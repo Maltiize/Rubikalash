@@ -1,13 +1,7 @@
-Constitution de l'équipe:
+Constitution de l'Ã©quipe:
 -Raphael BARRAUD
 -Thomas COQUEREAU
 -Omar DIOUF
 -Quentin MAISONNEUVE
 -Etienne MARTIN
 -Jean PORTALIS
-
-
-
-
-
-
