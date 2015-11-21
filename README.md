@@ -1,6 +1,6 @@
 Constitution de l'équipe:
 -Raphael BARRAUD
--Thomas COCKRAL
+-Thomas COQUEREAU
 -Omar DIOUF
 -Quentin MAISONNEUVE
 -Etienne MARTIN
