@@ -4,16 +4,14 @@ class Cube:
     # 0 si jamais la couleur n'a pas encore été indiquée 
     def __init__(self, cube=None):
 
-        #plages d'indexes de toutes les cases correspondantes à chaque face
+        #plages d'indexes de toutes les cases de chaque face
         # CF schéma dans madoc 
 
-        self.idxu=range(0,9)
-        self.idxd=range(45,54)
-        self.idxf=[12,13,14 ,24,25,26, 36,37,3]
-        self.idxl=[9,10,11, 21,22,23, 33,34,35]
-        self.idxr=[15,16,17 ,27,28,29, 39,40,41]
-        self.idxb=[18,19,20 ,30,31,32, 42,43,44]
+        self.idx=[["u",range(0,9)],["d",range(45,54)],["f",[12,13,14 ,24,25,26, 36,37,3]],["l",[9,10,11, 21,22,23, 33,34,35]],["r",[15,16,17 ,27,28,29, 39,40,41]],["b",[18,19,20 ,30,31,32, 42,43,44]]]
+        
 
+        #liste des noms des faces permet de faciliter les boucles for
+        self.liFace=["u","d","l","r","f","b"]
         
         #Initialisation des faces à 0
         
@@ -27,31 +25,51 @@ class Cube:
 
         #Si aucunes configuration de départ n'a été renseignée
         
-        if(Cube==None):
+        if(cube==None):
             return
 
+        #origin stocke 
         self.origin=cube
 
+        for x in self.idx:
+            self.initFace(x)
         
-        self.up=self.setface(self.idxu,self.up)
-        self.down=self.setface(self.idxd,self.down)
-        self.front=self.setface(self.idxf,self.front)
-        self.left=self.setface(self.idxl,self.left)
-        self.right=self.setface(self.idxr,self.right)
-        self.back=self.setface(self.idxb,self.back)
 
+    def setFace(self,nameFace,face):
+        print(nameFace)
+        if(nameFace=="u"):
+            self.up=face
+            
+        if(nameFace=="d"):
+            self.down=face
+            
+        if(nameFace=="l"):
+            self.lef=face
+            
+        if(nameFace=="r"):
+            self.right=face
+            
+        if(nameFace=="f"):
+            self.front=face
+            
+        if(nameFace=="b"):
+            self.back=face
+
+        else:
+            print("gocha")
+            print("INVALID FACENAME")
+            return -1
+        
 
     # Cette methode remplis chaque face avec les éléments qui lui correspondent 
     # ( renseignés dans les listes idx[nomface] )
 
-    def setface(self,idx,face):
-        if(len(idx)!=9):
-            print("INVALID SIZE ON IDX")
-            return -1
-        
+    def initFace(self,idx):
+        # on recupere la face à initialiser
+        face=self.getFace(idx[0])
         i=0
         j=0
-        for val in idx:
+        for val in idx[1]:
 
             face[j][i]=self.origin[val]
             #on passe à la case suivante   
@@ -68,6 +86,7 @@ class Cube:
 
     # cmd décrit l'action à operer sur le cube
     # rotation interprete la coommande et la redirige vers la methode associée
+    
     def rotation(self,cmd):
         return
     
@@ -90,17 +109,46 @@ class Cube:
         return
 
 
-
+    # récupere la face renseignée par nameFace 
     def getFace(self,nameFace):
-        return
+        if(nameFace=='u'):
+            return self.up
+        
+        if(nameFace=='d'):
+            return self.down
 
+        if(nameFace=='f'):
+            return self.front
 
-    def faceFinished(self):
-        return
+        if(nameFace=='l'):
+            return self.left
 
+        if(nameFace=='r'):
+            return self.right
 
+        if(nameFace=='b'):
+            return self.back
+        
+        print("INVALID FACENAME")
+        return -1
+
+    # Verifie qu'une face est complete
+    def faceFinished(self,nameFace):
+        face=self.getFace(nameFace)
+        color=face[0][0]
+        for x in face:
+            for y in x:
+                if(y!=color):
+                    return False
+        
+        return True
+
+    # Verifie si un cube est terminé ou non 
     def cubeFinished(self):
-        return
+        for x in self.liFace:
+            if(self.faceFinished(x)==False):
+                return False
+        return True
 
 
     #methode d'affichage du cube
@@ -140,3 +188,8 @@ cube = Cube("OGRBWYBGBGYYOYOWOWGRYOOOBGBRRYRBWWWRBWYGROWGRYBRGYWBOG")
     
 
 cube.printcube()
+cube.setFace('u',[[0,0,0],[0,0,0],[0,0,0]]  )
+cube.printcube()
+
+print(cube.cubeFinished())
+
