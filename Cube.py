@@ -22,6 +22,17 @@ class Cube:
         self.right=[0,0,0],[0,0,0],[0,0,0]
         self.back=[0,0,0],[0,0,0],[0,0,0]
 
+        #Liste des mouvements
+        self.D=["d",[["l",[6,7,8]],["f",[6,7,8],["r",[6,7,8]],["b",[6,7,8]]]]
+        self.U=["u",[["l",[0,1,2]],["f",[0,1,2],["r",[0,1,2]],["b",[0,1,2]]]]
+                
+        self.R=["r",[["l",[1,2,3]],["f",[1,2,3],["r",[1,2,3]],["b",[1,2,3]]]]
+        self.L=["l",[["l",[1,2,3]],["f",[1,2,3],["r",[1,2,3]],["b",[1,2,3]]]]
+                
+        self.B=["b",[["l",[1,2,3]],["f",[1,2,3],["r",[1,2,3]],["b",[1,2,3]]]]
+        self.F=["f",[["l",[2,5,8]],["u",[8,7,6],["r",[6,3,1]],["d",[1,2,3]]]]
+        
+
 
         #Si aucunes configuration de départ n'a été renseignée
         
@@ -34,7 +45,7 @@ class Cube:
         for x in self.idx:
             self.initFace(x)
         
-
+    #change l'état d'une face par le tableau renseigné
     def setFace(self,nameFace,face):
         if(nameFace=="u"):
             self.up=face
@@ -66,7 +77,7 @@ class Cube:
         
 
     # Cette methode remplis chaque face avec les éléments qui lui correspondent 
-    # ( renseignés dans les listes idx[nomface] )
+    # et renseignés dans la listes idx ( cf __init__ )
 
     def initFace(self,idx):
         # on recupere la face à initialiser
@@ -89,7 +100,7 @@ class Cube:
         
 
     # cmd décrit l'action à operer sur le cube
-    # rotation interprete la coommande et la redirige vers la methode associée
+    # rotation interprete la commande et la redirige vers la methode associée
     
     def rotation(self,cmd):
         return
@@ -161,7 +172,7 @@ class Cube:
             print("-------",x,"--------")
             afftab(self.getFace(x))
 
-#methode d'affichage d'un table 2D
+#methode d'affichage d'une table 2D
 def afftab(tab):
     for x in tab:
         aff(x)
