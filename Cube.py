@@ -36,29 +36,33 @@ class Cube:
         
 
     def setFace(self,nameFace,face):
-        print(nameFace)
         if(nameFace=="u"):
             self.up=face
+            return
             
         if(nameFace=="d"):
             self.down=face
+            return 
             
         if(nameFace=="l"):
             self.lef=face
+            return
             
         if(nameFace=="r"):
             self.right=face
+            return
             
         if(nameFace=="f"):
             self.front=face
+            return
             
         if(nameFace=="b"):
             self.back=face
+            return
 
-        else:
-            print("gocha")
-            print("INVALID FACENAME")
-            return -1
+        
+        print("INVALID FACENAME")
+        return -1
         
 
     # Cette methode remplis chaque face avec les éléments qui lui correspondent 
@@ -153,12 +157,9 @@ class Cube:
 
     #methode d'affichage du cube
     def printcube(self):
-        afftab(self.up)
-        afftab(self.left)
-        afftab(self.front)
-        afftab(self.right)
-        afftab(self.back)
-        afftab(self.down)
+        for x in self.liFace:
+            print("-------",x,"--------")
+            afftab(self.getFace(x))
 
 #methode d'affichage d'un table 2D
 def afftab(tab):
@@ -172,9 +173,14 @@ def afftab(tab):
 
        
 def aff(tab):
+   
+    for x in range(0,len(tab)):
+        print("_____",end='')
+    print("")
+    print(" | ",end='')
     for x in tab:
         print (x,end='')
-        print(" , ",end='')
+        print(" | ",end='')
     print("")
 
 
