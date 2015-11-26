@@ -7,7 +7,8 @@ class InterfaceIO:
 
 #récupère le cube de départ
     def PrendEntree(self):
-
+        self.entree = input("Entrez la configuration du Rubik's Cube a résoudre")
+        
 #renvoie les mouvements a faire a l'utilisateur
     def EnvoieSortie(self):
         
