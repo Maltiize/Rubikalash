@@ -2,11 +2,10 @@ import copy
 class Cube:
 
 
-    # 0|1|2
-    # 3|4|5
-    # 6|7|8
+  
 
-    # 0 si jamais la couleur n'a pas encore été indiquée 
+    # 0 si jamais la couleur n'a pas encore été indiquée
+    
     def __init__(self, cube=None):
 
         #plages d'indexes de toutes les cases de chaque face
@@ -27,10 +26,26 @@ class Cube:
         self.right=[0,0,0],[0,0,0],[0,0,0]
         self.back=[0,0,0],[0,0,0],[0,0,0]
 
-        #ordre de transposition de la face qui tourne
-        self.trans=[0,1,2],[2,5,8],[8,7,6],[6,3,0]
-
         #Liste des mouvements
+        
+        #explications de la structure de données :
+        #Dans la case m[0] le trouve le nom de la face à faire tourner
+        #la rotation de la face est gérée par la methode rotationFace
+        
+        #Le tableau m[1] decrit tout les subtitutions de cases entre chaque face
+        #exemple si je fais tourner la face du dessus (up) j'utilise le mouvement self.U
+        #la face "u" devra tourner sur elle meme puis
+        #les cases 0,1,2 de la face 'l' se retrouve en position 0,1,2 sur la face'f'
+        #les cases 0,1,2 de la face 'f' se retrouve en position 0,1,2 sur la face'r'
+        #ainsi de suite
+        
+        #NB pour passer d'une coordonée 1D noté ("i" dans ce programme) en coordonnées 2D sur un tablea de taille n
+        #coord x = partie entiere(i/n)
+        #coord y = i modulo n
+        # 0|1|2
+        # 3|4|5
+        # 6|7|8
+        
         self.D="d",[["l",[6,7,8]],["f",[6,7,8]],["r",[6,7,8]],["b",[6,7,8]]]
         self.U="u",[["l",[0,1,2]],["f",[0,1,2]],["r",[0,1,2]],["b",[0,1,2]]]
                 
@@ -40,6 +55,18 @@ class Cube:
         #self.B="b",[["l",[1,2,3]],["f",[1,2,3]],["r",[1,2,3]],["b",[1,2,3]]
         self.F="f",[["l",[2,5,8]],["u",[8,7,6]],["r",[6,3,1]],["d",[1,2,3]]]
         
+
+        #ordre de transposition des cases de la face qui tourne
+        #explications de la structure de données :
+
+        #Meme principe que pour la rotation des bords
+        #si je fais tourner la face f
+        #les cases de trans[0] (0,1,2) se retrouve en trans[1] (0,1,2)
+        #sachant que les cases de trans[3] se retrouve en trans[0]
+        self.trans=[0,1,2],[2,5,8],[8,7,6],[6,3,0]
+
+
+
 
 
         #Si aucunes configuration de départ n'a été renseignée
@@ -117,11 +144,14 @@ class Cube:
   
     def rotationFace(self,face):
         f=self.getFace(face)
+
+        #on crée une face "temporaire" pour stocker l'état de la face apres rotation
         tmp=[0,0,0],[0,0,0],[0,0,0] 
         for x in range(0,4):
             t=self.trans[x]
             s=self.trans[(x+1)%4]
             for y in range(0,3):
+                # cf explication de self.trans
                 tmp[int(s[y]/3)][s[y]%3]=f[int(t[y]/3)][t[y]%3]
         self.setFace(face,tmp)
         
@@ -137,10 +167,6 @@ class Cube:
         tmp=[]
         for x in range(0,4):
             tmp=tmp +[self.getLiCase(m[1][x][0],m[1][x][1])]
-        #recuperer la face de travail et la face courante
-        #sauvegarder les 3 cases de la face de travil
-        #transfer les trois cases de la face courante vers la face de travail
-        #répéter 4 fois
         for x in range(0,4):
             f=self.getFace(m[1][(x+1)%4][0])
             for y in range(0,3):
