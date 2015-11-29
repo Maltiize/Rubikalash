@@ -1,3 +1,4 @@
+import copy
 class Cube:
 
 
@@ -15,7 +16,7 @@ class Cube:
         
 
         #liste des noms des faces permet de faciliter les boucles for
-        self.liFace=["u","d","l","r","f","b"]
+        self.liFace=["u","l","f","r","b","d"]
         
         #Initialisation des faces à 0
         
@@ -89,7 +90,7 @@ class Cube:
     def initFace(self,idx):
         # on recupere la face à initialiser
         face=self.getFace(idx[0])
-        i=0
+        i=0 
         j=0
         for val in idx[1]:
 
@@ -107,33 +108,13 @@ class Cube:
         
 
     # cmd décrit l'action à operer sur le cube
-    # rotation interprete la commande et la redirige vers la methode associée
+    # rotation marche en deux parties
+    # la rotation de la face puis la rotation des bords de la face 
     def rotation(self,cmd):
-
-    # cette fonction fait touner les bords d'une face indiquée en argument
-    # mouv est la lettre du mouvement cf getMouv
-    def rotationEdge(self,mouv):
-        #on recupere le mouvement 
-        m=self.getMouv(mouv)
-        # on crée une liste des faces apres modifications
-        tmp=[]
         
-        for x in range(0,4):
-            # on recupere face d'origine que l'on va modifier
-            tmp=tmp+[self.getFace(m[1][(x+1)%4][0])]
-            #on recupere la face ou se trouve les infos qui nous interesse
-            f=self.getFace(m[1][x][0])
-            print(m[1][x][0],m[1][(x+1)%4][0])
-            for y in range(0,3):
-                # on boucle sur le nombre de cases à changer
-                i=m[1][(x+1)%4][1][y]
-                j=m[1][x][1][y]
-                #afftab(f)
-                tmp[x][int(i/3)][i%3]=f[int(j/3)][j%3]
-            
-        for x in range(0,4):
-            self.setFace(m[1][(x+1)%4][0],tmp[x])
-    
+        return
+
+  
     def rotationFace(self,face):
         f=self.getFace(face)
         tmp=[0,0,0],[0,0,0],[0,0,0] 
@@ -143,8 +124,35 @@ class Cube:
             for y in range(0,3):
                 tmp[int(s[y]/3)][s[y]%3]=f[int(t[y]/3)][t[y]%3]
         self.setFace(face,tmp)
+        
+    def getLiCase(self,nameFace,li):
+        f=self.getFace(nameFace)
+        ret = []
+        for x in li:
+            ret=ret+[f[int(x/3)][x%3]]
+        print(ret)
+        return ret
+    
+    def rotationEdge(self,mouv):
+        m=self.getMouv(mouv)
+        tmp=[]
+        for x in range(0,4):
+            tmp=tmp +[self.getLiCase(m[1][x][0],m[1][x][1])]
+        #recuperer la face de travail et la face courante
+        #sauvegarder les 3 cases de la face de travil
+        #transfer les trois cases de la face courante vers la face de travail
+        #répéter 4 fois
+        for x in range(0,4):
+            f=self.getFace(m[1][(x+1)%4][0])
+            for y in range(0,3):
+                i=m[1][(x+1)%4][1][y]
+                f[int(i/3)][i%3]=tmp[x][y]
+
+        
+                
             
-            
+
+
             
    
     # récupere la face renseignée par nameFace 
@@ -214,9 +222,11 @@ class Cube:
 
     #methode d'affichage du cube
     def printCube(self):
+        print("///////////////////////////////////")
         for x in self.liFace:
             print("-------",x,"--------")
             afftab(self.getFace(x))
+        print("///////////////////////////////////")
 
 #methode d'affichage d'une table 2D
 def afftab(tab):
@@ -248,7 +258,9 @@ def aff(tab):
 cube = Cube("OGRBWYBGBGYYOYOWOWGRYOOOBGBRRYRBWWWRBWYGROWGRYBRGYWBOG")
 
 
+cube.printCube()
 
-cube.rotationEdge('U')
+cube.rotationEdge('D')
+cube.printCube()
 print(cube.cubeFinished())
 
