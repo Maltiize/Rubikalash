@@ -1,0 +1,56 @@
+	29/11/2015
+
+	operationnel : 
+
+		- l'initialisation du cube 
+		- affichage du cube 
+		- verifier si le cube est finis
+		- les rotations R L F U D 
+		- les getters/setters des faces
+
+	a faire :
+
+		- la rotation B + composantes " x' " et " x2 "
+		- la verification d'un pattern sur une/des faces
+
+
+
+
+	Fonctionnement 
+
+		creation d'un nouveau cube 
+
+			cube = Cube(str) ou cube = Cube() pour créer un cube vide de couleur
+
+			l'argument str est une string respectant le format du sujet
+
+		verifier qu'un cube est finis ou non 
+
+			cube.cubeFinished() renvois true si e cube est finis false sinon
+
+			meme principe pour les faces avec 
+
+			cube.faceFinished(nameFace) nameface est un char ayant une valeur parmis " u d r l b f"
+
+		afficher le cube 
+
+			cube.printCube()
+
+		pour récupérer une face ( getter )
+
+			cube.getFace(nameFace)
+
+		pour changer une face ( setter )
+
+			cube.setFace(nameFace,tab)
+
+			NB : tab DOIT etre une liste de liste 3x3 sinon tout plante ;)
+
+
+		pour faire une rotation 
+
+			cube.rotation(cmd)
+
+			cmmd est un char parmis la liste des mouvements disponibles pour l'instant 
+
+			cf au debut du fichier pour plus d'informations
