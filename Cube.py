@@ -130,7 +130,6 @@ class Cube:
         ret = []
         for x in li:
             ret=ret+[f[int(x/3)][x%3]]
-        print(ret)
         return ret
     
     def rotationEdge(self,mouv):
@@ -226,32 +225,14 @@ class Cube:
         for x in self.liFace:
             print("-------",x,"--------")
             afftab(self.getFace(x))
-        print("///////////////////////////////////")
 
 #methode d'affichage d'une table 2D
 def afftab(tab):
     for x in tab:
-        aff(x)
-    print("")
-    print("")
+        print(x)
+
 
         
-
-
-       
-def aff(tab):
-   
-    for x in range(0,len(tab)):
-        print("_____",end='')
-    print("")
-    print(" | ",end='')
-    for x in tab:
-        print (x,end='')
-        print(" | ",end='')
-    print("")
-
-
-
         
 
 
