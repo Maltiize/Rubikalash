@@ -52,7 +52,7 @@ class Cube:
         self.R="r",[["d",[2,5,8]],["f",[2,5,8]],["u",[2,5,8]],["b",[0,3,6]]]
         self.L="l",[["l",[0,3,6]],["f",[0,3,6]],["r",[0,3,6]],["b",[8,5,2]]]
                 
-        #self.B="b",[["l",[1,2,3]],["f",[1,2,3]],["r",[1,2,3]],["b",[1,2,3]]
+        self.B="b",[["l",[1,2,3]],["f",[1,2,3]],["r",[1,2,3]],["b",[1,2,3]]]
         self.F="f",[["l",[2,5,8]],["u",[8,7,6]],["r",[6,3,1]],["d",[1,2,3]]]
         
 
@@ -138,6 +138,9 @@ class Cube:
     # rotation marche en deux parties
     # la rotation de la face puis la rotation des bords de la face 
     def rotation(self,cmd):
+        m=self.getMouv(cmd)
+        self.rotationFace(m[0])
+        self.rotationEdge(cmd)
         
         return
 
@@ -146,7 +149,8 @@ class Cube:
         f=self.getFace(face)
 
         #on crée une face "temporaire" pour stocker l'état de la face apres rotation
-        tmp=[0,0,0],[0,0,0],[0,0,0] 
+        tmp=[0,0,0],[0,0,0],[0,0,0]
+        tmp[1][1]=f[1][1]
         for x in range(0,4):
             t=self.trans[x]
             s=self.trans[(x+1)%4]
@@ -219,7 +223,6 @@ class Cube:
 
         if(nameMouv=='B'):
             return self.B
-
         if(nameMouv=='F'):
             return self.F
         
@@ -267,7 +270,7 @@ cube = Cube("OGRBWYBGBGYYOYOWOWGRYOOOBGBRRYRBWWWRBWYGROWGRYBRGYWBOG")
 
 cube.printCube()
 
-cube.rotationEdge('D')
+cube.rotation('D')
 cube.printCube()
 print(cube.cubeFinished())
 
