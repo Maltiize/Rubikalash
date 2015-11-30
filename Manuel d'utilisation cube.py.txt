@@ -1,16 +1,16 @@
-	29/11/2015
+	30/11/2015
 
 	operationnel : 
 
 		- l'initialisation du cube 
 		- affichage du cube 
 		- verifier si le cube est finis
-		- les rotations R L F U D 
+		- les rotations R L F U D R' U' F' D'  L'
 		- les getters/setters des faces
 
 	a faire :
 
-		- la rotation B + composantes " x' " et " x2 "
+		- la rotation B + composantes " x2 "
 		- la verification d'un pattern sur une/des faces
 
 

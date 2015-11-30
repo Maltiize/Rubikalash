@@ -13,7 +13,6 @@ class Cube:
 
         self.idx=[["u",range(0,9)],["d",range(45,54)],["f",[12,13,14 ,24,25,26, 36,37,3]],["l",[9,10,11, 21,22,23, 33,34,35]],["r",[15,16,17 ,27,28,29, 39,40,41]],["b",[18,19,20 ,30,31,32, 42,43,44]]]
         
-
         #liste des noms des faces permet de faciliter les boucles for
         self.liFace=["u","l","f","r","b","d"]
         
@@ -61,10 +60,11 @@ class Cube:
 
         #Meme principe que pour la rotation des bords
         #si je fais tourner la face f
-        #les cases de trans[0] (0,1,2) se retrouve en trans[1] (0,1,2)
+        #les cases de trans[0] (0,1,2) se retrouve en trans[1] (2,5,8)
         #sachant que les cases de trans[3] se retrouve en trans[0]
         self.trans=[0,1,2],[2,5,8],[8,7,6],[6,3,0]
 
+        self.transInversed=[0,1,2],[6,3,0],[8,7,6],[2,5,8]
 
 
 
@@ -138,22 +138,43 @@ class Cube:
     # rotation marche en deux parties
     # la rotation de la face puis la rotation des bords de la face 
     def rotation(self,cmd):
-        m=self.getMouv(cmd)
-        self.rotationFace(m[0])
-        self.rotationEdge(cmd)
+
+        if(len(cmd)>2 or len(cmd)==0):
+            print("COMMAND INVALID")
+            return -1
         
-        return
+        if(len(cmd)==1):
+            m=self.getMouv(cmd)
+            self.rotationFace(m[0])
+            self.rotationEdge(cmd)
+            return
+        if(cmd[1]!="'" and cmd[0]!="2"):
+            print("COMMAND INVALID")
+            return -1
+        m=self.getMouv(cmd[0])
+        if(cmd[1]=="'"):
+            self.rotationFace(m[0],True)
+            self.rotationEdgeInv(cmd[0])
+            
 
   
-    def rotationFace(self,face):
+    def rotationFace(self,face,inv=False):
+        if(inv==True):
+            tt=self.transInversed
+        else:
+            tt=self.trans
+        print(face)
         f=self.getFace(face)
 
         #on crée une face "temporaire" pour stocker l'état de la face apres rotation
         tmp=[0,0,0],[0,0,0],[0,0,0]
+        #le centre de la face est la seule case qui reste en place
+        print(tmp)
+        print(f)
         tmp[1][1]=f[1][1]
         for x in range(0,4):
-            t=self.trans[x]
-            s=self.trans[(x+1)%4]
+            t=tt[x]
+            s=tt[(x+1)%4]
             for y in range(0,3):
                 # cf explication de self.trans
                 tmp[int(s[y]/3)][s[y]%3]=f[int(t[y]/3)][t[y]%3]
@@ -178,7 +199,19 @@ class Cube:
                 f[int(i/3)][i%3]=tmp[x][y]
 
         
-                
+    def rotationEdgeInv(self,mouv):
+        m=self.getMouv(mouv)
+        tmp=[]
+        for x in range(0,4):
+            tmp=tmp +[self.getLiCase(m[1][x][0],m[1][x][1])]
+        for x in range(3,-1,-1):
+            f=self.getFace(m[1][x][0])
+            for y in range(0,3):
+                i=m[1][x][1][y]
+                f[int(i/3)][i%3]=tmp[(x+1)%4][y]
+
+        
+    
             
 
 
@@ -270,7 +303,6 @@ cube = Cube("OGRBWYBGBGYYOYOWOWGRYOOOBGBRRYRBWWWRBWYGROWGRYBRGYWBOG")
 
 cube.printCube()
 
-cube.rotation('D')
+cube.rotation("D'")
 cube.printCube()
-print(cube.cubeFinished())
 
