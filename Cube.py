@@ -41,6 +41,7 @@ class Cube:
         #NB pour passer d'une coordonée 1D noté ("i" dans ce programme) en coordonnées 2D sur un tablea de taille n
         #coord x = partie entiere(i/n)
         #coord y = i modulo n
+        
         # 0|1|2
         # 3|4|5
         # 6|7|8
@@ -81,6 +82,7 @@ class Cube:
             self.initFace(x)
         
     #change l'état d'une face par le tableau renseigné
+    #face doit être une liste de liste 3x3
     def setFace(self,nameFace,face):
         if(nameFace=="u"):
             self.up=face
@@ -136,49 +138,79 @@ class Cube:
 
     # cmd décrit l'action à operer sur le cube
     # rotation marche en deux parties
-    # la rotation de la face puis la rotation des bords de la face 
+    # la rotation de la face puis la rotation des bords de la face
+    # des verifications sur cmd sont faites au fur et à mesure #NeverTrustUser
     def rotation(self,cmd):
 
+        # Si l'action demandée n'est pas conforme
         if(len(cmd)>2 or len(cmd)==0):
             print("COMMAND INVALID")
             return -1
         
+        #si il s'agit d'une rotation "simple"
         if(len(cmd)==1):
             m=self.getMouv(cmd)
             self.rotationFace(m[0])
             self.rotationEdge(cmd)
             return
-        if(cmd[1]!="'" and cmd[0]!="2"):
-            print("COMMAND INVALID")
+        
+        #deuxième verification de l'argument
+        if(cmd[1]!="'" and cmd[1]!="2"):
+            print("COMMAND INVALID 2ND CHAR ISN'T ' OR 2 ")
             return -1
         m=self.getMouv(cmd[0])
+        
+        #si il s'agit d'une rotation inverse
         if(cmd[1]=="'"):
             self.rotationFace(m[0],True)
             self.rotationEdgeInv(cmd[0])
-            
 
-  
+    #Une rotation d'un demi consiste à echanger les parties droites / gauches et hautes / basses de la face qui tourne
+    #On recupere donc ces dernières dans deux listes "group" et on échange les valeurs  
+    def rotationHalfFace(self,face):
+        f=self.getFace(face)
+        groupa=[self.trans[0]]+[self.trans[2]]
+        groupb=[self.trans[1]]+[self.trans[3]]
+        
+        
+        #on crée une face "temporaire" pour stocker l'état de la face apres rotation
+        tmp=[0,0,0],[0,0,0],[0,0,0]
+        
+        #le centre de la face est la seule case qui reste en place
+        tmp[1][1]=f[1][1]
+        
+        for x in range(0,3):
+            tmp[int(groupa[0][x]/3)][groupa[0][x]%3]=f[int(groupa[1][x]/3)][groupa[1][x]%3]
+            tmp[int(groupa[1][x]/3)][groupa[1][x]%3]=f[int(groupa[0][x]/3)][groupa[0][x]%3]
+
+            tmp[int(groupb[0][x]/3)][groupb[0][x]%3]=f[int(groupb[1][x]/3)][groupb[1][x]%3]
+            tmp[int(groupb[1][x]/3)][groupb[1][x]%3]=f[int(groupb[0][x]/3)][groupb[0][x]%3]
+
+        self.setFace(face,tmp)
+
     def rotationFace(self,face,inv=False):
         if(inv==True):
             tt=self.transInversed
         else:
             tt=self.trans
-        print(face)
         f=self.getFace(face)
 
         #on crée une face "temporaire" pour stocker l'état de la face apres rotation
         tmp=[0,0,0],[0,0,0],[0,0,0]
+        
         #le centre de la face est la seule case qui reste en place
-        print(tmp)
-        print(f)
         tmp[1][1]=f[1][1]
+        
         for x in range(0,4):
             t=tt[x]
             s=tt[(x+1)%4]
             for y in range(0,3):
+                
                 # cf explication de self.trans
                 tmp[int(s[y]/3)][s[y]%3]=f[int(t[y]/3)][t[y]%3]
+                
         self.setFace(face,tmp)
+
         
     def getLiCase(self,nameFace,li):
         f=self.getFace(nameFace)
@@ -198,7 +230,7 @@ class Cube:
                 i=m[1][(x+1)%4][1][y]
                 f[int(i/3)][i%3]=tmp[x][y]
 
-        
+    #Meme principe que pour edge mais en inversant l'ordre des faces 
     def rotationEdgeInv(self,mouv):
         m=self.getMouv(mouv)
         tmp=[]
@@ -303,6 +335,6 @@ cube = Cube("OGRBWYBGBGYYOYOWOWGRYOOOBGBRRYRBWWWRBWYGROWGRYBRGYWBOG")
 
 cube.printCube()
 
-cube.rotation("D'")
+cube.rotationHalfFace("u")
 cube.printCube()
 

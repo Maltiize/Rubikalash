@@ -44,13 +44,13 @@
 
 			cube.setFace(nameFace,tab)
 
-			NB : tab DOIT etre une liste de liste 3x3 sinon tout plante ;)
+			NB : tab DOIT etre une liste de listes 3x3 sinon tout plante ;)
 
 
 		pour faire une rotation 
 
 			cube.rotation(cmd)
 
-			cmmd est un char parmis la liste des mouvements disponibles pour l'instant 
+			cmd est un char parmis la liste des mouvements disponibles pour l'instant 
 
-			cf au debut du fichier pour plus d'informations
+			CF: au debut du fichier pour plus d'informations
