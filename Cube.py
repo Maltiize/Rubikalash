@@ -164,6 +164,12 @@ class Cube:
         if(cmd[1]=="'"):
             self.rotationFace(m[0],True)
             self.rotationEdgeInv(cmd[0])
+            return
+        if(cmd[1]=="2"):
+            self.rotationHalfFace(m[0])
+            self.rotationEdge(cmd[0],True)
+            return
+        
 
     #Une rotation d'un demi consiste à echanger les parties droites / gauches et hautes / basses de la face qui tourne
     #On recupere donc ces dernières dans deux listes "group" et on échange les valeurs  
@@ -187,6 +193,7 @@ class Cube:
             tmp[int(groupb[1][x]/3)][groupb[1][x]%3]=f[int(groupb[0][x]/3)][groupb[0][x]%3]
 
         self.setFace(face,tmp)
+    
 
     def rotationFace(self,face,inv=False):
         if(inv==True):
@@ -219,16 +226,21 @@ class Cube:
             ret=ret+[f[int(x/3)][x%3]]
         return ret
     
-    def rotationEdge(self,mouv):
+    def rotationEdge(self,mouv,half=False):
+        if(half==True):
+            inc=2
+        else:
+            inc=1
         m=self.getMouv(mouv)
         tmp=[]
         for x in range(0,4):
             tmp=tmp +[self.getLiCase(m[1][x][0],m[1][x][1])]
         for x in range(0,4):
-            f=self.getFace(m[1][(x+1)%4][0])
+            f=self.getFace(m[1][(x+inc)%4][0])
             for y in range(0,3):
-                i=m[1][(x+1)%4][1][y]
+                i=m[1][(x+inc)%4][1][y]
                 f[int(i/3)][i%3]=tmp[x][y]
+                
 
     #Meme principe que pour edge mais en inversant l'ordre des faces 
     def rotationEdgeInv(self,mouv):
@@ -335,6 +347,6 @@ cube = Cube("OGRBWYBGBGYYOYOWOWGRYOOOBGBRRYRBWWWRBWYGROWGRYBRGYWBOG")
 
 cube.printCube()
 
-cube.rotationHalfFace("u")
+cube.rotation("U2")
 cube.printCube()
 
