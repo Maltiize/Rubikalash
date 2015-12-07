@@ -283,8 +283,16 @@ class Cube:
         
         print("INVALID FACENAME")
         return -1
-
-
+    # verifie un pattern li sur une des faces
+    # face est un nameFace et li une liste de coord 1D
+    def checkPattern(self,face,li):
+        f=self.getface(face)
+        color=f[int(li[0])][li[0]%3]
+        for x in li:
+            if(f[int(li[0])][li[0]%3]!=color)
+                return False
+        return True
+            
     def getMouv(self,nameMouv):
         if(nameMouv=='R'):
             return self.R
@@ -345,8 +353,14 @@ def afftab(tab):
 cube = Cube("OGRBWYBGBGYYOYOWOWGRYOOOBGBRRYRBWWWRBWYGROWGRYBRGYWBOG")
 
 
-cube.printCube()
 
-cube.rotation("U2")
+
+
+
+
+
+
+
+
 cube.printCube()
 

@@ -10,7 +10,6 @@
 
 	a faire :
 
-		- la rotation B
 		- la verification d'un pattern sur une/des faces
 
 
