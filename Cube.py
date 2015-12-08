@@ -289,7 +289,7 @@ class Cube:
         f=self.getface(face)
         color=f[int(li[0])][li[0]%3]
         for x in li:
-            if(f[int(li[0])][li[0]%3]!=color):
+            if(f[int(li[0]/3)][li[0]%3]!=color):
                 return False
         return True
             
