@@ -11,7 +11,7 @@ class Cube:
         #plages d'indexes de toutes les cases de chaque face
         # CF schéma dans madoc 
 
-        self.idx=[["u",range(0,9)],["d",range(45,54)],["f",[12,13,14 ,24,25,26, 36,37,3]],["l",[9,10,11, 21,22,23, 33,34,35]],["r",[15,16,17 ,27,28,29, 39,40,41]],["b",[18,19,20 ,30,31,32, 42,43,44]]]
+        self.idx=[["u",range(0,9)],["d",range(45,54)],["f",[12,13,14 ,24,25,26, 36,37,38]],["l",[9,10,11, 21,22,23, 33,34,35]],["r",[15,16,17 ,27,28,29, 39,40,41]],["b",[18,19,20 ,30,31,32, 42,43,44]]]
         
         #liste des noms des faces permet de faciliter les boucles for
         self.liFace=["u","l","f","r","b","d"]
@@ -25,14 +25,9 @@ class Cube:
         self.right=[0,0,0],[0,0,0],[0,0,0]
         self.back=[0,0,0],[0,0,0],[0,0,0]
 
-        #liste des voisins dans cette ordre [u,r,l,d]
+       
 
-        self.Nup=['b','r','l','f']
-        self.Ndown=['f','r','l','b']
-        self.Nfront=['u','r','l','d']
-        self.Nleft=['u','b','f','d']
-        self.Nright=['u','f','b','d']
-        self.Nback=['u','l','r','d']
+        
         #Liste des mouvements
         
         #explications de la structure de données :
@@ -53,15 +48,17 @@ class Cube:
         # 0|1|2
         # 3|4|5
         # 6|7|8
+
+         #sert aussi de liste des voisins dans cette ordre [u,r,d,l]
         
-        self.D="d",[["l",[6,7,8]],["f",[6,7,8]],["r",[6,7,8]],["b",[6,7,8]]]
-        self.U="u",[["l",[0,1,2]],["f",[0,1,2]],["r",[0,1,2]],["b",[0,1,2]]]
+        self.D="d",[["f",[6,7,8]],["r",[6,7,8]],["b",[6,7,8]],["l",[6,7,8]]]
+        self.U="u",[["b",[0,1,2]],["r",[0,1,2]],["f",[0,1,2]],["l",[0,1,2]]]
                 
-        self.R="r",[["d",[2,5,8]],["f",[2,5,8]],["u",[2,5,8]],["b",[0,3,6]]]
-        self.L="l",[["l",[0,3,6]],["f",[0,3,6]],["r",[0,3,6]],["b",[8,5,2]]]
+        self.R="r",[["u",[2,5,8]],["b",[0,3,6]],["d",[2,5,8]],["f",[2,5,8]]]
+        self.L="l",[["u",[0,3,6]],["f",[0,3,6]],["d",[0,3,6]],["b",[8,5,2]]]
                 
-        self.B="b",[["r",[8,5,2]],["d",[6,7,8]],["l",[0,3,6]],["u",[2,1,0]]]
-        self.F="f",[["l",[2,5,8]],["u",[8,7,6]],["r",[6,3,1]],["d",[1,2,3]]]
+        self.B="b",[["r",[8,5,2]],["u",[2,1,0]],["l",[0,3,6]],["d",[6,7,8]]]
+        self.F="f",[["u",[8,7,6]],["r",[6,3,0]],["d",[0,1,2]],["l",[8,5,2]]]
         
 
         #ordre de transposition des cases de la face qui tourne
@@ -348,7 +345,7 @@ class Cube:
             print("-------",x,"--------")
             afftab(self.getFace(x))
 
-    def get_voisin(self,nameFace):
+    def getNeighbour(self,nameFace):
         if(nameFace=='u'):
             return self.Nup
         
@@ -367,24 +364,25 @@ class Cube:
         if(nameFace=='b'):
             return self.Nback
 
-    def cherche_tranche(self,coulp,couls):
+    def searchEdge(self,coulp,couls):
         
         for i in self.liFace :
-            vois= self.get_voisin(i)
+            vois= self.getNeighbour(i)
             F=self.getFace(i)
             if F[0][1]==coulp :
-                if self.getface(vois[0])[2][1]==couls :
+                if self.getFace(vois[0])[2][1]==couls :
                     return [i,0,1]
                     
             if F[1][0]==coulp :
-                if self.getface(vois[2])[1][2]==couls :
+                if self.getFace(vois[2])[1][2]==couls :
                     return [i,1,0]
             if F[1][2]==coulp :
-                if self.getface(vois[1])[1][0]==couls :
+                if self.getFace(vois[1])[1][0]==couls :
                     return [i,1,2]
             if F[2][1]==coulp :
-                if self.getface(vois[3])[0][1]==couls :
+                if self.getFace(vois[3])[0][1]==couls :
                     return [i,2,1]
+        return['raté']
 #methode d'affichage d'une table 2D
 def afftab(tab):
     for x in tab:
@@ -397,6 +395,7 @@ def afftab(tab):
 
 
 cube = Cube("OGRBWYBGBGYYOYOWOWGRYOOOBGBRRYRBWWWRBWYGROWGRYBRGYWBOG")
+cube2 = Cube("OOOOOOOOOBBBRRRJJJGGGBBBRRRJJJGGGBBBRRRJJJGGGYYYYYYYYY")
 
 
 
@@ -408,5 +407,6 @@ cube = Cube("OGRBWYBGBGYYOYOWOWGRYOOOBGBRRYRBWWWRBWYGROWGRYBRGYWBOG")
 
 
 
-cube.printCube()
-cube.cherche_tranche('b','r')
+cube2.printCube()
+cube2.rotation('D')
+cube2.printCube()
