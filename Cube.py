@@ -25,6 +25,14 @@ class Cube:
         self.right=[0,0,0],[0,0,0],[0,0,0]
         self.back=[0,0,0],[0,0,0],[0,0,0]
 
+        #liste des voisins dans cette ordre [u,r,l,d]
+
+        self.Nup=['b','r','l','f']
+        self.Ndown=['f','r','l','b']
+        self.Nfront=['u','r','l','d']
+        self.Nleft=['u','b','f','d']
+        self.Nright=['u','f','b','d']
+        self.Nback=['u','l','r','d']
         #Liste des mouvements
         
         #explications de la structure de données :
@@ -340,11 +348,49 @@ class Cube:
             print("-------",x,"--------")
             afftab(self.getFace(x))
 
+    def get_voisin(self,nameFace):
+        if(nameFace=='u'):
+            return self.Nup
+        
+        if(nameFace=='d'):
+            return self.Ndown
+
+        if(nameFace=='f'):
+            return self.Nfront
+
+        if(nameFace=='l'):
+            return self.Nleft
+
+        if(nameFace=='r'):
+            return self.Nright
+
+        if(nameFace=='b'):
+            return self.Nback
+
+    def cherche_tranche(self,coulp,couls):
+        
+        for i in self.liFace :
+            vois= self.get_voisin(i)
+            F=self.getFace(i)
+            if F[0][1]==coulp :
+                if self.getface(vois[0])[2][1]==couls :
+                    return [i,0,1]
+                    
+            if F[1][0]==coulp :
+                if self.getface(vois[2])[1][2]==couls :
+                    return [i,1,0]
+            if F[1][2]==coulp :
+                if self.getface(vois[1])[1][0]==couls :
+                    return [i,1,2]
+            if F[2][1]==coulp :
+                if self.getface(vois[3])[0][1]==couls :
+                    return [i,2,1]
 #methode d'affichage d'une table 2D
 def afftab(tab):
     for x in tab:
         print(x)
 
+    
 
         
         
@@ -363,4 +409,4 @@ cube = Cube("OGRBWYBGBGYYOYOWOWGRYOOOBGBRRYRBWWWRBWYGROWGRYBRGYWBOG")
 
 
 cube.printCube()
-
+cube.cherche_tranche('b','r')
