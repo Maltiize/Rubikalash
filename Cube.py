@@ -15,6 +15,8 @@ class Cube:
         
         #liste des noms des faces permet de faciliter les boucles for
         self.liFace=["u","l","f","r","b","d"]
+
+ 
         
         #Initialisation des faces à 0
         
@@ -71,6 +73,7 @@ class Cube:
         self.trans=[0,1,2],[2,5,8],[8,7,6],[6,3,0]
 
         self.transInversed=[0,1,2],[6,3,0],[8,7,6],[2,5,8]
+        self.liEdge=1,5,7,3
 
 
 
@@ -363,7 +366,36 @@ class Cube:
 
         if(nameFace=='b'):
             return self.Nback
+#sert aussi de liste des voisins dans cette ordre [u,r,d,l]
+        
+        #self.D="d",[["f",[6,7,8]],["r",[6,7,8]],["b",[6,7,8]],["l",[6,7,8]]]
+    def findCube (self,color1, color2, color3=None):
+        if (color3==None):
+            
+            for i in self.liFace :
+                F=self.getFace(i)
+                m=self.getMouv(i.upper())
+                for idj,j in enumerate(self.liEdge) :
+                    x=int(j/3)
+                    y=j%3
+                    if F[x][y]==color1  :
+                        
+                        finter = self.getFace(m[1][idj][0])
+                        j2=m[1][idj][1][1]
+                        x=int(j2/3)
+                        y=j2%3
+                        if finter[x][y]==color2:
+                            if finter[x][y]==color2 :
+                                return [[i,j],[m[1][idj][0],j2]]
+                            else :
+                                return [[m[1][idj][0],j2],[i,j]]
+               
+        return[["raté"]]       
 
+                
+                
+                    
+            
    #methode d'affichage d'une table 2D
 def afftab(tab):
     for x in tab:
@@ -378,7 +410,8 @@ def afftab(tab):
 cube = Cube("OGRBWYBGBGYYOYOWOWGRYOOOBGBRRYRBWWWRBWYGROWGRYBRGYWBOG")
 cube2 = Cube("OOOOOOOOOBBBRRRJJJGGGBBBRRRJJJGGGBBBRRRJJJGGGYYYYYYYYY")
 
-
+for i in cube2.findCube("O","R") :
+    afftab(i)
 
 
 
