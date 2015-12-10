@@ -74,6 +74,7 @@ class Cube:
 
         self.transInversed=[0,1,2],[6,3,0],[8,7,6],[2,5,8]
         self.liEdge=1,5,7,3
+        self.liCorn=0,2,8,6
 
 
 
@@ -369,30 +370,57 @@ class Cube:
 #sert aussi de liste des voisins dans cette ordre [u,r,d,l]
         
         #self.D="d",[["f",[6,7,8]],["r",[6,7,8]],["b",[6,7,8]],["l",[6,7,8]]]
-    def findCube (self,color1, color2, color3=None):
-        if (color3==None):
+    def findCube (self,tabcolor):
+        
+        if(len(tabcolor)!=2 and len(tabcolor)!=3):
+            return -1
+        
+        tmpr=0,0,0
+        
+        for i in self.liFace :
+            F=self.getFace(i)
+            m=self.getMouv(i.upper())
             
-            for i in self.liFace :
-                F=self.getFace(i)
-                m=self.getMouv(i.upper())
-                for idj,j in enumerate(self.liEdge) :
-                    x=int(j/3)
-                    y=j%3
-                    if F[x][y]==color1  :
-                        
-                        finter = self.getFace(m[1][idj][0])
-                        j2=m[1][idj][1][1]
-                        x=int(j2/3)
-                        y=j2%3
-                        if finter[x][y]==color2:
-                            if finter[x][y]==color2 :
-                                return [[i,j],[m[1][idj][0],j2]]
-                            else :
-                                return [[m[1][idj][0],j2],[i,j]]
-               
-        return[["raté"]]       
-
+            if(color3len(tabcolor)==2):
+                li=self.liEdge
+                idx=1
+            else:
+                li=self.liCorn
+                idx=0
                 
+            for idj,j in enumerate(li) :
+                x=int(j/3)
+                y=j%3
+                
+                for idc1,c1 in enumerate(tabcolor) :
+                    
+                    if F[x][y]==c1:
+                        tmpr[idc1]=[j,i]
+                        finter = self.getFace(m[1][idj][0])
+                        j2=m[1][idj][1][idx]
+                        
+                        x2=int(j2/3)
+                        y2=j2%3
+                        tabcolor.remove(c1)
+
+                        for idc2,c2 in enumerate(tabcolor) :
+                        
+                            if finter[x2][y2]==c2:
+                                tmpr[idc2]=[j2,m[1][idj][0]]
+                                tabcolor.remove(c2)
+                                if(len(tabcolor)==0):
+                                    return tmpr[0:1]
+                                else:
+                                    finter = self.getFace(m[1][(idj+3)%4][0])
+                                    j2=m[1][idj][1][2]
+                                    x2=int(j2/3)
+                                    y2=j2%3    
+                                    
+                            
+                        
+                               
+        
+                         
                 
                     
             
@@ -410,7 +438,7 @@ def afftab(tab):
 cube = Cube("OGRBWYBGBGYYOYOWOWGRYOOOBGBRRYRBWWWRBWYGROWGRYBRGYWBOG")
 cube2 = Cube("OOOOOOOOOBBBRRRJJJGGGBBBRRRJJJGGGBBBRRRJJJGGGYYYYYYYYY")
 
-for i in cube2.findCube("O","R") :
+for i in cube2.findCube("O","B") :
     afftab(i)
 
 
