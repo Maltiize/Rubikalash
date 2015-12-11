@@ -370,6 +370,12 @@ class Cube:
 #sert aussi de liste des voisins dans cette ordre [u,r,d,l]
         
         #self.D="d",[["f",[6,7,8]],["r",[6,7,8]],["b",[6,7,8]],["l",[6,7,8]]]
+
+    def checkColorSquare(self,nameFace,color,idx):
+        f=self.getFace(nameFace)
+        return f[int(idx/3)][idx%3]==color
+        
+    
     def findCube (self,tabcolor):
         
         if(len(tabcolor)!=2 and len(tabcolor)!=3):
@@ -378,7 +384,6 @@ class Cube:
         tmpr=0,0,0
         
         for i in self.liFace :
-            F=self.getFace(i)
             m=self.getMouv(i.upper())
             
             if(color3len(tabcolor)==2):
@@ -389,32 +394,25 @@ class Cube:
                 idx=0
                 
             for idj,j in enumerate(li) :
-                x=int(j/3)
-                y=j%3
                 
                 for idc1,c1 in enumerate(tabcolor) :
                     
-                    if F[x][y]==c1:
+                    if self.checkColorSquare(i,c1,j):
                         tmpr[idc1]=[j,i]
-                        finter = self.getFace(m[1][idj][0])
                         j2=m[1][idj][1][idx]
-                        
-                        x2=int(j2/3)
-                        y2=j2%3
-                        tabcolor.remove(c1)
+                        f2=m[1][idj][0]
 
                         for idc2,c2 in enumerate(tabcolor) :
-                        
-                            if finter[x2][y2]==c2:
+                            if self.checkColorSquare(f2,c2,j2) and len(tabcolor)==2 :
                                 tmpr[idc2]=[j2,m[1][idj][0]]
-                                tabcolor.remove(c2)
-                                if(len(tabcolor)==0):
-                                    return tmpr[0:1]
-                                else:
-                                    finter = self.getFace(m[1][(idj+3)%4][0])
-                                    j2=m[1][idj][1][2]
-                                    x2=int(j2/3)
-                                    y2=j2%3    
+                                return tmpr[0:1]
+                            
+                            j3=m[1][(idj+3)%4][1][2]
+                            f3=m[1][(idj+3)%4][0]
+
+                            if self.checkColorSquare(f2,c2,j2) :
+                                tmpr[idc2]=[j2,m[1][idj][0]]
+                                  
                                     
                             
                         
