@@ -354,7 +354,12 @@ class Cube:
     def checkColorSquare(self,nameFace,color,idx):
         f=self.getFace(nameFace)
         return f[int(idx/3)][idx%3]==color
+
         
+    def getCase(self, nameFace, i):
+        face=self.getFace(nameFace)
+        return face[int(i/3)][i%3]
+
     
     def findCube (self,tabcolor):
         
@@ -428,15 +433,11 @@ cube2 = Cube("OOOOOOOOOBBBRRRJJJGGGBBBRRRJJJGGGBBBRRRJJJGGGYYYYYYYYY")
 
 
 
-
 cube.printCube()
 
 afftab(cube.findCube(['W','O']))
 
-
-
-
-
+print(cube.getCase("u",4))
 
 
 
