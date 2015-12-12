@@ -360,9 +360,31 @@ class Cube:
         face=self.getFace(nameFace)
         return face[int(i/3)][i%3]
 
-    def findEdge(self, tabcolor):
+    def findEdge(self, tabColor):
         color1 = tabColor[0]
         color2 = tabColor[1]
+        tabEdge1=[]
+        tabEdge2=[]
+        tab=[]
+        for k in range (len(self.liFace)):
+            for j in range(len(self.liEdge)):
+                if color1 == self.getCase(self.liFace[k],self.liEdge[j]):
+                    tabEdge1.append([self.liFace[k],self.liEdge[j]])
+                if color2 == self.getCase(self.liFace[k],self.liEdge[j]):
+                    tabEdge2.append([self.liFace[k],self.liEdge[j]])
+        for n in range(tabEdge1):
+            if tabEdge1[n][0] == l and tabEdge1[n][1] == 2:
+                if ['u',4] in tabEdge2:
+                    tab.append(tabEdge1[n],['u',4])
+                    return tab
+            if tabEdge1[n][0] == l and tabEdge1[n][1] == 2:
+                if ['u',4] in tabEdge2:
+                    tab.append(tabEdge1[n],['u',4])
+                    return tab
+            
+            
+        print(tabEdge1)
+        print(tabEdge2)
 
     
     def findCube (self,tabcolor):
@@ -442,7 +464,7 @@ cube.printCube()
 afftab(cube.findCube(['W','O']))
 
 print(cube.getCase("u",4))
-
+cube.findEdge(["W","R"])
 
 
 cube2.rotation('D')
