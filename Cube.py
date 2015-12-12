@@ -349,27 +349,7 @@ class Cube:
             print("-------",x,"--------")
             afftab(self.getFace(x))
 
-    def getNeighbour(self,nameFace):
-        if(nameFace=='u'):
-            return self.Nup
         
-        if(nameFace=='d'):
-            return self.Ndown
-
-        if(nameFace=='f'):
-            return self.Nfront
-
-        if(nameFace=='l'):
-            return self.Nleft
-
-        if(nameFace=='r'):
-            return self.Nright
-
-        if(nameFace=='b'):
-            return self.Nback
-#sert aussi de liste des voisins dans cette ordre [u,r,d,l]
-        
-        #self.D="d",[["f",[6,7,8]],["r",[6,7,8]],["b",[6,7,8]],["l",[6,7,8]]]
 
     def checkColorSquare(self,nameFace,color,idx):
         f=self.getFace(nameFace)
@@ -380,38 +360,48 @@ class Cube:
         
         if(len(tabcolor)!=2 and len(tabcolor)!=3):
             return -1
-        
-        tmpr=0,0,0
-        
-        for i in self.liFace :
-            m=self.getMouv(i.upper())
+
+        if(len(tabcolor)==2):
+            li=self.liEdge
+            idx=1
+            tmpr=[0]*2
+            workingtab=self.liFace
+        else:
+            li=self.liCorn
+            idx=2
+            tmpr=[0]*3
+            workingtab=self.liFace[0],self.liFace[5]
             
-            if(color3len(tabcolor)==2):
-                li=self.liEdge
-                idx=1
-            else:
-                li=self.liCorn
-                idx=0
-                
+        for i in workingtab :
+            m=self.getMouv(i.upper())
+ 
             for idj,j in enumerate(li) :
                 
                 for idc1,c1 in enumerate(tabcolor) :
                     
                     if self.checkColorSquare(i,c1,j):
                         tmpr[idc1]=[j,i]
+                        print(i,j)
                         j2=m[1][idj][1][idx]
                         f2=m[1][idj][0]
+                        print(f2,j2)
 
                         for idc2,c2 in enumerate(tabcolor) :
-                            if self.checkColorSquare(f2,c2,j2) and len(tabcolor)==2 :
-                                tmpr[idc2]=[j2,m[1][idj][0]]
-                                return tmpr[0:1]
+                            if self.checkColorSquare(f2,c2,j2):
+                                tmpr[idc2]=[j2,f2]
+                                if len(tabcolor)==2 :
+                                    return tmpr
+                                
+                                j3=m[1][(idj+3)%4][1][0]
+                                f3=m[1][(idj+3)%4][0]
+                                for idc3,c3 in enumerate(tabcolor) :
+                                    if self.checkColorSquare(f3,c3,j3) :
+                                        tmpr[idc3]=[j3,f3]
+                                        return tmpr
                             
-                            j3=m[1][(idj+3)%4][1][2]
-                            f3=m[1][(idj+3)%4][0]
-
-                            if self.checkColorSquare(f2,c2,j2) :
-                                tmpr[idc2]=[j2,m[1][idj][0]]
+                            
+                            
+                            
                                   
                                     
                             
@@ -436,8 +426,12 @@ def afftab(tab):
 cube = Cube("OGRBWYBGBGYYOYOWOWGRYOOOBGBRRYRBWWWRBWYGROWGRYBRGYWBOG")
 cube2 = Cube("OOOOOOOOOBBBRRRJJJGGGBBBRRRJJJGGGBBBRRRJJJGGGYYYYYYYYY")
 
-for i in cube2.findCube("O","B") :
-    afftab(i)
+
+
+
+cube.printCube()
+
+afftab(cube.findCube(['W','O']))
 
 
 
@@ -446,7 +440,4 @@ for i in cube2.findCube("O","B") :
 
 
 
-
-cube2.printCube()
 cube2.rotation('D')
-cube2.printCube()
