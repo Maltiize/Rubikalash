@@ -54,12 +54,12 @@ class Cube:
          #sert aussi de liste des voisins dans cette ordre [u,r,d,l]
         
         self.D="d",[["f",[6,7,8]],["r",[6,7,8]],["b",[6,7,8]],["l",[6,7,8]]]
-        self.U="u",[["b",[0,1,2]],["r",[0,1,2]],["f",[0,1,2]],["l",[0,1,2]]]
+        self.U="u",[["b",[2,1,0]],["r",[2,1,0]],["f",[2,1,0]],["l",[2,1,0]]]
                 
         self.R="r",[["u",[2,5,8]],["b",[0,3,6]],["d",[2,5,8]],["f",[2,5,8]]]
         self.L="l",[["u",[0,3,6]],["f",[0,3,6]],["d",[0,3,6]],["b",[8,5,2]]]
                 
-        self.B="b",[["r",[8,5,2]],["u",[2,1,0]],["l",[0,3,6]],["d",[6,7,8]]]
+        self.B="b",[["u",[2,1,0]],["l",[0,3,6]],["d",[6,7,8]],["r",[8,5,2]]]
         self.F="f",[["u",[8,7,6]],["r",[6,3,0]],["d",[0,1,2]],["l",[8,5,2]]]
         
 
@@ -373,7 +373,7 @@ class Cube:
             workingtab=self.liFace
         else:
             li=self.liCorn
-            idx=2
+            idx=0
             tmpr=[0]*3
             workingtab=self.liFace[0],self.liFace[5]
             
@@ -397,7 +397,7 @@ class Cube:
                                 if len(tabcolor)==2 :
                                     return tmpr
                                 
-                                j3=m[1][(idj+3)%4][1][0]
+                                j3=m[1][(idj+3)%4][1][2]
                                 f3=m[1][(idj+3)%4][0]
                                 for idc3,c3 in enumerate(tabcolor) :
                                     if self.checkColorSquare(f3,c3,j3) :
@@ -433,9 +433,9 @@ cube2 = Cube("OOOOOOOOOBBBRRRJJJGGGBBBRRRJJJGGGBBBRRRJJJGGGYYYYYYYYY")
 
 
 
-cube.printCube()
+cube2.printCube()
 
-afftab(cube.findCube(['W','O']))
+afftab(cube2.findCube(['O','B','G']))
 
 print(cube.getCase("u",4))
 
