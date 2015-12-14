@@ -7,10 +7,11 @@
 		- verifier si le cube est finis
 		- les rotations R L F U D R' U' F' D'  L' + composantes x2
 		- les getters/setters des faces
-
-	a faire :
-
 		- la verification d'un pattern sur une/des faces
+		- recherche d'un cube en particulier dans le rubik's cube
+
+
+
 
 
 
@@ -53,3 +54,9 @@
 			cmd est un char parmis la liste des mouvements disponibles pour l'instant 
 
 			CF: au debut du fichier pour plus d'informations
+
+		pour trouver le cube de couleur rouge et bleu 
+
+			cube.findCube('R','B')
+
+			CF commentaire pour savoir ce que renvoit la fonction 

@@ -27,6 +27,8 @@ class Cube:
         self.right=[0,0,0],[0,0,0],[0,0,0]
         self.back=[0,0,0],[0,0,0],[0,0,0]
 
+        
+
        
 
         
@@ -292,10 +294,12 @@ class Cube:
         
         print("INVALID FACENAME")
         return -1
+    
     # verifie un pattern li sur une des faces
     # face est un nameFace et li une liste de coord 1D
     def checkPattern(self,face,li):
         f=self.getface(face)
+        
         color=f[int(li[0])][li[0]%3]
         for x in li:
             if(f[int(li[0]/3)][li[0]%3]!=color):
@@ -348,8 +352,10 @@ class Cube:
         for x in self.liFace:
             print("-------",x,"--------")
             afftab(self.getFace(x))
-
-        
+    
+    def getCentralColor(self,nameFace):
+        f=self.getFace(nameFace)
+        return f[1][1]
 
     def checkColorSquare(self,nameFace,color,idx):
         f=self.getFace(nameFace)
@@ -362,17 +368,21 @@ class Cube:
 
 
 
-    #Cette fonction permet de trouver un cube ( coin ou tranche ) à l'intérieur même
-    #du rubik cube. Elle prend en argument une tabcolor qui est la liste des couleur qui compose
+    # Cette fonction permet de trouver un cube ( coin ou tranche ) à l'intérieur même
+    # du rubik cube. Elle prend en argument une tabcolor qui est la liste des couleur des faces qui composent
     # le cube recherché
+    
     # NB : si le cube est un coin la liste sera de trois couleurs
     # si il s'agit d'une tranche deux couleurs doivent être renseignées
+    
     # La fonction renvoit la structure de données suivante
     # tab[idx couleur] =[index sur la face, nom de la face]
+    
     # ex : si on precise tabcolor='R','G'
     # et que R se trouve en 7 sur Up et g en 1 sur Front on aura
     # tab = [ 7,'u'],[1,'f'] ,
     # l'ordre d'index dans tabcolor definit l'ordre d'index dans la liste renvoyée
+    
     # nameFace est une option qu'il faut préciser si on cherche un cube SEULEMENT sur une face
     # précise. Dans ce cas on précise le nom de la face dans cet argument  
     
