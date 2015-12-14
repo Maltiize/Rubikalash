@@ -360,14 +360,35 @@ class Cube:
         face=self.getFace(nameFace)
         return face[int(i/3)][i%3]
 
+
+
+    #Cette fonction permet de trouver un cube ( coin ou tranche ) à l'intérieur même
+    #du rubik cube. Elle prend en argument une tabcolor qui est la liste des couleur qui compose
+    # le cube recherché
+    # NB : si le cube est un coin la liste sera de trois couleurs
+    # si il s'agit d'une tranche deux couleurs doivent être renseignées
+    # La fonction renvoit la structure de données suivante
+    # tab[idx couleur] =[index sur la face, nom de la face]
+    # ex : si on precise tabcolor='R','G'
+    # et que R se trouve en 7 sur Up et g en 1 sur Front on aura
+    # tab = [ 7,'u'],[1,'f'] ,
+    # l'ordre d'index dans tabcolor definit l'ordre d'index dans la liste renvoyée
+    # nameFace est une option qu'il faut préciser si on cherche un cube SEULEMENT sur une face
+    # précise. Dans ce cas on précise le nom de la face dans cet argument  
     
-    def findCube (self,tabcolor):
-        
+    def findCube (self,tabcolor,nameFace=None):
+
+        # si Tabcolor ne correspond pas
         if(len(tabcolor)!=2 and len(tabcolor)!=3):
             return -1
-
+        
+        # si il s'agit d'un coin ou d'une tranche le comportement de la fonction ets legerement différent
+        # on regle ces différence dans ce bloc if else
+        # tmpr est la structure de données renvoyées à la fin
+        # sa taille depend du type de cube recherché
+    
         if(len(tabcolor)==2):
-            li=self.liEdge
+            li=self.liEdge[0:2]
             idx=1
             tmpr=[0]*2
             workingtab=self.liFace
@@ -376,6 +397,9 @@ class Cube:
             idx=0
             tmpr=[0]*3
             workingtab=self.liFace[0],self.liFace[5]
+
+        if(nameFace!=None):
+            workingtab=nameFace
             
         for i in workingtab :
             m=self.getMouv(i.upper())
@@ -383,6 +407,9 @@ class Cube:
             for idj,j in enumerate(li) :
                 
                 for idc1,c1 in enumerate(tabcolor) :
+                    
+                    # si on trouve une des couleurs on regardes les faces voisines
+                    # pour savoir si on se trouve ou non sur le bon cube
                     
                     if self.checkColorSquare(i,c1,j):
                         tmpr[idc1]=[j,i]
@@ -394,6 +421,9 @@ class Cube:
                         for idc2,c2 in enumerate(tabcolor) :
                             if self.checkColorSquare(f2,c2,j2):
                                 tmpr[idc2]=[j2,f2]
+                                
+                                # si on a trouvé deux couleurs et que le cube recherché est
+                                # une tranche on renvoit tmpr sinon on continue la recherche
                                 if len(tabcolor)==2 :
                                     return tmpr
                                 
@@ -403,8 +433,9 @@ class Cube:
                                     if self.checkColorSquare(f3,c3,j3) :
                                         tmpr[idc3]=[j3,f3]
                                         return tmpr
+        
                             
-                            
+        return -1                            
                             
                             
                                   
@@ -418,7 +449,7 @@ class Cube:
                     
             
    #methode d'affichage d'une table 2D
-def afftab(tab):
+def affTab(tab):
     for x in tab:
         print(x)
 
@@ -428,17 +459,3 @@ def afftab(tab):
         
 
 
-cube = Cube("OGRBWYBGBGYYOYOWOWGRYOOOBGBRRYRBWWWRBWYGROWGRYBRGYWBOG")
-cube2 = Cube("OOOOOOOOOBBBRRRJJJGGGBBBRRRJJJGGGBBBRRRJJJGGGYYYYYYYYY")
-
-
-
-cube2.printCube()
-
-afftab(cube2.findCube(['O','B','G']))
-
-print(cube.getCase("u",4))
-
-
-
-cube2.rotation('D')
