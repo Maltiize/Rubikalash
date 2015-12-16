@@ -298,7 +298,7 @@ class Cube:
     # verifie un pattern li sur une des faces
     # face est un nameFace et li une liste de coord 1D
     def checkPattern(self,face,li):
-        f=self.getface(face)
+        f=self.getFace(face)
         
         color=f[int(li[0])][li[0]%3]
         for x in li:
