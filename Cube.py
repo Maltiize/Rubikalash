@@ -351,7 +351,7 @@ class Cube:
         print("///////////////////////////////////")
         for x in self.liFace:
             print("-------",x,"--------")
-            afftab(self.getFace(x))
+            affTab(self.getFace(x))
     
     def getCentralColor(self,nameFace):
         f=self.getFace(nameFace)
@@ -466,6 +466,8 @@ def affTab(tab):
     
 
         
-        
+cube = Cube("OGRBWYBGBGYYOYOWOWGRYOOOBGBRRYRBWWWRBWYGROWGRYBRGYWBOG")
+cube.printCube()
+print(cube.findCube(['G','Y']))
 
 
