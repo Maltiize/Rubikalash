@@ -398,7 +398,7 @@ class Cube:
         # sa taille depend du type de cube recherché
     
         if(len(tabcolor)==2):
-            li=self.liEdge[0:2]
+            li=self.liEdge
             idx=1
             tmpr=[0]*2
             workingtab=self.liFace
@@ -409,7 +409,7 @@ class Cube:
             workingtab=self.liFace[0],self.liFace[5]
 
         if(nameFace!=None):
-            workingtab=nameFace
+            workingtab=[nameFace]
             
         for i in workingtab :
             m=self.getMouv(i.upper())
@@ -423,10 +423,8 @@ class Cube:
                     
                     if self.checkColorSquare(i,c1,j):
                         tmpr[idc1]=[j,i]
-                        print(i,j)
                         j2=m[1][idj][1][idx]
                         f2=m[1][idj][0]
-                        print(f2,j2)
 
                         for idc2,c2 in enumerate(tabcolor) :
                             if self.checkColorSquare(f2,c2,j2):
@@ -466,8 +464,10 @@ def affTab(tab):
     
 
         
-cube = Cube("OGRBWYBGBGYYOYOWOWGRYOOOBGBRRYRBWWWRBWYGROWGRYBRGYWBOG")
+#cube = Cube("OGRBWYBGBGYYOYOWOWGRYOOOBGBRRYRBWWWRBWYGROWGRYBRGYWBOG")
+cube = Cube("O0OOOOOOOBBBRRRJJJGGGBBBRRRJJJGGGBBBRRRJJJGGGYYYYYYYYY")
+
 cube.printCube()
-print(cube.findCube(['G','Y']))
+print(cube.findCube(['0','G']))
 
 
