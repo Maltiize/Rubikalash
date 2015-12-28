@@ -1,0 +1,11 @@
+CROIX NON CREEE:
+
+a) Retourner deux aretes opposées
+	do : FRUR'U'F'
+	avec front = une des faces avec une des aretes (pas la face jaune donc)
+b) Retourner deux aretes 
+	do : FURU'R'F'
+	avec front = la face avec l'arete la plus a gauche (pas la face jaune donc)
+c) Echanger les places de trois aretes dans le sens des aiguilles d'une motnre
+	do : RU2R'U'RU'R'
+~

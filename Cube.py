@@ -423,10 +423,10 @@ class Cube:
                     
                     if self.checkColorSquare(i,c1,j):
                         tmpr[idc1]=[j,i]
-                        print(i,j)
+                        #print(i,j)
                         j2=m[1][idj][1][idx]
                         f2=m[1][idj][0]
-                        print(f2,j2)
+                        #print(f2,j2)
 
                         for idc2,c2 in enumerate(tabcolor) :
                             if self.checkColorSquare(f2,c2,j2):
@@ -465,9 +465,9 @@ def affTab(tab):
 
     
 
-'''        
+'''
 cube = Cube("OGRBWYBGBGYYOYOWOWGRYOOOBGBRRYRBWWWRBWYGROWGRYBRGYWBOG")
 cube.printCube()
-print(cube.findCube(['G','Y']))
+print(cube.findCube(['Y','B']))
 '''
 

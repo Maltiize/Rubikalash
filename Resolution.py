@@ -36,15 +36,42 @@ class Resolution:
         listeColors=['G','R','B','O']
         for i in range(len(listeColors)):   
             self.listeAretes.append(cube.findCube(['Y',listeColors[i]]))
-        #trouve toutes les aretes jaunes que l'on doit placer         
-        
+        #trouve toutes les aretes jaunes que l'on doit placer
+
+    def checkCrossNonOriente(self):
+        posColor = self.whichIsColor('Y')
+        listeColors=['G','R','B','O']
+        for i in range(len(listeColors)):
+            pos = cube.findCube(['Y',listeColors[i][0][0]])
+            if pos[0][1] != posColor:
+                return False
+        return True
+
+    def checkEmplacement(self):
+        posColor = self.whichIsColor('Y')
+        listeColors=['G','R','O','B']
+        listos=[]
+        liste=[]
+        for i in range(len(listeColors)):
+            listos=[]
+            pos = cube.findCube(['Y',listeColors[i][0][0]])
+            print(pos)
+            print(pos[0][1])
+            listos.append(pos[0][1])
+            listos.append(listeColors[i][0][0])
+            liste.append(listos)
+            print(liste)
+        return liste
         
 
 
-cube = Cube("GGGGGGOGROOBYYGYRRWWWOORYYYBRRWWWOORBYYORRWWWYOGBBBBBB")
+cube = Cube("YGRGGGGGGBRRWWWOOYBYORRRWWWOOBYYYYRRWWWOOGYYRBBBBBBGOO")
 
 resolution = Resolution(cube)
 
 cube.printCube()
         
 resolution.solveYellow()
+
+print(resolution.checkCrossNonOriente())
+print(resolution.checkEmplacement())
