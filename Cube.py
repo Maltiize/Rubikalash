@@ -398,7 +398,7 @@ class Cube:
         # sa taille depend du type de cube recherché
     
         if(len(tabcolor)==2):
-            li=self.liEdge[0:2]
+            li=self.liEdge
             idx=1
             tmpr=[0]*2
             workingtab=self.liFace
@@ -469,5 +469,3 @@ def affTab(tab):
 cube = Cube("OGRBWYBGBGYYOYOWOWGRYOOOBGBRRYRBWWWRBWYGROWGRYBRGYWBOG")
 cube.printCube()
 print(cube.findCube(['G','Y']))
-
-
