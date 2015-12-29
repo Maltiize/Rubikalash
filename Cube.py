@@ -465,11 +465,11 @@ def affTab(tab):
 
     
 
-'''
+
 cube = Cube("YBGGGGGGGRRRWWWOOOYYBGRRWWWOOOYYYYRRWWWOOGRYOBBBBBBBRY")
 cube.printCube()
 print(cube.findCube(['Y','R']))
-'''
+
 
 
 
