@@ -16,35 +16,86 @@ class Resolution:
     # la rotation doit etre une composante de la face rotatingF
     def getApproRot(self,origin,destination,rotatingF):
         if(origin == destination):
+            return ''
+        if(rotatingF==destination):
             return -1
         i=-1
         x=0
         m=cube.getMouv(rotatingF.upper())
-        while(True):
+        while(x<6):
             if(origin==m[1][x%4][0]):
-                print("ok")
                 i=0
             if(destination==m[1][x%4][0] and i!=-1):
                 return rotatingF.upper()+self.liRota[i-1]
             x+=1
             if(i!=-1):
                 i+=1
+        return -1
 
                 
-
+    def applyCmd(self,cmd):
+        tmp=''
+        current=False
+        for x in cmd :
+            current=True
+            if(len(tmp)==0):
+                tmp=x
+                current = False
+            elif(len(tmp)==1 and current==True):
+                if(x=="'" or x=="2"):
+                    tmp+=x
+                    print(tmp)
+                    self.liCmd+=tmp
+                    cube.rotation(tmp)
+                    tmp=''
+                else :
+                    self.liCmd+=tmp
+                    cube.rotation(tmp)
+                    tmp=''
+            
+            
+            
     
 
     def theCross(self,nameFace):
         tab=self.checkCross(nameFace)
         colorcross=cube.getCentralColor(nameFace)
-        cmd=''
         if(tab[0]==True):
             return 0
+        # pour toute les faces qui n'ont pas encore été traitée
         for x in tab[1]:
+            
+            # On cherche le cube de couleur "Face à traiter" + " Face où se trouve la croix"
+            # on récupere donc la couleur de "Face à traiter" 
             curColor=cube.getCentralColor(x)
             result=cube.findCube([colorcross,curColor])
-            if(result[0][1]=='b'):
-                cmd+=self.getApproRot(x,result[1][1],result[0][1])+x+'2'
+
+            # on traite les différents cas en fonction de la position du cube 
+            if(result[0][1]==nameFace):
+                if(len(tab[1]==4)):
+                    self.liCmd+=self.getApproRot(result[1][1],x,result[0][1])
+                    # on actualise la liste des face à traiter au fur à mesure pour eviter de défaire ce qui a déjà été fait
+                    tab[1].remove(x)
+                else:
+                    self.liCmd+=result[1][1].upper()+self.getApproRot(result[1][1],x,result[0][1])+x.upper()+'2'
+                    tab[1].remove(x)
+
+
+
+            if(result[0][1]==cube.getFaceInversed(nameFace)):
+                self.liCmd+=self.getApproRot(result[1][1],x,result[0][1])+x.upper()+'2'
+                tab[1].remove(x)
+                
+            if(result[0][1]!=cube.getFaceInversed(nameFace) and result[0][1]!=nameFace):
+                rot=self.getApproRot(result[1][1],x,result[0][1])
+                if(rot==-1):
+                    if(result[1][1]==colorcross):
+                        if(len(tab[1]==4))
+                            self.liCmd+=colorcross.upper()
+                            tmpres=cube.findCube([colorcross,curColor])
+                            self.liCmd+=self.getApproRot(tmpres[1][1],x,result[0][1])
+
+            
             
     
     # Cette fonction permet de verifier si la croix a été réalisée sur une face
@@ -80,5 +131,5 @@ class Resolution:
         
 
 cube = Cube("OOOOOOOOOBBBRRRJJJGGGBBBRRRJJJGGGBBBRRRJJJGGGYYYYYYYYY")
-resol= Resolution(cube)
-print(resol.getApproRot('f','l','u'))
+resol= Resolution(cube)cube.printCube()
+print(resol.getApproRot('l','l','f'))
