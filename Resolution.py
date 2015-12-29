@@ -43,6 +43,7 @@ class Resolution:
         listeColors=['G','R','B','O']
         for i in range(len(listeColors)):
             pos = cube.findCube(['Y',listeColors[i][0][0]])
+            print(pos)
             if pos[0][1] != posColor:
                 return False
         return True
@@ -65,7 +66,7 @@ class Resolution:
         
 
 
-cube = Cube("YGRGGGGGGBRRWWWOOYBYORRRWWWOOBYYYYRRWWWOOGYYRBBBBBBGOO")
+cube = Cube("YBGGGGGGGRRRWWWOOOYYBGRRWWWOOOYYYYRRWWWOOGRYOBBBBBBBRY")
 
 resolution = Resolution(cube)
 
