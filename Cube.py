@@ -466,8 +466,8 @@ def affTab(tab):
     
 
         
-cube = Cube("OGRBWYBGBGYYOYOWOWGRYOOOBGBRRYRBWWWRBWYGROWGRYBRGYWBOG")
-cube.printCube()
-print(cube.findCube(['G','Y']))
-
+##cube = Cube("OGRBWYBGBGYYOYOWOWGRYOOOBGBRRYRBWWWRBWYGROWGRYBRGYWBOG")
+##cube.printCube()
+##print(cube.findCube(['G','Y']))
+##
 
