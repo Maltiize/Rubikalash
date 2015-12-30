@@ -43,7 +43,6 @@ class Resolution:
         listeColors=['G','R','B','O']
         for i in range(len(listeColors)):
             pos = cube.findCube(['Y',listeColors[i][0][0]])
-            print(pos)
             if pos[0][1] != posColor:
                 return False
         return True
@@ -56,14 +55,34 @@ class Resolution:
         for i in range(len(listeColors)):
             listos=[]
             pos = cube.findCube(['Y',listeColors[i][0][0]])
-            print(pos)
-            print(pos[0][1])
             listos.append(pos[0][1])
             listos.append(listeColors[i][0][0])
             liste.append(listos)
-            print(liste)
         return liste
+
+    def resolution(self):
         
+        while self.checkCrossNonOriente != True:
+            listos=[]
+            liste=self.checkEmplacement()
+            for i in range(len(liste())):
+                if liste[i][0] != self.whichIsColor('Y'):
+                    listos.append(liste[i])
+            if len(listos) == 3:
+                cube.setFace(listos[0][0])
+                resolution.rotate(['R','U',"2R'","U'",'R',"U'","R'"])
+            if len(listos) == 2:
+                if cube.getCentralColor(listos[0]) == 'B' and cube.getCentralColor(listos[1]) =='G' or cube.getCentralColor(listos[0]) == 'R' and cube.getCentralColor(listos[1]) == 'O':
+                    cube.setFace(listos[0][0])
+                    resolution.rotate(['F','R','U',"R'","U'","F'"])
+            else:
+                cube.setFace(listos[0][0])
+                resolution.rotate(['F','U',"R","U'","R'","F'"])
+
+    def rotate(self,liste):
+        for i in range(liste):
+            cube.rotation(liste[i])
+                    
 
 
 cube = Cube("YBGGGGGGGRRRWWWOOOYYBGRRWWWOOOYYYYRRWWWOOGRYOBBBBBBBRY")
