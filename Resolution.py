@@ -32,91 +32,113 @@ class Resolution:
 
 def rfjaune(c):
     j=c.down
-    r=c.left
-    b=c.front
-    while c.down!=[['Y','Y','Y'],['Y','Y','Y'],['Y','Y','Y']]:
-        if  b[2][0]=='Y' and r[2][0]=='Y' and j[2][0]=='Y':
-            c.rotation("L")
+    r=c.front
+    b=c.right
+    if c.down!=[['Y','Y','Y'],['Y','Y','Y'],['Y','Y','Y']]:
+        if  b[2][0]=='Y' and r[2][0]=='Y' and j[2][2]=='Y':
+            c.rotation("F")
             c.rotation("D")
-            c.rotation("L'")
+            c.rotation("F'")
             c.rotation("D")
-            c.rotation("L")
+            c.rotation("F")
             c.rotation("D2")
-            c.rotation("L'")
-                               
-        elif r[2][2]=='Y' and b[2][2]=='Y' and j[0][2]=='Y':
-            c.rotation("L")
+            c.rotation("F'")
+        
+        elif r[2][2]=='Y' and b[2][2]=='Y' and j[0][0]=='Y':
+            c.rotation("F")
             c.rotation("D2")
-            c.rotation("L'")
+            c.rotation("F'")
             c.rotation("D'")
-            c.rotation("L")
+            c.rotation("F")
             c.rotation("D'")
-            c.rotation("L'")
+            c.rotation("F'")
             
              
-        elif r[2][0]=='Y' and d[2][2]=='Y':
-            c.rotation("L")
+        elif r[2][0]=='Y' and r[2][2]=='Y':
+            c.rotation("F")
             c.rotation("D")  
-            c.rotation("L'")
+            c.rotation("F'")
             c.rotation("D")
-            c.rotation("L")
-            c.rotation("U'")
-            c.rotation("L'")
+            c.rotation("F")
+            c.rotation("D'")
+            c.rotation("F'")
             c.rotation("D")
-            c.rotation("L")
+            c.rotation("F")
             c.rotation("D'")
             c.rotation("D'")
-            c.rotation("L'")
+            c.rotation("F'")
             
         elif b[2][0]=='Y':
-            c.rotation("L")
+            c.rotation("F")
             c.rotation("D2")
-            c.rotation("L2")
+            c.rotation("F2")
             c.rotation("D'")
-            c.rotation("L2")
+            c.rotation("F2")
             c.rotation("D'")
-            c.rotation("L2")
+            c.rotation("F2")
             c.rotation("D2")
-            c.rotation("L")
+            c.rotation("F")
             
-        elif r[2][0]=='Y' and j[2][0]=='Y' and j[2][2]=='Y':
-             c.rotation("R'")#"L'U'RD'R'URD"
-             c.rotation("D'")
-             c.rotation("L")
-             c.rotation("U'")
-             c.rotation("L'")
-             c.rotation("D")
-             c.rotation("L")
-             c.rotation("U")
+        elif r[2][0]=='Y' and j[0][2]=='Y' and j[2][2]=='Y':
+            c.rotation("F'")#"L'U'RD'R'URD"
+            c.rotation("R'")
+            c.rotation("F")
+            c.rotation("L'")
+            c.rotation("F'")
+            c.rotation("R")
+            c.rotation("F")
+            c.rotation("L")
         elif  b[2][2]=='Y' and r[2][0]=='Y' and j[0][0]=='Y' and j[2][2]=='Y':
-            c.rotation("R'")#"L'URD'R'U'RD"
-            c.rotation("D")
-            c.rotation("L")
-            c.rotation("U'")
+            c.rotation("F'")
+            c.rotation("R")   ##Testé 
+            c.rotation("F")
             c.rotation("L'")
-            c.rotation("D'")
+            c.rotation("F'")
+            c.rotation("R'")
+            c.rotation("F")
             c.rotation("L")
+                               
+     
+
+        elif b[2][0]=='Y' and b[2][2]=='Y' and j[0][0]=='Y' and j[2][0]=='Y':
+            c.rotation("F2") #"R2DR'U2RD'R'U2R'"
             c.rotation("U")
-        elif b[2][0]=='Y' and b[2][2]=='Y' and j[0][0]=='Y' and j[0][2]=='Y':
-            c.rotation("L2") #"R2DR'U2RD'R'U2R'"
-            c.rotation("U")
-            c.rotation("L'")
-            c.rotation("D2")
-            c.rotation("L")
+            c.rotation("F'")
+            c.rotation("D2")    ## testé
+            c.rotation("F")
             c.rotation("U'")
-            c.rotation("L'")
+            c.rotation("F'")
             c.rotation("D2")
-            c.rotation("L'")
+            c.rotation("F'")
         else :
-            c.rotation("U")
-        rfjaune(c)
+            c.rotation("D")
+            rfjaune(c)
+    return(c.printCube())
         
         
-cube = Cube("OGRBWYBGBGYYOYOWOWGRYOOOBGBRRYRBWWWRBWYGROWGRYBRGYWBOG")
-c1=Cube("WWWWWWWWWRRRBBBOOOGGGRRRBBBOOOGGGOGYGBYOOYRRBBYYYYYGYR")
-c=Cube("WWWWWWWWWRRRBBBOOOGGGRRRBBBOOOGGGGOYGBYBGYRRORYOYYYYYB")
-c.printCube()
-c.rotation("D")
+        
+cube = Cube("WWWWWWWWWGGGRRRBBBOOOGGGRRRBBBOOOGOOYBRBGYGROBYYYYYYYR")
+c1=Cube("WWWWWWWWWGGGRRRBBBOOOGGGRRRBBBOOOGGRBROYBYGOOYYBYYYYYR")
+c=Cube("WWWWWWWWWRRRBBBOOOGGGRRRBBBOOOGGGRRRBBBOOOGGGYYYYYYYYY")
+##c.printCube()
+##c.rotation("D")  L=B R=F F=R U=D D=U
+#"R'U'RD'R'URD"
+#l'URD'R'U'RDx'
+
+##
+##cube.printCube()
+##cube.rotation("F'")
+####cube.rotation("R")
+####cube.rotation("F")
+####cube.rotation("L'")
+####cube.rotation("F'")
+####cube.rotation("R'")
+####cube.rotation("F")
+####cube.rotation("L")
+##cube.printCube()
+####
+####
+#c1.printCube()
 ##c.rotation("L")
 ##c.rotation("D2")
 ##c.rotation("L'")
@@ -124,10 +146,28 @@ c.rotation("D")
 ##c.rotation("L")
 ##c.rotation("D'")
 ##c.rotation("L'")
-#rfjaune(cub)
-c.printCube()
+##j=cube.down
+##r=cube.front
+##b=cube.right
+##a=b[2][2]
+##z=r[2][0]
+##y=j[0][2]
+##x=j[2][0]
+#print(a,z,y,x)
+#rfjaune(c1)
+c1.printCube()
 
 ##a=cube.left
 ##print(a[0][1])
-        
+c1.rotation("F2")
+#c1.rotation("F")#"R2DR'U2RD'R'U2R'"
+c1.rotation("U")
+c1.rotation("F'")
+c1.rotation("D2")
+c1.rotation("F")
+c1.rotation("U'")
+c1.rotation("F'")
+c1.rotation("D2")
+c1.rotation("F'")
+c1.printCube()
         
