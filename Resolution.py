@@ -9,6 +9,17 @@ class Resolution:
         self.liCross=1,5,7,3
         self.liCmd=[]
         self.liRota='','2',"'"
+
+
+    def getInvRot(self,rot):
+        if(len(rot)!=1 or len(rot)!=2):
+            print("getInvRot : INVALID ROTATION NAME")
+            return -1
+        if(len(rot)==1):
+            return rot+"'"
+        if(rot[1]=='2'):
+            return rot
+        return rot[0]
         
     # Cette fonction renvoit le type de rotation a éffectué
     # pour que le cube sur la face origin se retrouve sur la face
@@ -34,24 +45,22 @@ class Resolution:
 
                 
     def applyCmd(self,cmd):
-        tmp=''
-        current=False
-        for x in cmd :
-            current=True
-            if(len(tmp)==0):
-                tmp=x
-                current = False
-            elif(len(tmp)==1 and current==True):
-                if(x=="'" or x=="2"):
-                    tmp+=x
-                    print(tmp)
-                    self.liCmd+=tmp
-                    cube.rotation(tmp)
-                    tmp=''
-                else :
-                    self.liCmd+=tmp
-                    cube.rotation(tmp)
-                    tmp=''
+        cpt=0
+        while(cpt!=len(cmd)):
+            tmp=cmd[cpt]
+            if(cmd[cpt+1]=="'" or cmd[cpt+1]=="2"):
+                tmp+=cmd[cpt+1]
+                self.cube.rotation(tmp)
+                cpt+=1
+            else :
+                self.cube.rotation(tmp)
+            tmp=''
+            cpt+=1
+        return 0
+            
+
+
+        
             
             
             
@@ -88,12 +97,23 @@ class Resolution:
                 
             if(result[0][1]!=cube.getFaceInversed(nameFace) and result[0][1]!=nameFace):
                 rot=self.getApproRot(result[1][1],x,result[0][1])
+
+                
                 if(rot==-1):
                     if(result[1][1]==colorcross):
-                        if(len(tab[1]==4))
+                        if(len(tab[1]==4)):
                             self.liCmd+=colorcross.upper()
                             tmpres=cube.findCube([colorcross,curColor])
                             self.liCmd+=self.getApproRot(tmpres[1][1],x,result[0][1])
+
+                else :
+                    if(result[0][1] in tab):
+                        self.liCmd+=rot+self.getApproRot(result[0][1],nameFace,x)+self.getInvRot(rot)
+                        tab.remove(x)
+                    else :
+                        self.liCmd+=rot+self.getApproRot(result[0][1],nameFace,x)
+                        tab.remove(x)
+                        
 
             
             
@@ -131,5 +151,8 @@ class Resolution:
         
 
 cube = Cube("OOOOOOOOOBBBRRRJJJGGGBBBRRRJJJGGGBBBRRRJJJGGGYYYYYYYYY")
-resol= Resolution(cube)cube.printCube()
+resol= Resolution(cube)
+cube.printCube()
+resol.applyCmd("F'L2L2")
+cube.printCube()
 print(resol.getApproRot('l','l','f'))
