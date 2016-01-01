@@ -43,52 +43,8 @@ def rfjaune(c):
             c.rotation("F")
             c.rotation("D2")
             c.rotation("F'")
-        
-        elif r[2][2]=='Y' and b[2][2]=='Y' and j[0][0]=='Y':
-            c.rotation("F")
-            c.rotation("D2")
-            c.rotation("F'")
-            c.rotation("D'")
-            c.rotation("F")
-            c.rotation("D'")
-            c.rotation("F'")
-            
-             
-        elif r[2][0]=='Y' and r[2][2]=='Y':
-            c.rotation("F")
-            c.rotation("D")  
-            c.rotation("F'")
-            c.rotation("D")
-            c.rotation("F")
-            c.rotation("D'")
-            c.rotation("F'")
-            c.rotation("D")
-            c.rotation("F")
-            c.rotation("D'")
-            c.rotation("D'")
-            c.rotation("F'")
-            
-        elif b[2][0]=='Y':
-            c.rotation("F")
-            c.rotation("D2")
-            c.rotation("F2")
-            c.rotation("D'")
-            c.rotation("F2")
-            c.rotation("D'")
-            c.rotation("F2")
-            c.rotation("D2")
-            c.rotation("F")
-            
-        elif r[2][0]=='Y' and j[0][2]=='Y' and j[2][2]=='Y':
-            c.rotation("F'")#"L'U'RD'R'URD"
-            c.rotation("R'")
-            c.rotation("F")
-            c.rotation("L'")
-            c.rotation("F'")
-            c.rotation("R")
-            c.rotation("F")
-            c.rotation("L")
-        elif  b[2][2]=='Y' and r[2][0]=='Y' and j[0][0]=='Y' and j[2][2]=='Y':
+            print("FDF'DFD2F'")
+        elif  b[2][2]=='Y' and r[2][0]=='Y' and j[0][2]=='Y' and j[2][0]=='Y':
             c.rotation("F'")
             c.rotation("R")   ##Testé 
             c.rotation("F")
@@ -97,9 +53,7 @@ def rfjaune(c):
             c.rotation("R'")
             c.rotation("F")
             c.rotation("L")
-                               
-     
-
+            print("F'RFL'F'R'FL")
         elif b[2][0]=='Y' and b[2][2]=='Y' and j[0][0]=='Y' and j[2][0]=='Y':
             c.rotation("F2") #"R2DR'U2RD'R'U2R'"
             c.rotation("U")
@@ -110,16 +64,65 @@ def rfjaune(c):
             c.rotation("F'")
             c.rotation("D2")
             c.rotation("F'")
+            print("F2UF'D2FU'F'D2F'")
+        elif r[2][0]=='Y' and j[0][2]=='Y' and j[2][2]=='Y':
+            c.rotation("F'")#"L'U'RD'R'URD"
+            c.rotation("R'")
+            c.rotation("F")
+            c.rotation("L'")
+            c.rotation("F'")
+            c.rotation("R")
+            c.rotation("F")
+            c.rotation("L")
+            print("F'R'FL'F'RFL")
+        elif r[2][2]=='Y' and b[2][2]=='Y' and j[0][0]=='Y':
+            c.rotation("F")
+            c.rotation("D2")
+            c.rotation("F'")
+            c.rotation("D'")
+            c.rotation("F")
+            c.rotation("D'")
+            c.rotation("F'")
+            print("FD2F'D'FD'F'")
+             
+        elif r[2][0]=='Y' and r[2][2]=='Y':
+            c.rotation("F")
+            c.rotation("D")  
+            c.rotation("F'")    #Testé
+            c.rotation("D")
+            c.rotation("F")
+            c.rotation("D'")
+            c.rotation("F'")
+            c.rotation("D")
+            c.rotation("F")
+            c.rotation("D'")
+            c.rotation("D'")
+            c.rotation("F'")
+            print("FDF'DFD'F'DFD'D'F'")
+        elif b[2][0]=='Y':
+            c.rotation("F")
+            c.rotation("D2")
+            c.rotation("F2")
+            c.rotation("D'")
+            c.rotation("F2")
+            c.rotation("D'")
+            c.rotation("F2")
+            c.rotation("D2")
+            c.rotation("F")
+            print("FD2F2D'F2D'F2D2F")
+        
+        
         else :
             c.rotation("D")
             rfjaune(c)
     return(c.printCube())
         
-        
+   
         
 cube = Cube("WWWWWWWWWGGGRRRBBBOOOGGGRRRBBBOOOGOOYBRBGYGROBYYYYYYYR")
 c1=Cube("WWWWWWWWWGGGRRRBBBOOOGGGRRRBBBOOOGGRBROYBYGOOYYBYYYYYR")
 c=Cube("WWWWWWWWWRRRBBBOOOGGGRRRBBBOOOGGGRRRBBBOOOGGGYYYYYYYYY")
+c2=Cube("WWWWWWWWWGGGRRRBBBOOOGGGRRRBBBOOOGRBYGYBBGYOYRYOYYYRYO")
 ##c.printCube()
 ##c.rotation("D")  L=B R=F F=R U=D D=U
 #"R'U'RD'R'URD"
@@ -138,7 +141,7 @@ c=Cube("WWWWWWWWWRRRBBBOOOGGGRRRBBBOOOGGGRRRBBBOOOGGGYYYYYYYYY")
 ##cube.printCube()
 
 ####
-#c1.printCube()
+#cube.printCube()
 ##c.rotation("L")
 ##c.rotation("D2")
 ##c.rotation("L'")
@@ -154,8 +157,8 @@ c=Cube("WWWWWWWWWRRRBBBOOOGGGRRRBBBOOOGGGRRRBBBOOOGGGYYYYYYYYY")
 ##y=j[0][2]
 ##x=j[2][0]
 #print(a,z,y,x)
-#rfjaune(c1)
-##c1.printCube()
+rfjaune(c2)
+#c1.printCube()
 
 ##a=cube.left
 ##print(a[0][1])
