@@ -11,25 +11,28 @@ class Resolution:
         self.liRota='','2',"'"
 
     def rotation(self,cmd):
-        if(len(cmd)!=1 or len(cmd)!=2):
-            print("rotation : INVALID ROTATION NAME")
+        if(cmd==''):
+            return 0
+        if(len(cmd)!=1 and len(cmd)!=2):
+            print("rotation : INVALID ROTATION NAME",cmd)
             return -1
-        if(len(cmd)==2 and ( cmd[1]!="2" or cmd[1]!="'")):
-            print("rotation : INVALID ROTATION NAME")
+        if(len(cmd)==2 and ( cmd[1]!="2" and cmd[1]!="'")):
+            print("rotation : INVALID ROTATION NAME",cmd)
             return -1
         self.liCmd+=cmd
+        print("doing :" ,cmd)
         self.cube.rotation(cmd)
         
             
-    def getInvRot(self,rot):
-        if(len(rot)!=1 or len(rot)!=2):
-            print("getInvRot : INVALID ROTATION NAME")
+    def getInvRot(self,cmd):
+        if(len(cmd)!=1 and len(cmd)!=2):
+            print("getInvRot : INVALID ROTATION NAME",cmd)
             return -1
-        if(len(rot)==1):
-            return rot+"'"
-        if(rot[1]=='2'):
-            return rot
-        return rot[0]
+        if(len(cmd)==1):
+            return cmd+"'"
+        if(cmd[1]=='2'):
+            return cmd
+        return cmd[0]
         
     # Cette fonction renvoit le type de rotation a éffectué
     # pour que le cube sur la face origin se retrouve sur la face
@@ -58,6 +61,9 @@ class Resolution:
         cpt=0
         while(cpt!=len(cmd)):
             tmp=cmd[cpt]
+            if(cpt==len(cmd)-1):
+                self.rotation(tmp)
+                return 0
             if(cmd[cpt+1]=="'" or cmd[cpt+1]=="2"):
                 tmp+=cmd[cpt+1]
                 self.rotation(tmp)
@@ -78,79 +84,105 @@ class Resolution:
 
     def theCross(self,nameFace):
         tab=self.checkCross(nameFace)
+        print (tab)
         colorcross=cube.getCentralColor(nameFace)
         if(tab[0]==True):
             return 0
         # pour toute les faces qui n'ont pas encore été traitée
-        for x in tab[1]:
-            
-            # On cherche le cube de couleur "Face à traiter" + " Face où se trouve la croix"
-            # on récupere donc la couleur de "Face à traiter" 
-            curColor=cube.getCentralColor(x)
-            result=cube.findCube([colorcross,curColor])
-
-            # on traite les différents cas en fonction de la position du cube 
-            if(result[0][1]==nameFace):
-                if(len(tab[1]==4)):
-                    self.applyCmd(self.getApproRot(result[1][1],x,result[0][1]))
-                    # on actualise la liste des face à traiter au fur à mesure pour eviter de défaire ce qui a déjà été fait
-                    tab[1].remove(x)
-                else:
-                    self.applyCmd(result[1][1].upper()+self.getApproRot(result[1][1],x,result[0][1])+x.upper()+'2')
-                    tab[1].remove(x)
-
-
-
-            if(result[0][1]==cube.getFaceInversed(nameFace)):
-                self.applyCmd(self.getApproRot(result[1][1],x,result[0][1])+x.upper()+'2')
-                tab[1].remove(x)
+        while(len(tab[1])!=0):
+            for x in tab[1]:
                 
-            if(result[0][1]!=cube.getFaceInversed(nameFace) and result[0][1]!=nameFace):
-                rot=self.getApproRot(result[1][1],x,result[0][1])
+                # On cherche le cube de couleur "Face à traiter" + " Face où se trouve la croix"
+                # on récupere donc la couleur de "Face à traiter" 
+                curColor=cube.getCentralColor(x)
+                result=cube.findCube([colorcross,curColor])
+                print(result)
 
-                
-                if(rot==-1):
-                    if(result[1][1]==nameFace or result[1][1]==cube.getFaceInversed(nameFace)):
-                        if(len(tab[1]==4)):
-                            tmpcmd=result[1][1].upper()
-                            self.rotation(tmpcmd)
-                            
-                            tmppos==cube.findCube([colorcross,curColor])
-                            tmpcmd=self.getApproRot(tmppos[1][1],x,tmppos[0][1])
-                            self.rotation(tmpcmd)
-                            
-                            tmppos==cube.findCube([colorcross,curColor])
-                            tmpcmd=self.getApproRot(tmppos[0][1],nameFace,x)
-                            self.rotation(tmpcmd)
-                            
-                            tab.remove(x)
+                # on traite les différents cas en fonction de la position du cube 
+                if(result[0][1]==nameFace):
+                    if(len(tab[1])==4):
+                        self.applyCmd(self.getApproRot(result[1][1],x,result[0][1]))
+                        # on actualise la liste des face à traiter au fur à mesure pour eviter de défaire ce qui a déjà été fait
+                        tab[1].remove(x)
+                    else:
+                        self.applyCmd(result[1][1].upper()+self.getApproRot(result[1][1],x,result[0][1])+x.upper()+'2')
+                        tab[1].remove(x)
+
+
+
+                if(result[0][1]==cube.getFaceInversed(nameFace)):
+                    self.applyCmd(self.getApproRot(result[1][1],x,result[0][1])+x.upper()+'2')
+                    tab[1].remove(x)
+                    
+                if(result[0][1]!=cube.getFaceInversed(nameFace) and result[0][1]!=nameFace):
+                    rot=self.getApproRot(result[1][1],x,result[0][1])
+                    print(rot)
+
+                    
+                    if(rot==-1):
+                        if(result[1][1]==nameFace or result[1][1]==cube.getFaceInversed(nameFace)):
+                            if(len(tab[1]==4)):
+                                tmpcmd=result[1][1].upper()
+                                self.rotation(tmpcmd)
+                                
+                                tmppos=cube.findCube([colorcross,curColor])
+                                tmpcmd=self.getApproRot(tmppos[1][1],x,tmppos[0][1])
+                                self.rotation(tmpcmd)
+                                
+                                tmppos=cube.findCube([colorcross,curColor])
+                                tmpcmd=self.getApproRot(tmppos[0][1],nameFace,x)
+                                self.rotation(tmpcmd)
+                                
+                                tab[1].remove(x)
+                            else:
+                                tmpcmd=self.getApproRot(result[1][1],cube.getFaceInversed(nameFace),result[0][1])
+                                self.rotation(tmpcmd)
+                                self.rotation(cube.getFaceInversed(nameFace).upper())
+                                tmppos=cube.findCube([colorcross,curColor])
+                                tmpcmd=self.getApproRot(tmppos[1][1],x,tmppos[0][1])
+                                
+                                faceinter=tmppos[0][1]
+                                mouvinter=self.getInvRot(tmpcmd[0])
+                                
+                                self.cube.rotation(tmpcmd[0])
+                                
+                                tmppos==cube.findCube([colorcross,curColor])
+                                tmpcmd=self.getApproRot(tmppos[0][1],nameFace,x)
+                                if(faceinter not in tab):
+                                    self.rotation(mouvinter)
+                                tab[1].remove(x)
                         else:
-                            tmpcmd=self.getApproRot(result[1][1],cube.getFaceInversed(nameFace),result[0][1])
+                            tmpcmd=self.getApproRot(result[0][1],cube.getFaceInversed(nameFace),result[1][1])
                             self.rotation(tmpcmd)
-                            self.rotation(cube.getFaceInversed(nameFace).upper())
+                            
+                            faceinter=result[1][1]
+                            mouvinter=self.getInvRot(tmpcmd[0])
+                                
                             tmppos=cube.findCube([colorcross,curColor])
                             tmpcmd=self.getApproRot(tmppos[1][1],x,tmppos[0][1])
-                            faceinter=tmppos[0][1]
-                            mouvinter=self.getInvRot(tmpcmd[0])
-                            self.cube.rotation(tmpcmd[0])
-                            
-                            tmppos==cube.findCube([colorcross,curColor])
+                            self.rotation(tmpcmd)
+                                
+                            tmppos=cube.findCube([colorcross,curColor])
                             tmpcmd=self.getApproRot(tmppos[0][1],nameFace,x)
-                            if(faceinter in tab):
+                            self.rotation(tmpcmd)
+
+                            if(faceinter not in tab):
                                 self.rotation(mouvinter)
-                            tab.remove(x)                            
+                                
+                            tab[1].remove(x)
+                                
 
-                else :
-                    if(result[0][1] in tab):
-                        self.applyCmd(rot+self.getApproRot(result[0][1],nameFace,x)+self.getInvRot(rot))
-                        tab.remove(x)
                     else :
-                        self.applyCmd(rot+self.getApproRot(result[0][1],nameFace,x))
-                        tab.remove(x)
-                        
-
-            
-            
+                        print("ok")
+                        if(result[0][1] in tab[1]):
+                            self.applyCmd(rot+self.getApproRot(result[0][1],nameFace,x)+self.getInvRot(rot))
+                            tab[1].remove(x)
+                        else :
+                            self.applyCmd(rot+self.getApproRot(result[0][1],nameFace,x))
+                            tab[1].remove(x)
+                            
+                
+                
     
     # Cette fonction permet de verifier si la croix a été réalisée sur une face
     # Le nom de la face à vérifier est donné dans nameFace
@@ -179,14 +211,17 @@ class Resolution:
                 
         return tmp
                 
-                        
+              
         
         
         
 
-cube = Cube("OOOOOOOOOBBBRRRJJJGGGBBBRRRJJJGGGBBBRRRJJJGGGYYYYYYYYY")
+#cube = Cube("OOOOOOOOOBBBRRRJJJGGGBBBRRRJJJGGGBBBRRRJJJGGGYYYYYYYYY")
+cube = Cube("BWGOWWWWRYYBOBBWOOYGRRRGOBRBORYGWGOBOYOWGYGRRYBGBYYWGR")
+cube.printCube()
+
 resol= Resolution(cube)
+resol.applyCmd("L'FD")
 cube.printCube()
-resol.applyCmd("F'L2L2")
+resol.theCross('u')
 cube.printCube()
-print(resol.getApproRot('l','l','f'))

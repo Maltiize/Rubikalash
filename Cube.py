@@ -105,7 +105,7 @@ class Cube:
             return 
             
         if(nameFace=="l"):
-            self.lef=face
+            self.left=face
             return
             
         if(nameFace=="r"):
@@ -477,5 +477,5 @@ def affTab(tab):
 cube = Cube("YBGGGGGGGRRRWWWOOOYYBGRRWWWOOOYYYYRRWWWOOGRYOBBBBBBBRY")
 #cube = Cube("O0OOOOOOOBBBRRRJJJGGGBBBRRRJJJGGGBBBRRRJJJGGGYYYYYYYYY")
 
-cube.printCube()
-print(cube.findCube(['Y','R']))
+#cube.printCube()
+#print(cube.findCube(['Y','R']))
