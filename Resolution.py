@@ -10,7 +10,17 @@ class Resolution:
         self.liCmd=[]
         self.liRota='','2',"'"
 
-
+    def rotation(self,cmd):
+        if(len(cmd)!=1 or len(cmd)!=2):
+            print("rotation : INVALID ROTATION NAME")
+            return -1
+        if(len(cmd)==2 and ( cmd[1]!="2" or cmd[1]!="'")):
+            print("rotation : INVALID ROTATION NAME")
+            return -1
+        self.liCmd+=cmd
+        self.cube.rotation(cmd)
+        
+            
     def getInvRot(self,rot):
         if(len(rot)!=1 or len(rot)!=2):
             print("getInvRot : INVALID ROTATION NAME")
@@ -29,7 +39,7 @@ class Resolution:
         if(origin == destination):
             return ''
         if(rotatingF==destination):
-            return -1
+            return -2
         i=-1
         x=0
         m=cube.getMouv(rotatingF.upper())
@@ -50,10 +60,10 @@ class Resolution:
             tmp=cmd[cpt]
             if(cmd[cpt+1]=="'" or cmd[cpt+1]=="2"):
                 tmp+=cmd[cpt+1]
-                self.cube.rotation(tmp)
+                self.rotation(tmp)
                 cpt+=1
             else :
-                self.cube.rotation(tmp)
+                self.rotation(tmp)
             tmp=''
             cpt+=1
         return 0
@@ -82,17 +92,17 @@ class Resolution:
             # on traite les différents cas en fonction de la position du cube 
             if(result[0][1]==nameFace):
                 if(len(tab[1]==4)):
-                    self.liCmd+=self.getApproRot(result[1][1],x,result[0][1])
+                    self.applyCmd(self.getApproRot(result[1][1],x,result[0][1]))
                     # on actualise la liste des face à traiter au fur à mesure pour eviter de défaire ce qui a déjà été fait
                     tab[1].remove(x)
                 else:
-                    self.liCmd+=result[1][1].upper()+self.getApproRot(result[1][1],x,result[0][1])+x.upper()+'2'
+                    self.applyCmd(result[1][1].upper()+self.getApproRot(result[1][1],x,result[0][1])+x.upper()+'2')
                     tab[1].remove(x)
 
 
 
             if(result[0][1]==cube.getFaceInversed(nameFace)):
-                self.liCmd+=self.getApproRot(result[1][1],x,result[0][1])+x.upper()+'2'
+                self.applyCmd(self.getApproRot(result[1][1],x,result[0][1])+x.upper()+'2')
                 tab[1].remove(x)
                 
             if(result[0][1]!=cube.getFaceInversed(nameFace) and result[0][1]!=nameFace):
@@ -100,18 +110,42 @@ class Resolution:
 
                 
                 if(rot==-1):
-                    if(result[1][1]==colorcross):
+                    if(result[1][1]==nameFace or result[1][1]==cube.getFaceInversed(nameFace)):
                         if(len(tab[1]==4)):
-                            self.liCmd+=colorcross.upper()
-                            tmpres=cube.findCube([colorcross,curColor])
-                            self.liCmd+=self.getApproRot(tmpres[1][1],x,result[0][1])
+                            tmpcmd=result[1][1].upper()
+                            self.rotation(tmpcmd)
+                            
+                            tmppos==cube.findCube([colorcross,curColor])
+                            tmpcmd=self.getApproRot(tmppos[1][1],x,tmppos[0][1])
+                            self.rotation(tmpcmd)
+                            
+                            tmppos==cube.findCube([colorcross,curColor])
+                            tmpcmd=self.getApproRot(tmppos[0][1],nameFace,x)
+                            self.rotation(tmpcmd)
+                            
+                            tab.remove(x)
+                        else:
+                            tmpcmd=self.getApproRot(result[1][1],cube.getFaceInversed(nameFace),result[0][1])
+                            self.rotation(tmpcmd)
+                            self.rotation(cube.getFaceInversed(nameFace).upper())
+                            tmppos=cube.findCube([colorcross,curColor])
+                            tmpcmd=self.getApproRot(tmppos[1][1],x,tmppos[0][1])
+                            faceinter=tmppos[0][1]
+                            mouvinter=self.getInvRot(tmpcmd[0])
+                            self.cube.rotation(tmpcmd[0])
+                            
+                            tmppos==cube.findCube([colorcross,curColor])
+                            tmpcmd=self.getApproRot(tmppos[0][1],nameFace,x)
+                            if(faceinter in tab):
+                                self.rotation(mouvinter)
+                            tab.remove(x)                            
 
                 else :
                     if(result[0][1] in tab):
-                        self.liCmd+=rot+self.getApproRot(result[0][1],nameFace,x)+self.getInvRot(rot)
+                        self.applyCmd(rot+self.getApproRot(result[0][1],nameFace,x)+self.getInvRot(rot))
                         tab.remove(x)
                     else :
-                        self.liCmd+=rot+self.getApproRot(result[0][1],nameFace,x)
+                        self.applyCmd(rot+self.getApproRot(result[0][1],nameFace,x))
                         tab.remove(x)
                         
 
