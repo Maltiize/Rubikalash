@@ -46,7 +46,7 @@ class Resolution:
         i=-1
         x=0
         m=cube.getMouv(rotatingF.upper())
-        while(x<6):
+        while(x<=6):
             if(origin==m[1][x%4][0]):
                 i=0
             if(destination==m[1][x%4][0] and i!=-1):
@@ -91,7 +91,8 @@ class Resolution:
         # pour toute les faces qui n'ont pas encore été traitée
         while(len(tab[1])!=0):
             for x in tab[1]:
-                
+                print("doing : " ,x)
+                cube.printCube()
                 # On cherche le cube de couleur "Face à traiter" + " Face où se trouve la croix"
                 # on récupere donc la couleur de "Face à traiter" 
                 curColor=cube.getCentralColor(x)
@@ -107,8 +108,6 @@ class Resolution:
                     else:
                         self.applyCmd(result[1][1].upper()+self.getApproRot(result[1][1],x,result[0][1])+x.upper()+'2')
                         tab[1].remove(x)
-
-
 
                 if(result[0][1]==cube.getFaceInversed(nameFace)):
                     self.applyCmd(self.getApproRot(result[1][1],x,result[0][1])+x.upper()+'2')
@@ -148,7 +147,7 @@ class Resolution:
                                 
                                 tmppos==cube.findCube([colorcross,curColor])
                                 tmpcmd=self.getApproRot(tmppos[0][1],nameFace,x)
-                                if(faceinter not in tab):
+                                if(faceinter not in tab[1]):
                                     self.rotation(mouvinter)
                                 tab[1].remove(x)
                         else:
@@ -156,7 +155,7 @@ class Resolution:
                             self.rotation(tmpcmd)
                             
                             faceinter=result[1][1]
-                            mouvinter=self.getInvRot(tmpcmd[0])
+                            mouvinter=self.getInvRot(tmpcmd)
                                 
                             tmppos=cube.findCube([colorcross,curColor])
                             tmpcmd=self.getApproRot(tmppos[1][1],x,tmppos[0][1])
@@ -166,14 +165,31 @@ class Resolution:
                             tmpcmd=self.getApproRot(tmppos[0][1],nameFace,x)
                             self.rotation(tmpcmd)
 
-                            if(faceinter not in tab):
+                            if(faceinter not in tab[1]):
                                 self.rotation(mouvinter)
                                 
                             tab[1].remove(x)
-                                
+
+                    
+
+                    elif(rot==-2):
+                        print("ok")
+                        self.rotation(result[1][1].upper())
+                        tmppos=cube.findCube([colorcross,curColor])
+                        self.rotation(self.getApproRot(tmppos[1][1],x,tmppos[0][1]))
+                        
+                        if(result[1][1] not in tab[1] or (result[1][1]==nameFace and len(tab[1]!=4))):
+                            self.rotation(self.getInvRot(result[1][1].upper()))
+                        self.rotation(self.getApproRot(tmppos[0][1],nameFace,x))
+                        tab[1].remove(x)
+                            
+                            
+                        
+    
+                            
+                            
 
                     else :
-                        print("ok")
                         if(result[0][1] in tab[1]):
                             self.applyCmd(rot+self.getApproRot(result[0][1],nameFace,x)+self.getInvRot(rot))
                             tab[1].remove(x)
@@ -181,7 +197,8 @@ class Resolution:
                             self.applyCmd(rot+self.getApproRot(result[0][1],nameFace,x))
                             tab[1].remove(x)
                             
-                
+            print("face finished : " ,x)
+            
                 
     
     # Cette fonction permet de verifier si la croix a été réalisée sur une face
@@ -221,7 +238,7 @@ cube = Cube("BWGOWWWWRYYBOBBWOOYGRRRGOBRBORYGWGOBOYOWGYGRRYBGBYYWGR")
 cube.printCube()
 
 resol= Resolution(cube)
-resol.applyCmd("L'FD")
+resol.applyCmd("L'FDUDB2LR'B2D2L'U2L'")
 cube.printCube()
 resol.theCross('u')
 cube.printCube()
