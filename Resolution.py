@@ -4,30 +4,6 @@
 from Cube import *
 class Resolution:
 
-    def __init__(self,c):
-        self.cube=c
-        self.liCross=1,5,7,3,4
-
-
-
-    def theCross(self,nameFace):
-        while(self.checkCross(nameface)!=True):
-            return 0
-
-    def checkCross(self,nameFace):
-        tmp=False,[]
-        if(cube.checkPattern(nameFace,self.liCross)==False):
-            return tmp
-        m=cube.getMouv(nameFace.upper())
-        for x in m[1]:
-            colorEdge=cube.getCentralColor(x[0])
-            if(cube.checkColorSquare(x[0],colorEdge,x[1][1])==False):
-                return False
-            
-            tmp[1]=tmp[1]+[x[0]]
-        tmp[0]=True
-        return tmp
-#R=L; U=D ; L=R
 
 
 def rfjaune(c):
@@ -123,54 +99,6 @@ cube = Cube("WWWWWWWWWGGGRRRBBBOOOGGGRRRBBBOOOGOOYBRBGYGROBYYYYYYYR")
 c1=Cube("WWWWWWWWWGGGRRRBBBOOOGGGRRRBBBOOOGGRBROYBYGOOYYBYYYYYR")
 c=Cube("WWWWWWWWWRRRBBBOOOGGGRRRBBBOOOGGGRRRBBBOOOGGGYYYYYYYYY")
 c2=Cube("WWWWWWWWWGGGRRRBBBOOOGGGRRRBBBOOOGRBYGYBBGYOYRYOYYYRYO")
-##c.printCube()
-##c.rotation("D")  L=B R=F F=R U=D D=U
-#"R'U'RD'R'URD"
-#l'URD'R'U'RDx'
 
-
-##cube.printCube()
-##cube.rotation("F'")
-##cube.rotation("R")
-##cube.rotation("F")
-##cube.rotation("L'")
-##cube.rotation("F'")
-##cube.rotation("R'")
-##cube.rotation("F")
-##cube.rotation("L")
-##cube.printCube()
-
-####
-#cube.printCube()
-##c.rotation("L")
-##c.rotation("D2")
-##c.rotation("L'")
-##c.rotation("D'")
-##c.rotation("L")
-##c.rotation("D'")
-##c.rotation("L'")
-##j=cube.down
-##r=cube.front
-##b=cube.right
-##a=b[2][2]
-##z=r[2][0]
-##y=j[0][2]
-##x=j[2][0]
-#print(a,z,y,x)
 rfjaune(c2)
-#c1.printCube()
-
-##a=cube.left
-##print(a[0][1])
-##c1.rotation("F2")
-###c1.rotation("F")#"R2DR'U2RD'R'U2R'"
-##c1.rotation("U")
-##c1.rotation("F'")
-##c1.rotation("D2")
-##c1.rotation("F")
-##c1.rotation("U'")
-##c1.rotation("F'")
-##c1.rotation("D2")
-##c1.rotation("F'")
-##c1.printCube()
         
