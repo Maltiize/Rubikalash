@@ -2,7 +2,7 @@
 #et renvoie à InterfaceIO la résolution du cube
 
 from Cube import *
-class Resolution:
+
 
 
 
@@ -14,7 +14,7 @@ def rfjaune(c):
         if  b[2][0]=='Y' and r[2][0]=='Y' and j[2][2]=='Y':
             c.rotation("F")
             c.rotation("D")
-            c.rotation("F'")
+            c.rotation("F'")    #testé
             c.rotation("D")
             c.rotation("F")
             c.rotation("D2")
@@ -45,7 +45,7 @@ def rfjaune(c):
             c.rotation("F'")#"L'U'RD'R'URD"
             c.rotation("R'")
             c.rotation("F")
-            c.rotation("L'")
+            c.rotation("L'")   #Testé
             c.rotation("F'")
             c.rotation("R")
             c.rotation("F")
@@ -96,63 +96,13 @@ def rfjaune(c):
    
         
 cube = Cube("WWWWWWWWWGGGRRRBBBOOOGGGRRRBBBOOOGOOYBRBGYGROBYYYYYYYR")
-c1=Cube("WWWWWWWWWGGGRRRBBBOOOGGGRRRBBBOOOGGRBROYBYGOOYYBYYYYYR")
+s
 c=Cube("WWWWWWWWWRRRBBBOOOGGGRRRBBBOOOGGGRRRBBBOOOGGGYYYYYYYYY")
 c2=Cube("WWWWWWWWWGGGRRRBBBOOOGGGRRRBBBOOOGRBYGYBBGYOYRYOYYYRYO")
-<<<<<<< HEAD
+
 c3=Cube("WWWWWWWWWGGGRRRBBBOOOGGGRRRBBBOOOYGRYBBYROBOGBYRYYYBYY")
-##c.printCube()
-##c.rotation("D")  L=B R=F F=R U=D D=U
-#"R'U'RD'R'URD"
-#l'URD'R'U'RDx'
+c4=Cube("WWWWWWWWWGGGRRRBBBOOOGGGRRRBBBOOOGGRYRRBBBOOYGYYYYYOYY")
 
+rfjaune(c4)
 
-##cube.printCube()
-##cube.rotation("F'")
-##cube.rotation("R")
-##cube.rotation("F")
-##cube.rotation("L'")
-##cube.rotation("F'")
-##cube.rotation("R'")
-##cube.rotation("F")
-##cube.rotation("L")
-##cube.printCube()
-
-####
-#cube.printCube()
-##c.rotation("L")
-##c.rotation("D2")
-##c.rotation("L'")
-##c.rotation("D'")
-##c.rotation("L")
-##c.rotation("D'")
-##c.rotation("L'")
-##j=cube.down
-##r=cube.front
-##b=cube.right
-##a=b[2][2]
-##z=r[2][0]
-##y=j[0][2]
-##x=j[2][0]
-#print(a,z,y,x)
-rfjaune(c3)
-#c1.printCube()
-
-##a=cube.left
-##print(a[0][1])
-##c1.rotation("F2")
-###c1.rotation("F")#"R2DR'U2RD'R'U2R'"
-##c1.rotation("U")
-##c1.rotation("F'")
-##c1.rotation("D2")
-##c1.rotation("F")
-##c1.rotation("U'")
-##c1.rotation("F'")
-##c1.rotation("D2")
-##c1.rotation("F'")
-##c1.printCube()
-=======
-
-rfjaune(c2)
->>>>>>> 598d4adb1b47be29ebfb3a725ed8740c0d0e2313
         
