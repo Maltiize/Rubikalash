@@ -1,5 +1,5 @@
 Etapes:
-	1)Commencer par la face blanche (haut) et faire une croix
+	1)Commencer par la face blanche (haut) et faire un plus
 	2)Mettre pièce blanche/rouge du milieu au bon endroit pour cela: faire 1/2 tour a la pièce,
 se retrouve en bas au même endroit, la décaler sous la rouge fixe et refaire un 1/2 pour la faire remonter
 	3) faire un T, pour cela mettre les pièces des coins en dessous de leur position au bon endroit et faire la formule:

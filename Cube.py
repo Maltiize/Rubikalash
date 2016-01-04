@@ -14,8 +14,9 @@ class Cube:
         self.idx=[["u",range(0,9)],["d",range(45,54)],["f",[12,13,14 ,24,25,26, 36,37,38]],["l",[9,10,11, 21,22,23, 33,34,35]],["r",[15,16,17 ,27,28,29, 39,40,41]],["b",[18,19,20 ,30,31,32, 42,43,44]]]
         
         #liste des noms des faces permet de faciliter les boucles for
+
         self.liFace=["u","l","f","b","r","d"]
-        
+
 
  
         
@@ -299,7 +300,9 @@ class Cube:
     # verifie un pattern li sur une des faces
     # face est un nameFace et li une liste de coord 1D
     def checkPattern(self,face,li):
-        f=self.getFace(face)
+
+        f=self.getface(face)
+
         
         color=f[int(li[0])][li[0]%3]
         for x in li:
@@ -357,8 +360,8 @@ class Cube:
     def getCentralColor(self,nameFace):
         f=self.getFace(nameFace)
         return f[1][1]
-    
-    # Permet d'obtenir le nom de la face opposé à celle dont le nom est nameFace
+
+     # Permet d'obtenir le nom de la face opposé à celle dont le nom est nameFace
     def getFaceInversed(self,nameFace):
         if(nameFace not in self.liFace):
             print("getFaceInversed :INVALID NAMEFACE ")
@@ -366,6 +369,7 @@ class Cube:
         idx=self.liFace.index(nameFace)
         return self.liFace[len(self.liFace)-(1+idx)]
     
+
     def checkColorSquare(self,nameFace,color,idx):
         f=self.getFace(nameFace)
         return f[int(idx/3)][idx%3]==color
@@ -415,11 +419,11 @@ class Cube:
             li=self.liCorn
             idx=0
             tmpr=[0]*3
-            workingtab='u','d'
+            workingtab=self.liFace[0],self.liFace[5]
 
         if(nameFace!=None):
             workingtab=[nameFace]
-            
+
         for i in workingtab :
             m=self.getMouv(i.upper())
  
@@ -432,8 +436,10 @@ class Cube:
                     
                     if self.checkColorSquare(i,c1,j):
                         tmpr[idc1]=[j,i]
+
                         j2=m[1][idj][1][idx]
                         f2=m[1][idj][0]
+
 
                         for idc2,c2 in enumerate(tabcolor) :
                             if self.checkColorSquare(f2,c2,j2):
@@ -472,10 +478,8 @@ def affTab(tab):
 
     
 
-        
 #cube = Cube("OGRBWYBGBGYYOYOWOWGRYOOOBGBRRYRBWWWRBWYGROWGRYBRGYWBOG")
 cube = Cube("YBGGGGGGGRRRWWWOOOYYBGRRWWWOOOYYYYRRWWWOOGRYOBBBBBBBRY")
 #cube = Cube("O0OOOOOOOBBBRRRJJJGGGBBBRRRJJJGGGBBBRRRJJJGGGYYYYYYYYY")
-
 #cube.printCube()
 #print(cube.findCube(['Y','R']))
