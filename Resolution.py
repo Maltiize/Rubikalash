@@ -10,25 +10,25 @@ class Resolution:
         self.listeAretes=listeAretes
 
 #Fonction qui renvoie quelle face est de la couleur recherchée (jaune pour mon algo ("Y"))
+#On compare avec la couleur de chaque face en [1][1] et donc au milieu
     def whichIsColor(self,color):
-        
-        colorF = cube.up[1][1]
-        if colorF == 'Y' :
+        colorF = cube.up[1][1]  
+        if colorF == color :
             return "u"
         colorF = cube.down[1][1]
-        if colorF == 'Y' :
+        if colorF == color :
             return "d"
         colorF = cube.right[1][1]
-        if colorF == 'Y' :
+        if colorF == color :
             return "r"
         colorF = cube.left[1][1]
-        if colorF == 'Y' :
+        if colorF == color :
             return "l"
         colorF = cube.back[1][1]
-        if colorF == 'Y' :
+        if colorF == color :
             return "b"
         colorF = cube.front[1][1]
-        if colorF == 'Y':
+        if colorF == color:
             return "f"
 
 #Fonction qui recherche les aretes manquantes puis effectue les rotations nécessaires pour les amener
@@ -65,23 +65,21 @@ class Resolution:
         while self.checkCrossNonOriente != True:
             listos=[]
             liste=self.checkEmplacement()
-            for i in range(len(liste())):
+            for i in range(len(liste)):
                 if liste[i][0] != self.whichIsColor('Y'):
                     listos.append(liste[i])
             if len(listos) == 3:
-                cube.setFace(listos[0][0])
                 resolution.rotate(['R','U',"2R'","U'",'R',"U'","R'"])
             if len(listos) == 2:
                 if cube.getCentralColor(listos[0]) == 'B' and cube.getCentralColor(listos[1]) =='G' or cube.getCentralColor(listos[0]) == 'R' and cube.getCentralColor(listos[1]) == 'O':
-                    cube.setFace(listos[0][0])
                     resolution.rotate(['F','R','U',"R'","U'","F'"])
             else:
-                cube.setFace(listos[0][0])
                 resolution.rotate(['F','U',"R","U'","R'","F'"])
 
     def rotate(self,liste):
-        for i in range(liste):
+        for i in range(len(liste)):
             cube.rotation(liste[i])
+            cube.printCube()
                     
 
 
@@ -95,3 +93,4 @@ resolution.solveYellow()
 
 print(resolution.checkCrossNonOriente())
 print(resolution.checkEmplacement())
+resolution.resolution()
