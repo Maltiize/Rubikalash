@@ -104,7 +104,7 @@ class Cube:
             return 
             
         if(nameFace=="l"):
-            self.lef=face
+            self.left=face
             return
             
         if(nameFace=="r"):
