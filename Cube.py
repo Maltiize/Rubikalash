@@ -357,13 +357,31 @@ class Cube:
             print("-------",x,"--------")
             affTab(self.getFace(x))
     #Deuxieme méthode d'affichage du cube
-    def displayCube(self):
-        for i in range(3):
-            print("      " + self.up[i][0] + " " + self.up[i][1] + " " + self.up[i][2])
-        for j in range(3):
-            print(self.left[j][0] + " " + self.left[j][1] + " " + self.left[j][2] +" "+ self.front[j][0] + " " + self.front[j][1] + " " + self.front[j][2] +" "+ self.right[j][0] + " " + self.right[j][1] + " " + self.right[j][2]+" "+ self.back[j][0] + " " + self.back[j][1] + " " + self.back[j][2])
-        for k in range(3):
-            print("      " + self.down[k][0] + " " + self.down[k][1] + " " + self.down[k][2])
+    def displayCube(self,defaultFace='u'):
+        up=self.getFace(defaultFace)
+        down=self.getFace(self.getFaceInversed(defaultFace))
+        core=[]
+        for x in self.liFace :
+            if (x!=defaultFace and x!=self.getFaceInversed(defaultFace)):
+                core+=[self.getFace(x)]
+        for x in range(3):
+            print("      " ,end='')
+            for y in range(3):
+                print(up[x][y]+" " ,end='')
+            print("")
+            
+        for x in range(3):
+            for z in core:
+                for y in range(3):
+                    print(z[x][y]+" " ,end='')
+            print("")
+
+        for x in range(3):
+            print("      " ,end='')
+            for y in range(3):
+                print(down[x][y]+" " ,end='')
+            print("")
+            
     
     def getCentralColor(self,nameFace):
         f=self.getFace(nameFace)

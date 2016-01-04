@@ -124,9 +124,6 @@ class Resolution:
                     # -1 est renvoyé si ce n'est pas possible ( le pire des cas )
                     # -2 est renvoyé si le la face blanche ( exemple ) se trouve sur la face de destination
                     rot=self.getApproRot(result[1][1],x,result[0][1])
-                    
-
-                    
                     if(rot==-1):
                         
                         # si ce n'est pas possible un minimum de trois rotations sera nécessaire
@@ -337,16 +334,16 @@ def rfjaune(c):
    
         
 #cube = Cube("WWWWWWWWWGGGRRRBBBOOOGGGRRRBBBOOOGOOYBRBGYGROBYYYYYYYR")
-c1=Cube("WWWWWWWWWGGGRRRBBBOOOGGGRRRBBBOOOGGRBROYBYGOOYYBYYYYYR")
-c=Cube("WWWWWWWWWRRRBBBOOOGGGRRRBBBOOOGGGRRRBBBOOOGGGYYYYYYYYY")
-c2=Cube("WWWWWWWWWGGGRRRBBBOOOGGGRRRBBBOOOGRBYGYBBGYOYRYOYYYRYO")
+#c1=Cube("WWWWWWWWWGGGRRRBBBOOOGGGRRRBBBOOOGGRBROYBYGOOYYBYYYYYR")
+#c=Cube("WWWWWWWWWRRRBBBOOOGGGRRRBBBOOOGGGRRRBBBOOOGGGYYYYYYYYY")
+#c2=Cube("WWWWWWWWWGGGRRRBBBOOOGGGRRRBBBOOOGRBYGYBBGYOYRYOYYYRYO")
 
-rfjaune(c2)
+#rfjaune(c2)
         
 
 #cube = Cube("OOOOOOOOOBBBRRRJJJGGGBBBRRRJJJGGGBBBRRRJJJGGGYYYYYYYYY")
 cube = Cube("BWGOWWWWRYYBOBBWOOYGRRRGOBRBORYGWGOBOYOWGYGRRYBGBYYWGR")
 resol= Resolution(cube)
-resol.applyCmd("L'FDLR'B2D2LDU'L'R'B2D2L'R'B2D2L'B2D2L'UB2D2L'U")
-resol.theCross('u')
+resol.applyCmd("L'FDLR'B2D2LDU'L'R'B2D2L2L'B2D2L'UB2D2L'U")
+resol.theCross('f')
 cube.printCube()
