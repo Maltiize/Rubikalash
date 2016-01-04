@@ -6,10 +6,15 @@ class Resolution:
 
     def __init__(self,c):
         self.cube=c
+        
+        # liste des indexes servant  à la croix
         self.liCross=1,5,7,3
+
+        # liste des rotation effectué durant la résolution 
         self.liCmd=[]
         self.liRota='','2',"'"
-
+        
+    # Utiliser cette fonction permet de garder en mémoire les mouvements effectué durant la résolution
     def rotation(self,cmd):
         if(cmd==''):
             return 0
@@ -20,10 +25,10 @@ class Resolution:
             print("rotation : INVALID ROTATION NAME",cmd)
             return -1
         self.liCmd+=cmd
-        print("doing :" ,cmd)
+        #print("doing :" ,cmd)
         self.cube.rotation(cmd)
         
-            
+    # Fonction qui renvoit l'inverse d'une rotation L2 => L2 L=>L' L'=>L        
     def getInvRot(self,cmd):
         if(len(cmd)!=1 and len(cmd)!=2):
             print("getInvRot : INVALID ROTATION NAME",cmd)
@@ -56,7 +61,7 @@ class Resolution:
                 i+=1
         return -1
 
-                
+    #  Permet d'effectuer un certain nombre de rotation à la suite 
     def applyCmd(self,cmd):
         cpt=0
         while(cpt!=len(cmd)):
@@ -84,43 +89,53 @@ class Resolution:
 
     def theCross(self,nameFace):
         tab=self.checkCross(nameFace)
-        print (tab)
         colorcross=cube.getCentralColor(nameFace)
         if(tab[0]==True):
             return 0
+        
         # pour toute les faces qui n'ont pas encore été traitée
         while(len(tab[1])!=0):
             for x in tab[1]:
-                print("doing : " ,x)
-                cube.printCube()
                 # On cherche le cube de couleur "Face à traiter" + " Face où se trouve la croix"
                 # on récupere donc la couleur de "Face à traiter" 
                 curColor=cube.getCentralColor(x)
                 result=cube.findCube([colorcross,curColor])
-                print(result)
 
-                # on traite les différents cas en fonction de la position du cube 
+                # on traite les différents cas en fonction de la position du cube
+
+                # cas ou la face de la couleur dont on veut faire la croix (ex blanc) se trouve sur la face de la croix
                 if(result[0][1]==nameFace):
+
+                    # si la croix n'a pas été commencé on peut économiser un mouvement
                     if(len(tab[1])==4):
                         self.applyCmd(self.getApproRot(result[1][1],x,result[0][1]))
-                        # on actualise la liste des face à traiter au fur à mesure pour eviter de défaire ce qui a déjà été fait
-                        tab[1].remove(x)
                     else:
                         self.applyCmd(result[1][1].upper()+'2'+self.getApproRot(result[1][1],x,cube.getFaceInversed(nameFace))+x.upper()+'2')
-                        tab[1].remove(x)
 
+                #cas ou la face de la couleur dont on veut faire la croix se trouve sur la face inverse de la croix
                 if(result[0][1]==cube.getFaceInversed(nameFace)):
                     self.applyCmd(self.getApproRot(result[1][1],x,result[0][1])+x.upper()+'2')
-                    tab[1].remove(x)
-                    
+
+                # si on se trouve dans aucun des deux
                 if(result[0][1]!=cube.getFaceInversed(nameFace) and result[0][1]!=nameFace):
-                    
+
+                    # on essaye d'approcher le morceau de croix par une seule rotation
+                    # le nom de la rotation est donnée par getApproRot si une seule rotation suffit
+                    # -1 est renvoyé si ce n'est pas possible ( le pire des cas )
+                    # -2 est renvoyé si le la face blanche ( exemple ) se trouve sur la face de destination
                     rot=self.getApproRot(result[1][1],x,result[0][1])
-                    print(rot)
+                    
 
                     
                     if(rot==-1):
+                        
+                        # si ce n'est pas possible un minimum de trois rotations sera nécessaire
+                        
+                        # j'ai découpé cette partie en 2 cas à cause de certaines différences de procédure
+                        # mais je pense qu'il est pssible de factoriser cette partie du code 
                         if(result[1][1]==nameFace or result[1][1]==cube.getFaceInversed(nameFace)):
+
+                            # si la croix n'a pas été commencée
                             if(len(tab[1])==4):
                                 tmpcmd=result[1][1].upper()
                                 self.rotation(tmpcmd)
@@ -133,7 +148,8 @@ class Resolution:
                                 tmpcmd=self.getApproRot(tmppos[0][1],nameFace,x)
                                 self.rotation(tmpcmd)
                                 
-                                tab[1].remove(x)
+                            # si la croix a été commencé on garde en mémoire le mouvement qui perturbe le travail déjà réalisé
+                            # on fait ce mouvement à l'inverse une fois la face terminée
                             else:
                                 tmpcmd=self.getApproRot(result[1][1],cube.getFaceInversed(nameFace),result[0][1])
                                 self.rotation(tmpcmd)
@@ -151,7 +167,7 @@ class Resolution:
                                 self.rotation(tmpcmd)
                                 if(faceinter not in tab[1]):
                                     self.rotation(mouvinter)
-                                tab[1].remove(x)
+                        
                         else:
                             tmpcmd=self.getApproRot(result[0][1],cube.getFaceInversed(nameFace),result[1][1])
                             self.rotation(tmpcmd)
@@ -170,12 +186,10 @@ class Resolution:
                             if(faceinter not in tab[1]):
                                 self.rotation(mouvinter)
                                 
-                            tab[1].remove(x)
 
                     
-
+                    # si la face blanche est sur la face cherchée il faut retourner le cube
                     elif(rot==-2):
-                        print("ok")
                         self.rotation(result[1][1].upper())
                         tmppos=cube.findCube([colorcross,curColor])
                         self.rotation(self.getApproRot(tmppos[1][1],x,tmppos[0][1]))
@@ -183,27 +197,23 @@ class Resolution:
                         if(result[1][1] not in tab[1] or (result[1][1]==nameFace and len(tab[1]!=4))):
                             self.rotation(self.getInvRot(result[1][1].upper()))
                         self.rotation(self.getApproRot(tmppos[0][1],nameFace,x))
-                        tab[1].remove(x)
-                        
+
+                    # cas le plus simple ou il sufft de placer la partie de la croix sur la face ou on fait la croix
                     elif(rot==''):
-                        print("caca")
                         self.rotation(self.getApproRot(result[0][1],nameFace,x))
-                        tab[1].remove(x)
                             
                         
     
                             
                             
-
+                    # si rot est égal à une rotation 
                     else :
                         if(result[0][1] not in tab[1]):
                             self.applyCmd(rot+self.getApproRot(result[0][1],nameFace,x)+self.getInvRot(rot))
-                            tab[1].remove(x)
                         else :
                             self.applyCmd(rot+self.getApproRot(result[0][1],nameFace,x))
-                            tab[1].remove(x)
                             
-            print("face finished : " ,x)
+                tab[1].remove(x)            
             
                 
     
@@ -216,7 +226,7 @@ class Resolution:
     # La structure rénvoyée sera de la forme
     # [ False , [ nom de la face1 avec un cube mal placé, .....]]
     # si tout est bien placé on aura
-    # [ True ,[]]
+    # [ True ,[] ]
     
     def checkCross(self,nameFace):
         tmp=[True,[]]
@@ -241,10 +251,7 @@ class Resolution:
 
 #cube = Cube("OOOOOOOOOBBBRRRJJJGGGBBBRRRJJJGGGBBBRRRJJJGGGYYYYYYYYY")
 cube = Cube("BWGOWWWWRYYBOBBWOOYGRRRGOBRBORYGWGOBOYOWGYGRRYBGBYYWGR")
-cube.printCube()
-
 resol= Resolution(cube)
-resol.applyCmd("L'FDUDB2LR'B2D2L'U2L'DUDB2LR'DUDB2LR'DUDB2LR'B2D2L'U2L'B2D2L'U2L'R'B2D2L'R'B2D2L'R'B2D2L'B2D2L'UB2D2L'U")
-cube.printCube()
+resol.applyCmd("L'FDLR'B2D2LDU'L'R'B2D2L'R'B2D2L'B2D2L'UB2D2L'U")
 resol.theCross('u')
 cube.printCube()
