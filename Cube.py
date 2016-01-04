@@ -65,7 +65,7 @@ class Cube:
                 
         self.B="b",[["u",[2,1,0]],["l",[0,3,6]],["d",[6,7,8]],["r",[8,5,2]]]
         self.F="f",[["u",[8,7,6]],["r",[6,3,0]],["d",[0,1,2]],["l",[2,5,8]]]
-        
+
 
         #ordre de transposition des cases de la face qui tourne
         #explications de la structure de données :
@@ -483,3 +483,9 @@ cube = Cube("YBGGGGGGGRRRWWWOOOYYBGRRWWWOOOYYYYRRWWWOOGRYOBBBBBBBRY")
 #cube = Cube("O0OOOOOOOBBBRRRJJJGGGBBBRRRJJJGGGBBBRRRJJJGGGYYYYYYYYY")
 #cube.printCube()
 #print(cube.findCube(['Y','R']))
+        
+##cube = Cube("OGRBWYBGBGYYOYOWOWGRYOOOBGBRRYRBWWWRBWYGROWGRYBRGYWBOG")
+##cube.printCube()
+##print(cube.findCube(['G','Y']))
+##
+
