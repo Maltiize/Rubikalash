@@ -48,6 +48,7 @@ class Resolution:
                 return False
         return True
 
+#pas utile cette fonction apparemment
 #on récupère l'emplacement des aretes
     def checkEmplacement(self):
         posColor = self.whichIsColor('Y')
@@ -67,7 +68,7 @@ class Resolution:
         #tant que la croix n'est pas vérifiée
         while self.checkCrossNonOriente() != True:
             listos=[]
-            liste=self.checkEmplacement()
+            #liste=self.checkEmplacement()
             for i in range(len(liste)):
                 if liste[i][0] != self.whichIsColor('Y'):
                     listos.append(liste[i])
