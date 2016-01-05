@@ -9,6 +9,53 @@ class Resolution:
         self.face=face
         self.listeAretes=listeAretes
 
+
+ def rotation(self,cmd):
+        if(cmd==''):
+            return 0
+        if(len(cmd)!=1 and len(cmd)!=2):
+            print("rotation : INVALID ROTATION NAME",cmd)
+            return -1
+        if(len(cmd)==2 and ( cmd[1]!="2" and cmd[1]!="'")):
+            print("rotation : INVALID ROTATION NAME",cmd)
+            return -1
+        self.liCmd+=cmd
+        print("doing :" ,cmd)
+        self.cube.rotation(cmd)
+        
+    # Fonction qui renvoit l'inverse d'une rotation L2 => L2 L=>L' L'=>L        
+    def getInvRot(self,cmd):
+        if(len(cmd)!=1 and len(cmd)!=2):
+            print("getInvRot : INVALID ROTATION NAME",cmd)
+            return -1
+        if(len(cmd)==1):
+            return cmd+"'"
+        if(cmd[1]=='2'):
+            return cmd
+        return cmd[0]
+        
+    # Cette fonction renvoit le type de rotation a éffectué
+    # pour que le cube sur la face origin se retrouve sur la face
+    # destination
+    # la rotation doit etre une composante de la face rotatingF
+    def getApproRot(self,origin,destination,rotatingF):
+        if(origin == destination):
+            return ''
+        if(rotatingF==destination):
+            return -2
+        i=-1
+        x=0
+        m=cube.getMouv(rotatingF.upper())
+        while(x<=6):
+            if(origin==m[1][x%4][0]):
+                i=0
+            if(destination==m[1][x%4][0] and i!=-1):
+                return rotatingF.upper()+self.liRota[i-1]
+            x+=1
+            if(i!=-1):
+                i+=1
+        return -1
+
 #Fonction qui renvoie quelle face est de la couleur recherchée (jaune pour mon algo ("Y"))
 #On compare avec la couleur de chaque face en [1][1] et donc au milieu
     def whichIsColor(self,color):
