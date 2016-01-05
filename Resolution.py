@@ -37,16 +37,18 @@ class Resolution:
         for i in range(len(listeColors)):   
             self.listeAretes.append(cube.findCube(['Y',listeColors[i]]))
         #trouve toutes les aretes jaunes que l'on doit placer
-
+            
+#Fonction qui vérifie si la croix non orienté est vérifiée
     def checkCrossNonOriente(self):
-        posColor = self.whichIsColor('Y')
-        listeColors=['G','R','B','O']
-        for i in range(len(listeColors)):
-            pos = cube.findCube(['Y',listeColors[i][0][0]])
-            if pos[0][1] != posColor:
+        posColor = self.whichIsColor('Y')   #on trouve la position de la face jaune
+        listeColors=['G','R','B','O']       #c'est la liste des couleurs composants les aretes avec une face jaune
+        for i in range(len(listeColors)):   #on parcout la liste des couleurs
+            pos = cube.findCube(['Y',listeColors[i][0][0]]) #on récupère la position des aretes
+            if pos[0][1] != posColor:   #si la position de la face jaune des aretes n'est pas sur la face jaune, alors la croix n'est pas vérifiée
                 return False
         return True
 
+#on récupère l'emplacement des aretes
     def checkEmplacement(self):
         posColor = self.whichIsColor('Y')
         listeColors=['G','R','O','B']
