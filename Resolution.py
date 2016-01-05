@@ -9,6 +9,7 @@ class Resolution:
         
         # liste des indexes servant  à la croix
         self.liCross=1,5,7,3
+        self.liCorner=0,2,8,6
 
         # liste des rotation effectué durant la résolution 
         self.liCmd=[]
@@ -92,7 +93,7 @@ class Resolution:
         colorcross=cube.getCentralColor(nameFace)
         if(tab[0]==True):
             return 0
-        
+        print(tab)
         # pour toute les faces qui n'ont pas encore été traitée
         while(len(tab[1])!=0):
             for x in tab[1]:
@@ -229,7 +230,7 @@ class Resolution:
         tmp=[True,[]]
         colorcross=cube.getCentralColor(nameFace)
         m=cube.getMouv(nameFace.upper())
-        tabcolor=[]
+        
         for x in m[1]:
             coloredge=cube.getCentralColor(x[0])
             result=cube.findCube([colorcross,coloredge],nameFace)
@@ -241,8 +242,24 @@ class Resolution:
                 
         return tmp
                 
-              
+    def checkCorner(self,nameFace):
+        tmp=[True,[]]
+        colorcross=cube.getCentralColor(nameFace)
+        m=cube.getMouv(nameFace.upper())
+        for x in range (4):
+            colorPrev=cube.getCentralColor(m[1][(x+3)%4][0])
+            colorNext=cube.getCentralColor(m[1][x][0])
+            
 
+            result=cube.findCube([colorcross,colorPrev,colorNext],nameFace)
+            
+            if(result==-1 or result[1][1]!=m[1][(x+3)%4][0] or result[2][1]!=m[1][x][0] ):
+                tmp[1]+=[[colorPrev,colorNext]]
+                tmp[0]=False
+                
+        return tmp
+     
+        
 
 def rfjaune(c):
     j=c.down
@@ -330,8 +347,10 @@ def rfjaune(c):
             c.rotation("D")
             rfjaune(c)
     return(c.printCube())
+
+    
         
-   
+        
         
 #cube = Cube("WWWWWWWWWGGGRRRBBBOOOGGGRRRBBBOOOGOOYBRBGYGROBYYYYYYYR")
 #c1=Cube("WWWWWWWWWGGGRRRBBBOOOGGGRRRBBBOOOGGRBROYBYGOOYYBYYYYYR")
@@ -340,10 +359,10 @@ def rfjaune(c):
 
 #rfjaune(c2)
         
-
+    
 #cube = Cube("OOOOOOOOOBBBRRRJJJGGGBBBRRRJJJGGGBBBRRRJJJGGGYYYYYYYYY")
 cube = Cube("BWGOWWWWRYYBOBBWOOYGRRRGOBRBORYGWGOBOYOWGYGRRYBGBYYWGR")
 resol= Resolution(cube)
 resol.applyCmd("L'FDLR'B2D2LDU'L'R'B2D2L2L'B2D2L'UB2D2L'U")
-resol.theCross('f')
+resol.theCross('u')
 cube.printCube()
