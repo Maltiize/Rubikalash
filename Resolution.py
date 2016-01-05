@@ -93,7 +93,6 @@ class Resolution:
         colorcross=cube.getCentralColor(nameFace)
         if(tab[0]==True):
             return 0
-        print(tab)
         # pour toute les faces qui n'ont pas encore été traitée
         while(len(tab[1])!=0):
             for x in tab[1]:
@@ -244,22 +243,73 @@ class Resolution:
                 
     def checkCorner(self,nameFace):
         tmp=[True,[]]
-        colorcross=cube.getCentralColor(nameFace)
+        colorcorner=cube.getCentralColor(nameFace)
         m=cube.getMouv(nameFace.upper())
         for x in range (4):
             colorPrev=cube.getCentralColor(m[1][(x+3)%4][0])
             colorNext=cube.getCentralColor(m[1][x][0])
             
 
-            result=cube.findCube([colorcross,colorPrev,colorNext],nameFace)
+            result=cube.findCube([colorcorner,colorPrev,colorNext],nameFace)
             
             if(result==-1 or result[1][1]!=m[1][(x+3)%4][0] or result[2][1]!=m[1][x][0] ):
-                tmp[1]+=[[colorPrev,colorNext]]
+                tmp[1]+=[[[m[1][(x+3)%4][0],colorPrev],[m[1][x][0],colorNext]]]
                 tmp[0]=False
                 
         return tmp
-     
-        
+
+
+    def theCorner(self,nameFace):
+        tab=self.checkCorner(nameFace)
+        colorCorner=cube.getCentralColor(nameFace)
+        inv=cube.getFaceInversed(nameFace)
+        if(tab[0]==True):
+            return 0
+        else :
+            for idx, x in enumerate (tab[1]) :
+                print('')
+                print([colorCorner,x[0][1],x[1][1]])
+                
+                tmp=cube.findCube([colorCorner,x[0][1],x[1][1]])
+                print(inv)
+                print(tmp)
+                if (tmp[0][1] != inv):
+                    for i in range (0,2) :
+                        if (tmp[1+i][1] == inv):
+                            m=cube.getMouv(tmp[2-i][1])
+                            if (tmp[2-i][1] != x[1-i][0]):
+                                rotation(self.getApproRot(tmp[2-i][1],x[1-i][0],inv))
+                            if (tmp[0][1]) == m[1][1][0]:
+                                self.rotation(inv.upper())
+                                self.rotation(tmp[2-i][1])
+                                self.rotation(getInvRot(inv.upper()))
+                                self.rotation(getInvRot(tmp[2-i][1].upper()))
+                            else :
+                                self.rotation(getInvRot(inv.upper()))
+                                self.rotation(getInvRot(tmp[2-i][1].upper()))
+                                self.rotation(inv.upper())
+                                self.rotation(tmp[2-i][1].upper())
+                else :
+                    m=cube.getMouv(tmp[2][1])
+                    if (tmp[2][1] != x[0][0]):
+                        rotation(self.getApproRot(tmp[2][1],x[0][0],inv))
+                    if (tmp[1][1]== m[1][1][0]):
+                        
+                        self.rotation(getInvRot(cube.getFaceInversed(tmp[2][1]).upper()))#R'
+                        self.rotation(inv.upper()+'2')
+                        self.rotation(cube.getFaceInversed(tmp[2][1]).upper())
+                        self.rotation(inv.upper())
+                        self.rotation(getInvRot(cube.getFaceInversed(tmp[2][1]).upper()))
+                        self.rotation(getInvRot(inv.upper()))
+                        self.rotation(cube.getFaceInversed(tmp[2][1]).upper())
+                    else:
+                        self.rotation(getInvRot(m[1][1][0].upper()))
+                        self.rotation(inv.upper()+'2')
+                        self.rotation(m[1][1][0].upper())
+                        self.rotation(inv.upper())
+                        self.rotation(getInvRot(m[1][1][0].upper()))
+                        self.rotation(getInvRot(inv.upper()))
+                        self.rotation(m[1][1][0].upper())
 
 def rfjaune(c):
     j=c.down
@@ -365,4 +415,6 @@ cube = Cube("BWGOWWWWRYYBOBBWOOYGRRRGOBRBORYGWGOBOYOWGYGRRYBGBYYWGR")
 resol= Resolution(cube)
 resol.applyCmd("L'FDLR'B2D2LDU'L'R'B2D2L2L'B2D2L'UB2D2L'U")
 resol.theCross('u')
-cube.printCube()
+cube.displayCube()
+resol.theCorner('u')
+#cube.printCube()

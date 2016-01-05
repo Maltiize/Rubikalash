@@ -16,6 +16,7 @@ class Cube:
         #liste des noms des faces permet de faciliter les boucles for
 
         self.liFace=["u","l","f","b","r","d"]
+        self.liFaceaff=["u","l","f","r","b","d"]
 
 
  
@@ -361,7 +362,7 @@ class Cube:
         up=self.getFace(defaultFace)
         down=self.getFace(self.getFaceInversed(defaultFace))
         core=[]
-        for x in self.liFace :
+        for x in self.liFaceaff :
             if (x!=defaultFace and x!=self.getFaceInversed(defaultFace)):
                 core+=[self.getFace(x)]
         for x in range(3):
@@ -505,11 +506,11 @@ def affTab(tab):
     
 
 #cube = Cube("OGRBWYBGBGYYOYOWOWGRYOOOBGBRRYRBWWWRBWYGROWGRYBRGYWBOG")
-cube = Cube("YBGGGGGGGRRRWWWOOOYYBGRRWWWOOOYYYYRRWWWOOGRYOBBBBBBBRY")
+#cube = Cube("YBGGGGGGGRRRWWWOOOYYBGRRWWWOOOYYYYRRWWWOOGRYOBBBBBBBRY")
 #cube = Cube("O0OOOOOOOBBBRRRJJJGGGBBBRRRJJJGGGBBBRRRJJJGGGYYYYYYYYY")
 #cube.printCube()
 #print(cube.findCube(['Y','R']))
-cube.displayCube() 
+#cube.displayCube() 
 ##cube = Cube("OGRBWYBGBGYYOYOWOWGRYOOOBGBRRYRBWWWRBWYGROWGRYBRGYWBOG")
 ##cube.printCube()
 ##print(cube.findCube(['G','Y']))
