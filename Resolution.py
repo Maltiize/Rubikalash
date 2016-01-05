@@ -240,7 +240,8 @@ class Resolution:
                 
                 
         return tmp
-                
+
+     #verifie si les coin sont fait           
     def checkCorner(self,nameFace):
         tmp=[True,[]]
         colorcorner=cube.getCentralColor(nameFace)
@@ -399,7 +400,7 @@ def rfjaune(c):
     
         
         
-        
+#cc      
 #cube = Cube("WWWWWWWWWGGGRRRBBBOOOGGGRRRBBBOOOGOOYBRBGYGROBYYYYYYYR")
 #c1=Cube("WWWWWWWWWGGGRRRBBBOOOGGGRRRBBBOOOGGRBROYBYGOOYYBYYYYYR")
 #c=Cube("WWWWWWWWWRRRBBBOOOGGGRRRBBBOOOGGGRRRBBBOOOGGGYYYYYYYYY")
