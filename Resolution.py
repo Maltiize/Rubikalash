@@ -139,13 +139,44 @@ class Resolution:
             if len(listos) == 2:
                 #les différents cas possibles où les deux aretes sont adjacentes
                 if (cube.findCube([listos[0][0]]))[0][1] == 'u' and ((cube.findCube([listos[1][0]]))[1][1] == 'l' or (cube.findCube([listos[1][0]]))[1][1] == 'r'):
+
                     if (cube.findCube([listos[1][0]]))[1][1] == 'l':
-                        self.listeMouv.append(self.getApproRot("l","u","R"))
+                        self.listeMouv.append(self.getApproRot("u","r","l"))
+                        self.listeMouv.append(self.getApproRot("l","u","u"))
+                        self.listeMouv.append(self.getApproRot("u","r","b"))
 
+                        self.listeMouv.append(self.getApproRot("u","l","u"))
+                        self.listeMouv.append(self.getApproRot("r","u","b"))
+                        self.listeMouv.append(self.getApproRot("r","u","l"))
+                    #a vérifier
+                    if (cube.findCube([listos[1][0]]))[1][1] == 'r':
+                        self.listeMouv.append(self.getApproRot("u","r","u"))
+                        self.listeMouv.append(self.getApproRot("l","u","r"))
+                        self.listeMouv.append(self.getApproRot("u","r","b"))
 
-                    print("Bonjour")
+                        self.listeMouv.append(self.getApproRot("u","l","r"))
+                        self.listeMouv.append(self.getApproRot("r","u","b"))
+                        self.listeMouv.append(self.getApproRot("r","u","u"))
+
                 if (cube.findCube([listos[1][0]]))[1][1] == 'u' and ((cube.findCube([listos[0][0]]))[1][1] == 'l' or (cube.findCube([listos[0][0]]))[1][1] == 'r'):
-                    print("Bonjour")
+
+                    if (cube.findCube([listos[0][0]]))[1][1] == 'l':
+                        self.listeMouv.append(self.getApproRot("u","r","l"))
+                        self.listeMouv.append(self.getApproRot("l","u","u"))
+                        self.listeMouv.append(self.getApproRot("u","r","b"))
+
+                        self.listeMouv.append(self.getApproRot("u","l","u"))
+                        self.listeMouv.append(self.getApproRot("r","u","b"))
+                        self.listeMouv.append(self.getApproRot("r","u","l"))
+                    #a vérifier
+                    if (cube.findCube([listos[0][0]]))[1][1] == 'r':
+                        self.listeMouv.append(self.getApproRot("u","r","u"))
+                        self.listeMouv.append(self.getApproRot("l","u","r"))
+                        self.listeMouv.append(self.getApproRot("u","r","b"))
+
+                        self.listeMouv.append(self.getApproRot("u","l","r"))
+                        self.listeMouv.append(self.getApproRot("r","u","b"))
+                        self.listeMouv.append(self.getApproRot("r","u","u"))
                 if (cube.findCube([listos[0][0]]))[0][1] == 'd' and ((cube.findCube([listos[1][0]]))[1][1] == 'l' or (cube.findCube([listos[1][0]]))[1][1] == 'r'):
                     print("Bonjour")
                 if (cube.findCube([listos[1][0]]))[1][1] == 'd' and ((cube.findCube([listos[0][0]]))[1][1] == 'l' or (cube.findCube([listos[0][0]]))[1][1] == 'r'):
@@ -174,4 +205,3 @@ resolution.solveYellow()
 print(resolution.checkCrossNonOriente())
 print(resolution.checkEmplacement())
 resolution.resolutionYellowCross()
-print(resolution.getApproRot("left","up","R"))
