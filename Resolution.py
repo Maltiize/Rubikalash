@@ -8,6 +8,7 @@ class Resolution:
         self.cube=c
         self.face=face
         self.listeAretes=listeAretes
+        self.listeMouv=[]
 
 
     def rotation(self,cmd):
@@ -79,7 +80,7 @@ class Resolution:
         colorF = cube.back[1][1]
         if colorF == color :
             return "b"
-            
+
         colorF = cube.front[1][1]
         if colorF == color:
             return "f"
@@ -134,7 +135,21 @@ class Resolution:
             if len(listos) == 3:
                 resolution.rotate(['R','U',"2R'","U'",'R',"U'","R'"])
             
+            #retourner deux aretes adjacentes
             if len(listos) == 2:
+                #les différents cas possibles où les deux aretes sont adjacentes
+                if (cube.findCube([listos[0][0]]))[0][1] == 'u' and ((cube.findCube([listos[1][0]]))[1][1] == 'l' or (cube.findCube([listos[1][0]]))[1][1] == 'r'):
+                    if (cube.findCube([listos[1][0]]))[1][1] == 'l':
+                        self.listeMouv.append(self.getApproRot("l","u","R"))
+
+
+                    print("Bonjour")
+                if (cube.findCube([listos[1][0]]))[1][1] == 'u' and ((cube.findCube([listos[0][0]]))[1][1] == 'l' or (cube.findCube([listos[0][0]]))[1][1] == 'r'):
+                    print("Bonjour")
+                if (cube.findCube([listos[0][0]]))[0][1] == 'd' and ((cube.findCube([listos[1][0]]))[1][1] == 'l' or (cube.findCube([listos[1][0]]))[1][1] == 'r'):
+                    print("Bonjour")
+                if (cube.findCube([listos[1][0]]))[1][1] == 'd' and ((cube.findCube([listos[0][0]]))[1][1] == 'l' or (cube.findCube([listos[0][0]]))[1][1] == 'r'):
+                    print("Bonjour")
                 if cube.getCentralColor(listos[0]) == 'B' and cube.getCentralColor(listos[1]) =='G' or cube.getCentralColor(listos[0]) == 'R' and cube.getCentralColor(listos[1]) == 'O':
                     resolution.rotate(['F','R','U',"R'","U'","F'"])
             
@@ -159,3 +174,4 @@ resolution.solveYellow()
 print(resolution.checkCrossNonOriente())
 print(resolution.checkEmplacement())
 resolution.resolutionYellowCross()
+print(resolution.getApproRot("left","up","R"))
