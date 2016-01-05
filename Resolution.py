@@ -128,7 +128,14 @@ class Resolution:
             self.rubiks.rotation("B")
             
         return self.rubiks
-            
+    
+    def deuxcouronne(self):
+        while not self.checkscdcouronne():
+            self.deuxiemecouronne()
+            self.cubeinv()
+            self.deuxcubeinv()
+
+        return self.rubiks
 
     def deuxiemecouronne(self):
     #regarder les 4 coins au dessus et si il n'y a pas de jaune la bouger au bon endroit
@@ -188,7 +195,8 @@ class Resolution:
             
             #cube vert/rouge
             vr = self.rubiks.findCube(['G', 'R']) #cube vert/rouge
-            #on remet le cube vert/rouge sur sa face correspondante 
+            #on remet le cube vert/rouge sur sa face correspondante
+            #print(vr)
             if vr[0][1] == 'd':  #ici le cube vert est sur la face down
                 #if vr[1][1] == 'f':
                     #ne rien faire car bon endroit
@@ -337,12 +345,12 @@ class Resolution:
 #resol = Resolution(cube1)
 #resol.deuxiemecouronne()
 #cube1.printCube()
-cube2 = Cube("WWWWWWWWWGGGRRRBBBOOOGGGRRRYBBOOOGGGRRRBBBOOOYBYYYYYYY")
-cube2.printCube()
+cube2 = Cube("WWWWWWWWWGGGRRRBBBOOOYGYGRYOBRBOBYGGYRRBOOYGROYYRYBGOB")
+cube2.displayCube()
 resol = Resolution(cube2)
 print(resol.checkscdcouronne())
-resol.deuxiemecouronne()
-cube2.printCube()
+resol.deuxcouronne()
+cube2.displayCube()
 print(resol.checkscdcouronne())
         
         

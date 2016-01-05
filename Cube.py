@@ -15,7 +15,7 @@ class Cube:
         
         #liste des noms des faces permet de faciliter les boucles for
         self.liFace=["u","l","f","r","b","d"]
-
+        self.liFaceaff=["u","l","f","r","b","d"]
  
         
         #Initialisation des faces à 0
@@ -58,7 +58,7 @@ class Cube:
         self.D="d",[["f",[6,7,8]],["r",[6,7,8]],["b",[6,7,8]],["l",[6,7,8]]]
         self.U="u",[["b",[2,1,0]],["r",[2,1,0]],["f",[2,1,0]],["l",[2,1,0]]]
                 
-        self.R="r",[["u",[2,5,8]],["b",[0,3,6]],["d",[2,5,8]],["f",[2,5,8]]]
+        self.R="r",[["u",[2,5,8]],["b",[6,3,0]],["d",[2,5,8]],["f",[2,5,8]]]
         self.L="l",[["u",[0,3,6]],["f",[0,3,6]],["d",[0,3,6]],["b",[8,5,2]]]
                 
         self.B="b",[["u",[2,1,0]],["l",[0,3,6]],["d",[6,7,8]],["r",[8,5,2]]]
@@ -352,10 +352,44 @@ class Cube:
         for x in self.liFace:
             print("-------",x,"--------")
             affTab(self.getFace(x))
+        #Deuxieme méthode d'affichage du cube
+    def displayCube(self,defaultFace='u'):
+        up=self.getFace(defaultFace)
+        down=self.getFace(self.getFaceInversed(defaultFace))
+        core=[]
+        for x in self.liFaceaff :
+            if (x!=defaultFace and x!=self.getFaceInversed(defaultFace)):
+                core+=[self.getFace(x)]
+        for x in range(3):
+            print("      " ,end='')
+            for y in range(3):
+                print(up[x][y]+" " ,end='')
+            print("")
+            
+        for x in range(3):
+            for z in core:
+                for y in range(3):
+                    print(z[x][y]+" " ,end='')
+            print("")
+
+        for x in range(3):
+            print("      " ,end='')
+            for y in range(3):
+                print(down[x][y]+" " ,end='')
+            print("")
     
     def getCentralColor(self,nameFace):
         f=self.getFace(nameFace)
         return f[1][1]
+
+        # Permet d'obtenir le nom de la face opposé à celle dont le nom est nameFace
+    def getFaceInversed(self,nameFace):
+        if(nameFace not in self.liFace):
+            print("getFaceInversed :INVALID NAMEFACE ")
+            return -1
+        idx=self.liFace.index(nameFace)
+        return self.liFace[len(self.liFace)-(1+idx)]
+    
 
     def checkColorSquare(self,nameFace,color,idx):
         f=self.getFace(nameFace)
@@ -398,7 +432,7 @@ class Cube:
         # sa taille depend du type de cube recherché
     
         if(len(tabcolor)==2):
-            li=self.liEdge[0:2]
+            li=self.liEdge
             idx=1
             tmpr=[0]*2
             workingtab=self.liFace
@@ -423,7 +457,7 @@ class Cube:
                     
                     if self.checkColorSquare(i,c1,j):
                         tmpr[idc1]=[j,i]
-                        print(i,j)
+                        #print(i,j)
                         j2=m[1][idj][1][idx]
                         f2=m[1][idj][0]
                         #print(f2,j2)
