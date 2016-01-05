@@ -132,9 +132,21 @@ class Resolution:
                 if liste[i][0] != self.whichIsColor('Y'):
                     listos.append(liste[i])
             
+
+            
+            # CAS 1 --------------------------------------------------------------------------------------------------
+
+
+
             if len(listos) == 3:
                 resolution.rotate(['R','U',"2R'","U'",'R',"U'","R'"])
+
+
+
+            # CAS 2 --------------------------------------------------------------------------------------------------
             
+
+
             #retourner deux aretes adjacentes
             if len(listos) == 2:
                 #les différents cas possibles où les deux aretes sont adjacentes
@@ -177,8 +189,29 @@ class Resolution:
                         self.listeMouv.append(self.getApproRot("u","l","r"))
                         self.listeMouv.append(self.getApproRot("r","u","b"))
                         self.listeMouv.append(self.getApproRot("r","u","u"))
+
+
                 if (cube.findCube([listos[0][0]]))[0][1] == 'd' and ((cube.findCube([listos[1][0]]))[1][1] == 'l' or (cube.findCube([listos[1][0]]))[1][1] == 'r'):
-                    print("Bonjour")
+                    
+                    #a faire j'ai eu la flemme
+                    if (cube.findCube([listos[1][0]]))[1][1] == 'l':
+                        self.listeMouv.append(self.getApproRot("u","r","d"))
+                        self.listeMouv.append(self.getApproRot("l","u","l"))
+                        self.listeMouv.append(self.getApproRot("u","r","b"))
+
+                        self.listeMouv.append(self.getApproRot("u","l","u"))
+                        self.listeMouv.append(self.getApproRot("r","u","b"))
+                        self.listeMouv.append(self.getApproRot("r","u","l"))
+                    #a vérifier
+                    if (cube.findCube([listos[1][0]]))[1][1] == 'r':
+                        self.listeMouv.append(self.getApproRot("u","r","u"))
+                        self.listeMouv.append(self.getApproRot("l","u","r"))
+                        self.listeMouv.append(self.getApproRot("u","r","b"))
+
+                        self.listeMouv.append(self.getApproRot("u","l","r"))
+                        self.listeMouv.append(self.getApproRot("r","u","b"))
+                        self.listeMouv.append(self.getApproRot("r","u","u"))
+
                 if (cube.findCube([listos[1][0]]))[1][1] == 'd' and ((cube.findCube([listos[0][0]]))[1][1] == 'l' or (cube.findCube([listos[0][0]]))[1][1] == 'r'):
                     print("Bonjour")
                 if cube.getCentralColor(listos[0]) == 'B' and cube.getCentralColor(listos[1]) =='G' or cube.getCentralColor(listos[0]) == 'R' and cube.getCentralColor(listos[1]) == 'O':
