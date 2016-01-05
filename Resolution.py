@@ -12,7 +12,7 @@ class Resolution:
         self.liCorner=0,2,8,6
 
         # liste des rotation effectué durant la résolution 
-        self.liCmd=[]
+        self.liCmd=''
         self.liRota='','2',"'"
         
     # Utiliser cette fonction permet de garder en mémoire les mouvements effectué durant la résolution
@@ -26,7 +26,7 @@ class Resolution:
             print("rotation : INVALID ROTATION NAME",cmd)
             return -1
         self.liCmd+=cmd
-        #print("doing :" ,cmd)
+        print("doing :" ,cmd)
         self.cube.rotation(cmd)
         
     # Fonction qui renvoit l'inverse d'une rotation L2 => L2 L=>L' L'=>L        
@@ -267,19 +267,17 @@ class Resolution:
             return 0
         else :
             for idx, x in enumerate (tab[1]) :
-                print('')
-                print([colorCorner,x[0][1],x[1][1]])
+               
                 
                 tmp=cube.findCube([colorCorner,x[0][1],x[1][1]])
-                print(inv)
-                print(tmp)
                 if (tmp[0][1] != inv):
                     for i in range (0,2) :
                         if (tmp[1+i][1] == inv):
-                            m=cube.getMouv(tmp[2-i][1])
+                            m=cube.getMouv(tmp[2-i][1].upper())
                             if (tmp[2-i][1] != x[1-i][0]):
-                                rotation(self.getApproRot(tmp[2-i][1],x[1-i][0],inv))
-                            if (tmp[0][1]) == m[1][1][0]:
+                                self.rotation(self.getApproRot(tmp[2-i][1],x[1-i][0],inv))
+                                
+                            if (tmp[0][1] == m[1][1][0]):
                                 self.rotation(inv.upper())
                                 self.rotation(tmp[2-i][1])
                                 self.rotation(getInvRot(inv.upper()))
@@ -411,10 +409,11 @@ def rfjaune(c):
         
     
 #cube = Cube("OOOOOOOOOBBBRRRJJJGGGBBBRRRJJJGGGBBBRRRJJJGGGYYYYYYYYY")
-cube = Cube("BWGOWWWWRYYBOBBWOOYGRRRGOBRBORYGWGOBOYOWGYGRRYBGBYYWGR")
+cube = Cube("GGRRWGYRGYYBRBWOYWGWOOGRGRWBBWOOBBOYGYBWOBRRYRBOYYGOWW")
+cube.displayCube()
 resol= Resolution(cube)
-resol.applyCmd("L'FDLR'B2D2LDU'L'R'B2D2L2L'B2D2L'UB2D2L'U")
-resol.theCross('u')
+#resol.theCross('u')
+print(resol.liCmd)
 cube.displayCube()
 resol.theCorner('u')
 #cube.printCube()
