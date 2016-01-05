@@ -62,14 +62,16 @@ class Resolution:
             liste.append(listos)
         return liste
 
-    def resolution(self):
-        
+#fonction resolvant la croix yellow
+    def resolutionYellowCross(self):
+        #tant que la croix n'est pas vérifiée
         while self.checkCrossNonOriente != True:
             listos=[]
             liste=self.checkEmplacement()
             for i in range(len(liste)):
                 if liste[i][0] != self.whichIsColor('Y'):
                     listos.append(liste[i])
+                    print(listos)
             if len(listos) == 3:
                 resolution.rotate(['R','U',"2R'","U'",'R',"U'","R'"])
             if len(listos) == 2:
@@ -81,7 +83,7 @@ class Resolution:
     def rotate(self,liste):
         for i in range(len(liste)):
             cube.rotation(liste[i])
-            cube.printCube()
+            cube.displayCube()
                     
 
 
@@ -95,4 +97,4 @@ resolution.solveYellow()
 
 print(resolution.checkCrossNonOriente())
 print(resolution.checkEmplacement())
-resolution.resolution()
+resolution.resolutionYellowCross()
