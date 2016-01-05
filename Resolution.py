@@ -412,7 +412,7 @@ def rfjaune(c):
 cube = Cube("GGRRWGYRGYYBRBWOYWGWOOGRGRWBBWOOBBOYGYBWOBRRYRBOYYGOWW")
 cube.displayCube()
 resol= Resolution(cube)
-#resol.theCross('u')
+resol.theCross('u')
 print(resol.liCmd)
 cube.displayCube()
 resol.theCorner('u')
