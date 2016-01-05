@@ -258,7 +258,7 @@ class Resolution:
                 
         return tmp
 
-
+#the corner permet de faire les coin d'une face sans prendre en compte se qu'elle fait sur les autre face
     def theCorner(self,nameFace):
         tab=self.checkCorner(nameFace)
         colorCorner=cube.getCentralColor(nameFace)
@@ -279,34 +279,34 @@ class Resolution:
                                 
                             if (tmp[0][1] == m[1][1][0]):
                                 self.rotation(inv.upper())
-                                self.rotation(tmp[2-i][1])
-                                self.rotation(getInvRot(inv.upper()))
-                                self.rotation(getInvRot(tmp[2-i][1].upper()))
+                                self.rotation(tmp[2-i][1].upper())
+                                self.rotation(self.getInvRot(inv.upper()))
+                                self.rotation(self.getInvRot(tmp[2-i][1].upper()))
                             else :
-                                self.rotation(getInvRot(inv.upper()))
-                                self.rotation(getInvRot(tmp[2-i][1].upper()))
+                                self.rotation(self.getInvRot(inv.upper()))
+                                self.rotation(self.getInvRot(tmp[2-i][1].upper()))
                                 self.rotation(inv.upper())
                                 self.rotation(tmp[2-i][1].upper())
                 else :
-                    m=cube.getMouv(tmp[2][1])
+                    m=cube.getMouv(tmp[2][1].upper())
                     if (tmp[2][1] != x[0][0]):
-                        rotation(self.getApproRot(tmp[2][1],x[0][0],inv))
+                        self.rotation(self.getApproRot(tmp[2][1],x[0][0],inv))
                     if (tmp[1][1]== m[1][1][0]):
                         
-                        self.rotation(getInvRot(cube.getFaceInversed(tmp[2][1]).upper()))#R'
+                        self.rotation(self.getInvRot(cube.getFaceInversed(tmp[2][1]).upper()))#R'
                         self.rotation(inv.upper()+'2')
                         self.rotation(cube.getFaceInversed(tmp[2][1]).upper())
                         self.rotation(inv.upper())
-                        self.rotation(getInvRot(cube.getFaceInversed(tmp[2][1]).upper()))
-                        self.rotation(getInvRot(inv.upper()))
+                        self.rotation(self.getInvRot(cube.getFaceInversed(tmp[2][1]).upper()))
+                        self.rotation(self.getInvRot(inv.upper()))
                         self.rotation(cube.getFaceInversed(tmp[2][1]).upper())
                     else:
-                        self.rotation(getInvRot(m[1][1][0].upper()))
+                        self.rotation(self.getInvRot(m[1][1][0].upper()))
                         self.rotation(inv.upper()+'2')
                         self.rotation(m[1][1][0].upper())
                         self.rotation(inv.upper())
-                        self.rotation(getInvRot(m[1][1][0].upper()))
-                        self.rotation(getInvRot(inv.upper()))
+                        self.rotation(self.getInvRot(m[1][1][0].upper()))
+                        self.rotation(self.getInvRot(inv.upper()))
                         self.rotation(m[1][1][0].upper())
 
 def rfjaune(c):
@@ -414,6 +414,8 @@ cube.displayCube()
 resol= Resolution(cube)
 #resol.theCross('u')
 print(resol.liCmd)
-cube.displayCube()
+#cube.displayCube()
 resol.theCorner('u')
-#cube.printCube()
+print(resol.liCmd)
+cube.displayCube()
+
