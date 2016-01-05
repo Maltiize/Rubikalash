@@ -10,7 +10,7 @@ class Resolution:
         self.listeAretes=listeAretes
 
 
- def rotation(self,cmd):
+    def rotation(self,cmd):
         if(cmd==''):
             return 0
         if(len(cmd)!=1 and len(cmd)!=2):
@@ -59,21 +59,27 @@ class Resolution:
 #Fonction qui renvoie quelle face est de la couleur recherchée (jaune pour mon algo ("Y"))
 #On compare avec la couleur de chaque face en [1][1] et donc au milieu
     def whichIsColor(self,color):
+
         colorF = cube.up[1][1]  
         if colorF == color :
             return "u"
+
         colorF = cube.down[1][1]
         if colorF == color :
             return "d"
+
         colorF = cube.right[1][1]
         if colorF == color :
             return "r"
+
         colorF = cube.left[1][1]
         if colorF == color :
             return "l"
+
         colorF = cube.back[1][1]
         if colorF == color :
             return "b"
+            
         colorF = cube.front[1][1]
         if colorF == color:
             return "f"
@@ -107,24 +113,31 @@ class Resolution:
             pos = cube.findCube(['Y',listeColors[i][0][0]])
             listos.append(pos[0][1])
             listos.append(listeColors[i][0][0])
-            liste.append(listos)
+            liste.append(listos)    
+            #liste contenant les listes des arêtes avec (1) : sur quelle face se trouve la partie Y de l'arete et (2) : de quelle couleur est l'autre partie
         return liste
 
 #fonction resolvant la croix yellow
     def resolutionYellowCross(self):
+
         #tant que la croix n'est pas vérifiée
         while self.checkCrossNonOriente() != True:
             listos=[]
-            #liste=self.checkEmplacement()
+            #on récupère la position des arêtes ainsi que leur couleur a chaque tour
+            liste=self.checkEmplacement()   
+            
+            #On parcourt la liste, et si les parties Y ne sont pas sur la bonne face, on les ajoute à la liste des aretes a prendre en compte
             for i in range(len(liste)):
                 if liste[i][0] != self.whichIsColor('Y'):
                     listos.append(liste[i])
-                    print(listos)
+            
             if len(listos) == 3:
                 resolution.rotate(['R','U',"2R'","U'",'R',"U'","R'"])
+            
             if len(listos) == 2:
                 if cube.getCentralColor(listos[0]) == 'B' and cube.getCentralColor(listos[1]) =='G' or cube.getCentralColor(listos[0]) == 'R' and cube.getCentralColor(listos[1]) == 'O':
                     resolution.rotate(['F','R','U',"R'","U'","F'"])
+            
             else:
                 resolution.rotate(['F','U',"R","U'","R'","F'"])
 
@@ -144,5 +157,5 @@ cube.displayCube()
 resolution.solveYellow()
 
 print(resolution.checkCrossNonOriente())
-#print(resolution.checkEmplacement())
+print(resolution.checkEmplacement())
 resolution.resolutionYellowCross()
