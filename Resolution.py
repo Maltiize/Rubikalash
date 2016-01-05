@@ -65,7 +65,7 @@ class Resolution:
 #fonction resolvant la croix yellow
     def resolutionYellowCross(self):
         #tant que la croix n'est pas vérifiée
-        while self.checkCrossNonOriente != True:
+        while self.checkCrossNonOriente() != True:
             listos=[]
             liste=self.checkEmplacement()
             for i in range(len(liste)):
@@ -91,10 +91,10 @@ cube = Cube("YBGGGGGGGRRRWWWOOOYYBGRRWWWOOOYYYYRRWWWOOGRYOBBBBBBBRY")
 
 resolution = Resolution(cube)
 
-cube.printCube()
+cube.displayCube()
         
 resolution.solveYellow()
 
 print(resolution.checkCrossNonOriente())
-print(resolution.checkEmplacement())
+#print(resolution.checkEmplacement())
 resolution.resolutionYellowCross()
