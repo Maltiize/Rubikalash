@@ -286,10 +286,17 @@ class Resolution:
                 print("cas 1")
                 if len(listeAretes) == 3:
                     print("Trois faces sur la dernieres, on tente")
+                    self.listeMouv.append('D')
+                    self.listeMouv.append('F')
+                    self.listeMouv.append('R')
+                    self.listeMouv.append('Fi')
+                    self.listeMouv.append('Ri')
+                    self.listeMouv.append('Di')
+
+                    # D F R Fi Ri Di
+                    #on prend n'import lequel balek
 
                 # F U R Ui Ri Fi
-
-
             if len(listeAretes) == 2:
 
                 #Cas si les aretes sont 'adjacentes'
@@ -303,27 +310,66 @@ class Resolution:
                 if adj == True :
                     if pos  == 0:
                         print(pos)
+
+                        self.listeMouv.append('D')
+                        self.listeMouv.append('F')
+                        self.listeMouv.append('R')
+                        self.listeMouv.append('Fi')
+                        self.listeMouv.append('Ri')
+                        self.listeMouv.append('Di')
+                        # D F R Fi Ri Di
                         #cas down
                         
                     elif pos == 1:
                         print(pos)
+
+                        self.listeMouv.append('R')
+                        self.listeMouv.append('U')
+                        self.listeMouv.append('B')
+                        self.listeMouv.append('Ui')
+                        self.listeMouv.append('Bi')
+                        self.listeMouv.append('Ri')
+                        # R U B Ui Bi Ri
                         #cas right
 
                     elif pos == 2:
                         print(pos)
+
+                        self.listeMouv.append('L')
+                        self.listeMouv.append('U')
+                        self.listeMouv.append('F')
+                        self.listeMouv.append('Ui')
+                        self.listeMouv.append('Fi')
+                        self.listeMouv.append('Li')
+                        # L U F Ui Fi Li
                         #cas left
 
                     elif pos == 3:
                         print(pos)
+
+                        self.listeMouv.append('D')
+                        self.listeMouv.append('F')
+                        self.listeMouv.append('R')
+                        self.listeMouv.append('Fi')
+                        self.listeMouv.append('Ri')
+                        self.listeMouv.append('Di')
+                        # U B R Bi Ri Ui
                         #cas up
 
                         # F U R Ui Ri Fi
                 else :
                     print("cas 3")
                     if listeAretes[0] in diOp[0] and listeAretes[1] in diOp[0]:
+                        # R B U Bi Ui Ri
+
+                        #on fait cas right
                         #cas left or right
                     if listeAretes[0] in diOp[1] and listeAretes[1] in diOp[1]:
+                        # U R B Ri Bi Ui
+
+                        #cas up 
                         #cas up or down
+
                         # F R U Ri Ui Fi
 
                 
