@@ -249,12 +249,16 @@ class Resolution:
     def putCornerLastFace(self, cube) :
         faceBlanche = ''
         faceJaune = ''
-        
+
+        # On trouve les deux face "finies" pour savoir quelles faces modifier par la suite
         for face in cube.liFace :
             faceBlanche = face
             faceJaune = cube.getFaceInversed(face)
-            if cube.faceFinished(face) and cube.faceFinished(faceJaune):
+            if cube.faceFinished(faceBlanche) and cube.faceFinished(faceJaune):
                 break
+
+        
+        
 
         print(faceBlanche)
         print(faceJaune)
