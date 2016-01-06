@@ -250,9 +250,11 @@ class Resolution:
         faceBlanche = ''
         faceJaune = ''
         
-        for face in cube.liface :
+        for face in cube.liFace :
             faceBlanche = face
-            faceJaune = getFaceInversed(face)
+            faceJaune = cube.getFaceInversed(face)
+            if cube.faceFinished(face) and cube.faceFinished(faceJaune):
+                break
 
         print(faceBlanche)
         print(faceJaune)
@@ -360,7 +362,7 @@ def rfjaune(c):
         
 
 #cube = Cube("OOOOOOOOOBBBRRRJJJGGGBBBRRRJJJGGGBBBRRRJJJGGGYYYYYYYYY")
-cube = Cube("WWWWWWWWWWRRRBBBOOOGGGRRRBBBOOOGGGBOGRGBOROGBRYYYYYYYYY")
+cube = Cube("WWWWWWWWWRRRBBBOOOGGGRRRBBBOOOGGGBOGRGBOROGBRYYYYYYYYY")
 resol= Resolution(cube)
 resol.lastStep(cube)
-cube.printCube()
+cube.displayCube()
