@@ -266,7 +266,22 @@ class Resolution:
             temp = faceJaune
             faceJaune = faceBlanche
             faceBlanche = temp
-        
+        elif faceJaune == 'l' and faceTest[0][0] == faceTest[1][0] == faceTest[2][0] :
+            temp = faceJaune
+            faceJaune = faceBlanche
+            faceBlanche = temp
+        elif faceJaune == 'r' and faceTest[0][0] == faceTest[1][0] == faceTest[2][0] :
+            temp = faceJaune
+            faceJaune = faceBlanche
+            faceBlanche = temp
+        elif faceJaune == 'f' and faceTest[2][0] == faceTest[2][1] == faceTest[2][2] :
+            temp = faceJaune
+            faceJaune = faceBlanche
+            faceBlanche = temp
+        elif faceJaune == 'b' and faceTest[0][0] == faceTest[0][1] == faceTest[0][2] :
+            temp = faceJaune
+            faceJaune = faceBlanche
+            faceBlanche = temp
 
         print(faceBlanche)
         print(faceJaune)
