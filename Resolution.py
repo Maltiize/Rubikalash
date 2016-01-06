@@ -195,25 +195,45 @@ class Resolution:
                     
                     #a faire j'ai eu la flemme
                     if (cube.findCube([listos[1][0]]))[1][1] == 'l':
-                        self.listeMouv.append(self.getApproRot("u","r","d"))
-                        self.listeMouv.append(self.getApproRot("l","u","l"))
+                        self.listeMouv.append(self.getApproRot("d","l","d"))
+                        self.listeMouv.append(self.getApproRot("u","l","l"))
                         self.listeMouv.append(self.getApproRot("u","r","b"))
 
-                        self.listeMouv.append(self.getApproRot("u","l","u"))
+                        self.listeMouv.append(self.getApproRot("l","u","l"))
                         self.listeMouv.append(self.getApproRot("r","u","b"))
-                        self.listeMouv.append(self.getApproRot("r","u","l"))
+                        self.listeMouv.append(self.getApproRot("l","d","d"))
                     #a vérifier
                     if (cube.findCube([listos[1][0]]))[1][1] == 'r':
-                        self.listeMouv.append(self.getApproRot("u","r","u"))
-                        self.listeMouv.append(self.getApproRot("l","u","r"))
+                        self.listeMouv.append(self.getApproRot("d","l","r"))
+                        self.listeMouv.append(self.getApproRot("u","l","d"))
                         self.listeMouv.append(self.getApproRot("u","r","b"))
 
-                        self.listeMouv.append(self.getApproRot("u","l","r"))
+                        self.listeMouv.append(self.getApproRot("l","u","d"))
                         self.listeMouv.append(self.getApproRot("r","u","b"))
-                        self.listeMouv.append(self.getApproRot("r","u","u"))
+                        self.listeMouv.append(self.getApproRot("l","d","r"))
 
                 if (cube.findCube([listos[1][0]]))[1][1] == 'd' and ((cube.findCube([listos[0][0]]))[1][1] == 'l' or (cube.findCube([listos[0][0]]))[1][1] == 'r'):
-                    print("Bonjour")
+                    
+
+                    if (cube.findCube([listos[0][0]]))[1][1] == 'l':
+                        self.listeMouv.append(self.getApproRot("d","l","d"))
+                        self.listeMouv.append(self.getApproRot("u","l","l"))
+                        self.listeMouv.append(self.getApproRot("u","r","b"))
+
+                        self.listeMouv.append(self.getApproRot("l","u","l"))
+                        self.listeMouv.append(self.getApproRot("r","u","b"))
+                        self.listeMouv.append(self.getApproRot("l","d","d"))
+                    #a vérifier
+                    if (cube.findCube([listos[0][0]]))[1][1] == 'r':
+                        self.listeMouv.append(self.getApproRot("d","l","r"))
+                        self.listeMouv.append(self.getApproRot("u","l","d"))
+                        self.listeMouv.append(self.getApproRot("u","r","b"))
+
+                        self.listeMouv.append(self.getApproRot("l","u","d"))
+                        self.listeMouv.append(self.getApproRot("r","u","b"))
+                        self.listeMouv.append(self.getApproRot("l","d","r"))
+
+                        
                 if cube.getCentralColor(listos[0]) == 'B' and cube.getCentralColor(listos[1]) =='G' or cube.getCentralColor(listos[0]) == 'R' and cube.getCentralColor(listos[1]) == 'O':
                     resolution.rotate(['F','R','U',"R'","U'","F'"])
             
