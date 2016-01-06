@@ -243,8 +243,8 @@ class Resolution:
 
     def lastStep(self, cube) :
         if cube.cubeFinished() == False :
-            putCornerLastFace(cube)
-            putAreteLastFace(cube)
+            self.putCornerLastFace(cube)
+            self.putAreteLastFace(cube)
             
     def putCornerLastFace(self, cube) :
         faceBlanche = ''
