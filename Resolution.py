@@ -233,9 +233,15 @@ class Resolution:
                         self.listeMouv.append(self.getApproRot("r","u","b"))
                         self.listeMouv.append(self.getApproRot("l","d","r"))
 
-                        
-                if cube.getCentralColor(listos[0]) == 'B' and cube.getCentralColor(listos[1]) =='G' or cube.getCentralColor(listos[0]) == 'R' and cube.getCentralColor(listos[1]) == 'O':
-                    resolution.rotate(['F','R','U',"R'","U'","F'"])
+            #if cube.getCentralColor(listos[0]) == 'B' and cube.getCentralColor(listos[1]) =='G' or cube.getCentralColor(listos[0]) == 'R' and cube.getCentralColor(listos[1]) == 'O':
+             #       resolution.rotate(['F','R','U',"R'","U'","F'"])
+            
+            # CAS 3 --------------------------------------------------------------------------------------------------
+
+
+
+
+                
             
             else:
                 resolution.rotate(['F','U',"R","U'","R'","F'"])
@@ -258,3 +264,4 @@ resolution.solveYellow()
 print(resolution.checkCrossNonOriente())
 print(resolution.checkEmplacement())
 resolution.resolutionYellowCross()
+print(resolution.getApproRot("u","d","f"))
