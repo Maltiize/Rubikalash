@@ -289,9 +289,9 @@ class Resolution:
                     self.listeMouv.append('D')
                     self.listeMouv.append('F')
                     self.listeMouv.append('R')
-                    self.listeMouv.append('Fi')
-                    self.listeMouv.append('Ri')
-                    self.listeMouv.append('Di')
+                    self.listeMouv.append("F'")
+                    self.listeMouv.append("R'")
+                    self.listeMouv.append("D'")
 
                     # D F R Fi Ri Di
                     #on prend n'import lequel balek
@@ -314,9 +314,9 @@ class Resolution:
                         self.listeMouv.append('D')
                         self.listeMouv.append('F')
                         self.listeMouv.append('R')
-                        self.listeMouv.append('Fi')
-                        self.listeMouv.append('Ri')
-                        self.listeMouv.append('Di')
+                        self.listeMouv.append("F'")
+                        self.listeMouv.append("R'")
+                        self.listeMouv.append("D'")
                         # D F R Fi Ri Di
                         #cas down
                         
@@ -326,9 +326,9 @@ class Resolution:
                         self.listeMouv.append('R')
                         self.listeMouv.append('U')
                         self.listeMouv.append('B')
-                        self.listeMouv.append('Ui')
-                        self.listeMouv.append('Bi')
-                        self.listeMouv.append('Ri')
+                        self.listeMouv.append("U'")
+                        self.listeMouv.append("B'")
+                        self.listeMouv.append("R'")
                         # R U B Ui Bi Ri
                         #cas right
 
@@ -338,9 +338,9 @@ class Resolution:
                         self.listeMouv.append('L')
                         self.listeMouv.append('U')
                         self.listeMouv.append('F')
-                        self.listeMouv.append('Ui')
-                        self.listeMouv.append('Fi')
-                        self.listeMouv.append('Li')
+                        self.listeMouv.append("U'")
+                        self.listeMouv.append("F'")
+                        self.listeMouv.append("L'")
                         # L U F Ui Fi Li
                         #cas left
 
@@ -350,9 +350,9 @@ class Resolution:
                         self.listeMouv.append('D')
                         self.listeMouv.append('F')
                         self.listeMouv.append('R')
-                        self.listeMouv.append('Fi')
-                        self.listeMouv.append('Ri')
-                        self.listeMouv.append('Di')
+                        self.listeMouv.append("F'")
+                        self.listeMouv.append("R'")
+                        self.listeMouv.append("D'")
                         # U B R Bi Ri Ui
                         #cas up
 
