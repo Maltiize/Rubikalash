@@ -240,7 +240,26 @@ class Resolution:
                 
                 
         return tmp
+
+    def lastStep(self, cube) :
+        if cube.cubeFinished() == False :
+            putCornerLastFace(cube)
+            putAreteLastFace(cube)
+            
+    def putCornerLastFace(self, cube) :
+        faceBlanche = ''
+        faceJaune = ''
+        
+        for face in cube.liface :
+            faceBlanche = face
+            faceJaune = getFaceInversed(face)
+
+        print(faceBlanche)
+        print(faceJaune)
                 
+        
+    def putAreteLastFace(self, cube) :
+        return
               
 
 
@@ -330,26 +349,6 @@ def rfjaune(c):
             c.rotation("D")
             rfjaune(c)
     return(c.printCube())
-
-def lastStep(cube) :
-    if cube.cubeFinished() = False :
-        putCornerLastFace(cube)
-        putAreteLastFace(cube)
-        
-def putCornerLastFace(cube) :
-    faceBlanche = ''
-    faceJaune = ''
-    
-    for face in cube.liface :
-        faceBlanche = face
-        faceJaune = getFaceInversed(face)
-
-    print(faceBlanche)
-    print(faceJaune)
-            
-    
-def putAreteLastFace(cube) :
-    return
     
         
 #cube = Cube("WWWWWWWWWGGGRRRBBBOOOGGGRRRBBBOOOGOOYBRBGYGROBYYYYYYYR")
@@ -361,8 +360,7 @@ def putAreteLastFace(cube) :
         
 
 #cube = Cube("OOOOOOOOOBBBRRRJJJGGGBBBRRRJJJGGGBBBRRRJJJGGGYYYYYYYYY")
-cube = Cube("WWWWWWWWWRRRBBBOOOGGGRRRBBBOOOGGGRRRBBBOOOGGGYYYYYYYYY")
+cube = Cube("WWWWWWWWWWRRRBBBOOOGGGRRRBBBOOOGGGBOGRGBOROGBRYYYYYYYYY")
 resol= Resolution(cube)
-resol.applyCmd("L'FDLR'B2D2LDU'L'R'B2D2L2L'B2D2L'UB2D2L'U")
-resol.theCross('f')
+resol.lastStep(cube)
 cube.printCube()
