@@ -260,10 +260,13 @@ class Resolution:
 
     def solveYellowCross(self):
         dicAdj = [['u','r'],['u','l'],['d','r'],['d','l']]
+        dicOp = [['u','d'],['l','r']]
         #tant que la croix jaune n'est pas vérifiée
+        print("Dans la fonction")
         while self.checkCrossNonOriente() != True:
-
+            print("Dans la boucle")
             pos=None #position up ou down
+            adj=False
             #on récupère la position des aretes jaunes qui sont sur la face jaune
             liste=self.checkEmplacement()   
             #liste contenant le placement des aretes dont la partie jaune est déjà sur la face jaune
@@ -271,7 +274,7 @@ class Resolution:
 
 
             #on récupère la position des aretes dont la partie jaune est sur la face jaune
-            for i in range(liste):
+            for i in range(len(liste)):
                 #si la partie jaune de l'arete est sur la face jaune
                 if liste[i][0] == self.whichIsColor("Y"):
                     #alors on récupère l'emplacement de la partie de l'autre couleur
@@ -294,11 +297,33 @@ class Resolution:
 
                     if listeAretes[0] in dicAdj[i] and listeAretes[1] in dicAdj[i]:
                         pos = i
-                        print("cas 2")
-                        # F U R Ui Ri Fi
+                        adj = True
 
-                    else :
-                        print("cas 3")
+                        print("cas 2")
+                if adj == True :
+                    if pos  == 0:
+                        print(pos)
+                        #cas down
+                        
+                    elif pos == 1:
+                        print(pos)
+                        #cas right
+
+                    elif pos == 2:
+                        print(pos)
+                        #cas left
+
+                    elif pos == 3:
+                        print(pos)
+                        #cas up
+
+                        # F U R Ui Ri Fi
+                else :
+                    print("cas 3")
+                    if listeAretes[0] in diOp[0] and listeAretes[1] in diOp[0]:
+                        #cas left or right
+                    if listeAretes[0] in diOp[1] and listeAretes[1] in diOp[1]:
+                        #cas up or down
                         # F R U Ri Ui Fi
 
                 
@@ -315,7 +340,7 @@ class Resolution:
                     
 
 
-cube = Cube("YBGGGGGGGRRRWWWOOOYYBGRRWWWOOOYYYYRRWWWOOGRYOBBBBBBBRY")
+cube = Cube("GOBOOOOOOYGGWWWBBYOYOYGGWWWBBYGYBRGGWWWBBRYYYRRRRRRBRG")
 
 resolution = Resolution(cube)
 
@@ -325,5 +350,6 @@ resolution.solveYellow()
 
 print(resolution.checkCrossNonOriente())
 print(resolution.checkEmplacement())
-resolution.resolutionYellowCross()
-print(resolution.getApproRot("d","l","d"))
+#resolution.resolutionYellowCross()
+#print(resolution.getApproRot("d","l","d"))
+resolution.solveYellowCross()
