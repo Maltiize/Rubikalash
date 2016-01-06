@@ -9,6 +9,14 @@ class Resolution:
         self.face=face
         self.listeAretes=listeAretes
         self.listeMouv=[]
+        
+        # liste des indexes servant  à la croix
+        self.liCross=1,5,7,3
+        self.liCorner=0,2,8,6
+
+        # liste des rotation effectué durant la résolution 
+        self.liCmd=''
+        self.liRota='','2',"'"
 
 
     def rotation(self,cmd):
@@ -195,22 +203,22 @@ class Resolution:
                     
                     #a faire j'ai eu la flemme
                     if (cube.findCube([listos[1][0]]))[1][1] == 'l':
-                        self.listeMouv.append(self.getApproRot("d","l","d"))
+                        self.listeMouv.append(self.getApproRot("u","r","d"))
                         self.listeMouv.append(self.getApproRot("u","l","l"))
                         self.listeMouv.append(self.getApproRot("u","r","b"))
 
                         self.listeMouv.append(self.getApproRot("l","u","l"))
                         self.listeMouv.append(self.getApproRot("r","u","b"))
-                        self.listeMouv.append(self.getApproRot("l","d","d"))
+                        self.listeMouv.append(self.getApproRot("r","u","d"))
                     #a vérifier
                     if (cube.findCube([listos[1][0]]))[1][1] == 'r':
-                        self.listeMouv.append(self.getApproRot("d","l","r"))
+                        self.listeMouv.append(self.getApproRot("u","r","r"))
                         self.listeMouv.append(self.getApproRot("u","l","d"))
                         self.listeMouv.append(self.getApproRot("u","r","b"))
 
                         self.listeMouv.append(self.getApproRot("l","u","d"))
                         self.listeMouv.append(self.getApproRot("r","u","b"))
-                        self.listeMouv.append(self.getApproRot("l","d","r"))
+                        self.listeMouv.append(self.getApproRot("r","u","r"))
 
                 if (cube.findCube([listos[1][0]]))[1][1] == 'd' and ((cube.findCube([listos[0][0]]))[1][1] == 'l' or (cube.findCube([listos[0][0]]))[1][1] == 'r'):
                     
@@ -264,4 +272,4 @@ resolution.solveYellow()
 print(resolution.checkCrossNonOriente())
 print(resolution.checkEmplacement())
 resolution.resolutionYellowCross()
-print(resolution.getApproRot("u","d","f"))
+print(resolution.getApproRot("d","l","d"))
