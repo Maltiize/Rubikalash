@@ -118,13 +118,16 @@ class Resolution:
         listos=[]
         liste=[]
         for i in range(len(listeColors)):
+            #plutot que leur couleur ; on va mettre la position de la couleur
             listos=[]
             pos = cube.findCube(['Y',listeColors[i][0][0]])
             listos.append(pos[0][1])
-            listos.append(listeColors[i][0][0])
+            listos.append(pos[1][1])
             liste.append(listos)    
             #liste contenant les listes des arêtes avec (1) : sur quelle face se trouve la partie Y de l'arete et (2) : de quelle couleur est l'autre partie
         return liste
+
+#fonction qui renvoie la position des 
 
 #fonction resolvant la croix yellow
     def resolutionYellowCross(self):
@@ -253,6 +256,57 @@ class Resolution:
             
             else:
                 resolution.rotate(['F','U',"R","U'","R'","F'"])
+
+
+    def solveYellowCross(self):
+        dicAdj = [['u','r'],['u','l'],['d','r'],['d','l']]
+        #tant que la croix jaune n'est pas vérifiée
+        while self.checkCrossNonOriente() != True:
+
+            pos=None #position up ou down
+            #on récupère la position des aretes jaunes qui sont sur la face jaune
+            liste=self.checkEmplacement()   
+            #liste contenant le placement des aretes dont la partie jaune est déjà sur la face jaune
+            listeAretes=[]
+
+
+            #on récupère la position des aretes dont la partie jaune est sur la face jaune
+            for i in range(liste):
+                #si la partie jaune de l'arete est sur la face jaune
+                if liste[i][0] == self.whichIsColor("Y"):
+                    #alors on récupère l'emplacement de la partie de l'autre couleur
+                    listeAretes.append(liste[i][1])
+            #si il n'y a que la case jaune du milieu
+
+
+            if len(listeAretes) == 0 or len(listeAretes) == 3:
+                print("cas 1")
+                if len(listeAretes) == 3:
+                    print("Trois faces sur la dernieres, on tente")
+
+                # F U R Ui Ri Fi
+
+
+            if len(listeAretes) == 2:
+
+                #Cas si les aretes sont 'adjacentes'
+                for i in range(len(dicAdj)):
+
+                    if listeAretes[0] in dicAdj[i] and listeAretes[1] in dicAdj[i]:
+                        pos = i
+                        print("cas 2")
+                        # F U R Ui Ri Fi
+
+                    else :
+                        print("cas 3")
+                        # F R U Ri Ui Fi
+
+                
+            
+
+
+
+             
 
     def rotate(self,liste):
         for i in range(len(liste)):
