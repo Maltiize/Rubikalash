@@ -347,12 +347,12 @@ class Resolution:
                     elif pos == 3:
                         print(pos)
 
-                        self.listeMouv.append('D')
-                        self.listeMouv.append('F')
+                        self.listeMouv.append('U')
+                        self.listeMouv.append('B')
                         self.listeMouv.append('R')
-                        self.listeMouv.append("F'")
+                        self.listeMouv.append("B'")
                         self.listeMouv.append("R'")
-                        self.listeMouv.append("D'")
+                        self.listeMouv.append("U'")
                         # U B R Bi Ri Ui
                         #cas up
 
@@ -361,11 +361,23 @@ class Resolution:
                     print("cas 3")
                     if listeAretes[0] in diOp[0] and listeAretes[1] in diOp[0]:
                         # R B U Bi Ui Ri
+                        self.listeMouv.append('R')
+                        self.listeMouv.append('B')
+                        self.listeMouv.append('U')
+                        self.listeMouv.append("B'")
+                        self.listeMouv.append("U'")
+                        self.listeMouv.append("R'")
 
                         #on fait cas right
                         #cas left or right
                     if listeAretes[0] in diOp[1] and listeAretes[1] in diOp[1]:
                         # U R B Ri Bi Ui
+                        self.listeMouv.append('U')
+                        self.listeMouv.append('R')
+                        self.listeMouv.append('B')
+                        self.listeMouv.append("R'")
+                        self.listeMouv.append("B'")
+                        self.listeMouv.append("U'")
 
                         #cas up 
                         #cas up or down
@@ -399,3 +411,4 @@ print(resolution.checkEmplacement())
 #resolution.resolutionYellowCross()
 #print(resolution.getApproRot("d","l","d"))
 resolution.solveYellowCross()
+print(resolution.listeMouv)
