@@ -68,6 +68,9 @@ class Resolution:
             self.rubiks.rotation("D2")
             self.rubiks.rotation("L2")
 
+        print("2cubeinv")
+        return self.rubiks
+
     def cubeinv(self):
         #si cube au bon endroit mais couleurs inversées
         br = self.rubiks.findCube(['B', 'R']) #cube bleu/rouge
@@ -127,13 +130,17 @@ class Resolution:
             self.rubiks.rotation("D'")
             self.rubiks.rotation("B")
             
+        print("cubeinv")
         return self.rubiks
     
     def deuxcouronne(self):
         while not self.checkscdcouronne():
             self.deuxiemecouronne()
+            self.rubiks.displayCube()
             self.cubeinv()
+            self.rubiks.displayCube()
             self.deuxcubeinv()
+            self.rubiks.displayCube()
 
         return self.rubiks
 
@@ -203,10 +210,10 @@ class Resolution:
                 if vr[1][1] == 'l':
                     #faire
                     self.rubiks.rotation("D")
-                if vr[1][1] == 'b':
+                elif vr[1][1] == 'b':
                     #faire
                     self.rubiks.rotation("D2")
-                if vr[1][1] == 'r':
+                elif vr[1][1] == 'r':
                     #faire
                     self.rubiks.rotation("D'")
                 #on doit faire basculer le cube a droite
@@ -221,13 +228,13 @@ class Resolution:
             elif vr[1][1] == 'd': #ici le cube rouge est sur la face down
                 if vr[0][1] == 'f':
                     #faire
-                    self.rubiks.rotation("D")
-                if vr[0][1] == 'l':
+                    self.rubiks.rotation("D'")
+                elif vr[0][1] == 'r':
                     #faire
                     self.rubiks.rotation("D2")
-                if vr[0][1] == 'b':
+                elif vr[0][1] == 'b':
                     #faire
-                    self.rubiks.rotation("D'")
+                    self.rubiks.rotation("D")
                 #if a[0][1] == 'r':
                     #ne rien faire
                 #on doit faire basculer le cube a gauche
@@ -236,9 +243,9 @@ class Resolution:
                 self.rubiks.rotation("D")
                 self.rubiks.rotation("F")
                 self.rubiks.rotation("D")
-                self.rubiks.rotation("R")
+                self.rubiks.rotation("L")
                 self.rubiks.rotation("D'")
-                self.rubiks.rotation("R'")
+                self.rubiks.rotation("L'")
 
             #cube vert/orange
                 vo = self.rubiks.findCube(['G', 'O']) #cube vert/orange
@@ -268,7 +275,7 @@ class Resolution:
                     if vo[0][1] == 'f':
                         #faire
                         self.rubiks.rotation("D")
-                    elif vo[0][1] == 'l':
+                    elif vo[0][1] == 'r':
                         #faire
                         self.rubiks.rotation("D2")
                     elif vo[0][1] == 'b':
@@ -332,7 +339,7 @@ class Resolution:
                     self.rubiks.rotation("R")
                     self.rubiks.rotation("D'")
                     self.rubiks.rotation("R'")
-                
+            print("2couronne")   
             return self.rubiks
         
 
