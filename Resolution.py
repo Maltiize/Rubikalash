@@ -286,12 +286,12 @@ class Resolution:
                 print("cas 1")
                 if len(listeAretes) == 3:
                     print("Trois faces sur la dernieres, on tente")
-                    self.listeMouv.append('D')
-                    self.listeMouv.append('F')
                     self.listeMouv.append('R')
-                    self.listeMouv.append("F'")
-                    self.listeMouv.append("R'")
+                    self.listeMouv.append('B')
+                    self.listeMouv.append('D')      #check
+                    self.listeMouv.append("B'")
                     self.listeMouv.append("D'")
+                    self.listeMouv.append("B'")
 
                     # D F R Fi Ri Di
                     #on prend n'import lequel balek
@@ -312,10 +312,10 @@ class Resolution:
                         print(pos)
 
                         self.listeMouv.append('D')
-                        self.listeMouv.append('F')
-                        self.listeMouv.append('R')
-                        self.listeMouv.append("F'")
-                        self.listeMouv.append("R'")
+                        self.listeMouv.append('B')
+                        self.listeMouv.append('L')      
+                        self.listeMouv.append("B'")     #Check
+                        self.listeMouv.append("L'")
                         self.listeMouv.append("D'")
                         # D F R Fi Ri Di
                         #cas down
@@ -324,10 +324,10 @@ class Resolution:
                         print(pos)
 
                         self.listeMouv.append('R')
-                        self.listeMouv.append('U')
                         self.listeMouv.append('B')
-                        self.listeMouv.append("U'")
+                        self.listeMouv.append('D')      #Check
                         self.listeMouv.append("B'")
+                        self.listeMouv.append("D'")
                         self.listeMouv.append("R'")
                         # R U B Ui Bi Ri
                         #cas right
@@ -336,10 +336,10 @@ class Resolution:
                         print(pos)
 
                         self.listeMouv.append('L')
-                        self.listeMouv.append('U')
-                        self.listeMouv.append('F')
+                        self.listeMouv.append('B')
+                        self.listeMouv.append('U')      #Check
+                        self.listeMouv.append("B'")
                         self.listeMouv.append("U'")
-                        self.listeMouv.append("F'")
                         self.listeMouv.append("L'")
                         # L U F Ui Fi Li
                         #cas left
@@ -349,7 +349,7 @@ class Resolution:
 
                         self.listeMouv.append('U')
                         self.listeMouv.append('B')
-                        self.listeMouv.append('R')
+                        self.listeMouv.append('R')      #Check
                         self.listeMouv.append("B'")
                         self.listeMouv.append("R'")
                         self.listeMouv.append("U'")
@@ -359,22 +359,22 @@ class Resolution:
                         # F U R Ui Ri Fi
                 else :
                     print("cas 3")
-                    if listeAretes[0] in diOp[0] and listeAretes[1] in diOp[0]:
+                    if listeAretes[0] in dicOp[0] and listeAretes[1] in dicOp[0]:
                         # R B U Bi Ui Ri
                         self.listeMouv.append('R')
+                        self.listeMouv.append('D')
                         self.listeMouv.append('B')
-                        self.listeMouv.append('U')
+                        self.listeMouv.append("D'")     #BON
                         self.listeMouv.append("B'")
-                        self.listeMouv.append("U'")
                         self.listeMouv.append("R'")
 
                         #on fait cas right
                         #cas left or right
-                    if listeAretes[0] in diOp[1] and listeAretes[1] in diOp[1]:
+                    if listeAretes[0] in dicOp[1] and listeAretes[1] in dicOp[1]:
                         # U R B Ri Bi Ui
                         self.listeMouv.append('U')
                         self.listeMouv.append('R')
-                        self.listeMouv.append('B')
+                        self.listeMouv.append('B')      #Check
                         self.listeMouv.append("R'")
                         self.listeMouv.append("B'")
                         self.listeMouv.append("U'")
@@ -383,6 +383,8 @@ class Resolution:
                         #cas up or down
 
                         # F R U Ri Ui Fi
+            print(self.listeMouv)
+            self.rotate(self.listeMouv)
 
                 
             
