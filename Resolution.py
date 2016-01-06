@@ -337,9 +337,19 @@ def lastStep(cube) :
         putAreteLastFace(cube)
         
 def putCornerLastFace(cube) :
-    cube.down
+    faceBlanche = ''
+    faceJaune = ''
+    
+    for face in cube.liface :
+        faceBlanche = face
+        faceJaune = getFaceInversed(face)
+
+    print(faceBlanche)
+    print(faceJaune)
+            
     
 def putAreteLastFace(cube) :
+    return
     
         
 #cube = Cube("WWWWWWWWWGGGRRRBBBOOOGGGRRRBBBOOOGOOYBRBGYGROBYYYYYYYR")
@@ -351,7 +361,7 @@ def putAreteLastFace(cube) :
         
 
 #cube = Cube("OOOOOOOOOBBBRRRJJJGGGBBBRRRJJJGGGBBBRRRJJJGGGYYYYYYYYY")
-cube = Cube("BWGOWWWWRYYBOBBWOOYGRRRGOBRBORYGWGOBOYOWGYGRRYBGBYYWGR")
+cube = Cube("WWWWWWWWWRRRBBBOOOGGGRRRBBBOOOGGGRRRBBBOOOGGGYYYYYYYYY")
 resol= Resolution(cube)
 resol.applyCmd("L'FDLR'B2D2LDU'L'R'B2D2L2L'B2D2L'UB2D2L'U")
 resol.theCross('f')
