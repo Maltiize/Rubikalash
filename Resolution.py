@@ -330,8 +330,17 @@ def rfjaune(c):
             c.rotation("D")
             rfjaune(c)
     return(c.printCube())
+
+def lastStep(cube) :
+    if cube.cubeFinished() = False :
+        putCornerLastFace(cube)
+        putAreteLastFace(cube)
         
-   
+def putCornerLastFace(cube) :
+    cube.down
+    
+def putAreteLastFace(cube) :
+    
         
 #cube = Cube("WWWWWWWWWGGGRRRBBBOOOGGGRRRBBBOOOGOOYBRBGYGROBYYYYYYYR")
 #c1=Cube("WWWWWWWWWGGGRRRBBBOOOGGGRRRBBBOOOGGRBROYBYGOOYYBYYYYYR")
