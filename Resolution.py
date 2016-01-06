@@ -137,12 +137,14 @@ class Resolution:
         print("Dans la fonction")
         while self.checkCrossNonOriente() != True:
             print("Dans la boucle")
+            
             pos=None #position up ou down
             adj=False
             #on récupère la position des aretes jaunes qui sont sur la face jaune
             liste=self.checkEmplacement()   
             #liste contenant le placement des aretes dont la partie jaune est déjà sur la face jaune
             listeAretes=[]
+            listeCeTour=[]
 
 
             #on récupère la position des aretes dont la partie jaune est sur la face jaune
@@ -153,17 +155,19 @@ class Resolution:
                     listeAretes.append(liste[i][1])
             #si il n'y a que la case jaune du milieu
 
-
-            if len(listeAretes) == 0 or len(listeAretes) == 3:
+            print(len(listeAretes))
+            if len(listeAretes) == 0 or len(listeAretes) == 3 or len(listeAretes)==1:
                 print("cas 1")
                 if len(listeAretes) == 3:
                     print("Trois faces sur la dernieres, on tente")
-                    self.listeMouv.append('R')
-                    self.listeMouv.append('B')
-                    self.listeMouv.append('D')      #check
-                    self.listeMouv.append("B'")
-                    self.listeMouv.append("D'")
-                    self.listeMouv.append("B'")
+    
+                listeCeTour.append('U')
+                listeCeTour.append('R')
+                listeCeTour.append('B')      #bon
+                listeCeTour.append("R'")
+                listeCeTour.append("B'")
+                listeCeTour.append("U'")
+                
 
                     # D F R Fi Ri Di
                     #on prend n'import lequel balek
@@ -183,48 +187,48 @@ class Resolution:
                     if pos  == 0:
                         print(pos)
 
-                        self.listeMouv.append('D')
-                        self.listeMouv.append('B')
-                        self.listeMouv.append('L')      
-                        self.listeMouv.append("B'")     #Check
-                        self.listeMouv.append("L'")
-                        self.listeMouv.append("D'")
+                        listeCeTour.append('D')
+                        listeCeTour.append('B')
+                        listeCeTour.append('L')      
+                        listeCeTour.append("B'")     #Check
+                        listeCeTour.append("L'")
+                        listeCeTour.append("D'")
                         # D F R Fi Ri Di
                         #cas down
                         
                     elif pos == 1:
                         print(pos)
 
-                        self.listeMouv.append('R')
-                        self.listeMouv.append('B')
-                        self.listeMouv.append('D')      #Check
-                        self.listeMouv.append("B'")
-                        self.listeMouv.append("D'")
-                        self.listeMouv.append("R'")
+                        listeCeTour.append('R')
+                        listeCeTour.append('B')
+                        listeCeTour.append('D')      #Check
+                        listeCeTour.append("B'")
+                        listeCeTour.append("D'")
+                        listeCeTour.append("R'")
                         # R U B Ui Bi Ri
                         #cas right
 
                     elif pos == 2:
                         print(pos)
 
-                        self.listeMouv.append('L')
-                        self.listeMouv.append('B')
-                        self.listeMouv.append('U')      #Check
-                        self.listeMouv.append("B'")
-                        self.listeMouv.append("U'")
-                        self.listeMouv.append("L'")
+                        listeCeTour.append('L')
+                        listeCeTour.append('B')
+                        listeCeTour.append('U')      #Check
+                        listeCeTour.append("B'")
+                        listeCeTour.append("U'")
+                        listeCeTour.append("L'")
                         # L U F Ui Fi Li
                         #cas left
 
                     elif pos == 3:
                         print(pos)
 
-                        self.listeMouv.append('U')
-                        self.listeMouv.append('B')
-                        self.listeMouv.append('R')      #Check
-                        self.listeMouv.append("B'")
-                        self.listeMouv.append("R'")
-                        self.listeMouv.append("U'")
+                        listeCeTour.append('U')
+                        listeCeTour.append('B')
+                        listeCeTour.append('R')      #Check
+                        listeCeTour.append("B'")
+                        listeCeTour.append("R'")
+                        listeCeTour.append("U'")
                         # U B R Bi Ri Ui
                         #cas up
 
@@ -233,30 +237,31 @@ class Resolution:
                     print("cas 3")
                     if listeAretes[0] in dicOp[0] and listeAretes[1] in dicOp[0]:
                         # R B U Bi Ui Ri
-                        self.listeMouv.append('R')
-                        self.listeMouv.append('D')
-                        self.listeMouv.append('B')
-                        self.listeMouv.append("D'")     #BON
-                        self.listeMouv.append("B'")
-                        self.listeMouv.append("R'")
+                        listeCeTour.append('R')
+                        listeCeTour.append('D')
+                        listeCeTour.append('B')
+                        listeCeTour.append("D'")     #BON ~~ pas totalement
+                        listeCeTour.append("B'")
+                        listeCeTour.append("R'")
 
                         #on fait cas right
                         #cas left or right
                     if listeAretes[0] in dicOp[1] and listeAretes[1] in dicOp[1]:
                         # U R B Ri Bi Ui
-                        self.listeMouv.append('U')
-                        self.listeMouv.append('R')
-                        self.listeMouv.append('B')      #Check
-                        self.listeMouv.append("R'")
-                        self.listeMouv.append("B'")
-                        self.listeMouv.append("U'")
+                        listeCeTour.append('U')
+                        listeCeTour.append('R')
+                        listeCeTour.append('B')      #Check
+                        listeCeTour.append("R'")
+                        listeCeTour.append("B'")
+                        listeCeTour.append("U'")
 
                         #cas up 
                         #cas up or down
 
                         # F R U Ri Ui Fi
-            print(self.listeMouv)
-            self.rotate(self.listeMouv)
+            print(listeCeTour)
+            self.listeMouv.append(listeCeTour)
+            self.rotate(listeCeTour)
 
                 
             
@@ -272,7 +277,9 @@ class Resolution:
                     
 
 
-cube = Cube("GOBOOOOOOYGGWWWBBYOYOYGGWWWBBYGYBRGGWWWBBRYYYRRRRRRBRG")
+#cube = Cube("GOBOOOOOOYGGWWWBBYOYOYGGWWWBBYGYBRGGWWWBBRYYYRRRRRRBRG")
+#cube = Cube("YYRBBBBBBBOOWWWRRYBBOYOOWWWRRYRYOOOOWWWRRGRGYGGGGGGGYY")
+cube = Cube("GYROOOOOOYGGWWWBBGYBOYGGWWWBBRYYGRGGWWWBBBOYYRRRRRRBOY")
 
 resolution = Resolution(cube)
 
