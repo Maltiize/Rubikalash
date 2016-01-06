@@ -257,7 +257,15 @@ class Resolution:
             if cube.faceFinished(faceBlanche) and cube.faceFinished(faceJaune):
                 break
 
-        
+        faceTest = cube.getFace(cube.liFace[(cube.liFace.index(faceJaune)+2)%6])
+        if faceJaune == 'u' and faceTest[0][0] == faceTest[0][1] == faceTest[0][2] :
+            temp = faceJaune
+            faceJaune = faceBlanche
+            faceBlanche = temp
+        elif faceJaune == 'd' and faceTest[2][0] == faceTest[2][1] == faceTest[2][2] :
+            temp = faceJaune
+            faceJaune = faceBlanche
+            faceBlanche = temp
         
 
         print(faceBlanche)
@@ -366,7 +374,7 @@ def rfjaune(c):
         
 
 #cube = Cube("OOOOOOOOOBBBRRRJJJGGGBBBRRRJJJGGGBBBRRRJJJGGGYYYYYYYYY")
-cube = Cube("WWWWWWWWWRRRBBBOOOGGGRRRBBBOOOGGGBOGRGBOROGBRYYYYYYYYY")
+cube = Cube("WWWWWWWWWRRRBBBGGGOOORRRBBBGGGOOOBOGRGBGBROROYYYYYYYYY")
 resol= Resolution(cube)
 resol.lastStep(cube)
 cube.displayCube()
