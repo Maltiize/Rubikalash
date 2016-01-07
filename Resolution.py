@@ -44,6 +44,7 @@ class Resolution:
             self.rubiks.rotation("F2")
             self.rubiks.rotation("D2")
             self.rubiks.rotation("F2")
+            self.mouv += 5
 
         #si le cube bleu/rouge inversé avec le bleu/orange
         if br[1][1] == 'b' and bo[1][1] == 'f':
@@ -52,6 +53,7 @@ class Resolution:
             self.rubiks.rotation("R2")
             self.rubiks.rotation("D2")
             self.rubiks.rotation("R2")
+            self.mouv += 5
             
         #si le cube vert/orange inversé avec le bleu/orange
         if vo[0][1] == 'r' and bo[0][1] == 'l':
@@ -60,6 +62,7 @@ class Resolution:
             self.rubiks.rotation("B2")
             self.rubiks.rotation("D2")
             self.rubiks.rotation("B2")
+            self.mouv += 5
 
         #si le cube vert/orange inversé avec le vert/rouge
         if vo[1][1] == 'f' and vr[1][1] == 'b':
@@ -68,6 +71,7 @@ class Resolution:
             self.rubiks.rotation("L2")
             self.rubiks.rotation("D2")
             self.rubiks.rotation("L2")
+            self.mouv += 5
 
         print("2cubeinv")
         return self.rubiks
@@ -91,6 +95,7 @@ class Resolution:
             self.rubiks.rotation("R'")
             self.rubiks.rotation("D'")
             self.rubiks.rotation("R")
+            self.mouv += 11
 
         if vr[0][1] == 'f' and vr[1][1] == 'l':
             self.rubiks.rotation("L")
@@ -104,6 +109,7 @@ class Resolution:
             self.rubiks.rotation("F'")
             self.rubiks.rotation("D'")
             self.rubiks.rotation("F")
+            self.mouv += 11
 
         if vo[0][1] == 'b' and vo[1][1] == 'l':
             self.rubiks.rotation("B")
@@ -117,6 +123,7 @@ class Resolution:
             self.rubiks.rotation("L'")
             self.rubiks.rotation("D'")
             self.rubiks.rotation("L")
+            self.mouv += 11
 
         if bo[0][1] == 'b' and bo[1][1] == 'r':
             self.rubiks.rotation("R")
@@ -130,13 +137,14 @@ class Resolution:
             self.rubiks.rotation("B'")
             self.rubiks.rotation("D'")
             self.rubiks.rotation("B")
+            self.mouv += 11
             self.rubiks.displayCube()
             
         print("cubeinv")
         return self.rubiks
     
     def deuxcouronne(self):
-        mouv = 0
+        
         #peut creer une fonction maj pour savoir ou sont les 4 cubes ? utile?
         br = self.rubiks.findCube(['B', 'R']) #cube bleu/rouge
         vr = self.rubiks.findCube(['G', 'R']) #vert/rouge
