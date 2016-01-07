@@ -257,14 +257,30 @@ class Resolution:
             if cube.faceFinished(faceBlanche) and cube.faceFinished(faceJaune):
                 break
 
+        # Si les deux faces sont inversé
         faceTest = cube.getFace(cube.liFace[(cube.liFace.index(faceJaune)+2)%6])
         if ((faceJaune == 'u' or faceJaune == 'b') and faceTest[0][0] == faceTest[0][1] == faceTest[0][2]) or ((faceJaune == 'l' or faceJaune == 'r') and faceTest[0][0] == faceTest[1][0] == faceTest[2][0]) or ((faceJaune == 'd' or faceJaune == 'f') and faceTest[2][0] == faceTest[2][1] == faceTest[2][2]) :
             temp = faceJaune
             faceJaune = faceBlanche
             faceBlanche = temp
+        
+        if faceJaune == 'u' :
+            tabLine = [0,'x']
             
-        print(faceBlanche)
-        print(faceJaune)
+        elif faceJaune == 'd' :
+            tabLine = [2,'x']
+            
+        elif faceJaune == 'l' or 'f' :
+            tabLine = ['x',0]
+            
+        elif faceJaune == 'r' or 'b' :
+            tabLine = ['x',2]
+
+        print(tabLine)
+
+        
+        print("Face Blanche : " + faceBlanche)
+        print("Face Jaune : " + faceJaune)
                 
         
     def putAreteLastFace(self, cube) :
