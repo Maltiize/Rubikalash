@@ -342,31 +342,7 @@ class Resolution:
     
 
         
-#cc      
-#cube = Cube("WWWWWWWWWGGGRRRBBBOOOGGGRRRBBBOOOGOOYBRBGYGROBYYYYYYYR")
-#c1=Cube("WWWWWWWWWGGGRRRBBBOOOGGGRRRBBBOOOGGRBROYBYGOOYYBYYYYYR")
-#c=Cube("WWWWWWWWWRRRBBBOOOGGGRRRBBBOOOGGGRRRBBBOOOGGGYYYYYYYYY")
-#c2=Cube("WWWWWWWWWGGGRRRBBBOOOGGGRRRBBBOOOGRBYGYBBGYOYRYOYYYRYO")
 
-#rfjaune(c2)
-        
-    
-#cube = Cube("OOOOOOOOOBBBRRRJJJGGGBBBRRRJJJGGGBBBRRRJJJGGGYYYYYYYYY")
-cube = Cube("GGRRWGYRGYYBRBWOYWGWOOGRGRWBBWOOBBOYGYBWOBRRYRBOYYGOWW")
-cube1=Cube("WWWWWWWWWGGGRRRBBBOOOGGGRRRBBBOOOBRBOBYGOGYGRYYRYYYYYO")
-
-#cube.displayCube()
-#resol= Resolution(cube)
-#resol.theCross('f')
-#cube.displayCube()
-#cube.displayCube()
-#resol.applyCmd("FRD2L'F")
-#cube.displayCube()
-resol=Resolution(cube1)
-##resol.theCross('f')
-##cube.displayCube()
-resol.rfjaune()
-cube1.displayCube()
 
 #Fonction qui renvoie quelle face est de la couleur recherchée (jaune pour mon algo ("Y"))
 #On compare avec la couleur de chaque face en [1][1] et donc au milieu
@@ -580,7 +556,31 @@ cube1.displayCube()
             cube.rotation(liste[i])
             cube.displayCube()
                     
+#cc      
+#cube = Cube("WWWWWWWWWGGGRRRBBBOOOGGGRRRBBBOOOGOOYBRBGYGROBYYYYYYYR")
+#c1=Cube("WWWWWWWWWGGGRRRBBBOOOGGGRRRBBBOOOGGRBROYBYGOOYYBYYYYYR")
+#c=Cube("WWWWWWWWWRRRBBBOOOGGGRRRBBBOOOGGGRRRBBBOOOGGGYYYYYYYYY")
+#c2=Cube("WWWWWWWWWGGGRRRBBBOOOGGGRRRBBBOOOGRBYGYBBGYOYRYOYYYRYO")
 
+#rfjaune(c2)
+        
+    
+#cube = Cube("OOOOOOOOOBBBRRRJJJGGGBBBRRRJJJGGGBBBRRRJJJGGGYYYYYYYYY")
+cube = Cube("GGRRWGYRGYYBRBWOYWGWOOGRGRWBBWOOBBOYGYBWOBRRYRBOYYGOWW")
+cube1=Cube("WWWWWWWWWGGGRRRBBBOOOGGGRRRBBBOOOBRBOBYGOGYGRYYRYYYYYO")
+
+#cube.displayCube()
+#resol= Resolution(cube)
+#resol.theCross('f')
+#cube.displayCube()
+#cube.displayCube()
+#resol.applyCmd("FRD2L'F")
+#cube.displayCube()
+resol=Resolution(cube1)
+##resol.theCross('f')
+##cube.displayCube()
+resol.rfjaune()
+cube1.displayCube()
 
 #cube = Cube("GOBOOOOOOYGGWWWBBYOYOYGGWWWBBYGYBRGGWWWBBRYYYRRRRRRBRG")
 #cube = Cube("YYRBBBBBBBOOWWWRRYBBOYOOWWWRRYRYOOOOWWWRRGRGYGGGGGGGYY")
@@ -609,4 +609,4 @@ print(resolution.checkCrossNonOriente())
 print(resolution.checkEmplacement())
 resolution.solveYellowCross()
 print(resolution.listeMouv)
->>>>>>> ResolutionThomas
+
