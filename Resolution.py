@@ -237,6 +237,7 @@ class Resolution:
                     print("cas 3")
                     if listeAretes[0] in dicOp[0] and listeAretes[1] in dicOp[0]:
                         # R B U Bi Ui Ri
+                        print("------------------- 1 -------------------")
                         listeCeTour.append('R')
                         listeCeTour.append('D')
                         listeCeTour.append('B')
@@ -248,6 +249,7 @@ class Resolution:
                         #cas left or right
                     if listeAretes[0] in dicOp[1] and listeAretes[1] in dicOp[1]:
                         # U R B Ri Bi Ui
+                        print("------------------- 2 -------------------")
                         listeCeTour.append('U')
                         listeCeTour.append('R')
                         listeCeTour.append('B')      #Check
@@ -280,7 +282,15 @@ class Resolution:
 #cube = Cube("GOBOOOOOOYGGWWWBBYOYOYGGWWWBBYGYBRGGWWWBBRYYYRRRRRRBRG")
 #cube = Cube("YYRBBBBBBBOOWWWRRYBBOYOOWWWRRYRYOOOOWWWRRGRGYGGGGGGGYY")
 #cube = Cube("GYROOOOOOYGGWWWBBGYBOYGGWWWBBRYYGRGGWWWBBBOYYRRRRRRBOY")
-cube = Cube("YRYOOOOOOBGGWWWBBRGYOYGGWWWBBGYYBGGGWWWBBRBOORRRRRRYYY")
+#cube = Cube("YRYOOOOOOBGGWWWBBRGYOYGGWWWBBGYYBGGGWWWBBRBOORRRRRRYYY")
+            #meme cube *2
+#cube = Cube("OYYGGGGGGYRRWWWOOGOBBRRRWWWOOGYYYRRRWWWOOBYOGBBBBBBYYR")
+#cube = Cube("GGBOOOOOOYGGWWWBBRYYOYGGWWWBBYOYBOGGWWWBBYGYBRRRRRRYRR")
+            #meme cube *4
+#cube = Cube("BGRRRRRRROBBWWWGGGYYYYBBWWWGGYRYBYBBWWWGGYOYBOOOOOOROG")
+#cube = Cube("YYOBBBBBBROOWWWRRBYBBOOOWWWRRGYYYGOOWWWRRRYROGGGGGGYYG")
+#cube = Cube("GOROOOOOOYGGWWWBBYBYOYGGWWWBBYBYRGGGWWWBBOYYYRRRRRRRGB")
+cube = Cube("GYYGGGGGGRRRWWWOOGORYGRRWWWOOOYYYBRRWWWOORBBYBBBBBBOYY")
 resolution = Resolution(cube)
 
 cube.displayCube()
