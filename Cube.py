@@ -59,9 +59,9 @@ class Cube:
          #sert aussi de liste des voisins dans cette ordre [u,r,d,l]
         
         self.D="d",[["f",[6,7,8]],["r",[6,7,8]],["b",[6,7,8]],["l",[6,7,8]]]
-        self.U="u",[["b",[2,1,0]],["r",[2,1,0]],["f",[2,1,0]],["l",[2,1,0]]]  
+        self.U="u",[["b",[2,1,0]],["r",[2,1,0]],["f",[2,1,0]],["l",[2,1,0]]]
                 
-        self.R="r",[["u",[2,5,8]],["b",[0,3,6]],["d",[2,5,8]],["f",[2,5,8]]]
+        self.R="r",[["u",[2,5,8]],["b",[6,3,0]],["d",[2,5,8]],["f",[2,5,8]]]
         self.L="l",[["u",[0,3,6]],["f",[0,3,6]],["d",[0,3,6]],["b",[8,5,2]]]
                 
         self.B="b",[["u",[2,1,0]],["l",[0,3,6]],["d",[6,7,8]],["r",[8,5,2]]]
@@ -359,7 +359,6 @@ class Cube:
             affTab(self.getFace(x))
     #Deuxieme méthode d'affichage du cube
     def displayCube(self,defaultFace='u'):
-        print("")
         up=self.getFace(defaultFace)
         down=self.getFace(self.getFaceInversed(defaultFace))
         core=[]
