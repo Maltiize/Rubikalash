@@ -130,6 +130,7 @@ class Resolution:
             self.rubiks.rotation("B'")
             self.rubiks.rotation("D'")
             self.rubiks.rotation("B")
+            self.rubiks.displayCube()
             
         print("cubeinv")
         return self.rubiks
@@ -142,12 +143,12 @@ class Resolution:
         vo = self.rubiks.findCube(['G', 'O']) #cube vert/orange
         bo = self.rubiks.findCube(['B', 'O']) #cube bleu/orange
         while not self.checkscdcouronne():
-            while br[0][1] == 'd' or br[1][1] == 'd' or vr[0][1] == 'd' or vr[1][1] == 'd' or vo[0][1] == 'd' or vo[1][1] == 'd' or bo[0][1] == 'd' or bo[1][1] == 'd':
-                self.deuxiemecouronne()
-                br = self.rubiks.findCube(['B', 'R']) #cube bleu/rouge
-                vr = self.rubiks.findCube(['G', 'R']) #vert/rouge
-                vo = self.rubiks.findCube(['G', 'O']) #cube vert/orange
-                bo = self.rubiks.findCube(['B', 'O']) #cube bleu/orange
+            #while br[0][1] == 'd' or br[1][1] == 'd' or vr[0][1] == 'd' or vr[1][1] == 'd' or vo[0][1] == 'd' or vo[1][1] == 'd' or bo[0][1] == 'd' or bo[1][1] == 'd':
+            self.deuxiemecouronne()
+##                br = self.rubiks.findCube(['B', 'R']) #cube bleu/rouge
+##                vr = self.rubiks.findCube(['G', 'R']) #vert/rouge
+##                vo = self.rubiks.findCube(['G', 'O']) #cube vert/orange
+##                bo = self.rubiks.findCube(['B', 'O']) #cube bleu/orange
             self.rubiks.displayCube()
             if self.checkscdcouronne():
                 break
@@ -190,6 +191,7 @@ class Resolution:
                 self.rubiks.rotation("F")
                 self.rubiks.rotation("D'")
                 self.rubiks.rotation("F'")
+                self.rubiks.displayCube()
 
                     
             elif a[1][1] == 'd': #ici le cube rouge est sur la face down
@@ -211,8 +213,9 @@ class Resolution:
                 self.rubiks.rotation("F'")
                 self.rubiks.rotation("D'")
                 self.rubiks.rotation("R'")
-                self.rubiks.rotation("D'")
+                self.rubiks.rotation("D")
                 self.rubiks.rotation("R")
+                self.rubiks.displayCube()
 
             
             #cube vert/rouge
@@ -234,13 +237,14 @@ class Resolution:
                     self.rubiks.rotation("D'")
                 #on doit faire basculer le cube a droite
                 self.rubiks.rotation("D")
-                self.rubiks.rotation("R")
+                self.rubiks.rotation("L")
                 self.rubiks.rotation("D'")
-                self.rubiks.rotation("R'")
+                self.rubiks.rotation("L'")
                 self.rubiks.rotation("D'")
                 self.rubiks.rotation("F'")
                 self.rubiks.rotation("D")
                 self.rubiks.rotation("F")
+                self.rubiks.displayCube()
             elif vr[1][1] == 'd': #ici le cube rouge est sur la face down
                 if vr[0][1] == 'f':
                     #faire
@@ -262,101 +266,107 @@ class Resolution:
                 self.rubiks.rotation("L")
                 self.rubiks.rotation("D'")
                 self.rubiks.rotation("L'")
+                self.rubiks.displayCube()
 
             #cube vert/orange
-                vo = self.rubiks.findCube(['G', 'O']) #cube vert/orange
+            vo = self.rubiks.findCube(['G', 'O']) #cube vert/orange
                 #on remet le cube vert/orange sur sa face correspondante 
-                if vo[0][1] == 'd':  #ici le cube vert est sur la face down
-                    self.mouv += 8
-                    if vo[1][1] == 'f':
-                         #faire
-                        self.rubiks.rotation("D2")
-                    elif vo[1][1] == 'l':
-                        #faire
-                        self.rubiks.rotation("D'")
-                    #if vr[1][1] == 'b':
-                       #ne rien faire car bon endroit
-                    elif vo[1][1] == 'r':
-                        #faire
-                        self.rubiks.rotation("D")
-                    #on doit faire basculer le cube a gauche
+            if vo[0][1] == 'd':  #ici le cube vert est sur la face down
+                self.mouv += 8
+                if vo[1][1] == 'f':
+                     #faire
+                    self.rubiks.rotation("D2")
+                elif vo[1][1] == 'l':
+                    #faire
                     self.rubiks.rotation("D'")
-                    self.rubiks.rotation("L'")
+                #if vr[1][1] == 'b':
+                   #ne rien faire car bon endroit
+                elif vo[1][1] == 'r':
+                    #faire
                     self.rubiks.rotation("D")
-                    self.rubiks.rotation("L")
-                    self.rubiks.rotation("D")
-                    self.rubiks.rotation("B")
+                #on doit faire basculer le cube a gauche
+                self.rubiks.rotation("D'")
+                self.rubiks.rotation("L'")
+                self.rubiks.rotation("D")
+                self.rubiks.rotation("L")
+                self.rubiks.rotation("D")
+                self.rubiks.rotation("B")
+                self.rubiks.rotation("D'")
+                self.rubiks.rotation("B'")
+                self.rubiks.displayCube()
+                
+            if vo[1][1] == 'd': #ici le cube orange est sur la face down
+                if vo[0][1] == 'f':
+                    #faire
                     self.rubiks.rotation("D'")
-                    self.rubiks.rotation("B'")
-                if vo[1][1] == 'd': #ici le cube orange est sur la face down
-                    if vo[0][1] == 'f':
-                        #faire
-                        self.rubiks.rotation("D")
-                    elif vo[0][1] == 'r':
-                        #faire
-                        self.rubiks.rotation("D2")
-                    elif vo[0][1] == 'b':
-                        #faire
-                        self.rubiks.rotation("D'")
-                    #if a[0][1] == 'r':
-                        #ne rien faire
-                    #on doit faire basculer le cube a droite
+                elif vo[0][1] == 'r':
+                    #faire
+                    self.rubiks.rotation("D2")
+                elif vo[0][1] == 'b':
+                    #faire
                     self.rubiks.rotation("D")
-                    self.rubiks.rotation("B")
-                    self.rubiks.rotation("D'")
-                    self.rubiks.rotation("B'")
-                    self.rubiks.rotation("D'")
-                    self.rubiks.rotation("L'")
-                    self.rubiks.rotation("D")
-                    self.rubiks.rotation("L")
+                #if a[0][1] == 'r':
+                    #ne rien faire
+                #on doit faire basculer le cube a droite
+                self.rubiks.rotation("D")
+                self.rubiks.rotation("B")
+                self.rubiks.rotation("D'")
+                self.rubiks.rotation("B'")
+                self.rubiks.rotation("D'")
+                self.rubiks.rotation("L'")
+                self.rubiks.rotation("D")
+                self.rubiks.rotation("L")
+                self.rubiks.displayCube()
 
             #cube bleu/orange
-                bo = self.rubiks.findCube(['B', 'O']) #cube bleu/orange
-                #on remet le cube bleu/orange sur sa face correspondante 
-                if bo[0][1] == 'd':  #ici le cube bleu est sur la face down
-                    self.mouv += 8
-                    if bo[1][1] == 'f':
-                         #faire
-                        self.rubiks.rotation("D2")
-                    elif bo[1][1] == 'l':
-                        #faire
-                        self.rubiks.rotation("D'")
-                    #if bo[1][1] == 'b':
-                       #ne rien faire car bon endroit
-                    elif bo[1][1] == 'r':
-                        #faire
-                        self.rubiks.rotation("D")
+            bo = self.rubiks.findCube(['B', 'O']) #cube bleu/orange
+            #on remet le cube bleu/orange sur sa face correspondante 
+            if bo[0][1] == 'd':  #ici le cube bleu est sur la face down
+                self.mouv += 8
+                if bo[1][1] == 'f':
+                     #faire
+                    self.rubiks.rotation("D2")
+                elif bo[1][1] == 'l':
+                    #faire
+                    self.rubiks.rotation("D'")
+                #if bo[1][1] == 'b':
+                   #ne rien faire car bon endroit
+                elif bo[1][1] == 'r':
+                    #faire
+                    self.rubiks.rotation("D")
                     #on doit faire basculer le cube a droite
+                self.rubiks.rotation("D")
+                self.rubiks.rotation("R")
+                self.rubiks.rotation("D'")
+                self.rubiks.rotation("R'")
+                self.rubiks.rotation("D'")
+                self.rubiks.rotation("B'")
+                self.rubiks.rotation("D")
+                self.rubiks.rotation("B")
+                self.rubiks.displayCube()
+            
+            elif bo[1][1] == 'd': #ici le cube orange est sur la face down
+                if bo[0][1] == 'f':
+                    #faire
                     self.rubiks.rotation("D")
-                    self.rubiks.rotation("R")
+                #if bo[0][1] == 'r':
+                    #ne rien faire
+                elif bo[0][1] == 'b':
+                    #faire
                     self.rubiks.rotation("D'")
-                    self.rubiks.rotation("R'")
-                    self.rubiks.rotation("D'")
-                    self.rubiks.rotation("B'")
-                    self.rubiks.rotation("D")
-                    self.rubiks.rotation("B")
-                
-                elif bo[1][1] == 'd': #ici le cube orange est sur la face down
-                    if bo[0][1] == 'f':
-                        #faire
-                        self.rubiks.rotation("D'")
-                    #if bo[0][1] == 'l':
-                        #ne rien faire
-                    elif bo[0][1] == 'b':
-                        #faire
-                        self.rubiks.rotation("D")
-                    elif bo[0][1] == 'r':
-                        #faire
-                        self.rubiks.rotation("D2")
-                    #on doit faire basculer le cube a gauche
-                    self.rubiks.rotation("D'")
-                    self.rubiks.rotation("B'")
-                    self.rubiks.rotation("D")
-                    self.rubiks.rotation("B")
-                    self.rubiks.rotation("D")
-                    self.rubiks.rotation("R")
-                    self.rubiks.rotation("D'")
-                    self.rubiks.rotation("R'")
+                elif bo[0][1] == 'l':
+                    #faire
+                    self.rubiks.rotation("D2")
+                #on doit faire basculer le cube a gauche
+                self.rubiks.rotation("D'")
+                self.rubiks.rotation("B'")
+                self.rubiks.rotation("D")
+                self.rubiks.rotation("B")
+                self.rubiks.rotation("D")
+                self.rubiks.rotation("R")
+                self.rubiks.rotation("D'")
+                self.rubiks.rotation("R'")
+                self.rubiks.displayCube()
             print("2couronne")   
             #return self.rubiks
         
@@ -370,7 +380,7 @@ class Resolution:
 #resol = Resolution(cube1)
 #resol.deuxiemecouronne()
 #cube1.printCube()
-cube2 = Cube("WWWWWWWWWGGGRRRBBBOOOYGYGRYOBRBOBYGGYRRBOOYGROYYRYBGOB")
+cube2 = Cube("WWWWWWWWWGGGRRRBBBOOOBGRYRGOBOBOYYBOYOGRGGYGBBYYRYYRRO")
 cube2.displayCube()
 resol = Resolution(cube2)
 print(resol.checkscdcouronne())
