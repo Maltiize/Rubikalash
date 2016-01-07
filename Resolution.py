@@ -6,6 +6,7 @@ class Resolution:
 
     def __init__(self,cube):
         self.rubiks = cube
+        self.mouv = 0
 
 
     def checkCross(self,nameFace):
@@ -134,14 +135,28 @@ class Resolution:
         return self.rubiks
     
     def deuxcouronne(self):
+        mouv = 0
+        #peut creer une fonction maj pour savoir ou sont les 4 cubes ? utile?
+        br = self.rubiks.findCube(['B', 'R']) #cube bleu/rouge
+        vr = self.rubiks.findCube(['G', 'R']) #vert/rouge
+        vo = self.rubiks.findCube(['G', 'O']) #cube vert/orange
+        bo = self.rubiks.findCube(['B', 'O']) #cube bleu/orange
         while not self.checkscdcouronne():
-            self.deuxiemecouronne()
+            while br[0][1] == 'd' or br[1][1] == 'd' or vr[0][1] == 'd' or vr[1][1] == 'd' or vo[0][1] == 'd' or vo[1][1] == 'd' or bo[0][1] == 'd' or bo[1][1] == 'd':
+                self.deuxiemecouronne()
+                br = self.rubiks.findCube(['B', 'R']) #cube bleu/rouge
+                vr = self.rubiks.findCube(['G', 'R']) #vert/rouge
+                vo = self.rubiks.findCube(['G', 'O']) #cube vert/orange
+                bo = self.rubiks.findCube(['B', 'O']) #cube bleu/orange
             self.rubiks.displayCube()
+            if self.checkscdcouronne():
+                break
             self.cubeinv()
             self.rubiks.displayCube()
             self.deuxcubeinv()
             self.rubiks.displayCube()
 
+        print(self.mouv)
         return self.rubiks
 
     def deuxiemecouronne(self):
@@ -153,6 +168,7 @@ class Resolution:
             a = self.rubiks.findCube(['B', 'R']) #cube bleu/rouge
             #on remet le cube bleu/rouge sur sa face correspondante 
             if a[0][1] == 'd':  #ici le cube bleu est sur la face down
+                self.mouv += 9
                 #if a[1][1] == 'f':
                     #ne rien faire car bon endroit
                 if a[1][1] == 'l':
@@ -174,6 +190,7 @@ class Resolution:
                 self.rubiks.rotation("F")
                 self.rubiks.rotation("D'")
                 self.rubiks.rotation("F'")
+
                     
             elif a[1][1] == 'd': #ici le cube rouge est sur la face down
                 if a[0][1] == 'f':
@@ -196,17 +213,16 @@ class Resolution:
                 self.rubiks.rotation("R'")
                 self.rubiks.rotation("D'")
                 self.rubiks.rotation("R")
-                 #if self.rubiks.down[0][1] == 'B' and self.rubiks.back[0][1] == '
-                  #   self.rubiks.rotation(
-            #return self.rubiks.down[2][0]
+
             
             #cube vert/rouge
             vr = self.rubiks.findCube(['G', 'R']) #cube vert/rouge
             #on remet le cube vert/rouge sur sa face correspondante
             #print(vr)
             if vr[0][1] == 'd':  #ici le cube vert est sur la face down
-                #if vr[1][1] == 'f':
-                    #ne rien faire car bon endroit
+
+                self.mouv += 9
+                
                 if vr[1][1] == 'l':
                     #faire
                     self.rubiks.rotation("D")
@@ -251,6 +267,7 @@ class Resolution:
                 vo = self.rubiks.findCube(['G', 'O']) #cube vert/orange
                 #on remet le cube vert/orange sur sa face correspondante 
                 if vo[0][1] == 'd':  #ici le cube vert est sur la face down
+                    self.mouv += 8
                     if vo[1][1] == 'f':
                          #faire
                         self.rubiks.rotation("D2")
@@ -297,6 +314,7 @@ class Resolution:
                 bo = self.rubiks.findCube(['B', 'O']) #cube bleu/orange
                 #on remet le cube bleu/orange sur sa face correspondante 
                 if bo[0][1] == 'd':  #ici le cube bleu est sur la face down
+                    self.mouv += 8
                     if bo[1][1] == 'f':
                          #faire
                         self.rubiks.rotation("D2")
@@ -340,7 +358,7 @@ class Resolution:
                     self.rubiks.rotation("D'")
                     self.rubiks.rotation("R'")
             print("2couronne")   
-            return self.rubiks
+            #return self.rubiks
         
 
 
