@@ -278,6 +278,27 @@ class Resolution:
 
         print(tabLine)
 
+        if faceJaune == 'l' or faceJaune == 'r' :
+            tabSuccPred = [[2,1],[3,2],[1,2],[2,3]]
+        else :
+            tabSuccPred = [[1,2],[2,3],[2,1],[3,2]]
+            
+        print(tabSuccPred)
+
+        tabChangeFace = []
+        for i in cube.liFace :
+            if i != faceJaune and i != faceBlanche :
+                tabChangeFace.append(i)
+
+        print(tabChangeFace)
+
+        for i in 4 :
+            if tabLine[0] == 'x' :
+                index = 1
+            else :
+                index = 0
+                
+            if cube.getFace(tabChangeFace[i])
         
         print("Face Blanche : " + faceBlanche)
         print("Face Jaune : " + faceJaune)
