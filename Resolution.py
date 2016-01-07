@@ -241,7 +241,7 @@ class Resolution:
                         listeCeTour.append('R')
                         listeCeTour.append('D')
                         listeCeTour.append('B')
-                        listeCeTour.append("D'")     #BON ~~ pas totalement
+                        listeCeTour.append("D'")     #ERREURS
                         listeCeTour.append("B'")
                         listeCeTour.append("R'")
 
@@ -290,8 +290,13 @@ class Resolution:
 #cube = Cube("BGRRRRRRROBBWWWGGGYYYYBBWWWGGYRYBYBBWWWGGYOYBOOOOOOROG")
 #cube = Cube("YYOBBBBBBROOWWWRRBYBBOOOWWWRRGYYYGOOWWWRRRYROGGGGGGYYG")
 #cube = Cube("GOROOOOOOYGGWWWBBYBYOYGGWWWBBYBYRGGGWWWBBOYYYRRRRRRRGB")
-cube = Cube("GYYGGGGGGRRRWWWOOGORYGRRWWWOOOYYYBRRWWWOORBBYBBBBBBOYY")
+#cube = Cube("GYYGGGGGGRRRWWWOOGORYGRRWWWOOOYYYBRRWWWOORBBYBBBBBBOYY")
 resolution = Resolution(cube)
+
+
+# PROBLEME SUR LA ROTATION RIGHT
+
+
 
 cube.displayCube()
         
