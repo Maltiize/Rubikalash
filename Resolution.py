@@ -304,11 +304,27 @@ class Resolution:
                 faceEnCours = cube.getFace(tabChangeFace[i])
                 if index == 0 :
                     if faceEnCours[tabLine[index]][0] != faceEnCours[(tabLine[index]+1)%2][0] :
-                        tabMiniReplace.append([i,tabLine[index],0, faceEnCours[tabLine[index]][0], faceEnCours[(tabLine[index]+1)%2][0]])
+                        tabMiniReplace.append([i,tabLine[index],0])
                     if faceEnCours[tabLine[index]][2] != faceEnCours[(tabLine[index]+1)%2][2] :
-                        tabMiniReplace.append([i,tabLine[index],2, faceEnCours[tabLine[index]][2], faceEnCours[(tabLine[index]+1)%2][2]])
-            
+                        tabMiniReplace.append([i,tabLine[index],2])
+                else :
+                    if faceEnCours[0][tabLine[index]] != faceEnCours[0][(tabLine[index]+1)%2] :
+                        tabMiniReplace.append([i,0,tabLine[index]])
+                    if faceEnCours[2][tabLine[index]] != faceEnCours[2][(tabLine[index]+1)%2] :
+                        tabMiniReplace.append([i,2,tabLine[index]])
+
         print(tabMiniReplace)
+        
+        cas1 = False
+        for i in range(4):
+            if tabMiniReplace[i][0] == tabMiniReplace[(i+1)%4][0] or tabMiniReplace[i][0] == tabMiniReplace[(i+2)%4][0] or tabMiniReplace[i][0] == tabMiniReplace[(i+3)%4][0] :
+                cas1 = True
+                break        
+
+        print(cas1)
+
+        # R U R' U' R' F R2 U' R' U' R U R' F'
+       
         
         print("Face Blanche : " + faceBlanche)
         print("Face Jaune : " + faceJaune)
