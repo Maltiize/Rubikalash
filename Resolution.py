@@ -131,7 +131,7 @@ class Resolution:
 
 
     def solveYellowCross(self):
-        dicAdj = [['u','r'],['u','l'],['d','r'],['d','l']]
+        dicAdj = [['u','r'],['u','l'],['d','r'],['d','l'],['f','r'],['f','l'],['b','r'],['b','l']]
         dicOp = [['u','d'],['l','r']]
         #tant que la croix jaune n'est pas vérifiée
         print("Dans la fonction")
@@ -160,14 +160,21 @@ class Resolution:
                 print("cas 1")
                 if len(listeAretes) == 3:
                     print("Trois faces sur la dernieres, on tente")
-    
-                listeCeTour.append('U')
-                listeCeTour.append('R')
-                listeCeTour.append('B')      #bon
-                listeCeTour.append("R'")
-                listeCeTour.append("B'")
-                listeCeTour.append("U'")
-                
+                if listeAretes[0] == 'b' or listeAretes[0] == 'f':
+                    listeCeTour.append('U')
+                    listeCeTour.append('R')
+                    listeCeTour.append('B')      #bon
+                    listeCeTour.append("R'")
+                    listeCeTour.append("B'")
+                    listeCeTour.append("U'")
+                else:
+                    listeCeTour.append('F')
+                    listeCeTour.append('D')
+                    listeCeTour.append('L')      #A check
+                    listeCeTour.append("D'")
+                    listeCeTour.append("L'")
+                    listeCeTour.append("F'")
+                    
 
                     # D F R Fi Ri Di
                     #on prend n'import lequel balek
@@ -289,8 +296,8 @@ class Resolution:
             #meme cube *4
 #cube = Cube("BGRRRRRRROBBWWWGGGYYYYBBWWWGGYRYBYBBWWWGGYOYBOOOOOOROG")
 #cube = Cube("YYOBBBBBBROOWWWRRBYBBOOOWWWRRGYYYGOOWWWRRRYROGGGGGGYYG")
-#cube = Cube("GOROOOOOOYGGWWWBBYBYOYGGWWWBBYBYRGGGWWWBBOYYYRRRRRRRGB")
-cube = Cube("GYYGGGGGGRRRWWWOOGORYGRRWWWOOOYYYBRRWWWOORBBYBBBBBBOYY")
+cube = Cube("GOROOOOOOYGGWWWBBYBYOYGGWWWBBYBYRGGGWWWBBOYYYRRRRRRRGB")
+#cube = Cube("GYYGGGGGGRRRWWWOOGORYGRRWWWOOOYYYBRRWWWOORBBYBBBBBBOYY")
 resolution = Resolution(cube)
 
 
