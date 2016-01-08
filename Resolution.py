@@ -131,8 +131,8 @@ class Resolution:
 
 
     def solveYellowCross(self):
-        dicAdj = [['u','r'],['u','l'],['d','r'],['d','l'],['f','r'],['f','l'],['b','r'],['b','l']]
-        dicOp = [['u','d'],['l','r']]
+        dicAdj = [['u','r'],['u','l'],['d','r'],['d','l'],['f','r'],['f','l'],['b','r'],['b','l'],['u','f'],['u','b'],['d','f'],['d','b']]
+        dicOp = [['u','d'],['l','r']
         #tant que la croix jaune n'est pas vérifiée
         print("Dans la fonction")
         while self.checkCrossNonOriente() != True:
