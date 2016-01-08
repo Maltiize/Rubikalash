@@ -131,8 +131,10 @@ class Resolution:
 
 
     def solveYellowCross(self):
+        posY=self.whichIsColor('Y')
+        print(posY)
         dicAdj = [['u','r'],['u','l'],['d','r'],['d','l'],['f','r'],['f','l'],['b','r'],['b','l'],['u','f'],['u','b'],['d','f'],['d','b']]
-        dicOp = [['u','d'],['l','r']
+        dicOp = [['u','d'],['l','r']]
         #tant que la croix jaune n'est pas vérifiée
         print("Dans la fonction")
         while self.checkCrossNonOriente() != True:
@@ -273,7 +275,150 @@ class Resolution:
             self.rotate(listeCeTour)
 
                 
+    def solveYellowCross2(self):
+        posY=self.whichIsColor('Y')
+        print(posY)
+        dicAdj = [['f','r'],['f','l'],['b','r'],['b','l']]
+        dicOp = [['f','b'],['l','r']]
+        #tant que la croix jaune n'est pas vérifiée
+        print("Dans la fonction")
+        while self.checkCrossNonOriente() != True:
+            print("Dans la boucle")
             
+            pos=None #position up ou down
+            adj=False
+            #on récupère la position des aretes jaunes qui sont sur la face jaune
+            liste=self.checkEmplacement()   
+            #liste contenant le placement des aretes dont la partie jaune est déjà sur la face jaune
+            listeAretes=[]
+            listeCeTour=[]
+
+
+            #on récupère la position des aretes dont la partie jaune est sur la face jaune
+            for i in range(len(liste)):
+                #si la partie jaune de l'arete est sur la face jaune
+                if liste[i][0] == self.whichIsColor("Y"):
+                    #alors on récupère l'emplacement de la partie de l'autre couleur
+                    listeAretes.append(liste[i][1])
+            #si il n'y a que la case jaune du milieu
+
+            print(len(listeAretes))
+            if len(listeAretes) == 0 or len(listeAretes) == 3 or len(listeAretes)==1:
+                print("cas 1")
+                if len(listeAretes) == 3:
+                    print("Trois faces sur la dernieres, on tente")
+                if posY == 'u':
+                    listeCeTour.append('F')
+                    listeCeTour.append('U')
+                    listeCeTour.append('R')      #bon
+                    listeCeTour.append("Ui'")
+                    listeCeTour.append("Ri'")
+                    listeCeTour.append("Fi'")
+                if posY == 'd':
+                    listeCeTour.append('F')
+                    listeCeTour.append('D')
+                    listeCeTour.append('L')      #bon
+                    listeCeTour.append("Di'")
+                    listeCeTour.append("Li'")
+                    listeCeTour.append("Fi'")
+                    
+
+                    # D F R Fi Ri Di
+                    #on prend n'import lequel balek
+
+                # F U R Ui Ri Fi
+            if len(listeAretes) == 2:
+
+                #Cas si les aretes sont 'adjacentes'
+                for i in range(len(dicAdj)):
+
+                    if listeAretes[0] in dicAdj[i] and listeAretes[1] in dicAdj[i]:
+                        pos = i
+                        adj = True
+
+                        print("cas 2")
+                if adj == True :
+                    if pos  == 0:
+                        print(pos)
+
+                        listeCeTour.append('L')
+                        listeCeTour.append('D')
+                        listeCeTour.append('B')      #modif
+                        listeCeTour.append("D'")     #A check
+                        listeCeTour.append("B'")
+                        listeCeTour.append("L'")
+                        # D F R Fi Ri Di
+                        #cas down
+                        
+                    elif pos == 1:
+                        print(pos)
+
+                        listeCeTour.append('B')
+                        listeCeTour.append('D')     #modif
+                        listeCeTour.append('R')      #A Check
+                        listeCeTour.append("D'")
+                        listeCeTour.append("R'")
+                        listeCeTour.append("B'")
+                        # R U B Ui Bi Ri
+                        #cas right
+
+                    elif pos == 2:
+                        print(pos)
+
+                        listeCeTour.append('F')
+                        listeCeTour.append('D')     #mofif
+                        listeCeTour.append('L')      #A Check
+                        listeCeTour.append("D'")
+                        listeCeTour.append("L'")
+                        listeCeTour.append("F'")
+                        # L U F Ui Fi Li
+                        #cas left
+
+                    elif pos == 3:
+                        print(pos)
+
+                        listeCeTour.append('R')
+                        listeCeTour.append('D')     #modif
+                        listeCeTour.append('F')      #A Check
+                        listeCeTour.append("D'")
+                        listeCeTour.append("F'")
+                        listeCeTour.append("R'")
+                        # U B R Bi Ri Ui
+                        #cas up
+
+                        # F U R Ui Ri Fi
+                else :
+                    print("cas 3")
+                    if listeAretes[0] in dicOp[0] and listeAretes[1] in dicOp[0]:
+                        # R B U Bi Ui Ri
+                        print("------------------- 1 -------------------")
+                        listeCeTour.append('L')
+                        listeCeTour.append('B')
+                        listeCeTour.append('D')
+                        listeCeTour.append("B'")     #a check
+                        listeCeTour.append("D'")
+                        listeCeTour.append("L'")
+
+                        #on fait cas right
+                        #cas left or right
+                    if listeAretes[0] in dicOp[1] and listeAretes[1] in dicOp[1]:
+                        # U R B Ri Bi Ui
+                        print("------------------- 2 -------------------")
+                        listeCeTour.append('B')
+                        listeCeTour.append('R')
+                        listeCeTour.append('D')      #a check
+                        listeCeTour.append("R'")
+                        listeCeTour.append("D'")
+                        listeCeTour.append("B'")
+
+                        #cas up 
+                        #cas up or down
+
+                        # F R U Ri Ui Fi
+            print(listeCeTour)
+            self.listeMouv.append(listeCeTour)
+            self.rotate(listeCeTour)
+     
 
 
 
@@ -296,8 +441,11 @@ class Resolution:
             #meme cube *4
 #cube = Cube("BGRRRRRRROBBWWWGGGYYYYBBWWWGGYRYBYBBWWWGGYOYBOOOOOOROG")
 #cube = Cube("YYOBBBBBBROOWWWRRBYBBOOOWWWRRGYYYGOOWWWRRRYROGGGGGGYYG")
-cube = Cube("GOROOOOOOYGGWWWBBYBYOYGGWWWBBYBYRGGGWWWBBOYYYRRRRRRRGB")
+#cube = Cube("GOROOOOOOYGGWWWBBYBYOYGGWWWBBYBYRGGGWWWBBOYYYRRRRRRRGB")
 #cube = Cube("GYYGGGGGGRRRWWWOOGORYGRRWWWOOOYYYBRRWWWOORBBYBBBBBBOYY")
+
+            #cube solve v2
+cube = Cube("
 resolution = Resolution(cube)
 
 
@@ -313,5 +461,5 @@ print(resolution.checkCrossNonOriente())
 print(resolution.checkEmplacement())
 #resolution.resolutionYellowCross()
 #print(resolution.getApproRot("d","l","d"))
-resolution.solveYellowCross()
+resolution.solveYellowCross2()
 print(resolution.listeMouv)
