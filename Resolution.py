@@ -292,13 +292,23 @@ class Resolution:
 
         print(tabChangeFace)
 
-        for i in 4 :
-            if tabLine[0] == 'x' :
-                index = 1
-            else :
-                index = 0
-                
-            if cube.getFace(tabChangeFace[i])
+        if tabLine[0] == 'x' :
+            index = 1
+        else :
+            index = 0
+
+        tabMiniReplace = []
+
+        while len(tabMiniReplace) != 4 :
+            for i in range(4) :
+                faceEnCours = cube.getFace(tabChangeFace[i])
+                if index == 0 :
+                    if faceEnCours[tabLine[index]][0] != faceEnCours[(tabLine[index]+1)%2][0] :
+                        tabMiniReplace.append([i,tabLine[index],0, faceEnCours[tabLine[index]][0], faceEnCours[(tabLine[index]+1)%2][0]])
+                    if faceEnCours[tabLine[index]][2] != faceEnCours[(tabLine[index]+1)%2][2] :
+                        tabMiniReplace.append([i,tabLine[index],2, faceEnCours[tabLine[index]][2], faceEnCours[(tabLine[index]+1)%2][2]])
+            
+        print(tabMiniReplace)
         
         print("Face Blanche : " + faceBlanche)
         print("Face Jaune : " + faceJaune)
