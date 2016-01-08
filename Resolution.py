@@ -445,7 +445,7 @@ class Resolution:
 #cube = Cube("GYYGGGGGGRRRWWWOOGORYGRRWWWOOOYYYBRRWWWOORBBYBBBBBBOYY")
 
             #cube solve v2
-cube = Cube("
+cube = Cube("WWWWWWWWWBBBRRRGGGOOOBBBRRRGGGOOOGOBRRYGYBYYRYYOYYBYGO")
 resolution = Resolution(cube)
 
 
