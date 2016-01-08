@@ -388,7 +388,7 @@ class Resolution:
 #resol = Resolution(cube1)
 #resol.deuxiemecouronne()
 #cube1.printCube()
-cube2 = Cube("WWWWWWWWWGGGRRRBBBOOOBGRYRGOBOBOYYBOYOGRGGYGBBYYRYYRRO")
+cube2 = Cube("WWWWWWWWWGGGRRRBBBOOOYGGRROBBYROOBOGRYOGYBORRYGYGYBYBY")
 cube2.displayCube()
 resol = Resolution(cube2)
 print(resol.checkscdcouronne())
