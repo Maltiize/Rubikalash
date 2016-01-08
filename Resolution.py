@@ -316,13 +316,12 @@ class Resolution:
                 return 0
             else :
                 for idx, x in enumerate (tab[1]) :
-                    print (tab)
-                    cube.displayCube()
+                    
                     tmp=cube.findCube([colorCorner,x[0][1],x[1][1]])
                     for i in range (3) :
                         if tmp[i][1] == nameFace :
                             mtp=cube.getMouv(tmp[(i+1)%3][1].upper())
-                            print(tmp,mtp)
+                            
                             if tmp[(i+2)%3][1] == mtp[1][1][0] :
                                 self.rotation(tmp[(i+1)%3][1].upper())
                                 self.rotation(inv.upper())
@@ -505,10 +504,10 @@ def rfjaune(c):
         
     
 cube = Cube("OOOOOOOOOBBBRRRJJJGGGBBBRRRJJJGGGBBBRRRJJJGGGYYYYYYYYY")
-cube = Cube("GGRRWGYRGYYBRBWOYWGWOOGRGRWBBWOOBBOYGYBWOBRRYRBOYYGOWW")
+#cube = Cube("GGRRWGYRGYYBRBWOYWGWOOGRGRWBBWOOBBOYGYBWOBRRYRBOYYGOWW")
 #cube.displayCube()
 resol= Resolution(cube)
-#resol.applyCmd("RDR'D'")
+resol.applyCmd("RDBFLRRLBD'DR'RLRRB'R2B2L'BR'L2F'R2B2R'L'F'U'U2L'D'R2")
 #cube.displayCube()
 resol.theCross('u')
 print(resol.liCmd)
