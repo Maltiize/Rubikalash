@@ -93,12 +93,7 @@ class Resolution:
         if colorF == color:
             return "f"
 
-#Fonction qui recherche les aretes manquantes puis effectue les rotations nécessaires pour les amener
-    def solveYellow(self):
-        listeColors=['G','R','B','O']
-        for i in range(len(listeColors)):   
-            self.listeAretes.append(cube.findCube(['Y',listeColors[i]]))
-        #trouve toutes les aretes jaunes que l'on doit placer
+
             
 #Fonction qui vérifie si la croix non orienté est vérifiée
     def checkCrossNonOriente(self):
@@ -322,7 +317,6 @@ resolution = Resolution(cube)
 
 cube.displayCube()
         
-#resolution.solveYellow()
 
 #print(resolution.checkCrossNonOriente())
 #print(resolution.checkEmplacement())
