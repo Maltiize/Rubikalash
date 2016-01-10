@@ -734,6 +734,8 @@ class Resolution:
 ############## PARTIE 2ND COURONNE #################################
         
 
+############## PARTIE CROIX JAUNE #################################
+
 #Fonction qui renvoie quelle face est de la couleur recherchée (jaune pour mon algo ("Y"))
 #On compare avec la couleur de chaque face en [1][1] et donc au milieu
     def whichIsColor(self,color):
@@ -855,7 +857,7 @@ class Resolution:
 
         # F R U Ri Ui Fi
 
-    def ultimateYellowCross(self):
+    def resolutionCroixJaune(self):
         posY=self.whichIsColor('Y')
 
         #adj : Y en b u f 
@@ -949,6 +951,18 @@ class Resolution:
             self.rotation(liste[i])
             cube.displayCube()
 
+############## PARTIE CROIX JAUNE #################################
+            
+def resolutionFinale(entry):
+
+    cube = Cube(entry)
+    resolution = Resolution(cube)
+    resolution.theCross(self.whichIsColor('W'))
+    
+    
+
+        
+
     
                     
 #cc      
@@ -977,7 +991,7 @@ class Resolution:
     
 #cube = Cube("OOOOOOOOOBBBRRRJJJGGGBBBRRRJJJGGGBBBRRRJJJGGGYYYYYYYYY")
 #cube = Cube("GGRRWGYRGYYBRBWOYWGWOOGRGRWBBWOOBBOYGYBWOBRRYRBOYYGOWW")
-cube1=Cube("WWWWWWWWWGGGRRRBBBOOOGGGRRRBBBOOOBRBOBYGOGYGRYYRYYYYYO")
+#cube1=Cube("WWWWWWWWWGGGRRRBBBOOOGGGRRRBBBOOOBRBOBYGOGYGRYYRYYYYYO")
 
 #cube.displayCube()
 #resol= Resolution(cube)
@@ -986,11 +1000,11 @@ cube1=Cube("WWWWWWWWWGGGRRRBBBOOOGGGRRRBBBOOOBRBOBYGOGYGRYYRYYYYYO")
 #cube.displayCube()
 #resol.applyCmd("FRD2L'F")
 #cube.displayCube()
-resol=Resolution(cube1)
+#resol=Resolution(cube1)
 ##resol.theCross('f')
 ##cube.displayCube()
-resol.rfjaune()
-cube1.displayCube()
+#resol.rfjaune()
+#cube1.displayCube()
 
 #cube = Cube("GOBOOOOOOYGGWWWBBYOYOYGGWWWBBYGYBRGGWWWBBRYYYRRRRRRBRG")
 
@@ -1019,26 +1033,26 @@ cube1.displayCube()
             #cube solve v2
 #cube = Cube("WWWWWWWWWBBBRRRGGGOOOBBBRRRGGGOOOGOBRRYGYBYYRYYOYYBYGO")
 
-cube = Cube("GYRYYRBGYRBYOYGOYYBOYOOOBBBRRRGGGOOOBBBRRRGGGWWWWWWWWW")
-resolution = Resolution(cube)
+#cube = Cube("GYRYYRBGYRBYOYGOYYBOYOOOBBBRRRGGGOOOBBBRRRGGGWWWWWWWWW")
+#resolution = Resolution(cube)
 
 
 # PROBLEME SUR LA ROTATION RIGHT
 
 
 
-cube.displayCube()
+#cube.displayCube()
         
 
 
-print(resolution.checkCrossNonOriente())
-print(resolution.checkEmplacement())
+#print(resolution.checkCrossNonOriente())
+#print(resolution.checkEmplacement())
 
 #print(resolution.checkCrossNonOriente())
 #print(resolution.checkEmplacement())
 #resolution.resolutionYellowCross()
 #print(resolution.getApproRot("d","l","d"))
-resolution.ultimateYellowCross()
+#resolution.ultimateYellowCross()
 
-print(resolution.listeMouv)
-print(resolution.liCmd)
+#print(resolution.listeMouv)
+#print(resolution.liCmd)
