@@ -263,7 +263,8 @@ class Resolution:
             temp = faceJaune
             faceJaune = faceBlanche
             faceBlanche = temp
-        
+
+        # TabLine va nous servir à parcourir le cube pour trouver les cubes inversés en fonction des 4 faces à finir
         if faceJaune == 'u' :
             tabLine = [0,'x']
             
@@ -278,19 +279,19 @@ class Resolution:
 
         print(tabLine)
 
-        if faceJaune == 'l' or faceJaune == 'r' :
-            tabSuccPred = [[2,1],[3,2],[1,2],[2,3]]
-        else :
-            tabSuccPred = [[1,2],[2,3],[2,1],[3,2]]
-            
-        print(tabSuccPred)
+##        if faceJaune == 'l' or faceJaune == 'r' :
+##            tabSuccPred = [[2,1],[3,2],[1,2],[2,3]]
+##        else :
+##            tabSuccPred = [[1,2],[2,3],[2,1],[3,2]]
+##            
+##        print(tabSuccPred)
 
-        tabChangeFace = []
+        tabLiFaceChange = []
         for i in cube.liFace :
             if i != faceJaune and i != faceBlanche :
-                tabChangeFace.append(i)
+                tabLiFaceChange.append(i)
 
-        print(tabChangeFace)
+        print(tabLiFaceChange)
 
         if tabLine[0] == 'x' :
             index = 1
@@ -301,7 +302,7 @@ class Resolution:
 
         while len(tabMiniReplace) != 4 :
             for i in range(4) :
-                faceEnCours = cube.getFace(tabChangeFace[i])
+                faceEnCours = cube.getFace(tabLiFaceChange[i])
                 if index == 0 :
                     if faceEnCours[tabLine[index]][0] != faceEnCours[(tabLine[index]+1)%2][0] :
                         tabMiniReplace.append([i,tabLine[index],0])
@@ -321,12 +322,28 @@ class Resolution:
         for i in range(4):
             if tabMiniReplace[i][0] == tabMiniReplace[(i+1)%4][0] or tabMiniReplace[i][0] == tabMiniReplace[(i+2)%4][0] or tabMiniReplace[i][0] == tabMiniReplace[(i+3)%4][0] :
                 cas1 = True
+                faceChange = tabMiniReplace[i][0]
                 break        
 
         print(cas1)
 
-        # R U R' U' R' F R2 U' R' U' R U R' F'
-        # L U L' U' L' B L2 U' L' U' L U L' B'
+#CAS 1 : mal placé face gauche, faceJaune = D   
+##        cube.rotation('L')
+##        cube.rotation('D')
+##        cube.rotation('L\'')
+##        cube.rotation('D\'')
+##        cube.rotation('L\'')
+##        cube.rotation('F')
+##        cube.rotation('L2')
+##        cube.rotation('D\'')
+##        cube.rotation('L\'')
+##        cube.rotation('D\'')
+##        cube.rotation('L')
+##        cube.rotation('D')
+##        cube.rotation('L\'')
+##        cube.rotation('F\'')
+
+#CAS 1 : mal placé face droite, faceJaune = D
 ##        cube.rotation('R')
 ##        cube.rotation('D')
 ##        cube.rotation('R\'')
@@ -342,20 +359,20 @@ class Resolution:
 ##        cube.rotation('R\'')
 ##        cube.rotation('B\'')
         
-        cube.rotation('L')
-        cube.rotation('D')
-        cube.rotation('L\'')
-        cube.rotation('D\'')
-        cube.rotation('L\'')
-        cube.rotation('F')
-        cube.rotation('L2')
-        cube.rotation('D\'')
-        cube.rotation('L\'')
-        cube.rotation('D\'')
-        cube.rotation('L')
-        cube.rotation('D')
-        cube.rotation('L\'')
-        cube.rotation('F\'')
+        cube.rotation(tabLiFaceChange[faceChange].upper())
+        cube.rotation(faceJaune.upper())
+        cube.rotation(tabLiFaceChange[faceChange].upper()+'\'')
+        cube.rotation(faceJaune.upper()+'\'')
+        cube.rotation(tabLiFaceChange[faceChange].upper()+'\'')
+        cube.rotation(tabLiFaceChange[(faceChange+1)%4].upper())
+        cube.rotation(tabLiFaceChange[faceChange].upper()+'2')
+        cube.rotation(faceJaune.upper()+'\'')
+        cube.rotation(tabLiFaceChange[faceChange].upper()+'\'')
+        cube.rotation(faceJaune.upper()+'\'')
+        cube.rotation(tabLiFaceChange[faceChange].upper())
+        cube.rotation(faceJaune.upper())
+        cube.rotation(tabLiFaceChange[faceChange].upper()+'\'')
+        cube.rotation(tabLiFaceChange[(faceChange+1)%4].upper()+'\'')
         
         
         
@@ -469,6 +486,7 @@ def rfjaune(c):
 
 #cube = Cube("OOOOOOOOOBBBRRRJJJGGGBBBRRRJJJGGGBBBRRRJJJGGGYYYYYYYYY")
 cube = Cube("WWWWWWWWWRRRBBBOOOGGGRRRBBBOOOGGGBNGRNBONOGNRYYYYYYYYY")
+#cube = Cube("WWWWWWWWWRRRBBBOOOGGGRRRBBBOOOGGGRNRBNOGNBONGYYYYYYYYY")
 resol= Resolution(cube)
 cube.displayCube()
 resol.lastStep(cube)
