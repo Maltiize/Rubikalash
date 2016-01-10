@@ -324,6 +324,39 @@ class Resolution:
         print(cas1)
 
         # R U R' U' R' F R2 U' R' U' R U R' F'
+        # L U L' U' L' B L2 U' L' U' L U L' B'
+##        cube.rotation('R')
+##        cube.rotation('D')
+##        cube.rotation('R\'')
+##        cube.rotation('D\'')
+##        cube.rotation('R\'')
+##        cube.rotation('B')
+##        cube.rotation('R2')
+##        cube.rotation('D\'')
+##        cube.rotation('R\'')
+##        cube.rotation('D\'')
+##        cube.rotation('R')
+##        cube.rotation('D')
+##        cube.rotation('R\'')
+##        cube.rotation('B\'')
+        
+        cube.rotation('R')
+        #cube.rotation('U')
+        #cube.rotation('L\'')
+        #cube.rotation('U\'')
+        #cube.rotation('L\'')
+        #cube.rotation('B')
+        #cube.rotation('L2')
+        #cube.rotation('U\'')
+        #cube.rotation('L\'')
+        #cube.rotation('U\'')
+        #cube.rotation('L')
+        #cube.rotation('U')
+        #cube.rotation('L\'')
+        #cube.rotation('B\'')
+        
+        
+        
        
         
         print("Face Blanche : " + faceBlanche)
@@ -434,5 +467,6 @@ def rfjaune(c):
 #cube = Cube("OOOOOOOOOBBBRRRJJJGGGBBBRRRJJJGGGBBBRRRJJJGGGYYYYYYYYY")
 cube = Cube("WWWWWWWWWRRRBBBGGGOOORRRBBBGGGOOOBOGRGBGBROROYYYYYYYYY")
 resol= Resolution(cube)
+cube.displayCube()
 resol.lastStep(cube)
 cube.displayCube()
