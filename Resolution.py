@@ -946,8 +946,10 @@ class Resolution:
 
     def rotate(self,liste):
         for i in range(len(liste)):
-            cube.rotation(liste[i])
+            self.rotation(liste[i])
             cube.displayCube()
+
+    
                     
 #cc      
 #cube = Cube("WWWWWWWWWGGGRRRBBBOOOGGGRRRBBBOOOGOOYBRBGYGROBYYYYYYYR")
@@ -1039,4 +1041,4 @@ print(resolution.checkEmplacement())
 resolution.ultimateYellowCross()
 
 print(resolution.listeMouv)
-
+print(resolution.liCmd)

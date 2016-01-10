@@ -14,16 +14,13 @@ class Cube:
         self.idx=[["u",range(0,9)],["d",range(45,54)],["f",[12,13,14 ,24,25,26, 36,37,38]],["l",[9,10,11, 21,22,23, 33,34,35]],["r",[15,16,17 ,27,28,29, 39,40,41]],["b",[18,19,20 ,30,31,32, 42,43,44]]]
         
         #liste des noms des faces permet de faciliter les boucles for
-<<<<<<< HEAD
+
 
         self.liFace=["u","l","f","b","r","d"]
         self.liFaceaff=["u","l","f","r","b","d"]
 
-
-=======
         self.liFace=["u","l","f","r","b","d"]
         self.liFaceaff=["u","l","f","r","b","d"]
->>>>>>> ResolutionJean
  
         
         #Initialisation des faces à 0
@@ -71,9 +68,7 @@ class Cube:
                 
         self.B="b",[["u",[2,1,0]],["l",[0,3,6]],["d",[6,7,8]],["r",[8,5,2]]]
         self.F="f",[["u",[8,7,6]],["r",[6,3,0]],["d",[0,1,2]],["l",[2,5,8]]]
-<<<<<<< HEAD
 
->>>>>>> ResolutionJean
 
         #ordre de transposition des cases de la face qui tourne
         #explications de la structure de données :
@@ -364,11 +359,11 @@ class Cube:
         for x in self.liFace:
             print("-------",x,"--------")
             affTab(self.getFace(x))
-<<<<<<< HEAD
+
     #Deuxieme méthode d'affichage du cube
-=======
+
         #Deuxieme méthode d'affichage du cube
->>>>>>> ResolutionJean
+
     def displayCube(self,defaultFace='u'):
         up=self.getFace(defaultFace)
         down=self.getFace(self.getFaceInversed(defaultFace))
@@ -393,18 +388,15 @@ class Cube:
             for y in range(3):
                 print(down[x][y]+" " ,end='')
             print("")
-<<<<<<< HEAD
-            
-=======
->>>>>>> ResolutionJean
+
     
     def getCentralColor(self,nameFace):
         f=self.getFace(nameFace)
         return f[1][1]
 
-<<<<<<< HEAD
+
      # Permet d'obtenir le nom de la face opposé à celle dont le nom est nameFace
->>>>>>> ResolutionJean
+
     def getFaceInversed(self,nameFace):
         if(nameFace not in self.liFace):
             print("getFaceInversed :INVALID NAMEFACE ")
@@ -479,12 +471,12 @@ class Cube:
                     
                     if self.checkColorSquare(i,c1,j):
                         tmpr[idc1]=[j,i]
-<<<<<<< HEAD
+
 
                         j2=m[1][idj][1][idx]
                         f2=m[1][idj][0]
 
->>>>>>> ResolutionJean
+
 
                         for idc2,c2 in enumerate(tabcolor) :
                             if self.checkColorSquare(f2,c2,j2):
@@ -523,7 +515,7 @@ def affTab(tab):
 
     
 
-<<<<<<< HEAD
+
 #cube = Cube("OGRBWYBGBGYYOYOWOWGRYOOOBGBRRYRBWWWRBWYGROWGRYBRGYWBOG")
 #cube = Cube("YBGGGGGGGRRRWWWOOOYYBGRRWWWOOOYYYYRRWWWOOGRYOBBBBBBBRY")
 #cube = Cube("O0OOOOOOOBBBRRRJJJGGGBBBRRRJJJGGGBBBRRRJJJGGGYYYYYYYYY")
@@ -534,5 +526,5 @@ def affTab(tab):
 ##cube.printCube()
 ##print(cube.findCube(['G','Y']))
 ##
->>>>>>> ResolutionJean
+
 
