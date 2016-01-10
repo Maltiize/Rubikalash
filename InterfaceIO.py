@@ -35,8 +35,8 @@ class InterfaceIO:
 #renvoie les mouvements a faire a l'utilisateur
             
     def setOutput(self):
-
-        self.output = resolutionFinale(self.entry)
+    
+        self.output = resolutionFinale("RWYRWGOGOYYGWRWBOOBOGGGYORGWBWBOYBBGYRRBRGWOWOWYYYBRBR")
         print(self.output)
         
         
@@ -46,6 +46,6 @@ class InterfaceIO:
 #bonjour.getEntry()
 
 resolutionCube = InterfaceIO()
-resolutionCube.getEntry()
+#resolutionCube.getEntry()
 resolutionCube.setOutput()
 

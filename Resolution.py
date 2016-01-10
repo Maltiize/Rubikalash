@@ -53,7 +53,7 @@ class Resolution:
             return -2
         i=-1
         x=0
-        m=cube.getMouv(rotatingF.upper())
+        m=self.cube.getMouv(rotatingF.upper())
         while(x<=6):
             if(origin==m[1][x%4][0]):
                 i=0
@@ -92,7 +92,7 @@ class Resolution:
 
     def theCross(self,nameFace):
         tab=self.checkCross(nameFace)
-        colorcross=cube.getCentralColor(nameFace)
+        colorcross=self.cube.getCentralColor(nameFace)
         if(tab[0]==True):
             return 0
         # pour toute les faces qui n'ont pas encore été traitée
@@ -100,8 +100,8 @@ class Resolution:
             for x in tab[1]:
                 # On cherche le cube de couleur "Face à traiter" + " Face où se trouve la croix"
                 # on récupere donc la couleur de "Face à traiter" 
-                curColor=cube.getCentralColor(x)
-                result=cube.findCube([colorcross,curColor])
+                curColor=self.cube.getCentralColor(x)
+                result=self.cube.findCube([colorcross,curColor])
 
                 # on traite les différents cas en fonction de la position du cube
 
@@ -112,14 +112,14 @@ class Resolution:
                     if(len(tab[1])==4):
                         self.applyCmd(self.getApproRot(result[1][1],x,result[0][1]))
                     else:
-                        self.applyCmd(result[1][1].upper()+'2'+self.getApproRot(result[1][1],x,cube.getFaceInversed(nameFace))+x.upper()+'2')
+                        self.applyCmd(result[1][1].upper()+'2'+self.getApproRot(result[1][1],x,self.cube.getFaceInversed(nameFace))+x.upper()+'2')
 
                 #cas ou la face de la couleur dont on veut faire la croix se trouve sur la face inverse de la croix
-                if(result[0][1]==cube.getFaceInversed(nameFace)):
+                if(result[0][1]==self.cube.getFaceInversed(nameFace)):
                     self.applyCmd(self.getApproRot(result[1][1],x,result[0][1])+x.upper()+'2')
 
                 # si on se trouve dans aucun des deux
-                if(result[0][1]!=cube.getFaceInversed(nameFace) and result[0][1]!=nameFace):
+                if(result[0][1]!=self.cube.getFaceInversed(nameFace) and result[0][1]!=nameFace):
 
                     # on essaye d'approcher le morceau de croix par une seule rotation
                     # le nom de la rotation est donnée par getApproRot si une seule rotation suffit
@@ -132,28 +132,28 @@ class Resolution:
                         
                         # j'ai découpé cette partie en 2 cas à cause de certaines différences de procédure
                         # mais je pense qu'il est pssible de factoriser cette partie du code 
-                        if(result[1][1]==nameFace or result[1][1]==cube.getFaceInversed(nameFace)):
+                        if(result[1][1]==nameFace or result[1][1]==self.cube.getFaceInversed(nameFace)):
 
                             # si la croix n'a pas été commencée
                             if(len(tab[1])==4):
                                 tmpcmd=result[1][1].upper()
                                 self.rotation(tmpcmd)
                                 
-                                tmppos=cube.findCube([colorcross,curColor])
+                                tmppos=self.cube.findCube([colorcross,curColor])
                                 tmpcmd=self.getApproRot(tmppos[1][1],x,tmppos[0][1])
                                 self.rotation(tmpcmd)
                                 
-                                tmppos=cube.findCube([colorcross,curColor])
+                                tmppos=self.cube.findCube([colorcross,curColor])
                                 tmpcmd=self.getApproRot(tmppos[0][1],nameFace,x)
                                 self.rotation(tmpcmd)
                                 
                             # si la croix a été commencé on garde en mémoire le mouvement qui perturbe le travail déjà réalisé
                             # on fait ce mouvement à l'inverse une fois la face terminée
                             else:
-                                tmpcmd=self.getApproRot(result[1][1],cube.getFaceInversed(nameFace),result[0][1])
+                                tmpcmd=self.getApproRot(result[1][1],self.cube.getFaceInversed(nameFace),result[0][1])
                                 self.rotation(tmpcmd)
-                                self.rotation(cube.getFaceInversed(nameFace).upper())
-                                tmppos=cube.findCube([colorcross,curColor])
+                                self.rotation(self.cube.getFaceInversed(nameFace).upper())
+                                tmppos=self.cube.findCube([colorcross,curColor])
                                 tmpcmd=self.getApproRot(tmppos[1][1],x,tmppos[0][1])
                                 
                                 faceinter=tmppos[0][1]
@@ -161,24 +161,24 @@ class Resolution:
                                 
                                 self.cube.rotation(tmpcmd)
                                 
-                                tmppos==cube.findCube([colorcross,curColor])
+                                tmppos==self.cube.findCube([colorcross,curColor])
                                 tmpcmd=self.getApproRot(tmppos[0][1],nameFace,x)
                                 self.rotation(tmpcmd)
                                 if(faceinter not in tab[1]):
                                     self.rotation(mouvinter)
                         
                         else:
-                            tmpcmd=self.getApproRot(result[0][1],cube.getFaceInversed(nameFace),result[1][1])
+                            tmpcmd=self.getApproRot(result[0][1],self.cube.getFaceInversed(nameFace),result[1][1])
                             self.rotation(tmpcmd)
                             
                             faceinter=result[1][1]
                             mouvinter=self.getInvRot(tmpcmd)
                                 
-                            tmppos=cube.findCube([colorcross,curColor])
+                            tmppos=self.cube.findCube([colorcross,curColor])
                             tmpcmd=self.getApproRot(tmppos[1][1],x,tmppos[0][1])
                             self.rotation(tmpcmd)
                                 
-                            tmppos=cube.findCube([colorcross,curColor])
+                            tmppos=self.cube.findCube([colorcross,curColor])
                             tmpcmd=self.getApproRot(tmppos[0][1],nameFace,x)
                             self.rotation(tmpcmd)
 
@@ -190,7 +190,7 @@ class Resolution:
                     # si la face blanche est sur la face cherchée il faut retourner le cube
                     elif(rot==-2):
                         self.rotation(result[1][1].upper())
-                        tmppos=cube.findCube([colorcross,curColor])
+                        tmppos=self.cube.findCube([colorcross,curColor])
                         self.rotation(self.getApproRot(tmppos[1][1],x,tmppos[0][1]))
                         
                         if(result[1][1] not in tab[1] or (result[1][1]==nameFace and len(tab[1]!=4))):
@@ -229,12 +229,12 @@ class Resolution:
     
     def checkCross(self,nameFace):
         tmp=[True,[]]
-        colorcross=cube.getCentralColor(nameFace)
-        m=cube.getMouv(nameFace.upper())
+        colorcross=self.cube.getCentralColor(nameFace)
+        m=self.cube.getMouv(nameFace.upper())
         
         for x in m[1]:
-            coloredge=cube.getCentralColor(x[0])
-            result=cube.findCube([colorcross,coloredge],nameFace)
+            coloredge=self.cube.getCentralColor(x[0])
+            result=self.cube.findCube([colorcross,coloredge],nameFace)
             
             if(result==-1 or result[1][1]!=x[0]):
                 tmp[1]+=[x[0]]
@@ -246,14 +246,14 @@ class Resolution:
      #verifie si les coin sont fait           
     def checkCorner(self,nameFace):
         tmp=[True,[]]
-        colorcorner=cube.getCentralColor(nameFace)
-        m=cube.getMouv(nameFace.upper())
+        colorcorner=self.cube.getCentralColor(nameFace)
+        m=self.cube.getMouv(nameFace.upper())
         for x in range (4):
-            colorPrev=cube.getCentralColor(m[1][(x+3)%4][0])
-            colorNext=cube.getCentralColor(m[1][x][0])
+            colorPrev=self.cube.getCentralColor(m[1][(x+3)%4][0])
+            colorNext=self.cube.getCentralColor(m[1][x][0])
             
 
-            result=cube.findCube([colorcorner,colorPrev,colorNext],nameFace)
+            result=self.cube.findCube([colorcorner,colorPrev,colorNext],nameFace)
             
             if(result==-1 or result[1][1]!=m[1][(x+3)%4][0] or result[2][1]!=m[1][x][0] ):
                 tmp[1]+=[[[m[1][(x+3)%4][0],colorPrev],[m[1][x][0],colorNext]]]
@@ -262,8 +262,8 @@ class Resolution:
         return tmp
     def theCorner(self,nameFace):
         tab=self.checkCorner(nameFace)
-        colorCorner=cube.getCentralColor(nameFace)
-        inv=cube.getFaceInversed(nameFace)
+        colorCorner=self.cube.getCentralColor(nameFace)
+        inv=self.cube.getFaceInversed(nameFace)
         if(tab[0]==True):
             return 0
         else :
@@ -271,31 +271,31 @@ class Resolution:
             for idx, x in enumerate (tab[1]) :
                    
                     
-                tmp=cube.findCube([colorCorner,x[0][1],x[1][1]])
+                tmp=self.cube.findCube([colorCorner,x[0][1],x[1][1]])
                 
                 if (tmp[0][1] != inv):
                     for i in range (0,2) :
                         
                         if (tmp[1+i][1] == inv):
-                            m=cube.getMouv(tmp[2-i][1].upper())
+                            m=self.cube.getMouv(tmp[2-i][1].upper())
                             if (tmp[0][1] == m[1][1][0]):
                                 print("t")
                                 print(x[1-i][0])
-                                print("sal",self.getApproRot(tmp[0][1],cube.getFaceInversed(x[1-i][0]),inv))
-                                self.rotation(self.getApproRot(tmp[0][1],cube.getFaceInversed(x[1-i][0]),inv))
+                                print("sal",self.getApproRot(tmp[0][1],self.cube.getFaceInversed(x[1-i][0]),inv))
+                                self.rotation(self.getApproRot(tmp[0][1],self.cube.getFaceInversed(x[1-i][0]),inv))
                                 self.rotation(x[1-i][0].upper())
                                 self.rotation(self.getInvRot(inv.upper()))
                                 self.rotation(self.getInvRot(x[1-i][0].upper()))
                                 
                             else :
-                                self.rotation(self.getApproRot(tmp[0][1],cube.getFaceInversed(x[1-i][0]),inv))
+                                self.rotation(self.getApproRot(tmp[0][1],self.cube.getFaceInversed(x[1-i][0]),inv))
 
                                 self.rotation(self.getInvRot(x[1-i][0].upper()))
                                 self.rotation(inv.upper())
                                 self.rotation(x[1-i][0].upper())
                 else :
                     self.rotation(self.getApproRot(tmp[1][1],x[1][0],inv))
-                    m=cube.getMouv(tmp[1][1].upper())
+                    m=self.cube.getMouv(tmp[1][1].upper())
 
                     if tmp[2][1] == m[1][1][0] :
                         self.rotation(self.getInvRot(x[0][0].upper()))
@@ -319,10 +319,10 @@ class Resolution:
             else :
                 for idx, x in enumerate (tab[1]) :
                     
-                    tmp=cube.findCube([colorCorner,x[0][1],x[1][1]])
+                    tmp=self.cube.findCube([colorCorner,x[0][1],x[1][1]])
                     for i in range (3) :
                         if tmp[i][1] == nameFace :
-                            mtp=cube.getMouv(tmp[(i+1)%3][1].upper())
+                            mtp=self.cube.getMouv(tmp[(i+1)%3][1].upper())
                             
                             if tmp[(i+2)%3][1] == mtp[1][1][0] :
                                 self.rotation(tmp[(i+1)%3][1].upper())
@@ -332,7 +332,7 @@ class Resolution:
                                 self.rotation(tmp[(i+2)%3][1].upper())
                                 self.rotation(inv.upper())
                                 self.rotation(self.getInvRot(tmp[(i+2)%3][1].upper()))
-                self.theCorner(nameFace)        
+                #self.theCorner(nameFace)        
                         
                                 
             
@@ -342,9 +342,9 @@ class Resolution:
 #the corner permet de faire les coin d'une face sans prendre en compte se qu'elle fait sur les autre face
     def rfjaune(self):
         cube=self.cube
-        j=cube.down
-        r=cube.front
-        b=cube.right
+        j=self.cube.down
+        r=self.cube.front
+        b=self.cube.right
         if not cube.faceFinished('d'):
           
             if  b[2][0]=='Y' and r[2][0]=='Y' and j[2][2]=='Y' and j[0][0]!='Y' and j[0][2]!='Y' and j[2][0]!='Y':
@@ -369,7 +369,7 @@ class Resolution:
                 self.applyCmd("FD2F2D'F2D'F2D2F")
 
             else :
-                cube.rotation('D')       
+                self.cube.rotation('D')       
                 self.rfjaune()
     
 ############## PARTIE 2ND COURONNE #################################
@@ -740,27 +740,27 @@ class Resolution:
 #On compare avec la couleur de chaque face en [1][1] et donc au milieu
     def whichIsColor(self,color):
 
-        colorF = cube.up[1][1]  
+        colorF = self.cube.up[1][1]  
         if colorF == color :
             return "u"
 
-        colorF = cube.down[1][1]
+        colorF = self.cube.down[1][1]
         if colorF == color :
             return "d"
 
-        colorF = cube.right[1][1]
+        colorF = self.cube.right[1][1]
         if colorF == color :
             return "r"
 
-        colorF = cube.left[1][1]
+        colorF = self.cube.left[1][1]
         if colorF == color :
             return "l"
 
-        colorF = cube.back[1][1]
+        colorF = self.cube.back[1][1]
         if colorF == color :
             return "b"
 
-        colorF = cube.front[1][1]
+        colorF = self.cube.front[1][1]
         if colorF == color:
             return "f"
 
@@ -771,7 +771,7 @@ class Resolution:
         posColor = self.whichIsColor('Y')   #on trouve la position de la face jaune
         listeColors=['G','R','B','O']       #c'est la liste des couleurs composants les aretes avec une face jaune
         for i in range(len(listeColors)):   #on parcout la liste des couleurs
-            pos = cube.findCube(['Y',listeColors[i][0][0]]) #on récupère la position des aretes
+            pos = self.cube.findCube(['Y',listeColors[i][0][0]]) #on récupère la position des aretes
             if pos[0][1] != posColor:   #si la position de la face jaune des aretes n'est pas sur la face jaune, alors la croix n'est pas vérifiée
                 return False
         return True
@@ -786,7 +786,7 @@ class Resolution:
         for i in range(len(listeColors)):
             #plutot que leur couleur ; on va mettre la position de la couleur
             listos=[]
-            pos = cube.findCube(['Y',listeColors[i][0][0]])
+            pos = self.cube.findCube(['Y',listeColors[i][0][0]])
             listos.append(pos[0][1])
             listos.append(pos[1][1])
             liste.append(listos)    
@@ -949,19 +949,23 @@ class Resolution:
     def rotate(self,liste):
         for i in range(len(liste)):
             self.rotation(liste[i])
-            cube.displayCube()
+            self.cube.displayCube()
 
 ############## PARTIE CROIX JAUNE #################################
             
 def resolutionFinale(entry):
 
     cube = Cube(entry)
+    cube.displayCube()
     resolution = Resolution(cube)
-    resolution.theCross(self.whichIsColor('W'))
+    resolution.theCross('u')
+    resolution.theCorner('u')
+    resolution.deuxiemecouronne()
+    resolution.resolutionCroixJaune()
+    cube.displayCube()
     
-    
-
-        
+#MODIFIER POUR QUE SA FONCTION PERSONNELLE FONCTIONNE
+  
 
     
                     
