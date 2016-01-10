@@ -14,6 +14,7 @@ class Resolution:
         # liste des rotation effectué durant la résolution 
         self.liCmd=''
         self.liRota='','2',"'"
+        self.listeMouv=[]
         
     # Utiliser cette fonction permet de garder en mémoire les mouvements effectué durant la résolution
     def rotation(self,cmd):
@@ -338,37 +339,37 @@ class Resolution:
                 
                 
 #the corner permet de faire les coin d'une face sans prendre en compte se qu'elle fait sur les autre face
- def rfjaune(self):
-       cube=self.cube
-       j=cube.down
-       r=cube.front
-       b=cube.right
-       if not cube.faceFinished('d'):
+    def rfjaune(self):
+        cube=self.cube
+        j=cube.down
+        r=cube.front
+        b=cube.right
+        if not cube.faceFinished('d'):
           
-          if  b[2][0]=='Y' and r[2][0]=='Y' and j[2][2]=='Y' and j[0][0]!='Y' and j[0][2]!='Y' and j[2][0]!='Y':
-             self.applyCmd("FDF'DFD2F'")
+            if  b[2][0]=='Y' and r[2][0]=='Y' and j[2][2]=='Y' and j[0][0]!='Y' and j[0][2]!='Y' and j[2][0]!='Y':
+                self.applyCmd("FDF'DFD2F'")
 
-          elif  b[2][2]=='Y' and r[2][0]=='Y' and j[0][2]=='Y' and j[2][0]=='Y' and j[2][2]!='Y' and j[0][0]!='Y':
-             self.applyCmd("F'RFL'F'R'FL")
+            elif  b[2][2]=='Y' and r[2][0]=='Y' and j[0][2]=='Y' and j[2][0]=='Y' and j[2][2]!='Y' and j[0][0]!='Y':
+                self.applyCmd("F'RFL'F'R'FL")
 
-          elif b[2][0]=='Y' and b[2][2]=='Y' and j[0][0]=='Y' and j[2][0]=='Y'  and j[2][2]!='Y' and j[0][2]!='Y':
-             self.applyCmd("F2UF'D2FU'F'D2F'")
+            elif b[2][0]=='Y' and b[2][2]=='Y' and j[0][0]=='Y' and j[2][0]=='Y'  and j[2][2]!='Y' and j[0][2]!='Y':
+                self.applyCmd("F2UF'D2FU'F'D2F'")
 
-          elif r[2][0]=='Y' and j[0][2]=='Y' and j[2][2]=='Y'  and j[2][0]!='Y' and j[0][0]!='Y':
-             self.applyCmd("F'R'FL'F'RFL")
+            elif r[2][0]=='Y' and j[0][2]=='Y' and j[2][2]=='Y'  and j[2][0]!='Y' and j[0][0]!='Y':
+                self.applyCmd("F'R'FL'F'RFL")
 
-          elif r[2][2]=='Y' and b[2][2]=='Y' and j[0][0]=='Y' and j[2][2]!='Y' and j[2][0]!='Y' and j[0][2]!='Y':
-             self.applyCmd("FD2F'D'FD'F'")
+            elif r[2][2]=='Y' and b[2][2]=='Y' and j[0][0]=='Y' and j[2][2]!='Y' and j[2][0]!='Y' and j[0][2]!='Y':
+                self.applyCmd("FD2F'D'FD'F'")
 
-          elif r[2][0]=='Y' and r[2][2]=='Y' and j[0][0]!='Y' and j[0][2]!='Y' and j[2][0]!='Y' and j[2][2]!='Y' :
-             self.applyCmd("FDF'DFD'F'DFD'D'F'")
+            elif r[2][0]=='Y' and r[2][2]=='Y' and j[0][0]!='Y' and j[0][2]!='Y' and j[2][0]!='Y' and j[2][2]!='Y' :
+                self.applyCmd("FDF'DFD'F'DFD'D'F'")
 
-          elif b[2][0]=='Y' and j[0][0]!='Y' and j[0][2]!='Y' and j[2][0]!='Y' and j[2][2]!='Y':
-             self.applyCmd("FD2F2D'F2D'F2D2F")
+            elif b[2][0]=='Y' and j[0][0]!='Y' and j[0][2]!='Y' and j[2][0]!='Y' and j[2][2]!='Y':
+                self.applyCmd("FD2F2D'F2D'F2D2F")
 
-          else :
-             cube.rotation('D')       
-             self.rfjaune()
+            else :
+                cube.rotation('D')       
+                self.rfjaune()
     
 
         
@@ -402,12 +403,7 @@ class Resolution:
         if colorF == color:
             return "f"
 
-#Fonction qui recherche les aretes manquantes puis effectue les rotations nécessaires pour les amener
-    def solveYellow(self):
-        listeColors=['G','R','B','O']
-        for i in range(len(listeColors)):   
-            self.listeAretes.append(cube.findCube(['Y',listeColors[i]]))
-        #trouve toutes les aretes jaunes que l'on doit placer
+
             
 #Fonction qui vérifie si la croix non orienté est vérifiée
     def checkCrossNonOriente(self):
@@ -437,15 +433,79 @@ class Resolution:
         return liste
 
 #fonction qui renvoie la position des 
+    
+    def opposite(self,face):
+        if face == 'u':
+            return 'D'
+        elif face == 'd':
+            return 'U'
+        elif face == 'r':
+            return 'L'
+        elif face == 'l':
+            return 'R'
+        elif face == 'f':
+            return 'B'
+        elif face == 'b':
+            return 'F'
 
 
-    def solveYellowCross(self):
-        dicAdj = [['u','r'],['u','l'],['d','r'],['d','l']]
+#fonction qui renvoie les deux aretes dans le bon ordre pour le cas 2 de la croix jaune
+    def case2(self,pos1,pos2):
+    
+        posY = self.whichIsColor('Y')
+        print(posY)
+        index=['u','d','f','b','r','l'] 
+        liste=[['L','B','R','F'],['R','B','L','F'],['L','U','R','D'],['R','U','L','D'],['F','U','B','D'],['B','U','F','D']] #chaque liste correspond a un index respectif
+
+        ind=index.index(posY)
+        a=liste[ind].index(pos1.upper())
+        b=liste[ind].index(pos2.upper())
+        if a > b:
+            if liste[ind][(a+1)%4] != pos2.upper() or a < 3:
+                print(1)
+                return [pos1,pos2]
+            else:
+                print(2)
+                return [pos2,pos1]
+        else:
+            if liste[ind][(b+1)%4] != pos1.upper() or b <3:
+                print(3)
+                return [pos2,pos1]
+            else:
+                print(4)
+                return [pos1,pos2]
+
+#fonction qui renvoie les faces a utiliser pour le cas 1 de la résolution croix jaune
+    def case1(self):
+        posY=self.whichIsColor('Y')
+        index=['u','d','f','b','r','l']
+        liste=[['F','U','R'],['F','D','L'],['D','F','R'],['U','B','R'],['F','R','D'],['F','L','U']]
+        return liste[index.index(posY)]
+
+    def case3(self,pos1):
+
+        posY=self.whichIsColor('Y')
+        index=['u','d','f','b','r','l']
+        liste=[['L','B','R','F'],['R','B','L','F'],['L','U','R','D'],['R','U','L','D'],['F','U','B','D'],['B','U','F','D']]
+        listeDroite=[['F','R','B','L'],['F','L','B','R'],['R','U','L','D'],['R','D','L','U'],['D','B','U','F'],['D','F','U','B']]
+        ind = index.index(posY)
+        ind1 = liste[ind].index(pos1.upper())
+        ind2 = listeDroite[ind].index(liste[ind][(ind1+1)%4])
+        return [liste[ind][(ind1+1)%4] , listeDroite[ind][(ind2+1)%4] , posY.upper()]
+
+
+        # F R U Ri Ui Fi
+
+    def ultimateYellowCross(self):
+        posY=self.whichIsColor('Y')
+
+        #adj : Y en b u f 
+        dicAdj = [['u','r'],['l','u'],['r','d'],['d','l'],['l','f'],['b','l'],['r','b'],['f','r']]
         dicOp = [['u','d'],['l','r']]
         #tant que la croix jaune n'est pas vérifiée
-        print("Dans la fonction")
+
         while self.checkCrossNonOriente() != True:
-            print("Dans la boucle")
+
             
             pos=None #position up ou down
             adj=False
@@ -465,18 +525,21 @@ class Resolution:
             #si il n'y a que la case jaune du milieu
 
             print(len(listeAretes))
+            print(listeAretes)
             if len(listeAretes) == 0 or len(listeAretes) == 3 or len(listeAretes)==1:
                 print("cas 1")
                 if len(listeAretes) == 3:
                     print("Trois faces sur la dernieres, on tente")
-    
-                listeCeTour.append('U')
-                listeCeTour.append('R')
-                listeCeTour.append('B')      #bon
-                listeCeTour.append("R'")
-                listeCeTour.append("B'")
-                listeCeTour.append("U'")
+
+                tmp = self.case1()
+                listeCeTour.append(tmp[0])
+                listeCeTour.append(tmp[1])
+                listeCeTour.append(tmp[2])      #a check
+                listeCeTour.append(tmp[1]+"'")
+                listeCeTour.append(tmp[2]+"'")
+                listeCeTour.append(tmp[0]+"'")
                 
+                    
 
                     # D F R Fi Ri Di
                     #on prend n'import lequel balek
@@ -487,99 +550,40 @@ class Resolution:
                 #Cas si les aretes sont 'adjacentes'
                 for i in range(len(dicAdj)):
 
-                    if listeAretes[0] in dicAdj[i] and listeAretes[1] in dicAdj[i]:
-                        pos = i
+                    if listeAretes[0] in dicAdj[i] and listeAretes[1] in dicAdj[i]: #On vérifie qu'on est dans le cas de l'adjacence
                         adj = True
-
                         print("cas 2")
+
                 if adj == True :
-                    if pos  == 0:
-                        print(pos)
 
-                        listeCeTour.append('D')
-                        listeCeTour.append('B')
-                        listeCeTour.append('L')      
-                        listeCeTour.append("B'")     #Check
-                        listeCeTour.append("L'")
-                        listeCeTour.append("D'")
-                        # D F R Fi Ri Di
-                        #cas down
-                        
-                    elif pos == 1:
-                        print(pos)
-
-                        listeCeTour.append('R')
-                        listeCeTour.append('B')
-                        listeCeTour.append('D')      #Check
-                        listeCeTour.append("B'")
-                        listeCeTour.append("D'")
-                        listeCeTour.append("R'")
-                        # R U B Ui Bi Ri
-                        #cas right
-
-                    elif pos == 2:
-                        print(pos)
-
-                        listeCeTour.append('L')
-                        listeCeTour.append('B')
-                        listeCeTour.append('U')      #Check
-                        listeCeTour.append("B'")
-                        listeCeTour.append("U'")
-                        listeCeTour.append("L'")
-                        # L U F Ui Fi Li
-                        #cas left
-
-                    elif pos == 3:
-                        print(pos)
-
-                        listeCeTour.append('U')
-                        listeCeTour.append('B')
-                        listeCeTour.append('R')      #Check
-                        listeCeTour.append("B'")
-                        listeCeTour.append("R'")
-                        listeCeTour.append("U'")
-                        # U B R Bi Ri Ui
-                        #cas up
+                    tmp = self.case2(listeAretes[0],listeAretes[1])   #on récupère les aretes dans le bon ordre pour notre algorithme
+                    print(tmp)
+                    #on applique les rotations par rapport aux bonnes faces du coup
+                    listeCeTour.append(self.opposite(tmp[0]))
+                    listeCeTour.append(posY.upper())
+                    listeCeTour.append(self.opposite(tmp[1]))
+                    listeCeTour.append(posY.upper() + "'")
+                    listeCeTour.append(self.opposite(tmp[1])+"'")
+                    listeCeTour.append(self.opposite(tmp[0])+"'")
 
                         # F U R Ui Ri Fi
                 else :
                     print("cas 3")
-                    if listeAretes[0] in dicOp[0] and listeAretes[1] in dicOp[0]:
-                        # R B U Bi Ui Ri
-                        print("------------------- 1 -------------------")
-                        listeCeTour.append('R')
-                        listeCeTour.append('D')
-                        listeCeTour.append('B')
-                        listeCeTour.append("D'")     #ERREURS
-                        listeCeTour.append("B'")
-                        listeCeTour.append("R'")
-
-                        #on fait cas right
-                        #cas left or right
-                    if listeAretes[0] in dicOp[1] and listeAretes[1] in dicOp[1]:
-                        # U R B Ri Bi Ui
-                        print("------------------- 2 -------------------")
-                        listeCeTour.append('U')
-                        listeCeTour.append('R')
-                        listeCeTour.append('B')      #Check
-                        listeCeTour.append("R'")
-                        listeCeTour.append("B'")
-                        listeCeTour.append("U'")
-
-                        #cas up 
-                        #cas up or down
+                    tmp = self.case3(listeAretes[0])
+                    
+                    listeCeTour.append(tmp[0])
+                    listeCeTour.append(tmp[1])
+                    listeCeTour.append(tmp[2])
+                    listeCeTour.append(tmp[1]+"'")     #ERREURS
+                    listeCeTour.append(tmp[2]+"'")
+                    listeCeTour.append(tmp[0]+"'")
 
                         # F R U Ri Ui Fi
             print(listeCeTour)
             self.listeMouv.append(listeCeTour)
             self.rotate(listeCeTour)
 
-                
-            
 
-
-
-             
 
     def rotate(self,liste):
         for i in range(len(liste)):
@@ -597,7 +601,7 @@ class Resolution:
     
 #cube = Cube("OOOOOOOOOBBBRRRJJJGGGBBBRRRJJJGGGBBBRRRJJJGGGYYYYYYYYY")
 #cube = Cube("GGRRWGYRGYYBRBWOYWGWOOGRGRWBBWOOBBOYGYBWOBRRYRBOYYGOWW")
-#cube1=Cube("WWWWWWWWWGGGRRRBBBOOOGGGRRRBBBOOOBRBOBYGOGYGRYYRYYYYYO")
+cube1=Cube("WWWWWWWWWGGGRRRBBBOOOGGGRRRBBBOOOBRBOBYGOGYGRYYRYYYYYO")
 
 #cube.displayCube()
 #resol= Resolution(cube)
@@ -613,17 +617,33 @@ resol.rfjaune()
 cube1.displayCube()
 
 #cube = Cube("GOBOOOOOOYGGWWWBBYOYOYGGWWWBBYGYBRGGWWWBBRYYYRRRRRRBRG")
+
 #cube = Cube("YYRBBBBBBBOOWWWRRYBBOYOOWWWRRYRYOOOOWWWRRGRGYGGGGGGGYY")
+
 #cube = Cube("GYROOOOOOYGGWWWBBGYBOYGGWWWBBRYYGRGGWWWBBBOYYRRRRRRBOY")
+
 #cube = Cube("YRYOOOOOOBGGWWWBBRGYOYGGWWWBBGYYBGGGWWWBBRBOORRRRRRYYY")
+
             #meme cube *2
+
 #cube = Cube("OYYGGGGGGYRRWWWOOGOBBRRRWWWOOGYYYRRRWWWOOBYOGBBBBBBYYR")
+
 #cube = Cube("GGBOOOOOOYGGWWWBBRYYOYGGWWWBBYOYBOGGWWWBBYGYBRRRRRRYRR")
+
             #meme cube *4
 #cube = Cube("BGRRRRRRROBBWWWGGGYYYYBBWWWGGYRYBYBBWWWGGYOYBOOOOOOROG")
+
 #cube = Cube("YYOBBBBBBROOWWWRRBYBBOOOWWWRRGYYYGOOWWWRRRYROGGGGGGYYG")
+
 #cube = Cube("GOROOOOOOYGGWWWBBYBYOYGGWWWBBYBYRGGGWWWBBOYYYRRRRRRRGB")
-cube = Cube("GYYGGGGGGRRRWWWOOGORYGRRWWWOOOYYYBRRWWWOORBBYBBBBBBOYY")
+
+#cube = Cube("GYYGGGGGGRRRWWWOOGORYGRRWWWOOOYYYBRRWWWOORBBYBBBBBBOYY")
+
+
+            #cube solve v2
+#cube = Cube("WWWWWWWWWBBBRRRGGGOOOBBBRRRGGGOOOGOBRRYGYBYYRYYOYYBYGO")
+
+cube = Cube("GYRYYRBGYRBYOYGOYYBOYOOOBBBRRRGGGOOOBBBRRRGGGWWWWWWWWW")
 resolution = Resolution(cube)
 
 
@@ -633,10 +653,16 @@ resolution = Resolution(cube)
 
 cube.displayCube()
         
-resolution.solveYellow()
+
 
 print(resolution.checkCrossNonOriente())
 print(resolution.checkEmplacement())
-resolution.solveYellowCross()
+
+#print(resolution.checkCrossNonOriente())
+#print(resolution.checkEmplacement())
+#resolution.resolutionYellowCross()
+#print(resolution.getApproRot("d","l","d"))
+resolution.ultimateYellowCross()
+
 print(resolution.listeMouv)
 
