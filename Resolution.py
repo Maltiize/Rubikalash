@@ -314,7 +314,9 @@ class Resolution:
                         tabMiniReplace.append([i,2,tabLine[index]])
 
         print(tabMiniReplace)
-        
+
+        # cas 1 : les deux cubes à intervertir sont sur la même face
+        # cas 2 : les deux cubes à intervertir sont des coins opposés
         cas1 = False
         for i in range(4):
             if tabMiniReplace[i][0] == tabMiniReplace[(i+1)%4][0] or tabMiniReplace[i][0] == tabMiniReplace[(i+2)%4][0] or tabMiniReplace[i][0] == tabMiniReplace[(i+3)%4][0] :
@@ -340,20 +342,20 @@ class Resolution:
 ##        cube.rotation('R\'')
 ##        cube.rotation('B\'')
         
-        cube.rotation('R')
-        #cube.rotation('U')
-        #cube.rotation('L\'')
-        #cube.rotation('U\'')
-        #cube.rotation('L\'')
-        #cube.rotation('B')
-        #cube.rotation('L2')
-        #cube.rotation('U\'')
-        #cube.rotation('L\'')
-        #cube.rotation('U\'')
-        #cube.rotation('L')
-        #cube.rotation('U')
-        #cube.rotation('L\'')
-        #cube.rotation('B\'')
+        cube.rotation('L')
+        cube.rotation('D')
+        cube.rotation('L\'')
+        cube.rotation('D\'')
+        cube.rotation('L\'')
+        cube.rotation('F')
+        cube.rotation('L2')
+        cube.rotation('D\'')
+        cube.rotation('L\'')
+        cube.rotation('D\'')
+        cube.rotation('L')
+        cube.rotation('D')
+        cube.rotation('L\'')
+        cube.rotation('F\'')
         
         
         
@@ -444,6 +446,7 @@ def rfjaune(c):
             c.rotation("D'")
             c.rotation("F2")
             c.rotation("D'")
+            
             c.rotation("F2")
             c.rotation("D2")
             c.rotation("F")
@@ -465,7 +468,7 @@ def rfjaune(c):
         
 
 #cube = Cube("OOOOOOOOOBBBRRRJJJGGGBBBRRRJJJGGGBBBRRRJJJGGGYYYYYYYYY")
-cube = Cube("WWWWWWWWWRRRBBBGGGOOORRRBBBGGGOOOBOGRGBGBROROYYYYYYYYY")
+cube = Cube("WWWWWWWWWRRRBBBOOOGGGRRRBBBOOOGGGBNGRNBONOGNRYYYYYYYYY")
 resol= Resolution(cube)
 cube.displayCube()
 resol.lastStep(cube)
