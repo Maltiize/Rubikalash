@@ -960,12 +960,12 @@ def resolutionFinale(entry):
     resolution = Resolution(cube)
     resolution.theCross('u')
     resolution.theCorner('u')
-    resolution.deuxiemecouronne()
+    resolution.deuxcouronne()
     resolution.resolutionCroixJaune()
     cube.displayCube()
     
 #MODIFIER POUR QUE SA FONCTION PERSONNELLE FONCTIONNE
-  
+
 
     
                     
