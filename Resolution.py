@@ -300,6 +300,8 @@ class Resolution:
 
         tabMiniReplace = []
 
+        #A ce niveau de résolution il est possible de bien placer deux coins,
+        #donc tant que je n'obtient pas seulement deux coins mal placés :
         while len(tabMiniReplace) != 4 :
             for i in range(4) :
                 faceEnCours = cube.getFace(tabLiFaceChange[i])
@@ -313,6 +315,9 @@ class Resolution:
                         tabMiniReplace.append([i,0,tabLine[index]])
                     if faceEnCours[2][tabLine[index]] != faceEnCours[2][(tabLine[index]+1)%2] :
                         tabMiniReplace.append([i,2,tabLine[index]])
+            #(suite) je tourne la face "Jaune" (non résolue)
+            if len(tabMiniReplace) != 4 :
+                cube.rotation(faceJaune.upper())
 
         print(tabMiniReplace)
 
@@ -324,7 +329,8 @@ class Resolution:
                 cas1 = True
                 faceChange = tabMiniReplace[i][0]
                 break        
-
+        
+        
         print(cas1)
 
 #CAS 1 : mal placé face gauche, faceJaune = D   
@@ -358,21 +364,24 @@ class Resolution:
 ##        cube.rotation('D')
 ##        cube.rotation('R\'')
 ##        cube.rotation('B\'')
-        
-        cube.rotation(tabLiFaceChange[faceChange].upper())
-        cube.rotation(faceJaune.upper())
-        cube.rotation(tabLiFaceChange[faceChange].upper()+'\'')
-        cube.rotation(faceJaune.upper()+'\'')
-        cube.rotation(tabLiFaceChange[faceChange].upper()+'\'')
-        cube.rotation(tabLiFaceChange[(faceChange+1)%4].upper())
-        cube.rotation(tabLiFaceChange[faceChange].upper()+'2')
-        cube.rotation(faceJaune.upper()+'\'')
-        cube.rotation(tabLiFaceChange[faceChange].upper()+'\'')
-        cube.rotation(faceJaune.upper()+'\'')
-        cube.rotation(tabLiFaceChange[faceChange].upper())
-        cube.rotation(faceJaune.upper())
-        cube.rotation(tabLiFaceChange[faceChange].upper()+'\'')
-        cube.rotation(tabLiFaceChange[(faceChange+1)%4].upper()+'\'')
+        if cas1 :
+            print("hey")
+            cube.rotation(tabLiFaceChange[faceChange].upper())
+            cube.rotation(faceJaune.upper())
+            cube.rotation(tabLiFaceChange[faceChange].upper()+'\'')
+            cube.rotation(faceJaune.upper()+'\'')
+            cube.rotation(tabLiFaceChange[faceChange].upper()+'\'')
+            cube.rotation(tabLiFaceChange[(faceChange+1)%4].upper())
+            cube.rotation(tabLiFaceChange[faceChange].upper()+'2')
+            cube.rotation(faceJaune.upper()+'\'')
+            cube.rotation(tabLiFaceChange[faceChange].upper()+'\'')
+            cube.rotation(faceJaune.upper()+'\'')
+            cube.rotation(tabLiFaceChange[faceChange].upper())
+            cube.rotation(faceJaune.upper())
+            cube.rotation(tabLiFaceChange[faceChange].upper()+'\'')
+            cube.rotation(tabLiFaceChange[(faceChange+1)%4].upper()+'\'')
+        else :
+            None
         
         
         
@@ -485,9 +494,20 @@ def rfjaune(c):
         
 
 #cube = Cube("OOOOOOOOOBBBRRRJJJGGGBBBRRRJJJGGGBBBRRRJJJGGGYYYYYYYYY")
-cube = Cube("WWWWWWWWWRRRBBBOOOGGGRRRBBBOOOGGGBNGRNBONOGNRYYYYYYYYY")
+#COIN
+    #CAS1
+
+        #Gauche
+#cube = Cube("WWWWWWWWWRRRBBBOOOGGGRRRBBBOOOGGGBNGRNBONOGNRYYYYYYYYY")
+
+        #Droite
 #cube = Cube("WWWWWWWWWRRRBBBOOOGGGRRRBBBOOOGGGRNRBNOGNBONGYYYYYYYYY")
+
+    #CAS2
+cube = Cube("WWWWWWWWWRRRBBBOOOGGGRRRBBBOOOGGGRNOGNBONRBNGYYYYYYYYY")
+
 resol= Resolution(cube)
 cube.displayCube()
 resol.lastStep(cube)
 cube.displayCube()
+
