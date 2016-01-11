@@ -434,8 +434,8 @@ class Resolution:
             self.cube.rotation("D2")
             self.cube.rotation("L2")
             self.mouv += 5
-        self.cube.displayCube()
-        print("2cubeinv")
+        #self.cube.displayCube()
+        #print("2cubeinv")
 
     def cubeinv(self):
         #si cube au bon endroit mais couleurs inversées
@@ -457,7 +457,7 @@ class Resolution:
             self.cube.rotation("D'")
             self.cube.rotation("R")
             self.mouv += 11
-            self.cube.displayCube()
+            #self.cube.displayCube()
 
         if vr[0][1] == 'f' and vr[1][1] == 'l':
             self.cube.rotation("L")
@@ -472,7 +472,7 @@ class Resolution:
             self.cube.rotation("D'")
             self.cube.rotation("F")
             self.mouv += 11
-            self.cube.displayCube()
+            #self.cube.displayCube()
 
         if vo[0][1] == 'b' and vo[1][1] == 'l':
             self.cube.rotation("B")
@@ -487,7 +487,7 @@ class Resolution:
             self.cube.rotation("D'")
             self.cube.rotation("L")
             self.mouv += 11
-            self.cube.displayCube()
+            #self.cube.displayCube()
 
         if bo[0][1] == 'b' and bo[1][1] == 'r':
             self.cube.rotation("R")
@@ -502,9 +502,9 @@ class Resolution:
             self.cube.rotation("D'")
             self.cube.rotation("B")
             self.mouv += 11
-            self.cube.displayCube()
+            #self.cube.displayCube()
             
-        print("cubeinv")
+        #print("cubeinv")
     
     def deuxcouronne(self):
         
@@ -520,15 +520,15 @@ class Resolution:
                 vr = self.cube.findCube(['G', 'R']) #vert/rouge
                 vo = self.cube.findCube(['G', 'O']) #cube vert/orange
                 bo = self.cube.findCube(['B', 'O']) #cube bleu/orange
-            self.cube.displayCube()
+            #self.cube.displayCube()
             if self.checkscdcouronne():
                 break
             self.cubeinv()
-            self.cube.displayCube()
+            #self.cube.displayCube()
             self.deuxcubeinv()
-            self.cube.displayCube()
+            #self.cube.displayCube()
 
-        print(self.mouv)
+        #print(self.mouv)
         return self.cube
     
     def majcube(self):
@@ -566,7 +566,7 @@ class Resolution:
                 self.cube.rotation("F")
                 self.cube.rotation("D'")
                 self.cube.rotation("F'")
-                self.cube.displayCube()
+                #self.cube.displayCube()
 
                     
             elif br[1][1] == 'd': #ici le cube rouge est sur la face down
@@ -590,7 +590,7 @@ class Resolution:
                 self.cube.rotation("R'")
                 self.cube.rotation("D")
                 self.cube.rotation("R")
-                self.cube.displayCube()
+                #self.cube.displayCube()
 
             
             #cube vert/rouge
@@ -618,7 +618,7 @@ class Resolution:
                 self.cube.rotation("F'")
                 self.cube.rotation("D")
                 self.cube.rotation("F")
-                self.cube.displayCube()
+                #self.cube.displayCube()
             elif vr[1][1] == 'd': #ici le cube rouge est sur la face down
                 if vr[0][1] == 'f':
                     #faire
@@ -741,7 +741,7 @@ class Resolution:
                 self.cube.rotation("D'")
                 self.cube.rotation("R'")
                 self.cube.displayCube()
-            print("2couronne")
+            #print("2couronne")
 
 ############## PARTIE 2ND COURONNE #################################
         
@@ -826,7 +826,6 @@ class Resolution:
     def case2(self,pos1,pos2):
     
         posY = self.whichIsColor('Y')
-        print(posY)
         index=['u','d','f','b','r','l'] 
         liste=[['L','B','R','F'],['R','B','L','F'],['L','U','R','D'],['R','U','L','D'],['F','U','B','D'],['B','U','F','D']] #chaque liste correspond a un index respectif
 
@@ -835,17 +834,13 @@ class Resolution:
         b=liste[ind].index(pos2.upper())
         if a > b:
             if liste[ind][(a+1)%4] != pos2.upper() or a < 3:
-                print(1)
                 return [pos1,pos2]
             else:
-                print(2)
                 return [pos2,pos1]
         else:
             if liste[ind][(b+1)%4] != pos1.upper() or b <3:
-                print(3)
                 return [pos2,pos1]
             else:
-                print(4)
                 return [pos1,pos2]
 
 #fonction qui renvoie les faces a utiliser pour le cas 1 de la résolution croix jaune
@@ -897,12 +892,9 @@ class Resolution:
                     listeAretes.append(liste[i][1])
             #si il n'y a que la case jaune du milieu
 
-            print(len(listeAretes))
-            print(listeAretes)
             if len(listeAretes) == 0 or len(listeAretes) == 3 or len(listeAretes)==1:
-                print("cas 1")
-                if len(listeAretes) == 3:
-                    print("Trois faces sur la dernieres, on tente")
+                
+                #print("cas 1")
 
                 tmp = self.case1()
                 listeCeTour.append(tmp[0])
@@ -925,12 +917,12 @@ class Resolution:
 
                     if listeAretes[0] in dicAdj[i] and listeAretes[1] in dicAdj[i]: #On vérifie qu'on est dans le cas de l'adjacence
                         adj = True
-                        print("cas 2")
+                        #print("cas 2")
 
                 if adj == True :
 
                     tmp = self.case2(listeAretes[0],listeAretes[1])   #on récupère les aretes dans le bon ordre pour notre algorithme
-                    print(tmp)
+                    #print(tmp)
                     #on applique les rotations par rapport aux bonnes faces du coup
                     listeCeTour.append(self.opposite(tmp[0]))
                     listeCeTour.append(posY.upper())
@@ -941,7 +933,7 @@ class Resolution:
 
                         # F U R Ui Ri Fi
                 else :
-                    print("cas 3")
+                    #print("cas 3")
                     tmp = self.case3(listeAretes[0])
                     
                     listeCeTour.append(tmp[0])
@@ -952,7 +944,7 @@ class Resolution:
                     listeCeTour.append(tmp[0]+"'")
 
                         # F R U Ri Ui Fi
-            print(listeCeTour)
+            #print(listeCeTour)
             self.listeMouv.append(listeCeTour)
             self.rotate(listeCeTour)
 
@@ -971,17 +963,26 @@ def resolutionFinale(entry):
     print("Cube d'origine")
     cube.displayCube()
     resolution = Resolution(cube)
-    resolution.theCross('u')
+    
     print("Etape 1 : Croix")
+    resolution.theCross('u')
     cube.displayCube()
-    resolution.theCorner('u')
+
     print("Etape 2 : Les coins")
+
+    resolution.theCorner('u')
     cube.displayCube()
-    resolution.deuxcouronne()
+
     print("Etape 3 : la deuxieme couronne")
+    resolution.deuxcouronne()
     cube.displayCube()
-    resolution.resolutionCroixJaune()
+
     print("Etape 4 : la croix inverse")
+    resolution.resolutionCroixJaune()
+    cube.displayCube()
+
+    print("Etape 5 : la face inverse")
+    resolution.rfjaune()
     cube.displayCube()
     
 #MODIFIER POUR QUE SA FONCTION PERSONNELLE FONCTIONNE
