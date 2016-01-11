@@ -398,6 +398,7 @@ class Cube:
      # Permet d'obtenir le nom de la face opposé à celle dont le nom est nameFace
 
     def getFaceInversed(self,nameFace):
+        self.liFace=["u","l","f","b","r","d"]
         if(nameFace not in self.liFace):
             print("getFaceInversed :INVALID NAMEFACE ")
             return -1
