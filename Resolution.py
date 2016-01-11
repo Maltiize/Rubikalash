@@ -350,38 +350,38 @@ class Resolution:
                 
                 
 #the corner permet de faire les coin d'une face sans prendre en compte se qu'elle fait sur les autre face
- def rfjaune(self):
-       cube=self.cube
+    def rfjaune(self):
+        cube=self.cube
        
-       j=cube.down
-       r=cube.front
-       b=cube.right
-       if not cube.faceFinished('d'):
+        j=cube.down
+        r=cube.front
+        b=cube.right
+        if not cube.faceFinished('d'):
           
-          if r[2][0]==b[2][0] and j[2][2]==b[2][0]  and j[0][0]!=b[2][0] and j[0][2]!=b[2][0]  and j[2][0]!=b[2][0]:
-             self.applyCmd("FDF'DFD2F'")
+            if r[2][0]==b[2][0] and j[2][2]==b[2][0]  and j[0][0]!=b[2][0] and j[0][2]!=b[2][0]  and j[2][0]!=b[2][0]:
+                self.applyCmd("FDF'DFD2F'")
 
-          elif r[2][0]==b[2][2] and j[0][2]==b[2][2] and j[2][0]==b[2][2] and j[2][2]!=b[2][2] and j[0][0]!=b[2][2]:
-             self.applyCmd("F'RFL'F'R'FL")
+            elif r[2][0]==b[2][2] and j[0][2]==b[2][2] and j[2][0]==b[2][2] and j[2][2]!=b[2][2] and j[0][0]!=b[2][2]:
+                self.applyCmd("F'RFL'F'R'FL")
 
-          elif b[2][2]==b[2][0] and j[0][0]==b[2][0] and j[2][0]==b[2][0]   and j[2][2]!=b[2][0]  and j[0][2]!=b[2][0] :
-             self.applyCmd("F2UF'D2FU'F'D2F'")
+            elif b[2][2]==b[2][0] and j[0][0]==b[2][0] and j[2][0]==b[2][0]   and j[2][2]!=b[2][0]  and j[0][2]!=b[2][0] :
+                self.applyCmd("F2UF'D2FU'F'D2F'")
 
-          elif j[0][2]== r[2][0]  and j[2][2]== r[2][0]   and j[2][0]!= r[2][0]  and j[0][0]!= r[2][0] :
-             self.applyCmd("F'R'FL'F'RFL")
+            elif j[0][2]== r[2][0]  and j[2][2]== r[2][0]   and j[2][0]!= r[2][0]  and j[0][0]!= r[2][0] :
+                self.applyCmd("F'R'FL'F'RFL")
 
-          elif  b[2][2]==r[2][2] and j[0][0]==r[2][2] and j[2][2]!=r[2][2] and j[2][0]!=r[2][2] and j[0][2]!=r[2][2]:
-             self.applyCmd("FD2F'D'FD'F'")
+            elif  b[2][2]==r[2][2] and j[0][0]==r[2][2] and j[2][2]!=r[2][2] and j[2][0]!=r[2][2] and j[0][2]!=r[2][2]:
+                self.applyCmd("FD2F'D'FD'F'")
 
-          elif r[2][2]==r[2][0] and j[0][0]!=r[2][0] and j[0][2]!=r[2][0] and j[2][0]!=r[2][0] and j[2][2]!=r[2][0] :
-             self.applyCmd("FDF'DFD'F'DFD'D'F'")
+            elif r[2][2]==r[2][0] and j[0][0]!=r[2][0] and j[0][2]!=r[2][0] and j[2][0]!=r[2][0] and j[2][2]!=r[2][0] :
+                self.applyCmd("FDF'DFD'F'DFD'D'F'")
 
-          elif j[0][0]!=b[2][0] and j[0][2]!=b[2][0] and j[2][0]!=b[2][0] and j[2][2]!=b[2][0]:
-             self.applyCmd("FD2F2D'F2D'F2D2F")
+            elif j[0][0]!=b[2][0] and j[0][2]!=b[2][0] and j[2][0]!=b[2][0] and j[2][2]!=b[2][0]:
+                self.applyCmd("FD2F2D'F2D'F2D2F")
 
-          else :
-             self.rotation('D')       
-             self.rfjaune()
+            else :
+                self.rotation('D')       
+                self.rfjaune()
 
     
 ############## PARTIE 2ND COURONNE #################################
@@ -1014,29 +1014,29 @@ def resolutionFinale(entry):
         
     
 #cube = Cube("OOOOOOOOOBBBRRRJJJGGGBBBRRRJJJGGGBBBRRRJJJGGGYYYYYYYYY")
-<<<<<<< HEAD
-cube = Cube("GGRRWGYRGYYBRBWOYWGWOOGRGRWBBWOOBBOYGYBWOBRRYRBOYYGOWW")
-cube1=Cube("WWWWWWWWWGGGRRRBBBOOOGGGRRRBBBOOOBRBOBYGOGYGRYYRYYYYYO")
-cube2=Cube("BBBBBBBBBOOOWWWRRRYYYOOOWWWRRRYYYYOGOWRGRYGYGWGWGGGOGR")
-=======
+
 #cube = Cube("GGRRWGYRGYYBRBWOYWGWOOGRGRWBBWOOBBOYGYBWOBRRYRBOYYGOWW")
 #cube1=Cube("WWWWWWWWWGGGRRRBBBOOOGGGRRRBBBOOOBRBOBYGOGYGRYYRYYYYYO")
->>>>>>> df6a268447aa85ae6f2b3a78cd90a31795e2540d
+#cube2=Cube("BBBBBBBBBOOOWWWRRRYYYOOOWWWRRRYYYYOGOWRGRYGYGWGWGGGOGR")
 
-cube2.displayCube()
+#cube = Cube("GGRRWGYRGYYBRBWOYWGWOOGRGRWBBWOOBBOYGYBWOBRRYRBOYYGOWW")
+#cube1=Cube("WWWWWWWWWGGGRRRBBBOOOGGGRRRBBBOOOBRBOBYGOGYGRYYRYYYYYO")
+
+
+#cube2.displayCube()
 #resol= Resolution(cube)
 #resol.theCross('f')
 #cube.displayCube()
 #cube.displayCube()
 #resol.applyCmd("FRD2L'F")
 #cube.displayCube()
-<<<<<<< HEAD
-resol=Resolution(cube2)
+
+#resol=Resolution(cube2)
 ##resol.theCross('f')
 ##cube.displayCube()
-resol.rfjaune()
-cube2.displayCube()
-=======
+#resol.rfjaune()
+#cube2.displayCube()
+
 #resol=Resolution(cube1)
 ##resol.theCross('f')
 ##cube.displayCube()
@@ -1093,4 +1093,4 @@ cube2.displayCube()
 
 #print(resolution.listeMouv)
 #print(resolution.liCmd)
->>>>>>> df6a268447aa85ae6f2b3a78cd90a31795e2540d
+
