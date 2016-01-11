@@ -19,8 +19,10 @@ class Cube:
         self.liFace=["u","l","f","b","r","d"]
         self.liFaceaff=["u","l","f","r","b","d"]
 
-        self.liFace=["u","l","f","r","b","d"]
-        self.liFaceaff=["u","l","f","r","b","d"]
+
+        #Vient du merge de Jean, a garder pour voir si il en a besoin
+        #self.liFace=["u","l","f","r","b","d"]
+        #self.liFaceaff=["u","l","f","r","b","d"]
  
         
         #Initialisation des faces à 0

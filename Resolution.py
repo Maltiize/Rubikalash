@@ -342,7 +342,7 @@ class Resolution:
                                 self.rotation(tmp[(i+2)%3][1].upper())
                                 self.rotation(inv.upper())
                                 self.rotation(self.getInvRot(tmp[(i+2)%3][1].upper()))
-                #self.theCorner(nameFace)        
+                self.theCorner(nameFace)        
                         
                                 
             
