@@ -404,11 +404,23 @@ class Resolution:
         else :
             couleurMiniCube = cube.getFace(faceOpposeFinie)[tabParc[0]][1]
             
-        # CAS 2
+
         faceSuivanteOF = tabLiFaceChange[(tabLiFaceChange.index(faceOpposeFinie)+(1*sensRotation))%4]
-        
+
+        # CAS 2
+        #R' U R' U' R' U' R' U R U R2
         if couleurMiniCube == cube.getCentralColor(cube.liFace[cube.liFace.index(faceSuivanteOF)]) :
-            None
+            cube.rotation(faceSuivanteOF.upper()+'\'')
+            cube.rotation(faceJaune.upper())
+            cube.rotation(faceSuivanteOF.upper()+'\'')
+            cube.rotation(faceJaune.upper()+'\'')
+            cube.rotation(faceSuivanteOF.upper()+'\'')
+            cube.rotation(faceJaune.upper()+'\'')
+            cube.rotation(faceSuivanteOF.upper()+'\'')
+            cube.rotation(faceJaune.upper())
+            cube.rotation(faceSuivanteOF.upper())
+            cube.rotation(faceJaune.upper())
+            cube.rotation(faceSuivanteOF.upper()+'2')
 
         # CAS 1
         # R2 U' R' U' R U R U R U' R
