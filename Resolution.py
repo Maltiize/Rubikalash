@@ -241,9 +241,12 @@ class Resolution:
                 
         return tmp
 
+    ## ETAPE 6 & 7 ##
+    
+    
     def lastStep(self, cube) :
         if cube.cubeFinished() == False :
-            # Récupération des différent variables nécéssaire à la résolution
+            # Récupération des différentes variables nécéssaire à la résolution
             faceJaune = self.getFaceJaune(cube)
             tabParc = self.getTabParc(cube, faceJaune)
             tabLiFaceChange = self.getTabLiFaceChange(cube, faceJaune)
@@ -291,12 +294,12 @@ class Resolution:
     def getTabLiFaceChange(self, cube, faceJaune) :
         # Ce tableau contient les face non finies, il va nous permettre de nous afranchir des couleurs
         # car les mouvements à faire pour résoudre le cube sont symétrique
-        tabLiFaceChange = []
-        for i in cube.liFace :
-            if i != faceJaune and i != cube.getFaceInversed(faceJaune) :
-                tabLiFaceChange.append(i)
-
-        return tabLiFaceChange
+        if faceJaune == 'd' or faceJaune == 'u' :
+            return ['l','f','b','r']
+        elif faceJaune == 'l' or faceJaune == 'r' :
+            return ['f','u','b','d']
+        else :
+            return ['d','r','u','l']
         
     def putCornerLastFace(self, cube, faceJaune, tabParc, tabLiFaceChange) :
         if tabParc[0] == 'x' :
@@ -334,6 +337,11 @@ class Resolution:
                 faceChange = tabMiniReplace[i][0]
                 break
 
+        if faceJaune == 'd' or faceJaune == 'r' or faceJaune == 'b' :
+            faceSuivante = 1
+        else :
+            faceSuivante = -1
+
 #CAS 1 : 
         if cas1 :
             cube.rotation(tabLiFaceChange[faceChange].upper())
@@ -341,7 +349,7 @@ class Resolution:
             cube.rotation(tabLiFaceChange[faceChange].upper()+'\'')
             cube.rotation(faceJaune.upper()+'\'')
             cube.rotation(tabLiFaceChange[faceChange].upper()+'\'')
-            cube.rotation(tabLiFaceChange[(faceChange+1)%4].upper())
+            cube.rotation(tabLiFaceChange[(faceChange+(1*faceSuivante))%4].upper())
             cube.rotation(tabLiFaceChange[faceChange].upper()+'2')
             cube.rotation(faceJaune.upper()+'\'')
             cube.rotation(tabLiFaceChange[faceChange].upper()+'\'')
@@ -349,7 +357,7 @@ class Resolution:
             cube.rotation(tabLiFaceChange[faceChange].upper())
             cube.rotation(faceJaune.upper())
             cube.rotation(tabLiFaceChange[faceChange].upper()+'\'')
-            cube.rotation(tabLiFaceChange[(faceChange+1)%4].upper()+'\'')
+            cube.rotation(tabLiFaceChange[(faceChange+(1*faceSuivante))%4].upper()+'\'')
         else :
             for i in range(4):
                 if index == 0 :
@@ -362,26 +370,52 @@ class Resolution:
                         break
 #CAS 2 :
             cube.rotation(tabLiFaceChange[faceChange].upper())
-            cube.rotation(tabLiFaceChange[(faceChange+3)%4].upper())
+            cube.rotation(tabLiFaceChange[(faceChange+(3*faceSuivante))%4].upper())
             cube.rotation(faceJaune.upper()+'\'') 
-            cube.rotation(tabLiFaceChange[(faceChange+3)%4].upper()+'\'')
+            cube.rotation(tabLiFaceChange[(faceChange+(3*faceSuivante))%4].upper()+'\'')
             cube.rotation(faceJaune.upper()+'\'')
-            cube.rotation(tabLiFaceChange[(faceChange+3)%4].upper())
+            cube.rotation(tabLiFaceChange[(faceChange+(3*faceSuivante))%4].upper())
             cube.rotation(faceJaune.upper())
-            cube.rotation(tabLiFaceChange[(faceChange+3)%4].upper()+'\'')
+            cube.rotation(tabLiFaceChange[(faceChange+(3*faceSuivante))%4].upper()+'\'')
             cube.rotation(tabLiFaceChange[faceChange].upper()+'\'')
-            cube.rotation(tabLiFaceChange[(faceChange+3)%4].upper())
+            cube.rotation(tabLiFaceChange[(faceChange+(3*faceSuivante))%4].upper())
             cube.rotation(faceJaune.upper())
-            cube.rotation(tabLiFaceChange[(faceChange+3)%4].upper()+'\'')
+            cube.rotation(tabLiFaceChange[(faceChange+(3*faceSuivante))%4].upper()+'\'')
             cube.rotation(faceJaune.upper()+'\'')
-            cube.rotation(tabLiFaceChange[(faceChange+3)%4].upper()+'\'')
+            cube.rotation(tabLiFaceChange[(faceChange+(3*faceSuivante))%4].upper()+'\'')
             cube.rotation(tabLiFaceChange[faceChange].upper())
-            cube.rotation(tabLiFaceChange[(faceChange+3)%4].upper())
+            cube.rotation(tabLiFaceChange[(faceChange+(3*faceSuivante))%4].upper())
             cube.rotation(tabLiFaceChange[faceChange].upper()+'\'')
 
     def putAreteLastFace(self, cube, faceJaune, tabParc, tabLiFaceChange) :
-        return
-              
+
+        faceFinie = None
+        for i in range(4) :
+            if cube.faceFinished(tabLiFaceChange[i]) :
+                faceFinie = tabLiFaceChange[i]
+                break
+
+        if tabParc[0] == 'x' :
+            couleurMiniCube = cube.getFace(cube.getFaceInversed(faceFinie))[tabParc[1]][1]
+        else :
+            couleurMiniCube = cube.getFace(cube.getFaceInversed(faceFinie))[1][tabParc[0]]
+            
+        # CAS 1
+        # R2 U' R' U' R U R U R U' R
+        if couleurMiniCube == cube.getCentralColor(cube.liFace[cube.liFace.index(tabLiFaceChange[(tabLiFaceChange.index(faceFinie)+1)%4])]) :
+            None
+
+        # CAS 2
+        else :
+            None
+
+
+        print(faceFinie)
+        print(tabLiFaceChange)
+        
+
+
+    ## ETAPE 6 & 7 ##         
 
 
 def rfjaune(c):
