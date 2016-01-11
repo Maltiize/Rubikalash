@@ -400,7 +400,7 @@ class Resolution:
         bo = self.cube.findCube(['B', 'O']) #cube bleu/orange
 
         #si le cube bleu/rouge inversé avec le vert/rouge
-        if br[0][1] == 'l' and vr[0][1] == 'r':
+        if (br[0][1] == 'l' and vr[0][1] == 'r') or (br[0][1] == 'f' and vr[0][1] == 'f'):
             self.cube.rotation("F2")
             self.cube.rotation("D2")
             self.cube.rotation("F2")
@@ -409,7 +409,7 @@ class Resolution:
             self.mouv += 5
 
         #si le cube bleu/rouge inversé avec le bleu/orange
-        if br[1][1] == 'b' and bo[1][1] == 'f':
+        if (br[1][1] == 'b' and bo[1][1] == 'f') or (br[1][1] == 'r' and bo[1][1] == 'r'):
             self.cube.rotation("R2")
             self.cube.rotation("D2")
             self.cube.rotation("R2")
@@ -418,7 +418,7 @@ class Resolution:
             self.mouv += 5
             
         #si le cube vert/orange inversé avec le bleu/orange
-        if vo[0][1] == 'r' and bo[0][1] == 'l':
+        if (vo[0][1] == 'r' and bo[0][1] == 'l') or (vo[0][1] == 'b' and bo[0][1] == 'b'):
             self.cube.rotation("B2")
             self.cube.rotation("D2")
             self.cube.rotation("B2")
@@ -427,7 +427,7 @@ class Resolution:
             self.mouv += 5
 
         #si le cube vert/orange inversé avec le vert/rouge
-        if vo[1][1] == 'f' and vr[1][1] == 'b':
+        if (vo[1][1] == 'f' and vr[1][1] == 'b') or (vo[1][1] == 'l' and vr[1][1] == 'l'):
             self.cube.rotation("L2")
             self.cube.rotation("D2")
             self.cube.rotation("L2")
@@ -985,7 +985,6 @@ def resolutionFinale(entry):
     cube.displayCube()
     
 #MODIFIER POUR QUE SA FONCTION PERSONNELLE FONCTIONNE
-
 
     
                     
