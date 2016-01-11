@@ -442,16 +442,40 @@ class Resolution:
             # CAS 1
             # M2 U M2 U2 M2 U M2
             if couleurMiniCube == cube.getFace(cube.getFaceInversed(tabLiFaceChange[0]))[1][1] :
+                # L2 + R2 = M2 ou B2 + F2 = M2
+                cube.rotation(tabLiFaceChange[0].upper()+'2')
+                cube.rotation(tabLiFaceChange[2].upper()+'2')
+                cube.rotation(faceJaune.upper())
+                cube.rotation(tabLiFaceChange[0].upper()+'2')
+                cube.rotation(tabLiFaceChange[2].upper()+'2')
+                cube.rotation(faceJaune.upper()+'2')
+                cube.rotation(tabLiFaceChange[0].upper()+'2')
+                cube.rotation(tabLiFaceChange[2].upper()+'2')
+                cube.rotation(faceJaune.upper())
+                cube.rotation(tabLiFaceChange[0].upper()+'2')
+                cube.rotation(tabLiFaceChange[2].upper()+'2')
 
             # CAS 2
             # U R' U' R U' R U R U' R' U R U R2 U' R' U
             else :
-
-
-        print(tabLiFaceChange)
-        cube.rotation('M')
-
-
+                cube.rotation(faceJaune.upper())
+                cube.rotation(tabLiFaceChange[0].upper()+'\'')
+                cube.rotation(faceJaune.upper()+'\'')
+                cube.rotation(tabLiFaceChange[0].upper())
+                cube.rotation(faceJaune.upper()+'\'')
+                cube.rotation(tabLiFaceChange[0].upper())
+                cube.rotation(faceJaune.upper())
+                cube.rotation(tabLiFaceChange[0].upper())
+                cube.rotation(faceJaune.upper()+'\'')
+                cube.rotation(tabLiFaceChange[0].upper()+'\'')
+                cube.rotation(faceJaune.upper())
+                cube.rotation(tabLiFaceChange[0].upper())
+                cube.rotation(faceJaune.upper())
+                cube.rotation(tabLiFaceChange[0].upper()+'2')
+                cube.rotation(faceJaune.upper()+'\'')
+                cube.rotation(tabLiFaceChange[0].upper()+'\'')
+                cube.rotation(faceJaune.upper())
+                
     ## ETAPE 6 & 7 ##         
 
 
