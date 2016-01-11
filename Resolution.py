@@ -309,36 +309,43 @@ class Resolution:
                         self.rotation(self.getInvRot(m[1][1][0].upper()))
                         self.rotation(self.getInvRot(inv.upper()))
                         self.rotation(m[1][1][0].upper())
+
+
+   
+                
+                    
+        
     def rfjaune(self):
        cube=self.cube
+       
        j=cube.down
        r=cube.front
        b=cube.right
        if not cube.faceFinished('d'):
           
-          if  b[2][0]=='Y' and r[2][0]=='Y' and j[2][2]=='Y' and j[0][0]!='Y' and j[0][2]!='Y' and j[2][0]!='Y':
+          if r[2][0]==b[2][0] and j[2][2]==b[2][0]  and j[0][0]!=b[2][0] and j[0][2]!=b[2][0]  and j[2][0]!=b[2][0]:
              self.applyCmd("FDF'DFD2F'")
 
-          elif  b[2][2]=='Y' and r[2][0]=='Y' and j[0][2]=='Y' and j[2][0]=='Y' and j[2][2]!='Y' and j[0][0]!='Y':
+          elif r[2][0]==b[2][2] and j[0][2]==b[2][2] and j[2][0]==b[2][2] and j[2][2]!=b[2][2] and j[0][0]!=b[2][2]:
              self.applyCmd("F'RFL'F'R'FL")
 
-          elif b[2][0]=='Y' and b[2][2]=='Y' and j[0][0]=='Y' and j[2][0]=='Y'  and j[2][2]!='Y' and j[0][2]!='Y':
+          elif b[2][2]==b[2][0] and j[0][0]==b[2][0] and j[2][0]==b[2][0]   and j[2][2]!=b[2][0]  and j[0][2]!=b[2][0] :
              self.applyCmd("F2UF'D2FU'F'D2F'")
 
-          elif r[2][0]=='Y' and j[0][2]=='Y' and j[2][2]=='Y'  and j[2][0]!='Y' and j[0][0]!='Y':
+          elif j[0][2]== r[2][0]  and j[2][2]== r[2][0]   and j[2][0]!= r[2][0]  and j[0][0]!= r[2][0] :
              self.applyCmd("F'R'FL'F'RFL")
 
-          elif r[2][2]=='Y' and b[2][2]=='Y' and j[0][0]=='Y' and j[2][2]!='Y' and j[2][0]!='Y' and j[0][2]!='Y':
+          elif  b[2][2]==r[2][2] and j[0][0]==r[2][2] and j[2][2]!=r[2][2] and j[2][0]!=r[2][2] and j[0][2]!=r[2][2]:
              self.applyCmd("FD2F'D'FD'F'")
 
-          elif r[2][0]=='Y' and r[2][2]=='Y' and j[0][0]!='Y' and j[0][2]!='Y' and j[2][0]!='Y' and j[2][2]!='Y' :
+          elif r[2][2]==r[2][0] and j[0][0]!=r[2][0] and j[0][2]!=r[2][0] and j[2][0]!=r[2][0] and j[2][2]!=r[2][0] :
              self.applyCmd("FDF'DFD'F'DFD'D'F'")
 
-          elif b[2][0]=='Y' and j[0][0]!='Y' and j[0][2]!='Y' and j[2][0]!='Y' and j[2][2]!='Y':
+          elif j[0][0]!=b[2][0] and j[0][2]!=b[2][0] and j[2][0]!=b[2][0] and j[2][2]!=b[2][0]:
              self.applyCmd("FD2F2D'F2D'F2D2F")
 
           else :
-             cube.rotation('D')       
+             self.rotation('D')       
              self.rfjaune()
     
 
@@ -357,16 +364,17 @@ class Resolution:
 #cube = Cube("OOOOOOOOOBBBRRRJJJGGGBBBRRRJJJGGGBBBRRRJJJGGGYYYYYYYYY")
 cube = Cube("GGRRWGYRGYYBRBWOYWGWOOGRGRWBBWOOBBOYGYBWOBRRYRBOYYGOWW")
 cube1=Cube("WWWWWWWWWGGGRRRBBBOOOGGGRRRBBBOOOBRBOBYGOGYGRYYRYYYYYO")
+cube2=Cube("BBBBBBBBBOOOWWWRRRYYYOOOWWWRRRYYYYOGOWRGRYGYGWGWGGGOGR")
 
-#cube.displayCube()
+cube2.displayCube()
 #resol= Resolution(cube)
 #resol.theCross('f')
 #cube.displayCube()
 #cube.displayCube()
 #resol.applyCmd("FRD2L'F")
 #cube.displayCube()
-resol=Resolution(cube1)
+resol=Resolution(cube2)
 ##resol.theCross('f')
 ##cube.displayCube()
 resol.rfjaune()
-cube1.displayCube()
+cube2.displayCube()
