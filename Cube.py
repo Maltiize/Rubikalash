@@ -15,10 +15,12 @@ class Cube:
         
         #liste des noms des faces permet de faciliter les boucles for
 
+
         self.liFace=["u","l","f","b","r","d"]
         self.liFaceaff=["u","l","f","r","b","d"]
 
-
+        self.liFace=["u","l","f","r","b","d"]
+        self.liFaceaff=["u","l","f","r","b","d"]
  
         
         #Initialisation des faces à 0
@@ -357,7 +359,11 @@ class Cube:
         for x in self.liFace:
             print("-------",x,"--------")
             affTab(self.getFace(x))
+
     #Deuxieme méthode d'affichage du cube
+
+        #Deuxieme méthode d'affichage du cube
+
     def displayCube(self,defaultFace='u'):
         up=self.getFace(defaultFace)
         down=self.getFace(self.getFaceInversed(defaultFace))
@@ -382,13 +388,15 @@ class Cube:
             for y in range(3):
                 print(down[x][y]+" " ,end='')
             print("")
-            
+
     
     def getCentralColor(self,nameFace):
         f=self.getFace(nameFace)
         return f[1][1]
 
+
      # Permet d'obtenir le nom de la face opposé à celle dont le nom est nameFace
+
     def getFaceInversed(self,nameFace):
         if(nameFace not in self.liFace):
             print("getFaceInversed :INVALID NAMEFACE ")
@@ -464,8 +472,10 @@ class Cube:
                     if self.checkColorSquare(i,c1,j):
                         tmpr[idc1]=[j,i]
 
+
                         j2=m[1][idj][1][idx]
                         f2=m[1][idj][0]
+
 
 
                         for idc2,c2 in enumerate(tabcolor) :
@@ -505,7 +515,12 @@ def affTab(tab):
 
     
 
+<<<<<<< HEAD
 cube = Cube("OGRBWYBGBGYYOYOWOWGRYOOOBGBRRYRBWWWRBWYGROWGRYBRGYWBOG")
+=======
+
+#cube = Cube("OGRBWYBGBGYYOYOWOWGRYOOOBGBRRYRBWWWRBWYGROWGRYBRGYWBOG")
+>>>>>>> df6a268447aa85ae6f2b3a78cd90a31795e2540d
 #cube = Cube("YBGGGGGGGRRRWWWOOOYYBGRRWWWOOOYYYYRRWWWOOGRYOBBBBBBBRY")
 #cube = Cube("O0OOOOOOOBBBRRRJJJGGGBBBRRRJJJGGGBBBRRRJJJGGGYYYYYYYYY")
 #cube.printCube()
@@ -515,4 +530,5 @@ cube = Cube("OGRBWYBGBGYYOYOWOWGRYOOOBGBRRYRBWWWRBWYGROWGRYBRGYWBOG")
 ##cube.printCube()
 print(cube.findCube(['R','B']))
 ##
+
 
