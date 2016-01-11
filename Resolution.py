@@ -302,11 +302,6 @@ class Resolution:
             return ['d','r','u','l']
         
     def putCornerLastFace(self, cube, faceJaune, tabParc, tabLiFaceChange) :
-        if tabParc[0] == 'x' :
-            index = 1
-        else :
-            index = 0
-
         tabMiniReplace = []
         
         #A ce niveau de résolution il est possible de bien placer deux coins,
@@ -314,16 +309,16 @@ class Resolution:
         while len(tabMiniReplace) != 4 :
             for i in range(4) :
                 faceEnCours = cube.getFace(tabLiFaceChange[i])
-                if index == 0 :
-                    if faceEnCours[tabParc[index]][0] != faceEnCours[(tabParc[index]+1)%2][0] :
-                        tabMiniReplace.append([i,tabParc[index],0])
-                    if faceEnCours[tabParc[index]][2] != faceEnCours[(tabParc[index]+1)%2][2] :
-                        tabMiniReplace.append([i,tabParc[index],2])
+                if tabParc[0] != 'x' :
+                    if faceEnCours[tabParc[0]][0] != faceEnCours[(tabParc[0]+1)%2][0] :
+                        tabMiniReplace.append([i,tabParc[0],0])
+                    if faceEnCours[tabParc[0]][2] != faceEnCours[(tabParc[0]+1)%2][2] :
+                        tabMiniReplace.append([i,tabParc[0],2])
                 else :
-                    if faceEnCours[0][tabParc[index]] != faceEnCours[0][(tabParc[index]+1)%2] :
-                        tabMiniReplace.append([i,0,tabParc[index]])
-                    if faceEnCours[2][tabParc[index]] != faceEnCours[2][(tabParc[index]+1)%2] :
-                        tabMiniReplace.append([i,2,tabParc[index]])
+                    if faceEnCours[0][tabParc[1]] != faceEnCours[0][(tabParc[1]+1)%2] :
+                        tabMiniReplace.append([i,0,tabParc[1]])
+                    if faceEnCours[2][tabParc[1]] != faceEnCours[2][(tabParc[1]+1)%2] :
+                        tabMiniReplace.append([i,2,tabParc[1]])
             #(suite) je tourne la face "Jaune" (non résolue)
             if len(tabMiniReplace) != 4 :
                 cube.rotation(faceJaune.upper())
@@ -360,12 +355,12 @@ class Resolution:
             cube.rotation(tabLiFaceChange[(faceChange+(1*sensRotation))%4].upper()+'\'')
         else :
             for i in range(4):
-                if index == 0 :
-                    if tabMiniReplace[i][2] == 2 - tabParc[index] :
+                if tabParc[0] != 'x' :
+                    if tabMiniReplace[i][2] == 2 - tabParc[0] :
                         faceChange = tabMiniReplace[i][0]
                         break
                 else : 
-                    if tabMiniReplace[i][1] == tabParc[index] :
+                    if tabMiniReplace[i][1] == tabParc[1] :
                         faceChange = tabMiniReplace[i][0]
                         break
 #CAS 2 :
@@ -399,47 +394,62 @@ class Resolution:
                 faceOpposeFinie = cube.getFaceInversed(tabLiFaceChange[i])
                 break
 
-        if tabParc[0] == 'x' :
-            couleurMiniCube = cube.getFace(faceOpposeFinie)[1][tabParc[1]]
+        if faceOpposeFinie != None :
+            if tabParc[0] == 'x' :
+                couleurMiniCube = cube.getFace(faceOpposeFinie)[1][tabParc[1]]
+            else :
+                couleurMiniCube = cube.getFace(faceOpposeFinie)[tabParc[0]][1]
+                
+
+            faceSuivanteOF = tabLiFaceChange[(tabLiFaceChange.index(faceOpposeFinie)+(1*sensRotation))%4]
+
+            # CAS 2
+            #R' U R' U' R' U' R' U R U R2
+            if couleurMiniCube == cube.getCentralColor(cube.liFace[cube.liFace.index(faceSuivanteOF)]) :
+                cube.rotation(faceSuivanteOF.upper()+'\'')
+                cube.rotation(faceJaune.upper())
+                cube.rotation(faceSuivanteOF.upper()+'\'')
+                cube.rotation(faceJaune.upper()+'\'')
+                cube.rotation(faceSuivanteOF.upper()+'\'')
+                cube.rotation(faceJaune.upper()+'\'')
+                cube.rotation(faceSuivanteOF.upper()+'\'')
+                cube.rotation(faceJaune.upper())
+                cube.rotation(faceSuivanteOF.upper())
+                cube.rotation(faceJaune.upper())
+                cube.rotation(faceSuivanteOF.upper()+'2')
+
+            # CAS 1
+            # R2 U' R' U' R U R U R U' R
+            else :
+                cube.rotation(faceSuivanteOF.upper()+'2')
+                cube.rotation(faceJaune.upper()+'\'')
+                cube.rotation(faceSuivanteOF.upper()+'\'')
+                cube.rotation(faceJaune.upper()+'\'')
+                cube.rotation(faceSuivanteOF.upper())
+                cube.rotation(faceJaune.upper())
+                cube.rotation(faceSuivanteOF.upper())
+                cube.rotation(faceJaune.upper())
+                cube.rotation(faceSuivanteOF.upper())
+                cube.rotation(faceJaune.upper()+'\'')
+                cube.rotation(faceSuivanteOF.upper())
+
         else :
-            couleurMiniCube = cube.getFace(faceOpposeFinie)[tabParc[0]][1]
-            
+            if tabParc[0] == 'x' :
+                couleurMiniCube = cube.getFace(tabLiFaceChange[0])[1][tabParc[1]]
+            else :
+                couleurMiniCube = cube.getFace(tabLiFaceChange[0])[tabParc[0]][1]
 
-        faceSuivanteOF = tabLiFaceChange[(tabLiFaceChange.index(faceOpposeFinie)+(1*sensRotation))%4]
+            # CAS 1
+            # M2 U M2 U2 M2 U M2
+            if couleurMiniCube == cube.getFace(cube.getFaceInversed(tabLiFaceChange[0]))[1][1] :
 
-        # CAS 2
-        #R' U R' U' R' U' R' U R U R2
-        if couleurMiniCube == cube.getCentralColor(cube.liFace[cube.liFace.index(faceSuivanteOF)]) :
-            cube.rotation(faceSuivanteOF.upper()+'\'')
-            cube.rotation(faceJaune.upper())
-            cube.rotation(faceSuivanteOF.upper()+'\'')
-            cube.rotation(faceJaune.upper()+'\'')
-            cube.rotation(faceSuivanteOF.upper()+'\'')
-            cube.rotation(faceJaune.upper()+'\'')
-            cube.rotation(faceSuivanteOF.upper()+'\'')
-            cube.rotation(faceJaune.upper())
-            cube.rotation(faceSuivanteOF.upper())
-            cube.rotation(faceJaune.upper())
-            cube.rotation(faceSuivanteOF.upper()+'2')
-
-        # CAS 1
-        # R2 U' R' U' R U R U R U' R
-        else :
-            cube.rotation(faceSuivanteOF.upper()+'2')
-            cube.rotation(faceJaune.upper()+'\'')
-            cube.rotation(faceSuivanteOF.upper()+'\'')
-            cube.rotation(faceJaune.upper()+'\'')
-            cube.rotation(faceSuivanteOF.upper())
-            cube.rotation(faceJaune.upper())
-            cube.rotation(faceSuivanteOF.upper())
-            cube.rotation(faceJaune.upper())
-            cube.rotation(faceSuivanteOF.upper())
-            cube.rotation(faceJaune.upper()+'\'')
-            cube.rotation(faceSuivanteOF.upper())
+            # CAS 2
+            # U R' U' R U' R U R U' R' U R U R2 U' R' U
+            else :
 
 
         print(tabLiFaceChange)
-        
+        cube.rotation('M')
 
 
     ## ETAPE 6 & 7 ##         
