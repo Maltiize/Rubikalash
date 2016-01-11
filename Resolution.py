@@ -949,19 +949,27 @@ class Resolution:
     def rotate(self,liste):
         for i in range(len(liste)):
             self.rotation(liste[i])
-            self.cube.displayCube()
+            #self.cube.displayCube()
 
 ############## PARTIE CROIX JAUNE #################################
             
 def resolutionFinale(entry):
 
     cube = Cube(entry)
+    print("Cube d'origine")
     cube.displayCube()
     resolution = Resolution(cube)
     resolution.theCross('u')
+    print("Etape 1 : Croix")
+    cube.displayCube()
     resolution.theCorner('u')
+    print("Etape 2 : Les coins")
+    cube.displayCube()
     resolution.deuxcouronne()
+    print("Etape 3 : la deuxieme couronne")
+    cube.displayCube()
     resolution.resolutionCroixJaune()
+    print("Etape 4 : la croix inverse")
     cube.displayCube()
     
 #MODIFIER POUR QUE SA FONCTION PERSONNELLE FONCTIONNE
