@@ -984,7 +984,6 @@ class Resolution:
             # Résolution des coins et des arrêtes
             self.putCornerLastFace(faceJaune, tabParc, tabLiFaceChange)
             self.putAreteLastFace(faceJaune, tabParc, tabLiFaceChange)
-            print(2)
 
     def getFaceJaune(self) :
         faceBlanche = ''
@@ -1040,8 +1039,6 @@ class Resolution:
         #donc tant que je n'obtient pas seulement deux coins mal placés :
         while len(tabMiniReplace) != 4 :
             tabMiniReplace = []
-            self.cube.displayCube()
-            print(len(tabMiniReplace))
             for i in range(4) :
                 faceEnCours = self.cube.getFace(tabLiFaceChange[i])
                 if tabParc[0] != 'x' :
