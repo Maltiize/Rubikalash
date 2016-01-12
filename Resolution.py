@@ -1114,9 +1114,6 @@ class Resolution:
 
             # CAS 2
             #R' U R' U' R' U' R' U R U R2
-            print(faceSuivanteOF)
-            print(couleurMiniCube)
-            print(self.cube.getCentralColor(self.cube.liFace[self.cube.liFace.index(faceSuivanteOF)]))
             if couleurMiniCube == self.cube.getCentralColor(self.cube.liFace[self.cube.liFace.index(faceSuivanteOF)]) :
                 self.rotation(faceSuivanteOF.upper()+'\'')
                 self.rotation(faceJaune.upper())
