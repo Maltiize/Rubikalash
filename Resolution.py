@@ -1252,6 +1252,3 @@ def resolutionFinale(entry):
     print(str(resolution.nbCmd) + '\n')
     
 #MODIFIER POUR QUE SA FONCTION PERSONNELLE FONCTIONNE
-
-resolutionFinale("RWYRWGOGOYYGWRWBOOBOGGGYORGWBWBOYBBGYRRBRGWOWOWYYYBRBR")
-
