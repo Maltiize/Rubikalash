@@ -14,6 +14,7 @@ class Resolution:
 
         # liste des rotation effectué durant la résolution 
         self.liCmd=''
+        self.nbCmd=0
         self.liRota='','2',"'"
         self.listeMouv=[]
         
@@ -28,6 +29,7 @@ class Resolution:
             print("rotation : INVALID ROTATION NAME",cmd)
             return -1
         self.liCmd+=cmd
+        self.nbCmd+=1
        
         self.cube.rotation(cmd)
         
@@ -159,7 +161,7 @@ class Resolution:
                                 faceinter=tmppos[0][1]
                                 mouvinter=self.getInvRot(tmpcmd)
                                 
-                                self.cube.rotation(tmpcmd)
+                                self.rotation(tmpcmd)
                                 
                                 tmppos==self.cube.findCube([colorcross,curColor])
                                 tmpcmd=self.getApproRot(tmppos[0][1],nameFace,x)
@@ -405,38 +407,38 @@ class Resolution:
 
         #si le cube bleu/rouge inversé avec le vert/rouge
         if (br[0][1] == 'l' and vr[0][1] == 'r') or (br[0][1] == 'f' and vr[0][1] == 'f'):
-            self.cube.rotation("F2")
-            self.cube.rotation("D2")
-            self.cube.rotation("F2")
-            self.cube.rotation("D2")
-            self.cube.rotation("F2")
+            self.rotation("F2")
+            self.rotation("D2")
+            self.rotation("F2")
+            self.rotation("D2")
+            self.rotation("F2")
             self.mouv += 5
 
         #si le cube bleu/rouge inversé avec le bleu/orange
         if (br[1][1] == 'b' and bo[1][1] == 'f') or (br[1][1] == 'r' and bo[1][1] == 'r'):
-            self.cube.rotation("R2")
-            self.cube.rotation("D2")
-            self.cube.rotation("R2")
-            self.cube.rotation("D2")
-            self.cube.rotation("R2")
+            self.rotation("R2")
+            self.rotation("D2")
+            self.rotation("R2")
+            self.rotation("D2")
+            self.rotation("R2")
             self.mouv += 5
             
         #si le cube vert/orange inversé avec le bleu/orange
         if (vo[0][1] == 'r' and bo[0][1] == 'l') or (vo[0][1] == 'b' and bo[0][1] == 'b'):
-            self.cube.rotation("B2")
-            self.cube.rotation("D2")
-            self.cube.rotation("B2")
-            self.cube.rotation("D2")
-            self.cube.rotation("B2")
+            self.rotation("B2")
+            self.rotation("D2")
+            self.rotation("B2")
+            self.rotation("D2")
+            self.rotation("B2")
             self.mouv += 5
 
         #si le cube vert/orange inversé avec le vert/rouge
         if (vo[1][1] == 'f' and vr[1][1] == 'b') or (vo[1][1] == 'l' and vr[1][1] == 'l'):
-            self.cube.rotation("L2")
-            self.cube.rotation("D2")
-            self.cube.rotation("L2")
-            self.cube.rotation("D2")
-            self.cube.rotation("L2")
+            self.rotation("L2")
+            self.rotation("D2")
+            self.rotation("L2")
+            self.rotation("D2")
+            self.rotation("L2")
             self.mouv += 5
         #self.cube.displayCube()
         #print("2cubeinv")
@@ -449,61 +451,61 @@ class Resolution:
         bo = self.cube.findCube(['B', 'O']) #cube bleu/orange
 
         if br[0][1] == 'f' and br[1][1] == 'r':
-            self.cube.rotation("F")
-            self.cube.rotation("D")
-            self.cube.rotation("F'")
-            self.cube.rotation("D2")
-            self.cube.rotation("F")
-            self.cube.rotation("D2")
-            self.cube.rotation("F'")
-            self.cube.rotation("D")
-            self.cube.rotation("R'")
-            self.cube.rotation("D'")
-            self.cube.rotation("R")
+            self.rotation("F")
+            self.rotation("D")
+            self.rotation("F'")
+            self.rotation("D2")
+            self.rotation("F")
+            self.rotation("D2")
+            self.rotation("F'")
+            self.rotation("D")
+            self.rotation("R'")
+            self.rotation("D'")
+            self.rotation("R")
             self.mouv += 11
             #self.cube.displayCube()
 
         if vr[0][1] == 'f' and vr[1][1] == 'l':
-            self.cube.rotation("L")
-            self.cube.rotation("D")
-            self.cube.rotation("L'")
-            self.cube.rotation("D2")
-            self.cube.rotation("L")
-            self.cube.rotation("D2")
-            self.cube.rotation("L'")
-            self.cube.rotation("D")
-            self.cube.rotation("F'")
-            self.cube.rotation("D'")
-            self.cube.rotation("F")
+            self.rotation("L")
+            self.rotation("D")
+            self.rotation("L'")
+            self.rotation("D2")
+            self.rotation("L")
+            self.rotation("D2")
+            self.rotation("L'")
+            self.rotation("D")
+            self.rotation("F'")
+            self.rotation("D'")
+            self.rotation("F")
             self.mouv += 11
             #self.cube.displayCube()
 
         if vo[0][1] == 'b' and vo[1][1] == 'l':
-            self.cube.rotation("B")
-            self.cube.rotation("D")
-            self.cube.rotation("B'")
-            self.cube.rotation("D2")
-            self.cube.rotation("B")
-            self.cube.rotation("D2")
-            self.cube.rotation("B'")
-            self.cube.rotation("D")
-            self.cube.rotation("L'")
-            self.cube.rotation("D'")
-            self.cube.rotation("L")
+            self.rotation("B")
+            self.rotation("D")
+            self.rotation("B'")
+            self.rotation("D2")
+            self.rotation("B")
+            self.rotation("D2")
+            self.rotation("B'")
+            self.rotation("D")
+            self.rotation("L'")
+            self.rotation("D'")
+            self.rotation("L")
             self.mouv += 11
 
         if bo[0][1] == 'b' and bo[1][1] == 'r':
-            self.cube.rotation("R")
-            self.cube.rotation("D")
-            self.cube.rotation("R'")
-            self.cube.rotation("D2")
-            self.cube.rotation("R")
-            self.cube.rotation("D2")
-            self.cube.rotation("R'")
-            self.cube.rotation("D")
-            self.cube.rotation("B'")
-            self.cube.rotation("D'")
-            self.cube.rotation("B")
+            self.rotation("R")
+            self.rotation("D")
+            self.rotation("R'")
+            self.rotation("D2")
+            self.rotation("R")
+            self.rotation("D2")
+            self.rotation("R'")
+            self.rotation("D")
+            self.rotation("B'")
+            self.rotation("D'")
+            self.rotation("B")
             self.mouv += 11
             
     
@@ -547,45 +549,45 @@ class Resolution:
                     #ne rien faire car bon endroit
                 if br[1][1] == 'l':
                     #faire
-                    self.cube.rotation("D")
+                    self.rotation("D")
                 elif br[1][1] == 'b':
                     #faire
-                    self.cube.rotation("D2")
+                    self.rotation("D2")
                 elif br[1][1] == 'r':
                     #faire
-                    self.cube.rotation("D'")
+                    self.rotation("D'")
                 #on doit faire basculer le cube a gauche/ au dessus du rouge
-                self.cube.rotation("D'")
-                self.cube.rotation("R'")
-                self.cube.rotation("D")
-                self.cube.rotation("R")
-                self.cube.rotation("D")
-                self.cube.rotation("F")
-                self.cube.rotation("D'")
-                self.cube.rotation("F'")
+                self.rotation("D'")
+                self.rotation("R'")
+                self.rotation("D")
+                self.rotation("R")
+                self.rotation("D")
+                self.rotation("F")
+                self.rotation("D'")
+                self.rotation("F'")
 
                     
             elif br[1][1] == 'd': #ici le cube rouge est sur la face down
                 if br[0][1] == 'f':
                     #faire
-                    self.cube.rotation("D")
+                    self.rotation("D")
                 elif br[0][1] == 'l':
                     #faire
-                    self.cube.rotation("D2")
+                    self.rotation("D2")
                 elif br[0][1] == 'b':
                     #faire
-                    self.cube.rotation("D'")
+                    self.rotation("D'")
                 #if a[0][1] == 'r':
                     #ne rien faire
                 #on doit faire basculer le cube a droite
-                self.cube.rotation("D")
-                self.cube.rotation("F")
-                self.cube.rotation("D'")
-                self.cube.rotation("F'")
-                self.cube.rotation("D'")
-                self.cube.rotation("R'")
-                self.cube.rotation("D")
-                self.cube.rotation("R")
+                self.rotation("D")
+                self.rotation("F")
+                self.rotation("D'")
+                self.rotation("F'")
+                self.rotation("D'")
+                self.rotation("R'")
+                self.rotation("D")
+                self.rotation("R")
 
             
             #cube vert/rouge
@@ -597,44 +599,44 @@ class Resolution:
                 
                 if vr[1][1] == 'l':
                     #faire
-                    self.cube.rotation("D")
+                    self.rotation("D")
                 elif vr[1][1] == 'b':
                     #faire
-                    self.cube.rotation("D2")
+                    self.rotation("D2")
                 elif vr[1][1] == 'r':
                     #faire
-                    self.cube.rotation("D'")
+                    self.rotation("D'")
                 #on doit faire basculer le cube a droite
-                self.cube.rotation("D")
-                self.cube.rotation("L")
-                self.cube.rotation("D'")
-                self.cube.rotation("L'")
-                self.cube.rotation("D'")
-                self.cube.rotation("F'")
-                self.cube.rotation("D")
-                self.cube.rotation("F")
+                self.rotation("D")
+                self.rotation("L")
+                self.rotation("D'")
+                self.rotation("L'")
+                self.rotation("D'")
+                self.rotation("F'")
+                self.rotation("D")
+                self.rotation("F")
 
             elif vr[1][1] == 'd': #ici le cube rouge est sur la face down
                 if vr[0][1] == 'f':
                     #faire
-                    self.cube.rotation("D'")
+                    self.rotation("D'")
                 elif vr[0][1] == 'r':
                     #faire
-                    self.cube.rotation("D2")
+                    self.rotation("D2")
                 elif vr[0][1] == 'b':
                     #faire
-                    self.cube.rotation("D")
+                    self.rotation("D")
                 #elif a[0][1] == 'r':
                     #ne rien faire
                 #on doit faire basculer le cube a gauche
-                self.cube.rotation("D'")
-                self.cube.rotation("F'")
-                self.cube.rotation("D")
-                self.cube.rotation("F")
-                self.cube.rotation("D")
-                self.cube.rotation("L")
-                self.cube.rotation("D'")
-                self.cube.rotation("L'")
+                self.rotation("D'")
+                self.rotation("F'")
+                self.rotation("D")
+                self.rotation("F")
+                self.rotation("D")
+                self.rotation("L")
+                self.rotation("D'")
+                self.rotation("L'")
                 self.cube.displayCube()
 
             #cube vert/orange
@@ -644,47 +646,47 @@ class Resolution:
                 self.mouv += 8
                 if vo[1][1] == 'f':
                      #faire
-                    self.cube.rotation("D2")
+                    self.rotation("D2")
                 elif vo[1][1] == 'l':
                     #faire
-                    self.cube.rotation("D'")
+                    self.rotation("D'")
                 #if vr[1][1] == 'b':
                    #ne rien faire car bon endroit
                 elif vo[1][1] == 'r':
                     #faire
-                    self.cube.rotation("D")
+                    self.rotation("D")
                 #on doit faire basculer le cube a gauche
-                self.cube.rotation("D'")
-                self.cube.rotation("L'")
-                self.cube.rotation("D")
-                self.cube.rotation("L")
-                self.cube.rotation("D")
-                self.cube.rotation("B")
-                self.cube.rotation("D'")
-                self.cube.rotation("B'")
+                self.rotation("D'")
+                self.rotation("L'")
+                self.rotation("D")
+                self.rotation("L")
+                self.rotation("D")
+                self.rotation("B")
+                self.rotation("D'")
+                self.rotation("B'")
                 self.cube.displayCube()
                 
             elif vo[1][1] == 'd': #ici le cube orange est sur la face down
                 if vo[0][1] == 'f':
                     #faire
-                    self.cube.rotation("D'")
+                    self.rotation("D'")
                 elif vo[0][1] == 'r':
                     #faire
-                    self.cube.rotation("D2")
+                    self.rotation("D2")
                 elif vo[0][1] == 'b':
                     #faire
-                    self.cube.rotation("D")
+                    self.rotation("D")
                 #if vo[0][1] == 'r':
                     #ne rien faire
                 #on doit faire basculer le cube a droite
-                self.cube.rotation("D")
-                self.cube.rotation("B")
-                self.cube.rotation("D'")
-                self.cube.rotation("B'")
-                self.cube.rotation("D'")
-                self.cube.rotation("L'")
-                self.cube.rotation("D")
-                self.cube.rotation("L")
+                self.rotation("D")
+                self.rotation("B")
+                self.rotation("D'")
+                self.rotation("B'")
+                self.rotation("D'")
+                self.rotation("L'")
+                self.rotation("D")
+                self.rotation("L")
                 self.cube.displayCube()
 
             #cube bleu/orange
@@ -694,47 +696,47 @@ class Resolution:
                 self.mouv += 8
                 if bo[1][1] == 'f':
                      #faire
-                    self.cube.rotation("D2")
+                    self.rotation("D2")
                 elif bo[1][1] == 'l':
                     #faire
-                    self.cube.rotation("D'")
+                    self.rotation("D'")
                 #if bo[1][1] == 'b':
                    #ne rien faire car bon endroit
                 elif bo[1][1] == 'r':
                     #faire
-                    self.cube.rotation("D")
+                    self.rotation("D")
                     #on doit faire basculer le cube a droite
-                self.cube.rotation("D")
-                self.cube.rotation("R")
-                self.cube.rotation("D'")
-                self.cube.rotation("R'")
-                self.cube.rotation("D'")
-                self.cube.rotation("B'")
-                self.cube.rotation("D")
-                self.cube.rotation("B")
+                self.rotation("D")
+                self.rotation("R")
+                self.rotation("D'")
+                self.rotation("R'")
+                self.rotation("D'")
+                self.rotation("B'")
+                self.rotation("D")
+                self.rotation("B")
                 self.cube.displayCube()
             
             elif bo[1][1] == 'd': #ici le cube orange est sur la face down
                 if bo[0][1] == 'f':
                     #faire
-                    self.cube.rotation("D")
+                    self.rotation("D")
                 #if bo[0][1] == 'r':
                     #ne rien faire
                 elif bo[0][1] == 'b':
                     #faire
-                    self.cube.rotation("D'")
+                    self.rotation("D'")
                 elif bo[0][1] == 'l':
                     #faire
-                    self.cube.rotation("D2")
+                    self.rotation("D2")
                 #on doit faire basculer le cube a gauche
-                self.cube.rotation("D'")
-                self.cube.rotation("B'")
-                self.cube.rotation("D")
-                self.cube.rotation("B")
-                self.cube.rotation("D")
-                self.cube.rotation("R")
-                self.cube.rotation("D'")
-                self.cube.rotation("R'")
+                self.rotation("D'")
+                self.rotation("B'")
+                self.rotation("D")
+                self.rotation("B")
+                self.rotation("D")
+                self.rotation("R")
+                self.rotation("D'")
+                self.rotation("R'")
                 self.cube.displayCube()
 
 ############## PARTIE 2ND COURONNE #################################
@@ -956,6 +958,8 @@ class Resolution:
 
             # Résolution des coins et des arrêtes
             self.putCornerLastFace(faceJaune, tabParc, tabLiFaceChange)
+            
+        if self.cube.cubeFinished() == False :
             self.putAreteLastFace(faceJaune, tabParc, tabLiFaceChange)
 
     def getFaceJaune(self) :
@@ -1026,7 +1030,7 @@ class Resolution:
                         tabMiniReplace.append([i,2,tabParc[1]])
             #(suite) je tourne la face "Jaune" (non résolue)
             if len(tabMiniReplace) != 4 :
-                self.cube.rotation(faceJaune.upper())
+                self.rotation(faceJaune.upper())
 
         # cas 1 : les deux cubes à intervertir sont sur la même face
         # cas 2 : les deux cubes à intervertir sont des coins opposés
@@ -1044,20 +1048,20 @@ class Resolution:
 
 #CAS 1 : 
         if cas1 :
-            self.cube.rotation(tabLiFaceChange[faceChange].upper())
-            self.cube.rotation(faceJaune.upper())
-            self.cube.rotation(tabLiFaceChange[faceChange].upper()+'\'')
-            self.cube.rotation(faceJaune.upper()+'\'')
-            self.cube.rotation(tabLiFaceChange[faceChange].upper()+'\'')
-            self.cube.rotation(tabLiFaceChange[(faceChange+(1*sensRotation))%4].upper())
-            self.cube.rotation(tabLiFaceChange[faceChange].upper()+'2')
-            self.cube.rotation(faceJaune.upper()+'\'')
-            self.cube.rotation(tabLiFaceChange[faceChange].upper()+'\'')
-            self.cube.rotation(faceJaune.upper()+'\'')
-            self.cube.rotation(tabLiFaceChange[faceChange].upper())
-            self.cube.rotation(faceJaune.upper())
-            self.cube.rotation(tabLiFaceChange[faceChange].upper()+'\'')
-            self.cube.rotation(tabLiFaceChange[(faceChange+(1*sensRotation))%4].upper()+'\'')
+            self.rotation(tabLiFaceChange[faceChange].upper())
+            self.rotation(faceJaune.upper())
+            self.rotation(tabLiFaceChange[faceChange].upper()+'\'')
+            self.rotation(faceJaune.upper()+'\'')
+            self.rotation(tabLiFaceChange[faceChange].upper()+'\'')
+            self.rotation(tabLiFaceChange[(faceChange+(1*sensRotation))%4].upper())
+            self.rotation(tabLiFaceChange[faceChange].upper()+'2')
+            self.rotation(faceJaune.upper()+'\'')
+            self.rotation(tabLiFaceChange[faceChange].upper()+'\'')
+            self.rotation(faceJaune.upper()+'\'')
+            self.rotation(tabLiFaceChange[faceChange].upper())
+            self.rotation(faceJaune.upper())
+            self.rotation(tabLiFaceChange[faceChange].upper()+'\'')
+            self.rotation(tabLiFaceChange[(faceChange+(1*sensRotation))%4].upper()+'\'')
         else :
             for i in range(4):
                 if tabParc[0] != 'x' :
@@ -1069,23 +1073,23 @@ class Resolution:
                         faceChange = tabMiniReplace[i][0]
                         break
 #CAS 2 :
-            self.cube.rotation(tabLiFaceChange[faceChange].upper())
-            self.cube.rotation(tabLiFaceChange[(faceChange+(3*sensRotation))%4].upper())
-            self.cube.rotation(faceJaune.upper()+'\'') 
-            self.cube.rotation(tabLiFaceChange[(faceChange+(3*sensRotation))%4].upper()+'\'')
-            self.cube.rotation(faceJaune.upper()+'\'')
-            self.cube.rotation(tabLiFaceChange[(faceChange+(3*sensRotation))%4].upper())
-            self.cube.rotation(faceJaune.upper())
-            self.cube.rotation(tabLiFaceChange[(faceChange+(3*sensRotation))%4].upper()+'\'')
-            self.cube.rotation(tabLiFaceChange[faceChange].upper()+'\'')
-            self.cube.rotation(tabLiFaceChange[(faceChange+(3*sensRotation))%4].upper())
-            self.cube.rotation(faceJaune.upper())
-            self.cube.rotation(tabLiFaceChange[(faceChange+(3*sensRotation))%4].upper()+'\'')
-            self.cube.rotation(faceJaune.upper()+'\'')
-            self.cube.rotation(tabLiFaceChange[(faceChange+(3*sensRotation))%4].upper()+'\'')
-            self.cube.rotation(tabLiFaceChange[faceChange].upper())
-            self.cube.rotation(tabLiFaceChange[(faceChange+(3*sensRotation))%4].upper())
-            self.cube.rotation(tabLiFaceChange[faceChange].upper()+'\'')
+            self.rotation(tabLiFaceChange[faceChange].upper())
+            self.rotation(tabLiFaceChange[(faceChange+(3*sensRotation))%4].upper())
+            self.rotation(faceJaune.upper()+'\'') 
+            self.rotation(tabLiFaceChange[(faceChange+(3*sensRotation))%4].upper()+'\'')
+            self.rotation(faceJaune.upper()+'\'')
+            self.rotation(tabLiFaceChange[(faceChange+(3*sensRotation))%4].upper())
+            self.rotation(faceJaune.upper())
+            self.rotation(tabLiFaceChange[(faceChange+(3*sensRotation))%4].upper()+'\'')
+            self.rotation(tabLiFaceChange[faceChange].upper()+'\'')
+            self.rotation(tabLiFaceChange[(faceChange+(3*sensRotation))%4].upper())
+            self.rotation(faceJaune.upper())
+            self.rotation(tabLiFaceChange[(faceChange+(3*sensRotation))%4].upper()+'\'')
+            self.rotation(faceJaune.upper()+'\'')
+            self.rotation(tabLiFaceChange[(faceChange+(3*sensRotation))%4].upper()+'\'')
+            self.rotation(tabLiFaceChange[faceChange].upper())
+            self.rotation(tabLiFaceChange[(faceChange+(3*sensRotation))%4].upper())
+            self.rotation(tabLiFaceChange[faceChange].upper()+'\'')
 
     def putAreteLastFace(self, faceJaune, tabParc, tabLiFaceChange) :
         if faceJaune == 'd' or faceJaune == 'r' or faceJaune == 'b' :
@@ -1110,33 +1114,36 @@ class Resolution:
 
             # CAS 2
             #R' U R' U' R' U' R' U R U R2
+            print(faceSuivanteOF)
+            print(couleurMiniCube)
+            print(self.cube.getCentralColor(self.cube.liFace[self.cube.liFace.index(faceSuivanteOF)]))
             if couleurMiniCube == self.cube.getCentralColor(self.cube.liFace[self.cube.liFace.index(faceSuivanteOF)]) :
-                self.cube.rotation(faceSuivanteOF.upper()+'\'')
-                self.cube.rotation(faceJaune.upper())
-                self.cube.rotation(faceSuivanteOF.upper()+'\'')
-                self.cube.rotation(faceJaune.upper()+'\'')
-                self.cube.rotation(faceSuivanteOF.upper()+'\'')
-                self.cube.rotation(faceJaune.upper()+'\'')
-                self.cube.rotation(faceSuivanteOF.upper()+'\'')
-                self.cube.rotation(faceJaune.upper())
-                self.cube.rotation(faceSuivanteOF.upper())
-                self.cube.rotation(faceJaune.upper())
-                self.cube.rotation(faceSuivanteOF.upper()+'2')
+                self.rotation(faceSuivanteOF.upper()+'\'')
+                self.rotation(faceJaune.upper())
+                self.rotation(faceSuivanteOF.upper()+'\'')
+                self.rotation(faceJaune.upper()+'\'')
+                self.rotation(faceSuivanteOF.upper()+'\'')
+                self.rotation(faceJaune.upper()+'\'')
+                self.rotation(faceSuivanteOF.upper()+'\'')
+                self.rotation(faceJaune.upper())
+                self.rotation(faceSuivanteOF.upper())
+                self.rotation(faceJaune.upper())
+                self.rotation(faceSuivanteOF.upper()+'2')
 
             # CAS 1
             # R2 U' R' U' R U R U R U' R
             else :
-                self.cube.rotation(faceSuivanteOF.upper()+'2')
-                self.cube.rotation(faceJaune.upper()+'\'')
-                self.cube.rotation(faceSuivanteOF.upper()+'\'')
-                self.cube.rotation(faceJaune.upper()+'\'')
-                self.cube.rotation(faceSuivanteOF.upper())
-                self.cube.rotation(faceJaune.upper())
-                self.cube.rotation(faceSuivanteOF.upper())
-                self.cube.rotation(faceJaune.upper())
-                self.cube.rotation(faceSuivanteOF.upper())
-                self.cube.rotation(faceJaune.upper()+'\'')
-                self.cube.rotation(faceSuivanteOF.upper())
+                self.rotation(faceSuivanteOF.upper()+'2')
+                self.rotation(faceJaune.upper()+'\'')
+                self.rotation(faceSuivanteOF.upper()+'\'')
+                self.rotation(faceJaune.upper()+'\'')
+                self.rotation(faceSuivanteOF.upper())
+                self.rotation(faceJaune.upper())
+                self.rotation(faceSuivanteOF.upper())
+                self.rotation(faceJaune.upper())
+                self.rotation(faceSuivanteOF.upper())
+                self.rotation(faceJaune.upper()+'\'')
+                self.rotation(faceSuivanteOF.upper())
 
         else :
             if tabParc[0] == 'x' :
@@ -1148,17 +1155,19 @@ class Resolution:
             # M2 U M2 U2 M2 U M2
             if couleurMiniself.cube == self.cube.getFace(self.cube.getFaceInversed(tabLiFaceChange[2]))[1][1] :
                 # L2 + R2 = M2 ou B2 + F2 = M2 mais cela inverse la face haute et basse
-                self.cube.rotation(tabLiFaceChange[0].upper()+'2')
-                self.cube.rotation(tabLiFaceChange[2].upper()+'2')
-                self.cube.rotation(self.cube.getFaceInversed(faceJaune).upper())
-                self.cube.rotation(tabLiFaceChange[0].upper()+'2')
-                self.cube.rotation(tabLiFaceChange[2].upper()+'2')
-                self.cube.rotation(faceJaune.upper()+'2')
-                self.cube.rotation(tabLiFaceChange[0].upper()+'2')
-                self.cube.rotation(tabLiFaceChange[2].upper()+'2')
-                self.cube.rotation(self.cube.getFaceInversed(faceJaune).upper())
-                self.cube.rotation(tabLiFaceChange[0].upper()+'2')
-                self.cube.rotation(tabLiFaceChange[2].upper()+'2')
+                self.rotation(tabLiFaceChange[0].upper()+'2')
+                self.rotation(tabLiFaceChange[2].upper()+'2')
+                self.rotation(self.cube.getFaceInversed(faceJaune).upper())
+                self.rotation(tabLiFaceChange[0].upper()+'2')
+                self.rotation(tabLiFaceChange[2].upper()+'2')
+                self.rotation(faceJaune.upper()+'2')
+                self.rotation(tabLiFaceChange[0].upper()+'2')
+                self.rotation(tabLiFaceChange[2].upper()+'2')
+                self.rotation(self.cube.getFaceInversed(faceJaune).upper())
+                self.rotation(tabLiFaceChange[0].upper()+'2')
+                self.rotation(tabLiFaceChange[2].upper()+'2')
+
+                self.nbCmd -= 4 
 
             # CAS 2
             # U R' U' R U' R U R U' R' U R U R2 U' R' U
@@ -1168,23 +1177,23 @@ class Resolution:
                 else :
                     face = 2
                     
-                self.cube.rotation(faceJaune.upper())
-                self.cube.rotation(tabLiFaceChange[face].upper()+'\'')
-                self.cube.rotation(faceJaune.upper()+'\'')
-                self.cube.rotation(tabLiFaceChange[face].upper())
-                self.cube.rotation(faceJaune.upper()+'\'')
-                self.cube.rotation(tabLiFaceChange[face].upper())
-                self.cube.rotation(faceJaune.upper())
-                self.cube.rotation(tabLiFaceChange[face].upper())
-                self.cube.rotation(faceJaune.upper()+'\'')
-                self.cube.rotation(tabLiFaceChange[face].upper()+'\'')
-                self.cube.rotation(faceJaune.upper())
-                self.cube.rotation(tabLiFaceChange[face].upper())
-                self.cube.rotation(faceJaune.upper())
-                self.cube.rotation(tabLiFaceChange[face].upper()+'2')
-                self.cube.rotation(faceJaune.upper()+'\'')
-                self.cube.rotation(tabLiFaceChange[face].upper()+'\'')
-                self.cube.rotation(faceJaune.upper())
+                self.rotation(faceJaune.upper())
+                self.rotation(tabLiFaceChange[face].upper()+'\'')
+                self.rotation(faceJaune.upper()+'\'')
+                self.rotation(tabLiFaceChange[face].upper())
+                self.rotation(faceJaune.upper()+'\'')
+                self.rotation(tabLiFaceChange[face].upper())
+                self.rotation(faceJaune.upper())
+                self.rotation(tabLiFaceChange[face].upper())
+                self.rotation(faceJaune.upper()+'\'')
+                self.rotation(tabLiFaceChange[face].upper()+'\'')
+                self.rotation(faceJaune.upper())
+                self.rotation(tabLiFaceChange[face].upper())
+                self.rotation(faceJaune.upper())
+                self.rotation(tabLiFaceChange[face].upper()+'2')
+                self.rotation(faceJaune.upper()+'\'')
+                self.rotation(tabLiFaceChange[face].upper()+'\'')
+                self.rotation(faceJaune.upper())
                 
 ## ETAPE 6 & 7  : FIN  ##         
 
@@ -1220,5 +1229,11 @@ def resolutionFinale(entry):
     print("Etape 6 : les coins et les arretes jaunes ")
     resolution.lastStep()
     cube.displayCube()
+
+    print(resolution.liCmd)
+    print(resolution.nbCmd)
     
 #MODIFIER POUR QUE SA FONCTION PERSONNELLE FONCTIONNE
+
+resolutionFinale("RWYRWGOGOYYGWRWBOOBOGGGYORGWBWBOYBBGYRRBRGWOWOWYYYBRBR")
+
