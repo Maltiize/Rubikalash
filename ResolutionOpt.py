@@ -42,16 +42,16 @@ class Resolution:
         self.majcube()
 
         #si le cube bleu/rouge inversé avec le vert/rouge
-        if br[0][1] == 'l' and vr[0][1] == 'r':
+        if (br[0][1] == 'l' and vr[0][1] == 'r') or (br[0][1] == 'f' and vr[0][1] == 'f'):
             a = "F"
         #si le cube bleu/rouge inversé avec le bleu/orange
-        elif br[1][1] == 'b' and bo[1][1] == 'f':
+        elif (br[1][1] == 'b' and bo[1][1] == 'f') or (br[1][1] == 'r' and bo[1][1] == 'r'):
             a = "R"
         #si le cube vert/orange inversé avec le bleu/orange
-        elif vo[0][1] == 'r' and bo[0][1] == 'l':
+        elif (vo[0][1] == 'r' and bo[0][1] == 'l') or (vo[0][1] == 'b' and bo[0][1] == 'b'):
             a = "B"
         #si le cube vert/orange inversé avec le vert/rouge
-        elif vo[1][1] == 'f' and vr[1][1] == 'b':
+        elif (vo[1][1] == 'f' and vr[1][1] == 'b') or (vo[1][1] == 'l' and vr[1][1] == 'l'):
             a = "L"
         if a!= 0:
             self.rubiks.rotation(str(a)+str(2))

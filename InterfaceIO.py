@@ -1,10 +1,12 @@
+from Resolution import *
+
 class InterfaceIO:
 
 #classe qui gère les entrées sorties avec l'utilisateur
     
     def __init__(self, entree=None, sortie=None):
         self.entry=entree
-        self.sortie=sortie
+        self.output=sortie
 
 #l'utilisateur entre dans le programme la position du cube de départ
         
@@ -32,9 +34,18 @@ class InterfaceIO:
             
 #renvoie les mouvements a faire a l'utilisateur
             
-    #def setOutput(self):
+    def setOutput(self):
+    
+        self.output = resolutionFinale("RWYRWGOGOYYGWRWBOOBOGGGYORGWBWBOYBBGYRRBRGWOWOWYYYBRBR")
+        print(self.output)
+        
+        
         
         
 #bonjour = InterfaceIO()
 #bonjour.getEntry()
+
+resolutionCube = InterfaceIO()
+#resolutionCube.getEntry()
+resolutionCube.setOutput()
 

@@ -19,8 +19,10 @@ class Cube:
         self.liFace=["u","l","f","b","r","d"]
         self.liFaceaff=["u","l","f","r","b","d"]
 
-        self.liFace=["u","l","f","r","b","d"]
-        self.liFaceaff=["u","l","f","r","b","d"]
+
+        #Vient du merge de Jean, a garder pour voir si il en a besoin
+        #self.liFace=["u","l","f","r","b","d"]
+        #self.liFaceaff=["u","l","f","r","b","d"]
  
         
         #Initialisation des faces à 0
@@ -518,6 +520,10 @@ def affTab(tab):
 
 
 #cube = Cube("OGRBWYBGBGYYOYOWOWGRYOOOBGBRRYRBWWWRBWYGROWGRYBRGYWBOG")
+
+
+#cube = Cube("OGRBWYBGBGYYOYOWOWGRYOOOBGBRRYRBWWWRBWYGROWGRYBRGYWBOG")
+
 #cube = Cube("YBGGGGGGGRRRWWWOOOYYBGRRWWWOOOYYYYRRWWWOOGRYOBBBBBBBRY")
 #cube = Cube("O0OOOOOOOBBBRRRJJJGGGBBBRRRJJJGGGBBBRRRJJJGGGYYYYYYYYY")
 #cube.printCube()
@@ -525,7 +531,7 @@ def affTab(tab):
 #cube.displayCube() 
 ##cube = Cube("OGRBWYBGBGYYOYOWOWGRYOOOBGBRRYRBWWWRBWYGROWGRYBRGYWBOG")
 ##cube.printCube()
-##print(cube.findCube(['G','Y']))
+#print(cube.findCube(['R','B']))
 ##
 
 
