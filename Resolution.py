@@ -279,9 +279,6 @@ class Resolution:
                         if (tmp[1+i][1] == inv):
                             m=self.cube.getMouv(tmp[2-i][1].upper())
                             if (tmp[0][1] == m[1][1][0]):
-                                print("t")
-                                print(x[1-i][0])
-                                print("sal",self.getApproRot(tmp[0][1],self.cube.getFaceInversed(x[1-i][0]),inv))
                                 self.rotation(self.getApproRot(tmp[0][1],self.cube.getFaceInversed(x[1-i][0]),inv))
                                 self.rotation(x[1-i][0].upper())
                                 self.rotation(self.getInvRot(inv.upper()))
@@ -358,18 +355,11 @@ class Resolution:
         b=cube.right
         g=cube.left
         o=cube.back
-        cube.displayCube()
         if not cube.faceFinished('d') :
           
-            
-
             if r[2][0]==b[2][2] and j[0][2]==b[2][2] and j[2][0]==b[2][2] and j[2][2]!=b[2][2] and j[0][0]!=b[2][2]:
                 self.applyCmd("F'RFL'F'R'FL")
                 
-                
-
-            
-
             elif b[2][2]==b[2][0] and j[0][0]==b[2][0] and j[2][0]==b[2][0]   and j[2][2]!=b[2][0]  and j[0][2]!=b[2][0] :
                 self.applyCmd("F2UF'D2FU'F'D2F'")
                 
@@ -501,7 +491,6 @@ class Resolution:
             self.cube.rotation("D'")
             self.cube.rotation("L")
             self.mouv += 11
-            #self.cube.displayCube()
 
         if bo[0][1] == 'b' and bo[1][1] == 'r':
             self.cube.rotation("R")
@@ -516,9 +505,7 @@ class Resolution:
             self.cube.rotation("D'")
             self.cube.rotation("B")
             self.mouv += 11
-            #self.cube.displayCube()
             
-        #print("cubeinv")
     
     def deuxcouronne(self):
         
@@ -534,15 +521,12 @@ class Resolution:
                 vr = self.cube.findCube(['G', 'R']) #vert/rouge
                 vo = self.cube.findCube(['G', 'O']) #cube vert/orange
                 bo = self.cube.findCube(['B', 'O']) #cube bleu/orange
-            #self.cube.displayCube()
+
             if self.checkscdcouronne():
                 break
             self.cubeinv()
-            #self.cube.displayCube()
             self.deuxcubeinv()
-            #self.cube.displayCube()
-
-        #print(self.mouv)
+            
         return self.cube
     
     def majcube(self):
@@ -570,7 +554,6 @@ class Resolution:
                 elif br[1][1] == 'r':
                     #faire
                     self.cube.rotation("D'")
-                    self.cube.printCube()
                 #on doit faire basculer le cube a gauche/ au dessus du rouge
                 self.cube.rotation("D'")
                 self.cube.rotation("R'")
@@ -580,7 +563,6 @@ class Resolution:
                 self.cube.rotation("F")
                 self.cube.rotation("D'")
                 self.cube.rotation("F'")
-                #self.cube.displayCube()
 
                     
             elif br[1][1] == 'd': #ici le cube rouge est sur la face down
@@ -604,7 +586,6 @@ class Resolution:
                 self.cube.rotation("R'")
                 self.cube.rotation("D")
                 self.cube.rotation("R")
-                #self.cube.displayCube()
 
             
             #cube vert/rouge
@@ -632,7 +613,7 @@ class Resolution:
                 self.cube.rotation("F'")
                 self.cube.rotation("D")
                 self.cube.rotation("F")
-                #self.cube.displayCube()
+
             elif vr[1][1] == 'd': #ici le cube rouge est sur la face down
                 if vr[0][1] == 'f':
                     #faire
@@ -755,7 +736,6 @@ class Resolution:
                 self.cube.rotation("D'")
                 self.cube.rotation("R'")
                 self.cube.displayCube()
-            #print("2couronne")
 
 ############## PARTIE 2ND COURONNE #################################
         
@@ -907,8 +887,6 @@ class Resolution:
             #si il n'y a que la case jaune du milieu
 
             if len(listeAretes) == 0 or len(listeAretes) == 3 or len(listeAretes)==1:
-                
-                #print("cas 1")
 
                 tmp = self.case1()
                 listeCeTour.append(tmp[0])
@@ -931,12 +909,10 @@ class Resolution:
 
                     if listeAretes[0] in dicAdj[i] and listeAretes[1] in dicAdj[i]: #On vérifie qu'on est dans le cas de l'adjacence
                         adj = True
-                        #print("cas 2")
 
                 if adj == True :
 
                     tmp = self.case2(listeAretes[0],listeAretes[1])   #on récupère les aretes dans le bon ordre pour notre algorithme
-                    #print(tmp)
                     #on applique les rotations par rapport aux bonnes faces du coup
                     listeCeTour.append(self.opposite(tmp[0]))
                     listeCeTour.append(posY.upper())
@@ -947,7 +923,6 @@ class Resolution:
 
                         # F U R Ui Ri Fi
                 else :
-                    #print("cas 3")
                     tmp = self.case3(listeAretes[0])
                     
                     listeCeTour.append(tmp[0])
@@ -958,7 +933,6 @@ class Resolution:
                     listeCeTour.append(tmp[0]+"'")
 
                         # F R U Ri Ui Fi
-            #print(listeCeTour)
             self.listeMouv.append(listeCeTour)
             self.rotate(listeCeTour)
 
@@ -967,7 +941,6 @@ class Resolution:
     def rotate(self,liste):
         for i in range(len(liste)):
             self.rotation(liste[i])
-            #self.cube.displayCube()
 
 ############## PARTIE CROIX JAUNE #################################            
 
@@ -1167,8 +1140,6 @@ class Resolution:
 
         else :
             if tabParc[0] == 'x' :
-                print(self.cube.getFace(tabLiFaceChange[2]))
-                
                 couleurMiniself.cube = self.cube.getFace(tabLiFaceChange[2])[1][tabParc[1]]
             else :
                 couleurMiniself.cube = self.cube.getFace(tabLiFaceChange[0])[tabParc[0]][1]
@@ -1358,7 +1329,5 @@ def resolutionFinale(entry):
 
 #print(resolution.listeMouv)
 #print(resolution.liCmd)
-
-resolutionFinale("WWWWWWWWWGGGRRRBBBOOOGGGRRRBBBOOOGGOYRGYOYRBYBYOYYYRYB")
 
 
