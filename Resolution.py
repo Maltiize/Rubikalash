@@ -1147,13 +1147,13 @@ class Resolution:
 
         else :
             if tabParc[0] == 'x' :
-                couleurMiniself.cube = self.cube.getFace(tabLiFaceChange[2])[1][tabParc[1]]
+                couleurMiniCube = self.cube.getFace(tabLiFaceChange[2])[1][tabParc[1]]
             else :
-                couleurMiniself.cube = self.cube.getFace(tabLiFaceChange[0])[tabParc[0]][1]
+                couleurMiniCube = self.cube.getFace(tabLiFaceChange[0])[tabParc[0]][1]
 
             # CAS 1
             # M2 U M2 U2 M2 U M2
-            if couleurMiniself.cube == self.cube.getFace(self.cube.getFaceInversed(tabLiFaceChange[2]))[1][1] :
+            if couleurMiniCube == self.cube.getFace(self.cube.getFaceInversed(tabLiFaceChange[2]))[1][1] :
                 # L2 + R2 = M2 ou B2 + F2 = M2 mais cela inverse la face haute et basse
                 self.rotation(tabLiFaceChange[0].upper()+'2')
                 self.rotation(tabLiFaceChange[2].upper()+'2')
@@ -1200,7 +1200,13 @@ class Resolution:
 
 def resolutionFinale(entry):
 
-    cube = Cube(entry)
+    #cube = Cube("WWWWWWWWWGGGRRRBBBOOOGGGRRRBBBOOOGGGRRRBBBOOOYYYYYYYYY")
+    cube = Cube("RWYRWGOGOYYGWRWBOOBOGGGYORGWBWBOYBBGYRRBRGWOWOWYYYBRBR")
+    cube.displayCube()
+    cmd = entry.split()
+    for i in cmd :
+        cube.rotation(i)
+
     print("Cube d'origine")
     cube.displayCube()
     resolution = Resolution(cube)
