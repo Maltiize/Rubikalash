@@ -1,7 +1,9 @@
 #récupère le cube de départ entrée par l'utilisateur dans InterfaceIO
 #et renvoie à InterfaceIO la résolution du cube
 
+from random import randint
 from Cube import Cube
+
 class Resolution:
 
     def __init__(self,cube):
@@ -52,16 +54,16 @@ class Resolution:
         self.majcube()
 
         #si le cube bleu/rouge inversé avec le vert/rouge
-        if self.br[0][1] == 'l' and self.vr[0][1] == 'r':
+        if (self.br[0][1] == 'l' and self.vr[0][1] == 'r') or (self.br[0][1] == 'f' and self.vr[0][1] == 'f'):
             a = "F"
         #si le cube bleu/rouge inversé avec le bleu/orange
-        elif self.br[1][1] == 'b' and self.bo[1][1] == 'f':
+        elif (self.br[1][1] == 'b' and self.bo[1][1] == 'f') or (self.br[1][1] == 'r' and self.bo[1][1] == 'r'):
             a = "R"
         #si le cube vert/orange inversé avec le bleu/orange
-        elif self.vo[0][1] == 'r' and self.bo[0][1] == 'l':
+        elif (self.vo[0][1] == 'r' and self.bo[0][1] == 'l') or (self.vo[0][1] == 'b' and self.bo[0][1] == 'b'):
             a = "B"
         #si le cube vert/orange inversé avec le vert/rouge
-        elif self.vo[1][1] == 'f' and self.vr[1][1] == 'b':
+        elif (self.vo[1][1] == 'f' and self.vr[1][1] == 'b') or (self.vo[1][1] == 'l' and self.vr[1][1] == 'l'):
             a = "L"
         if a!= 0:
             self.rubiks.rotation(str(a)+str(2))
@@ -118,7 +120,7 @@ class Resolution:
         a = 0
         b = 0
         
-        if self.br[0][1] == 'f' and self.br[1][1] == 'r':
+        if (self.br[0][1] == 'f' and self.br[1][1] == 'r'):
             a = "F"
             b = "R"
         if self.vr[0][1] == 'f' and self.vr[1][1] == 'l':
@@ -209,7 +211,7 @@ class Resolution:
     
     def deuxcouronne(self):
         
-        #peut creer une fonction maj pour saself.voir ou sont les 4 cubes ? utile?
+        #peut creer une fonction maj pour savoir ou sont les 4 cubes ? utile?
 ##        self.br = self.rubiks.findCube(['B', 'R']) #cube bleu/rouge
 ##        self.vr = self.rubiks.findCube(['G', 'R']) #vert/rouge
 ##        self.vo = self.rubiks.findCube(['G', 'O']) #cube vert/orange
@@ -458,6 +460,16 @@ class Resolution:
                 self.rubiks.displayCube()
             print("2couronne")   
             #return self.rubiks
+
+def randomcube():
+    tab = ['U','L','R','B','D','F','U2','L2','R2','B2','D2','F2',]
+    cube = Cube("WWWWWWWWWGGGRRRBBBOOOGGGRRRBBBOOOGGGRRRBBBOOOYYYYYYYYY")
+    cube.displayCube()
+    for i in range(randint(0,100)):
+        mouv = tab[randint(0,11)]
+        cube.rotation(mouv)
+
+    cube.displayCube()
         
 
 
@@ -467,12 +479,14 @@ class Resolution:
 #resol = Resolution(cube1)
 #resol.deuxiemecouronne()
 #cube1.printCube()
-#cube2 = Cube("WWWWWWWWWGGGRRRBBBOOOGGBYRBRBYROYRYYOBRYROYGYGOGOYGBOB")
-cube2 = Cube("FYFOFOYFBOBFOYRYYOBRYROYFBYRBRBYRFFFRRRBBBOOOWWWWWWWWW")
+cube2 = Cube("WWWWWWWWWGGGRRRBBBOOOGGBYRBRBYROYRYYOBRYROYGYGOGOYGBOB")
+#cube2 = Cube("FYFOFOYFBOBFOYRYYOBRYROYFBYRBRBYRFFFRRRBBBOOOWWWWWWWWW")
 cube2.displayCube()
 resol = Resolution(cube2)
 print(resol.checkscdcouronne())
 resol.deuxcouronne()
 cube2.displayCube()
 print(resol.checkscdcouronne())
+print("##################################################")
+randomcube()
 
