@@ -1204,34 +1204,52 @@ def resolutionFinale(entry):
     print("Cube d'origine")
     cube.displayCube()
     resolution = Resolution(cube)
+
+    print(resolution.liCmd)
+    print(str(resolution.nbCmd) + '\n')
     
     print("Etape 1 : Croix")
     resolution.theCross('u')
     cube.displayCube()
+
+    print(resolution.liCmd)
+    print(str(resolution.nbCmd) + '\n')
 
     print("Etape 2 : Les coins")
 
     resolution.theCorner('u')
     cube.displayCube()
 
+    print(resolution.liCmd)
+    print(str(resolution.nbCmd) + '\n')
+
     print("Etape 3 : la deuxieme couronne")
     resolution.deuxcouronne()
     cube.displayCube()
+
+    print(resolution.liCmd)
+    print(str(resolution.nbCmd)+ '\n')
 
     print("Etape 4 : la croix inverse")
     resolution.resolutionCroixJaune()
     cube.displayCube()
 
+    print(resolution.liCmd)
+    print(str(resolution.nbCmd) + '\n')
+
     print("Etape 5 : la face inverse")
     resolution.rfjaune()
     cube.displayCube()
+
+    print(resolution.liCmd)
+    print(str(resolution.nbCmd) + '\n')
 
     print("Etape 6 : les coins et les arretes jaunes ")
     resolution.lastStep()
     cube.displayCube()
 
     print(resolution.liCmd)
-    print(resolution.nbCmd)
+    print(str(resolution.nbCmd) + '\n')
     
 #MODIFIER POUR QUE SA FONCTION PERSONNELLE FONCTIONNE
 
