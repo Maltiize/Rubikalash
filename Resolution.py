@@ -984,6 +984,7 @@ class Resolution:
             # Résolution des coins et des arrêtes
             self.putCornerLastFace(faceJaune, tabParc, tabLiFaceChange)
             self.putAreteLastFace(faceJaune, tabParc, tabLiFaceChange)
+            print(2)
 
     def getFaceJaune(self) :
         faceBlanche = ''
@@ -1032,11 +1033,15 @@ class Resolution:
             return ['d','r','u','l']
         
     def putCornerLastFace(self, faceJaune, tabParc, tabLiFaceChange) :
+       
         tabMiniReplace = []
         
         #A ce niveau de résolution il est possible de bien placer deux coins,
         #donc tant que je n'obtient pas seulement deux coins mal placés :
         while len(tabMiniReplace) != 4 :
+            tabMiniReplace = []
+            self.cube.displayCube()
+            print(len(tabMiniReplace))
             for i in range(4) :
                 faceEnCours = self.cube.getFace(tabLiFaceChange[i])
                 if tabParc[0] != 'x' :
@@ -1126,16 +1131,16 @@ class Resolution:
 
         if faceOpposeFinie != None :
             if tabParc[0] == 'x' :
-                couleurMiniself.cube = self.cube.getFace(faceOpposeFinie)[1][tabParc[1]]
+                couleurMiniCube = self.cube.getFace(faceOpposeFinie)[1][tabParc[1]]
             else :
-                couleurMiniself.cube = self.cube.getFace(faceOpposeFinie)[tabParc[0]][1]
+                couleurMiniCube = self.cube.getFace(faceOpposeFinie)[tabParc[0]][1]
                 
 
             faceSuivanteOF = tabLiFaceChange[(tabLiFaceChange.index(faceOpposeFinie)+(1*sensRotation))%4]
 
             # CAS 2
             #R' U R' U' R' U' R' U R U R2
-            if couleurMiniself.cube == self.cube.getCentralColor(self.cube.liFace[self.cube.liFace.index(faceSuivanteOF)]) :
+            if couleurMiniCube == self.cube.getCentralColor(self.cube.liFace[self.cube.liFace.index(faceSuivanteOF)]) :
                 self.cube.rotation(faceSuivanteOF.upper()+'\'')
                 self.cube.rotation(faceJaune.upper())
                 self.cube.rotation(faceSuivanteOF.upper()+'\'')
