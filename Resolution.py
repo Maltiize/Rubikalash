@@ -356,33 +356,47 @@ class Resolution:
         j=cube.down
         r=cube.front
         b=cube.right
-        if not cube.faceFinished('d'):
+        g=cube.left
+        o=cube.back
+        cube.displayCube()
+        if not cube.faceFinished('d') :
           
-            if r[2][0]==b[2][0] and j[2][2]==b[2][0]  and j[0][0]!=b[2][0] and j[0][2]!=b[2][0]  and j[2][0]!=b[2][0]:
-                self.applyCmd("FDF'DFD2F'")
+            
 
-            elif r[2][0]==b[2][2] and j[0][2]==b[2][2] and j[2][0]==b[2][2] and j[2][2]!=b[2][2] and j[0][0]!=b[2][2]:
+            if r[2][0]==b[2][2] and j[0][2]==b[2][2] and j[2][0]==b[2][2] and j[2][2]!=b[2][2] and j[0][0]!=b[2][2]:
                 self.applyCmd("F'RFL'F'R'FL")
+                
+                
+
+            
 
             elif b[2][2]==b[2][0] and j[0][0]==b[2][0] and j[2][0]==b[2][0]   and j[2][2]!=b[2][0]  and j[0][2]!=b[2][0] :
                 self.applyCmd("F2UF'D2FU'F'D2F'")
-
+                
+            elif r[2][0]==b[2][0] and j[2][2]==b[2][0]  and j[0][0]!=b[2][0] and j[0][2]!=b[2][0]  and j[2][0]!=b[2][0]:
+                self.applyCmd("FDF'DFD2F'")
+                
             elif j[0][2]== r[2][0]  and j[2][2]== r[2][0]   and j[2][0]!= r[2][0]  and j[0][0]!= r[2][0] :
                 self.applyCmd("F'R'FL'F'RFL")
+                
 
             elif  b[2][2]==r[2][2] and j[0][0]==r[2][2] and j[2][2]!=r[2][2] and j[2][0]!=r[2][2] and j[0][2]!=r[2][2]:
                 self.applyCmd("FD2F'D'FD'F'")
-
+                
             elif r[2][2]==r[2][0] and j[0][0]!=r[2][0] and j[0][2]!=r[2][0] and j[2][0]!=r[2][0] and j[2][2]!=r[2][0] :
-                self.applyCmd("FDF'DFD'F'DFD'D'F'")
-
-            elif j[0][0]!=b[2][0] and j[0][2]!=b[2][0] and j[2][0]!=b[2][0] and j[2][2]!=b[2][0]:
+                self.applyCmd("BD2B2D'B2D'B2D2B")
+                
+                
+            elif j[1][1]==b[2][0] and j[0][0]!=b[2][0] and j[0][2]!=b[2][0] and j[2][0]!=b[2][0] and j[2][2]!=b[2][0] and r[2][0]!=r[2][2] and b[2][0]!=b[2][2] and g[2][0]!=g[2][2] and o[2][0]!=o[2][2] :
                 self.applyCmd("FD2F2D'F2D'F2D2F")
-
+                
             else :
                 self.rotation('D')       
-                self.rfjaune()
-
+            self.rfjaune()
+            
+        else :
+            return 1
+        
     
 ############## PARTIE 2ND COURONNE #################################
     def checkscdcouronne(self):
@@ -1068,11 +1082,10 @@ def resolutionFinale(entry):
 
 
             #cube solve v2
-#cube = Cube("WWWWWWWWWBBBRRRGGGOOOBBBRRRGGGOOOGOBRRYGYBYYRYYOYYBYGO")
-
+##cube = Cube("WWWWWWWWWGGGRRRBBBOOOGGGRRRBBBOOOGGOYRGYOYRBYBYOYYYRYB")
 #cube = Cube("GYRYYRBGYRBYOYGOYYBOYOOOBBBRRRGGGOOOBBBRRRGGGWWWWWWWWW")
-#resolution = Resolution(cube)
-
+resolution = Resolution(cube)
+resolution.rfjaune()
 
 # PROBLEME SUR LA ROTATION RIGHT
 
