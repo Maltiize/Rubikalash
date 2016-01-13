@@ -8,7 +8,7 @@ class InterfaceIO:
     def __init__(self, entree=None, sortie=None):
         self.entry=entree
         self.output=sortie
-        self.path="C:/Users/Thomas/Rubikcube_of_death_that_kill/"
+        self.path="/comptes/etudiant/E15A502B/Rubikcube_of_death_that_kill/"
         self.file="cube.txt"
 
 #l'utilisateur entre dans le programme la position du cube de départ
@@ -61,12 +61,18 @@ class InterfaceIO:
 
     #fait une resolution pour chaque cube present dans la liste en entré
     def batTest(self,TCube=None):
+        nbfini=0
+        nbmvt=0
         if(TCube==None):
             TCube=getCubeFile(self.path+self.file)
             print("nbcube à tester : ",len(TCube))
-        for i in TCube :
+        for idi,i in enumerate (TCube) :
             self.output = resolutionFinale(i)
-            
+            if self.output[1]==True:
+                nbfini+=1
+            nbmvt+=len(self.output[0])
+            print("moyfini : ",nbfini/(idi+1))
+            print("moymvt : ",nbmvt/(idi+1))
             
 #renvoie les mouvements a faire a l'utilisateur      
     def setOutput(self):

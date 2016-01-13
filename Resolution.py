@@ -1693,7 +1693,7 @@ def resolutionFinale(strcu="WWWWWWWWWGGGRRRBBBOOOGGGRRRBBBOOOGGGRRRBBBOOOYYYYYYY
     
     print("Etape 1 : Croix")
     resolution.theCross('u')
-    cube.displayCube()
+    #cube.displayCube()
 
     #print(resolution.liCmd)
     #print(str(resolution.nbCmd) + '\n')
@@ -1701,7 +1701,7 @@ def resolutionFinale(strcu="WWWWWWWWWGGGRRRBBBOOOGGGRRRBBBOOOGGGRRRBBBOOOYYYYYYY
     print("Etape 2 : Les coins")
 
     resolution.theCorner('u')
-    cube.displayCube()
+    #cube.displayCube()
 
     #print(resolution.liCmd)
     #print(str(resolution.nbCmd) + '\n')
@@ -1733,12 +1733,9 @@ def resolutionFinale(strcu="WWWWWWWWWGGGRRRBBBOOOGGGRRRBBBOOOGGGRRRBBBOOOYYYYYYY
 
     #print(resolution.liCmd)
     #print(str(resolution.nbCmd) + '\n')
-
-    return resolution.liCmd
+    
+    return ([resolution.liCmd,cube.cubeFinished()])#penser à enlever cube.cubeFinished()
 #MODIFIER POUR QUE SA FONCTION PERSONNELLE FONCTIONNE
 
 
-#cube= Cube("BOWGWOORYYWYGGRGBBOYRWGWBRGOBBROOBBWRYOWWOYYWGGGYYRRRB")
-#resol=Resolution(cube)
-#resol.theCross('u')
-#cube.displayCube()
+
