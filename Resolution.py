@@ -35,7 +35,7 @@ class Resolution:
             return -1
         self.liCmd+=cmd
         self.nbCmd+=1
-       
+        #print(cmd,end='')
         self.cube.rotation(cmd)
         
     # Fonction qui renvoit l'inverse d'une rotation L2 => L2 L=>L' L'=>L        
@@ -106,11 +106,13 @@ class Resolution:
         while(len(tab[1])!=0):
             for x in tab[1]:
                 #print(tab)
-                #cube.displayCube()
+                
                 # On cherche le cube de couleur "Face à traiter" + " Face où se trouve la croix"
                 # on récupere donc la couleur de "Face à traiter" 
                 curColor=self.cube.getCentralColor(x)
                 result=self.cube.findCube([colorcross,curColor])
+                #print(result)
+                #cube.displayCube()
 
                 # on traite les différents cas en fonction de la position du cube
 
@@ -207,8 +209,8 @@ class Resolution:
                         tmppos=self.cube.findCube([colorcross,curColor])
                         self.rotation(self.getApproRot(tmppos[1][1],x,tmppos[0][1]))
                         
-                        if(result[1][1] not in tab[1] or (result[1][1]==nameFace and len(tab[1]!=4))):
-                            self.rotation(rr)
+                        if(rr[0].lower() not in tab[1] or (rr[0].lower()==nameFace and len(tab[1]!=4))):
+                            self.rotation(self.getInvRot(rr))
                         self.rotation(self.getApproRot(tmppos[0][1],nameFace,x))
 
                     # cas le plus simple ou il sufft de placer la partie de la croix sur la face ou on fait la croix
@@ -225,7 +227,6 @@ class Resolution:
                             self.applyCmd(rot+self.getApproRot(result[0][1],nameFace,x)+self.getInvRot(rot))
                         else :
                             self.applyCmd(rot+self.getApproRot(result[0][1],nameFace,x))
-                            
                 tab[1].remove(x)            
             
                 
@@ -1722,7 +1723,7 @@ def resolutionFinale(strcu="WWWWWWWWWGGGRRRBBBOOOGGGRRRBBBOOOGGGRRRBBBOOOYYYYYYY
 #MODIFIER POUR QUE SA FONCTION PERSONNELLE FONCTIONNE
 
 
-cube= Cube("BOGWWWGYYWGYRBGORRWGOYGBRRGYBBOORYGOWWWBWRBOOGORRYBBYY")
-resol=Resolution(cube)
-resol.theCross('u')
-cube.displayCube()
+#cube= Cube("BOWGWOORYYWYGGRGBBOYRWGWBRGOBBROOBBWRYOWWOYYWGGGYYRRRB")
+#resol=Resolution(cube)
+#resol.theCross('u')
+#cube.displayCube()
