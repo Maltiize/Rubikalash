@@ -453,7 +453,7 @@ class Resolution:
         bo = self.cube.findCube(['B', 'O']) #cube bleu/orange
 
         #si le cube bleu/rouge inversé avec le vert/rouge
-        if (br[0][1] == 'l' and vr[0][1] == 'r') or (br[0][1] == 'f' and vr[0][1] == 'f'):
+        if (br[0][1] == 'l' and vr[0][1] == 'r') or (br[0][1] == 'f' and vr[0][1] == 'f') or (br[0][1] == 'l' and vr[0][1] == 'f') or (br[0][1] == 'f' and vr[0][1] == 'r'):
             self.rotation("F2")
             self.rotation("D2")
             self.rotation("F2")
@@ -462,7 +462,7 @@ class Resolution:
             self.mouv += 5
 
         #si le cube bleu/rouge inversé avec le bleu/orange
-        if (br[1][1] == 'b' and bo[1][1] == 'f') or (br[1][1] == 'r' and bo[1][1] == 'r'):
+        if (br[1][1] == 'b' and bo[1][1] == 'f') or (br[1][1] == 'r' and bo[1][1] == 'r') or (br[1][1] == 'b' and bo[1][1] == 'r') or (br[1][1] == 'r' and bo[1][1] == 'f'):
             self.rotation("R2")
             self.rotation("D2")
             self.rotation("R2")
@@ -471,7 +471,7 @@ class Resolution:
             self.mouv += 5
             
         #si le cube vert/orange inversé avec le bleu/orange
-        if (vo[0][1] == 'r' and bo[0][1] == 'l') or (vo[0][1] == 'b' and bo[0][1] == 'b'):
+        if (vo[0][1] == 'r' and bo[0][1] == 'l') or (vo[0][1] == 'b' and bo[0][1] == 'b') or (vo[0][1] == 'r' and bo[0][1] == 'b') or (vo[0][1] == 'b' and bo[0][1] == 'l'):
             self.rotation("B2")
             self.rotation("D2")
             self.rotation("B2")
@@ -480,7 +480,7 @@ class Resolution:
             self.mouv += 5
 
         #si le cube vert/orange inversé avec le vert/rouge
-        if (vo[1][1] == 'f' and vr[1][1] == 'b') or (vo[1][1] == 'l' and vr[1][1] == 'l'):
+        if (vo[1][1] == 'f' and vr[1][1] == 'b') or (vo[1][1] == 'l' and vr[1][1] == 'l') or (vo[1][1] == 'f' and vr[1][1] == 'l') or (vo[1][1] == 'l' and vr[1][1] == 'b'):
             self.rotation("L2")
             self.rotation("D2")
             self.rotation("L2")
