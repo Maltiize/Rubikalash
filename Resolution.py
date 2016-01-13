@@ -1457,8 +1457,15 @@ class Resolution:
                 break
 
         # Si les deux faces sont inversé
-        faceTest = self.cube.getFace(self.cube.liFace[(self.cube.liFace.index(faceJaune)+2)%6])
-        if (faceJaune == 'u' and faceTest[0][0] == faceTest[0][1] == faceTest[0][2] == faceTest[1][1]) or ((faceJaune == 'd') and faceTest[2][0] == faceTest[2][1] == faceTest[2][2] == faceTest[1][1]) :
+        counter = 0
+        tabTemp = []
+        for i in self.cube.liFace :
+            if i != 'u' and i != 'd' :
+                faceTest = self.cube.getFace(self.cube.liFace[(self.cube.liFace.index(i)+2)%6])
+                if (faceJaune == 'u' and faceTest[0][0] == faceTest[0][1] == faceTest[0][2] == faceTest[1][1]) or ((faceJaune == 'd') and faceTest[2][0] == faceTest[2][1] == faceTest[2][2] == faceTest[1][1]) :
+                    counter += 1
+
+        if counter == 4 :
             temp = faceJaune
             faceJaune = faceBlanche
             faceBlanche = temp
@@ -1679,7 +1686,7 @@ class Resolution:
                 self.rotation(faceJaune.upper())
                 
 ## ETAPE 6 & 7  : FIN  ##
-
+                
 def resolutionFinale(strcu="WWWWWWWWWGGGRRRBBBOOOGGGRRRBBBOOOGGGRRRBBBOOOYYYYYYYYY",entry=''):
     
     cube = Cube(strcu)
