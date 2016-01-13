@@ -45,7 +45,7 @@ class InterfaceIO:
             tab = ['U','L','R','B','D','F','U2','L2','R2','B2','D2','F2',]
             cube = Cube("WWWWWWWWWGGGRRRBBBOOOGGGRRRBBBOOOGGGRRRBBBOOOYYYYYYYYY")
          
-            for i in range(random.randint(0,100)):
+            for i in range(random.randint(0,15)):
                 mouv = tab[random.randint(0,11)]
                 cube.rotation(mouv)
             strtmp=cube.getStr()
@@ -74,9 +74,11 @@ class InterfaceIO:
             else :
                 Tfail.append(i)
             nbmvt+=self.output[2]
-            print("cube num : ",nbfini)
-            print("moyfini : ",nbfini/(idi+1))
-            print("moymvt : ",nbmvt/(nbfini))
+            moyenne = nbmvt/nbfini
+            #print("cube num : ",nbfini)
+            #print("moyfini : ",nbfini/(idi+1))
+        print("moymvt : ",nbmvt/(nbfini))
+        print("cube num : ",nbfini)
             
 #renvoie les mouvements a faire a l'utilisateur      
     def setOutput(self):
@@ -150,9 +152,10 @@ resolutionCube = InterfaceIO()
 
 #batTestOfBatCube=resolutionCube.batCube(10000)
 
-#batTestOfBatCube=resolutionCube.batCube(10000)
+batTestOfBatCube=resolutionCube.batCube(100000)
 
 resolutionCube.batTest()
+
 #resolutionCube.setOutput()
 #batTestOfBatCube=resolutionCube.batCube(10)
 #resolutionCube.batTest()

@@ -1259,7 +1259,9 @@ def resolutionFinale(strcu="WWWWWWWWWGGGRRRBBBOOOGGGRRRBBBOOOGGGRRRBBBOOOYYYYYYY
     resolution.applyCmd(entry)
 
     #print("Cube d'origine")
-    print(cube.getStr())
+
+    #print(cube.getStr())
+
     #cube.displayCube()
     
     #print(resolution.liCmd)
