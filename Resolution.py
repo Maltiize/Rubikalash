@@ -402,7 +402,7 @@ class Resolution:
                 
                 
 
-     def rfjaune(self):
+    def rfjaune(self):
         cube=self.cube
        
         j=cube.down
@@ -526,7 +526,6 @@ class Resolution:
             self.deuxcubeinv()
             self.cubeinvenface()
             self.deuxcubeinv()
-        self.cube.displayCube()
     
 #cette fonction permet de récupérer l'emplacement des cubes en coins de la deuxième couronne
 #elle est utilisée en mise à jour lorsqu'il y a eu des changements sur le cube
@@ -644,7 +643,7 @@ class Resolution:
                 elif self.vr[0][1] == 'r':
                     self.rotation("D2")
                     
-                elif vr[0][1] == 'b':
+                elif self.vr[0][1] == 'b':
                     self.rotation("D")
                     
                 #on doit faire basculer le cube a gauche
