@@ -1238,10 +1238,10 @@ class Resolution:
             
 #Fonction qui vérifie si la croix non orienté est vérifiée
     def checkCrossNonOriente(self):
-        posColor = self.whichIsColor('Y')   #on trouve la position de la face jaune
-        listeColors=['G','R','B','O']       #c'est la liste des couleurs composants les aretes avec une face jaune
+        posColor = 'd'   #on trouve la position de la face jaune
+        listeColors=[self.cube.getCentralColor('f'),self.cube.getCentralColor('b'),self.cube.getCentralColor('r'),self.cube.getCentralColor('l')]       #c'est la liste des couleurs composants les aretes avec une face jaune
         for i in range(len(listeColors)):   #on parcout la liste des couleurs
-            pos = self.cube.findCube(['Y',listeColors[i][0][0]]) #on récupère la position des aretes
+            pos = self.cube.findCube([self.cube.getCentralColor('d'),listeColors[i][0][0]]) #on récupère la position des aretes
             if pos[0][1] != posColor:   #si la position de la face jaune des aretes n'est pas sur la face jaune, alors la croix n'est pas vérifiée
                 return False
         return True
@@ -1249,14 +1249,14 @@ class Resolution:
 #pas utile cette fonction apparemment
 #on récupère l'emplacement des aretes
     def checkEmplacement(self):
-        posColor = self.whichIsColor('Y')
-        listeColors=['G','R','O','B']
+        posColor = 'd'
+        listeColors=[self.cube.getCentralColor('f'),self.cube.getCentralColor('b'),self.cube.getCentralColor('r'),self.cube.getCentralColor('l')]
         listos=[]
         liste=[]
         for i in range(len(listeColors)):
             #plutot que leur couleur ; on va mettre la position de la couleur
             listos=[]
-            pos = self.cube.findCube(['Y',listeColors[i][0][0]])
+            pos = self.cube.findCube([self.cube.getCentralColor('d'),listeColors[i][0][0]])
             listos.append(pos[0][1])
             listos.append(pos[1][1])
             liste.append(listos)    
@@ -1283,7 +1283,7 @@ class Resolution:
 #fonction qui renvoie les deux aretes dans le bon ordre pour le cas 2 de la croix jaune
     def case2(self,pos1,pos2):
     
-        posY = self.whichIsColor('Y')
+        posY = 'd'
         index=['u','d','f','b','r','l'] 
         liste=[['L','B','R','F'],['R','B','L','F'],['L','U','R','D'],['R','U','L','D'],['F','U','B','D'],['B','U','F','D']] #chaque liste correspond a un index respectif
 
@@ -1303,14 +1303,14 @@ class Resolution:
 
 #fonction qui renvoie les faces a utiliser pour le cas 1 de la résolution croix jaune
     def case1(self):
-        posY=self.whichIsColor('Y')
+        posY='d'
         index=['u','d','f','b','r','l']
         liste=[['F','U','R'],['F','D','L'],['D','F','R'],['U','B','R'],['F','R','D'],['F','L','U']]
         return liste[index.index(posY)]
 
     def case3(self,pos1):
 
-        posY=self.whichIsColor('Y')
+        posY='d'
         index=['u','d','f','b','r','l']
         liste=[['L','B','R','F'],['R','B','L','F'],['L','U','R','D'],['R','U','L','D'],['F','U','B','D'],['B','U','F','D']]
         listeDroite=[['F','R','B','L'],['F','L','B','R'],['R','U','L','D'],['R','D','L','U'],['D','B','U','F'],['D','F','U','B']]
@@ -1323,7 +1323,7 @@ class Resolution:
         # F R U Ri Ui Fi
 
     def resolutionCroixJaune(self):
-        posY=self.whichIsColor('Y')
+        posY='d'
 
         #adj : Y en b u f 
         dicAdj = [['u','r'],['l','u'],['r','d'],['d','l'],['l','f'],['b','l'],['r','b'],['f','r']]
