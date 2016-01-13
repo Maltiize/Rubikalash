@@ -1307,7 +1307,3 @@ def resolutionFinale(strcu="WWWWWWWWWGGGRRRBBBOOOGGGRRRBBBOOOGGGRRRBBBOOOYYYYYYY
 
 
 
-cube = Cube("RROOWYOYBWWBYORYRYGGBYGBWRRBBYBOGWGWGRRGOYGGBOWWOYBOWR")
-resol = Resolution(cube)
-resol.theCross('u')
-cube.displayCube()
