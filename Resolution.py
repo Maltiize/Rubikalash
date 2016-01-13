@@ -35,7 +35,7 @@ class Resolution:
             return -1
         self.liCmd+=cmd
         self.nbCmd+=1
-        print(cmd,end='')
+        #print(cmd,end='')
         self.cube.rotation(cmd)
         
     # Fonction qui renvoit l'inverse d'une rotation L2 => L2 L=>L' L'=>L        
@@ -105,14 +105,14 @@ class Resolution:
         # pour toute les faces qui n'ont pas encore été traitée
         while(len(tab[1])!=0):
             for x in tab[1]:
-                print(tab)
+                #print(tab)
                 
                 # On cherche le cube de couleur "Face à traiter" + " Face où se trouve la croix"
                 # on récupere donc la couleur de "Face à traiter" 
                 curColor=self.cube.getCentralColor(x)
                 result=self.cube.findCube([colorcross,curColor])
-                print(result)
-                cube.displayCube()
+                #print(result)
+                #cube.displayCube()
 
                 # on traite les différents cas en fonction de la position du cube
 
@@ -231,7 +231,7 @@ class Resolution:
                             self.applyCmd(rot+self.getApproRot(result[0][1],nameFace,x)+self.getInvRot(rot))
                         else :
                             self.applyCmd(rot+self.getApproRot(result[0][1],nameFace,x))
-                print("")
+                #print("")
                 tab[1].remove(x)            
             
                 
@@ -1295,7 +1295,7 @@ def resolutionFinale(strcu="WWWWWWWWWGGGRRRBBBOOOGGGRRRBBBOOOGGGRRRBBBOOOYYYYYYY
 
 
 #cube = Cube("RROOWYOYBWWBYORYRYGGBYGBWRRBBYBOGWGWGRRGOYGGBOWWOYBOWR")
-cube = Cube("YGBYWYRYBGGWGBYOORYORYGGWRRBBWRORRBYOGGOWOBOBGRWOYBWWW")
-resol = Resolution(cube)
-resol.theCross('u')
-cube.displayCube()
+#cube = Cube("YGBYWYRYBGGWGBYOORYORYGGWRRBBWRORRBYOGGOWOBOBGRWOYBWWW")
+#resol = Resolution(cube)
+#resol.theCross('u')
+#cube.displayCube()
