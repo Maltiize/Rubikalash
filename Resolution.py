@@ -523,6 +523,7 @@ class Resolution:
             while self.br[0][1] == 'd' or self.br[1][1] == 'd' or self.vr[0][1] == 'd' or self.vr[1][1] == 'd' or self.vo[0][1] == 'd' or self.vo[1][1] == 'd' or self.bo[0][1] == 'd' or self.bo[1][1] == 'd':
                 self.deuxiemecouronne()
                 self.majcube()
+                print("mvteasy")
             if self.checkscdcouronne():
                 break
             self.cubeinv()
@@ -531,6 +532,7 @@ class Resolution:
             self.deuxcubeinv()
             self.cubeinvenface()
             self.deuxcubeinv()
+            print("pasfait")
     
 #cette fonction permet de récupérer l'emplacement des cubes en coins de la deuxième couronne
 #elle est utilisée en mise à jour lorsqu'il y a eu des changements sur le cube
@@ -548,7 +550,7 @@ class Resolution:
 
     def cubeinvenface(self):
         #si le cube vert/rouge est inversé avec le cube bleu/orange
-        if (self.bo[0][1] == 'l' or self.bo[0][1] == 'f') and (self.vr[0][1] == 'r' or self.vr[0][1] == 'b'):
+        #if (self.bo[0][1] == 'l' or self.bo[0][1] == 'f') and (self.vr[0][1] == 'r' or self.vr[0][1] == 'b'):
             self.rotation("D")
             self.rotation("L")
             self.rotation("D'")
@@ -559,7 +561,7 @@ class Resolution:
             self.rotation("F")
 
         #si le cube vert/orange est inversé avec le cube bleu/rouge
-        elif (self.vo[0][1] == 'f' or self.vo[0][1] == 'r') and (self.br[0][1] == 'l' or self.br[0][1] == 'b'):
+        #elif (self.vo[0][1] == 'f' or self.vo[0][1] == 'r') and (self.br[0][1] == 'l' or self.br[0][1] == 'b'):
             #on doit faire basculer le cube a gauche/ au dessus du rouge
             self.rotation("D'")
             self.rotation("R'")
@@ -1257,14 +1259,14 @@ def resolutionFinale(strcu="WWWWWWWWWGGGRRRBBBOOOGGGRRRBBBOOOGGGRRRBBBOOOYYYYYYY
     #print("Etape 2 : Les coins")
 
     resolution.theCorner('u')
-    #cube.displayCube()
+    cube.displayCube()
 
     #print(resolution.liCmd)
     #print(str(resolution.nbCmd) + '\n')
 
     #print("Etape 3 : la deuxieme couronne")
     resolution.deuxcouronne()
-    #cube.displayCube()
+    cube.displayCube()
 
     #print(resolution.liCmd)
     #print(str(resolution.nbCmd)+ '\n')
@@ -1285,7 +1287,7 @@ def resolutionFinale(strcu="WWWWWWWWWGGGRRRBBBOOOGGGRRRBBBOOOGGGRRRBBBOOOYYYYYYY
 
     #print("Etape 6 : les coins et les arretes jaunes ")
     resolution.lastStep()
-    #cube.displayCube()
+    cube.displayCube()
 
     #print(resolution.liCmd)
     #print(str(resolution.nbCmd) + '\n')

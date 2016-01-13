@@ -8,7 +8,7 @@ class InterfaceIO:
     def __init__(self, entree=None, sortie=None):
         self.entry=entree
         self.output=sortie
-        self.path="/comptes/etudiant/E15A502B/Rubikcube_of_death_that_kill/"
+        self.path="C:/Users/jeanp/Rubikcube_of_death_that_kill/"
         self.file="cube.txt"
 
 #l'utilisateur entre dans le programme la position du cube de départ
@@ -81,8 +81,8 @@ class InterfaceIO:
 #renvoie les mouvements a faire a l'utilisateur      
     def setOutput(self):
         
-        self.output = resolutionFinale("RYYWWBWWRGRRBOGYWGOGWBGYRRWGBBYORORRBOBOOOBBGYGYGYYWOW")
-        self.output = resolutionFinale("BBGYWWYWWYGGOOOGGYRORYGBRRRGBWROOWBBOROBBWRORYYWYYWBGG")
+        self.output = resolutionFinale("WROWWOGYYGGRWGRGWWBBOGGOYRYBBWBORORBRWRBOOGGBWRYYYBYOY")
+        #self.output = resolutionFinale("BBGYWWYWWYGGOOOGGYRORYGBRRRGBWROOWBBOROBBWRORYYWYYWBGG")
         #self.output = resolutionFinale("WWWWWWWWWGGGRRRBBBOOOGGGRRRBBBOOOGGGRRRBBBOOOYYYYYYYYY", "B2 F D B' L F L B' R U F' B D2 L' F2 B2 U R2 L F B2 L2 U2 R' U'")
 ##        self.output = resolutionFinale("D2 L U2 B' U L2 R' D2 B D2 B2 F' L' D' R2 L' U2 B2 D' U' F' L' F2 B' R'")
 ##        self.output = resolutionFinale("B' R L U' B' U' R' U2 R' L2 D2 R U2 B2 D L2 U2 B2 F2 R2 F' L R' B2 R")
@@ -152,8 +152,8 @@ resolutionCube = InterfaceIO()
 
 #batTestOfBatCube=resolutionCube.batCube(10000)
 
-resolutionCube.batTest()
-#resolutionCube.setOutput()
+#resolutionCube.batTest()
+resolutionCube.setOutput()
 #batTestOfBatCube=resolutionCube.batCube(10)
 #resolutionCube.batTest()
 #resolutionCube.getEntry()
