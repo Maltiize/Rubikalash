@@ -1677,7 +1677,7 @@ def resolutionFinale(strcu="WWWWWWWWWGGGRRRBBBOOOGGGRRRBBBOOOGGGRRRBBBOOOYYYYYYY
     
     print("Etape 1 : Croix")
     resolution.theCross('u')
-    #cube.displayCube()
+    cube.displayCube()
 
     #print(resolution.liCmd)
     #print(str(resolution.nbCmd) + '\n')
@@ -1685,7 +1685,7 @@ def resolutionFinale(strcu="WWWWWWWWWGGGRRRBBBOOOGGGRRRBBBOOOGGGRRRBBBOOOYYYYYYY
     print("Etape 2 : Les coins")
 
     resolution.theCorner('u')
-    #cube.displayCube()
+    cube.displayCube()
 
     #print(resolution.liCmd)
     #print(str(resolution.nbCmd) + '\n')
