@@ -39,7 +39,9 @@ Avec U=La face du haut
      B=La face arrière
 
 Exemple d'entré du programme:
-#Nom du programme("RYYWWBWWRGRRBOGYWGOGWBGYRRWGBBYORORRBOBOOOBBGYGYGYYWOW")
+#solve("RYYWWBWWRGRRBOGYWGOGWBGYRRWGBBYORORRBOBOOOBBGYGYGYYWOW")
+
+(la fonction se trouve dans poqb.py)
 
 III.Résultat
 
