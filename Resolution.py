@@ -1423,14 +1423,18 @@ class Resolution:
                 index = 0
             elif faceJaune == 'd' :
                 index = 2
-
-            if self.cube.getFace(faceTest)[index][0] == self.cube.getFace(faceTest)[index][1] == self.cube.getFace(faceTest)[index][2] :
+                
+            counter = 0
+            for i in tabLiFaceChange :
+                if self.cube.getFace(i)[index][0] == self.cube.getFace(i)[index][1] == self.cube.getFace(i)[index][2] :
+                    counter += 1
+            if counter == 4 :    
                 for i in tabLiFaceChange :
                     if self.cube.getCentralColor(i) == self.cube.getFace(faceTest)[index][0] :
                         faceDest = i
-                
-                self.rotation(self.getApproRot(faceTest,faceDest,faceJaune))
-                return
+                    
+                    self.rotation(self.getApproRot(faceTest,faceDest,faceJaune))
+                    return
             #Test si ...
             
             tabParc = self.getTabParc(faceJaune)
@@ -1680,20 +1684,20 @@ def resolutionFinale(strcu="WWWWWWWWWGGGRRRBBBOOOGGGRRRBBBOOOGGGRRRBBBOOOYYYYYYY
     
     cube = Cube(strcu)
     resolution = Resolution(cube)
-    #cube = Cube("RWYRWGOGOYYGWRWBOOBOGGGYORGWBWBOYBBGYRRBRGWOWOWYYYBRBR")
+    #cube = Cube("RYYWWBWWRGRRBOGYWGOGWBGYRRWGBBYORORRBOBOOOBBGYGYGYYWOW")
     #cube.displayCube()
     resolution.applyCmd(entry)
 
     #print("Cube d'origine")
     print(cube.getStr())
-    #cube.displayCube()
+    cube.displayCube()
     
     #print(resolution.liCmd)
     #print(str(resolution.nbCmd) + '\n')
     
     print("Etape 1 : Croix")
     resolution.theCross('u')
-    #cube.displayCube()
+    cube.displayCube()
 
     #print(resolution.liCmd)
     #print(str(resolution.nbCmd) + '\n')
@@ -1701,14 +1705,14 @@ def resolutionFinale(strcu="WWWWWWWWWGGGRRRBBBOOOGGGRRRBBBOOOGGGRRRBBBOOOYYYYYYY
     print("Etape 2 : Les coins")
 
     resolution.theCorner('u')
-    #cube.displayCube()
+    cube.displayCube()
 
     #print(resolution.liCmd)
     #print(str(resolution.nbCmd) + '\n')
 
     print("Etape 3 : la deuxieme couronne")
     resolution.deuxcouronne()
-    #cube.displayCube()
+    cube.displayCube()
 
     #print(resolution.liCmd)
     #print(str(resolution.nbCmd)+ '\n')
@@ -1722,20 +1726,18 @@ def resolutionFinale(strcu="WWWWWWWWWGGGRRRBBBOOOGGGRRRBBBOOOGGGRRRBBBOOOYYYYYYY
 
     print("Etape 5 : la face inverse")
     resolution.rfjaune()
-    #cube.displayCube()
+    cube.displayCube()
 
     #print(resolution.liCmd)
     #print(str(resolution.nbCmd) + '\n')
 
     print("Etape 6 : les coins et les arretes jaunes ")
     resolution.lastStep()
-    #cube.displayCube()
+    cube.displayCube()
 
     #print(resolution.liCmd)
     #print(str(resolution.nbCmd) + '\n')
     
     return ([resolution.liCmd,cube.cubeFinished()])#penser à enlever cube.cubeFinished()
 #MODIFIER POUR QUE SA FONCTION PERSONNELLE FONCTIONNE
-
-
 
