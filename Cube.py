@@ -130,7 +130,31 @@ class Cube:
         print("INVALID FACENAME")
         return -1
         
+    def getStr(self,nameFace='u'):
+        up=self.getFace(nameFace)
+        down=self.getFace(self.getFaceInversed(nameFace))
+        core=[]
+        strresult=''
+        for x in self.liFaceaff :
+            if (x!=nameFace and x!=self.getFaceInversed(nameFace)):
+                core+=[self.getFace(x)]
+        for x in range(3):
+            for y in range(3):
+                strresult+=up[x][y]
+        
+        for x in range(3):
+            for z in core:
+                for y in range(3):
+                    strresult+=z[x][y]
 
+        for x in range(3):
+            for y in range(3):
+                strresult+=down[x][y]
+
+        return strresult
+        
+
+    
     # Cette methode remplis chaque face avec les éléments qui lui correspondent 
     # et renseignés dans la listes idx ( cf __init__ )
 
@@ -519,7 +543,8 @@ def affTab(tab):
     
 
 
-#cube = Cube("OGRBWYBGBGYYOYOWOWGRYOOOBGBRRYRBWWWRBWYGROWGRYBRGYWBOG")
+cube = Cube("OGRBWYBGBGYYOYOWOWGRYOOOBGBRRYRBWWWRBWYGROWGRYBRGYWBOG")
+print(cube.getStr())
 
 
 #cube = Cube("OGRBWYBGBGYYOYOWOWGRYOOOBGBRRYRBWWWRBWYGROWGRYBRGYWBOG")

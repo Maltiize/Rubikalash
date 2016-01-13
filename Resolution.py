@@ -20,7 +20,7 @@ class Resolution:
         
     # Utiliser cette fonction permet de garder en mémoire les mouvements effectué durant la résolution
     def rotation(self,cmd):
-        if(cmd==''):
+        if(cmd=='' or cmd==' '):
             return 0
         if(len(cmd)!=1 and len(cmd)!=2):
             print("rotation : INVALID ROTATION NAME",cmd)
@@ -1195,14 +1195,13 @@ class Resolution:
 ## ETAPE 6 & 7  : FIN  ##         
 
 
-def resolutionFinale(entry):
+def resolutionFinale(strcu="WWWWWWWWWGGGRRRBBBOOOGGGRRRBBBOOOGGGRRRBBBOOOYYYYYYYYY",entry=''):
 
-    #cube = Cube("WWWWWWWWWGGGRRRBBBOOOGGGRRRBBBOOOGGGRRRBBBOOOYYYYYYYYY")
-    cube = Cube("RWYRWGOGOYYGWRWBOOBOGGGYORGWBWBOYBBGYRRBRGWOWOWYYYBRBR")
-    cube.displayCube()
-    cmd = entry.split()
-    for i in cmd :
-        cube.rotation(i)
+    cube = Cube(strcu)
+    resolution = Resolution(cube)
+    #cube = Cube("RWYRWGOGOYYGWRWBOOBOGGGYORGWBWBOYBBGYRRBRGWOWOWYYYBRBR")
+    #cube.displayCube()
+    resolution.applyCmd(entry)
 
     print("Cube d'origine")
     cube.displayCube()
@@ -1253,5 +1252,6 @@ def resolutionFinale(entry):
 
     print(resolution.liCmd)
     print(str(resolution.nbCmd) + '\n')
-    
+
+    return resolution.liCmd
 #MODIFIER POUR QUE SA FONCTION PERSONNELLE FONCTIONNE
