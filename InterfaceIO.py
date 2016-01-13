@@ -67,6 +67,7 @@ class InterfaceIO:
         for i in TCube :
             self.output = resolutionFinale(i)
             
+            
 #renvoie les mouvements a faire a l'utilisateur      
     def setOutput(self):
         
@@ -134,7 +135,7 @@ def getCubeFile(path):
 
 resolutionCube = InterfaceIO()
 
-batTestOfBatCube=resolutionCube.batCube(10000)
+#batTestOfBatCube=resolutionCube.batCube(10000)
 resolutionCube.batTest()
 #resolutionCube.setOutput()
 

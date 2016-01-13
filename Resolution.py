@@ -195,15 +195,15 @@ class Resolution:
                     elif(rot==-2):
                         #print('ok')
                         rr=result[1][1].upper()
-                        if(result[1][1]!=self.cube.getFaceInversed(nameFace) and result[1][1]!=nameFace):
-                            rr=self.getApproRot(result[0][1],cube.getFaceInversed(nameFace),result[1][1])
+                        #if(result[1][1]!=self.cube.getFaceInversed(nameFace) and result[1][1]!=nameFace):
+                        #    rr=self.getApproRot(result[0][1],cube.getFaceInversed(nameFace),result[1][1])
                             
                         self.rotation(rr)
                         tmppos=self.cube.findCube([colorcross,curColor])
                         self.rotation(self.getApproRot(tmppos[1][1],x,tmppos[0][1]))
                         
                         if(result[1][1] not in tab[1] or (result[1][1]==nameFace and len(tab[1]!=4))):
-                            self.rotation(self.getInvRot(rr))
+                            self.rotation(self.getInvRot(result[1][1].upper()))
                         self.rotation(self.getApproRot(tmppos[0][1],nameFace,x))
 
                     # cas le plus simple ou il sufft de placer la partie de la croix sur la face ou on fait la croix
@@ -1075,10 +1075,8 @@ class Resolution:
                         tabMiniReplace.append([i,0,tabParc[1]])
                     if faceEnCours[2][tabParc[1]] != faceEnCours[2][(tabParc[1]+1)%2] :
                         tabMiniReplace.append([i,2,tabParc[1]])
-            if len(tabMiniReplace) == 0 :
-                return
             #(suite) je tourne la face "Jaune" (non résolue)
-            elif len(tabMiniReplace) != 4 :
+            if len(tabMiniReplace) != 4 :
                 self.rotation(faceJaune.upper())
 
         # cas 1 : les deux cubes à intervertir sont sur la même face
@@ -1253,9 +1251,9 @@ def resolutionFinale(strcu="WWWWWWWWWGGGRRRBBBOOOGGGRRRBBBOOOGGGRRRBBBOOOYYYYYYY
     resolution.applyCmd(entry)
 
     print("Cube d'origine")
+    print(cube.getStr())
     cube.displayCube()
     
-
     print(resolution.liCmd)
     print(str(resolution.nbCmd) + '\n')
     
