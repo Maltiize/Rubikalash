@@ -63,10 +63,10 @@ class InterfaceIO:
     def batTest(self,TCube=None):
         if(TCube==None):
             TCube=getCubeFile(self.path+self.file)
-        
+            print(TCube)
         for i in TCube :
             self.output = resolutionFinale(i)
-             
+            
 #renvoie les mouvements a faire a l'utilisateur      
     def setOutput(self):
         
@@ -109,13 +109,22 @@ def writeTab(tab,path,ficName="cube.txt"):
      
 def getCubeFile(path):
     liCube=[]
+    tmp=''
+
     fic = open(path, 'r') # url = fichier .txt
     data = fic.read()
     fic.close()
     data.replace('\n',' ') # Remplace le 2eme parametre par le character que tu
     #veut ou laisse comme ca pour juste supprimer
     data.split()
-    return data
+    for x in data:
+        if(x=='\n'):
+            cube = Cube(tmp)
+            liCube+=[tmp]
+            tmp=''
+        else :
+            tmp+=x   
+    return liCube
 
     
 
@@ -126,7 +135,7 @@ def getCubeFile(path):
 resolutionCube = InterfaceIO()
 
 batTestOfBatCube=resolutionCube.batCube(10)
-resolutionCube.batTest(batTestOfBatCube)
+resolutionCube.batTest()
 #resolutionCube.getEntry()
 #resolutionCube.setOutput()
 

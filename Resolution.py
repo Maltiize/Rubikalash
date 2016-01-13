@@ -100,6 +100,8 @@ class Resolution:
         # pour toute les faces qui n'ont pas encore été traitée
         while(len(tab[1])!=0):
             for x in tab[1]:
+                print(tab)
+                cube.displayCube()
                 # On cherche le cube de couleur "Face à traiter" + " Face où se trouve la croix"
                 # on récupere donc la couleur de "Face à traiter" 
                 curColor=self.cube.getCentralColor(x)
@@ -191,7 +193,12 @@ class Resolution:
                     
                     # si la face blanche est sur la face cherchée il faut retourner le cube
                     elif(rot==-2):
-                        self.rotation(result[1][1].upper())
+                        print('ok')
+                        rr=result[1][1].upper()
+                        #if(result[1][1]!=self.cube.getFaceInversed(nameFace) and result[1][1]!=nameFace):
+                        #    rr=self.getApproRot(result[0][1],cube.getFaceInversed(nameFace),result[1][1])
+                            
+                        self.rotation(rr)
                         tmppos=self.cube.findCube([colorcross,curColor])
                         self.rotation(self.getApproRot(tmppos[1][1],x,tmppos[0][1]))
                         
@@ -1245,7 +1252,7 @@ def resolutionFinale(strcu="WWWWWWWWWGGGRRRBBBOOOGGGRRRBBBOOOGGGRRRBBBOOOYYYYYYY
 
     print("Cube d'origine")
     cube.displayCube()
-    resolution = Resolution(cube)
+    
 
     print(resolution.liCmd)
     print(str(resolution.nbCmd) + '\n')
@@ -1295,3 +1302,9 @@ def resolutionFinale(strcu="WWWWWWWWWGGGRRRBBBOOOGGGRRRBBBOOOGGGRRRBBBOOOYYYYYYY
 
     return resolution.liCmd
 #MODIFIER POUR QUE SA FONCTION PERSONNELLE FONCTIONNE
+
+
+
+cube = Cube("RROOWYOYBWWBYORYRYGGBYGBWRRBBYBOGWGWGRRGOYGGBOWWOYBOWR")
+resol = Resolution(cube)
+resol.theCross('u')
