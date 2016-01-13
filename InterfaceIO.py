@@ -136,16 +136,15 @@ def getCubeFile(path):
 
 resolutionCube = InterfaceIO()
 
-<<<<<<< HEAD
+
 #batTestOfBatCube=resolutionCube.batCube(10000)
-=======
 
 batTestOfBatCube=resolutionCube.batCube(10000)
->>>>>>> f0672b9921efef06ed79fd34aac13c5d704efd88
+
 resolutionCube.batTest()
 #resolutionCube.setOutput()
 #batTestOfBatCube=resolutionCube.batCube(10)
 #resolutionCube.batTest()
 #resolutionCube.getEntry()
-resolutionCube.setOutput()
+#resolutionCube.setOutput()
 

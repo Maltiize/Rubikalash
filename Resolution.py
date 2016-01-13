@@ -860,7 +860,7 @@ class Resolution:
 ##            self.cube.rotation("D2")
 ##            self.cube.rotation("L2")
         self.mouv += 5
-        self.cube.displayCube()
+        #self.cube.displayCube()
         print("2cubeinv")
 
     def cubeinv(self):
@@ -898,7 +898,7 @@ class Resolution:
             self.cube.rotation("D'")
             self.cube.rotation(str(b))
             self.mouv += 11
-            self.cube.displayCube()
+            #self.cube.displayCube()
 
 ##        if br[0][1] == 'f' and br[1][1] == 'r':
 ##            self.cube.rotation("F")
@@ -960,7 +960,7 @@ class Resolution:
 ##            self.mouv += 11
 ##            self.cube.displayCube()
             
-        print("cubeinv")
+        #print("cubeinv")
     
     def deuxcouronne(self):
         
@@ -984,11 +984,11 @@ class Resolution:
             self.cubeinv()
             if self.checkscdcouronne():
                 break
-            self.cube.displayCube()
+            #self.cube.displayCube()
             self.deuxcubeinv()
-            self.cube.displayCube()
+            #self.cube.displayCube()
 
-        print(self.mouv)
+        #print(self.mouv)
         return self.cube
     
     def majcube(self):
@@ -1013,7 +1013,7 @@ class Resolution:
                 elif br[1][1] == 'r':
                     #faire
                     self.cube.rotation("D'")
-                    self.cube.printCube()
+                    #self.cube.printCube()
                 #on doit faire basculer le cube a gauche/ au dessus du rouge
                 self.cube.rotation("D'")
                 self.cube.rotation("R'")
@@ -1023,7 +1023,7 @@ class Resolution:
                 self.cube.rotation("F")
                 self.cube.rotation("D'")
                 self.cube.rotation("F'")
-                self.cube.displayCube()
+                #self.cube.displayCube()
 
                     
             elif br[1][1] == 'd': #ici le cube rouge est sur la face down
@@ -1047,7 +1047,7 @@ class Resolution:
                 self.cube.rotation("R'")
                 self.cube.rotation("D")
                 self.cube.rotation("R")
-                self.cube.displayCube()
+                #self.cube.displayCube()
 
             
             #cube vert/rouge
@@ -1075,7 +1075,7 @@ class Resolution:
                 self.cube.rotation("F'")
                 self.cube.rotation("D")
                 self.cube.rotation("F")
-                self.cube.displayCube()
+                #self.cube.displayCube()
             elif vr[1][1] == 'd': #ici le cube rouge est sur la face down
                 if vr[0][1] == 'f':
                     #faire
@@ -1097,7 +1097,7 @@ class Resolution:
                 self.cube.rotation("L")
                 self.cube.rotation("D'")
                 self.cube.rotation("L'")
-                self.cube.displayCube()
+                #self.cube.displayCube()
 
             #cube vert/orange
             vo = self.cube.findCube(['G', 'O']) #cube vert/orange
@@ -1124,7 +1124,7 @@ class Resolution:
                 self.cube.rotation("B")
                 self.cube.rotation("D'")
                 self.cube.rotation("B'")
-                self.cube.displayCube()
+                #self.cube.displayCube()
                 
             elif vo[1][1] == 'd': #ici le cube orange est sur la face down
                 if vo[0][1] == 'f':
@@ -1147,7 +1147,7 @@ class Resolution:
                 self.cube.rotation("L'")
                 self.cube.rotation("D")
                 self.cube.rotation("L")
-                self.cube.displayCube()
+                #self.cube.displayCube()
 
             #cube bleu/orange
             bo = self.cube.findCube(['B', 'O']) #cube bleu/orange
@@ -1174,7 +1174,7 @@ class Resolution:
                 self.cube.rotation("B'")
                 self.cube.rotation("D")
                 self.cube.rotation("B")
-                self.cube.displayCube()
+                #self.cube.displayCube()
             
             elif bo[1][1] == 'd': #ici le cube orange est sur la face down
                 if bo[0][1] == 'f':
@@ -1197,8 +1197,8 @@ class Resolution:
                 self.cube.rotation("R")
                 self.cube.rotation("D'")
                 self.cube.rotation("R'")
-                self.cube.displayCube()
-            print("2couronne")   
+                #self.cube.displayCube()
+            #print("2couronne")   
 
 ############## PARTIE 2ND COURONNE #################################
         
