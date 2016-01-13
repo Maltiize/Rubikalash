@@ -1259,14 +1259,14 @@ def resolutionFinale(strcu="WWWWWWWWWGGGRRRBBBOOOGGGRRRBBBOOOGGGRRRBBBOOOYYYYYYY
     #print("Etape 2 : Les coins")
 
     resolution.theCorner('u')
-    cube.displayCube()
+    #cube.displayCube()
 
     #print(resolution.liCmd)
     #print(str(resolution.nbCmd) + '\n')
 
     #print("Etape 3 : la deuxieme couronne")
     resolution.deuxcouronne()
-    cube.displayCube()
+    #cube.displayCube()
 
     #print(resolution.liCmd)
     #print(str(resolution.nbCmd)+ '\n')
@@ -1287,12 +1287,12 @@ def resolutionFinale(strcu="WWWWWWWWWGGGRRRBBBOOOGGGRRRBBBOOOGGGRRRBBBOOOYYYYYYY
 
     #print("Etape 6 : les coins et les arretes jaunes ")
     resolution.lastStep()
-    cube.displayCube()
+    #cube.displayCube()
 
     #print(resolution.liCmd)
     #print(str(resolution.nbCmd) + '\n')
     
-    return ([resolution.liCmd,cube.cubeFinished()])#penser à enlever cube.cubeFinished()
+    return ([resolution.liCmd,cube.cubeFinished(),resolution.nbCmd])#penser à enlever cube.cubeFinished()
 #MODIFIER POUR QUE SA FONCTION PERSONNELLE FONCTIONNE
 
 

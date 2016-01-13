@@ -8,7 +8,7 @@ class InterfaceIO:
     def __init__(self, entree=None, sortie=None):
         self.entry=entree
         self.output=sortie
-        self.path="C:/Users/jeanp/Rubikcube_of_death_that_kill/"
+        self.path="D:/Projet Python RUBIK'S CUBE/Rubikcube_of_death_that_kill/"
         self.file="cube.txt"
 
 #l'utilisateur entre dans le programme la position du cube de départ
@@ -73,10 +73,10 @@ class InterfaceIO:
                 nbfini+=1
             else :
                 Tfail.append(i)
-            nbmvt+=len(self.output[0])
+            nbmvt+=self.output[2]
             print("cube num : ",nbfini)
             print("moyfini : ",nbfini/(idi+1))
-            print("moymvt : ",nbmvt/(idi+1))
+            print("moymvt : ",nbmvt/(nbfini))
             
 #renvoie les mouvements a faire a l'utilisateur      
     def setOutput(self):
@@ -152,8 +152,8 @@ resolutionCube = InterfaceIO()
 
 #batTestOfBatCube=resolutionCube.batCube(10000)
 
-#resolutionCube.batTest()
-resolutionCube.setOutput()
+resolutionCube.batTest()
+#resolutionCube.setOutput()
 #batTestOfBatCube=resolutionCube.batCube(10)
 #resolutionCube.batTest()
 #resolutionCube.getEntry()
