@@ -902,12 +902,12 @@ class Resolution:
 
                 tmp = self.case1()
 
-                self.rotation.append(tmp[0])
-                self.rotation.append(tmp[1])
-                self.rotation.append(tmp[2])      
-                self.rotation.append(tmp[1]+"'")
-                self.rotation.append(tmp[2]+"'")
-                self.rotation.append(tmp[0]+"'")
+                self.rotation(tmp[0])
+                self.rotation(tmp[1])
+                self.rotation(tmp[2])      
+                self.rotation(tmp[1]+"'")
+                self.rotation(tmp[2]+"'")
+                self.rotation(tmp[0]+"'")
                 
                     
 
@@ -927,23 +927,23 @@ class Resolution:
 
                     tmp = self.case2(listeAretes[0],listeAretes[1])   #on récupère les aretes dans le bon ordre pour notre algorithme
                     #on applique les rotations par rapport aux bonnes faces du coup
-                    self.rotation.append(self.opposite(tmp[0]))
-                    self.rotation.append(posY.upper())
-                    self.rotation.append(self.opposite(tmp[1]))
-                    self.rotation.append(posY.upper() + "'")
-                    self.rotation.append(self.opposite(tmp[1])+"'")
-                    self.rotation.append(self.opposite(tmp[0])+"'")
+                    self.rotation(self.opposite(tmp[0]))
+                    self.rotation(posY.upper())
+                    self.rotation(self.opposite(tmp[1]))
+                    self.rotation(posY.upper() + "'")
+                    self.rotation(self.opposite(tmp[1])+"'")
+                    self.rotation(self.opposite(tmp[0])+"'")
 
                         # F U R Ui Ri Fi
                 else :      #CAS 3
                     tmp = self.case3(listeAretes[0])
                     
-                    self.rotation.append(tmp[0])
-                    self.rotation.append(tmp[1])
-                    self.rotation.append(tmp[2])
-                    self.rotation.append(tmp[1]+"'")    
-                    self.rotation.append(tmp[2]+"'")
-                    self.rotation.append(tmp[0]+"'")
+                    self.rotation(tmp[0])
+                    self.rotation(tmp[1])
+                    self.rotation(tmp[2])
+                    self.rotation(tmp[1]+"'")    
+                    self.rotation(tmp[2]+"'")
+                    self.rotation(tmp[0]+"'")
 
                         # F R U Ri Ui Fi
 
