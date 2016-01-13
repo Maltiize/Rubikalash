@@ -35,7 +35,7 @@ class Resolution:
             return -1
         self.liCmd+=cmd
         self.nbCmd+=1
-        #print(cmd,end='')
+        print(cmd,end='')
         self.cube.rotation(cmd)
         
     # Fonction qui renvoit l'inverse d'une rotation L2 => L2 L=>L' L'=>L        
@@ -105,14 +105,14 @@ class Resolution:
         # pour toute les faces qui n'ont pas encore été traitée
         while(len(tab[1])!=0):
             for x in tab[1]:
-                #print(tab)
+                print(tab)
                 
                 # On cherche le cube de couleur "Face à traiter" + " Face où se trouve la croix"
                 # on récupere donc la couleur de "Face à traiter" 
                 curColor=self.cube.getCentralColor(x)
                 result=self.cube.findCube([colorcross,curColor])
-                #print(result)
-                #cube.displayCube()
+                print(result)
+                cube.displayCube()
 
                 # on traite les différents cas en fonction de la position du cube
 
@@ -201,6 +201,7 @@ class Resolution:
                     # si la face blanche est sur la face cherchée il faut retourner le cube
                     elif(rot==-2):
                         #print('ok')
+                        comeB=False
                         rr=result[1][1].upper()
                         if(result[1][1]!=self.cube.getFaceInversed(nameFace) and result[1][1]!=nameFace):
                             rr=self.getApproRot(result[0][1],self.cube.getFaceInversed(nameFace),result[1][1])
@@ -208,11 +209,14 @@ class Resolution:
                         self.rotation(rr)
                         tmppos=self.cube.findCube([colorcross,curColor])
                         self.rotation(self.getApproRot(tmppos[1][1],x,tmppos[0][1]))
-                        
-                        if(rr[0].lower() not in tab[1] or (rr[0].lower()==nameFace and len(tab[1]!=4))):
+                        if(result[1][1]==cube.getFaceInversed(nameFace)):
+                            comeB=True
+                        elif((rr[0].lower() not in tab[1] or (rr[0].lower()==nameFace and len(tab[1]!=4)))):
                             self.rotation(self.getInvRot(rr))
                         self.rotation(self.getApproRot(tmppos[0][1],nameFace,x))
-
+                        if(comeB):
+                            self.rotation(self.getInvRot(self.getApproRot(tmppos[1][1],x,tmppos[0][1])))
+                            
                     # cas le plus simple ou il sufft de placer la partie de la croix sur la face ou on fait la croix
                     elif(rot==''):
                         self.rotation(self.getApproRot(result[0][1],nameFace,x))
@@ -227,6 +231,7 @@ class Resolution:
                             self.applyCmd(rot+self.getApproRot(result[0][1],nameFace,x)+self.getInvRot(rot))
                         else :
                             self.applyCmd(rot+self.getApproRot(result[0][1],nameFace,x))
+                print("")
                 tab[1].remove(x)            
             
                 
@@ -1290,6 +1295,7 @@ def resolutionFinale(strcu="WWWWWWWWWGGGRRRBBBOOOGGGRRRBBBOOOGGGRRRBBBOOOYYYYYYY
 
 
 #cube = Cube("RROOWYOYBWWBYORYRYGGBYGBWRRBBYBOGWGWGRRGOYGGBOWWOYBOWR")
-cube = Cube("WWWWWWWWWGGGRRRBBBOOOGGBORRBBGROOYYRBYGROYBBGYGYRYYOYO")
+cube = Cube("YGBYWYRYBGGWGBYOORYORYGGWRRBBWRORRBYOGGOWOBOBGRWOYBWWW")
 resol = Resolution(cube)
-#resol.theCross('u')
+resol.theCross('u')
+cube.displayCube()
