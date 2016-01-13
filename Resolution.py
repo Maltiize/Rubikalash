@@ -11,6 +11,8 @@ class Resolution:
         self.br = 0
         self.bo = 0
         self.vo = 0
+        self.a = 0
+        self.b = 0
         
         
         # liste des indexes servant  à la croix
@@ -516,23 +518,24 @@ class Resolution:
             self.rotation(str(b)+"'")
             self.rotation("D'")
             self.rotation(str(b))
-    
+            
+#fonction finale pour la deuxième couronne regroupant toutes les méthodes    
     def deuxcouronne(self):
         self.majcube()
         while self.checkscdcouronne()== False:
             while self.br[0][1] == 'd' or self.br[1][1] == 'd' or self.vr[0][1] == 'd' or self.vr[1][1] == 'd' or self.vo[0][1] == 'd' or self.vo[1][1] == 'd' or self.bo[0][1] == 'd' or self.bo[1][1] == 'd':
                 self.deuxiemecouronne()
-                self.majcube()
-                print("mvteasy")
             if self.checkscdcouronne():
                 break
             self.cubeinv()
             if self.checkscdcouronne():
                 break
             self.deuxcubeinv()
+            if self.checkscdcouronne():
+                break
+            if self.a == 4:
+                self.a=0
             self.cubeinvenface()
-            self.deuxcubeinv()
-            print("pasfait")
     
 #cette fonction permet de récupérer l'emplacement des cubes en coins de la deuxième couronne
 #elle est utilisée en mise à jour lorsqu'il y a eu des changements sur le cube
@@ -547,10 +550,12 @@ class Resolution:
         self.vr = self.cube.findCube([l, f]) #vert/rouge
         self.vo = self.cube.findCube([l, b]) #cube vert/orange
         self.bo = self.cube.findCube([r, b]) #cube bleu/orange
-
+        
+#cette fonction permet de débloquer des situations rares dans la dispositions des 4 coins de la 2eme couronne
     def cubeinvenface(self):
         #si le cube vert/rouge est inversé avec le cube bleu/orange
         #if (self.bo[0][1] == 'l' or self.bo[0][1] == 'f') and (self.vr[0][1] == 'r' or self.vr[0][1] == 'b'):
+        if self.a == 0:
             self.rotation("D")
             self.rotation("L")
             self.rotation("D'")
@@ -562,6 +567,7 @@ class Resolution:
 
         #si le cube vert/orange est inversé avec le cube bleu/rouge
         #elif (self.vo[0][1] == 'f' or self.vo[0][1] == 'r') and (self.br[0][1] == 'l' or self.br[0][1] == 'b'):
+        if self.a == 1:
             #on doit faire basculer le cube a gauche/ au dessus du rouge
             self.rotation("D'")
             self.rotation("R'")
@@ -571,10 +577,21 @@ class Resolution:
             self.rotation("F")
             self.rotation("D'")
             self.rotation("F'")
+            
+        if self.a == 2:
+            self.rotation("D")
+            self.rotation("R")
+            self.rotation("D'")
+            self.rotation("R'")
+            self.rotation("D'")
+            self.rotation("B'")
+            self.rotation("D")
+            self.rotation("B")
+
+        self.a += 1
 
     def deuxiemecouronne(self):
     #regarder les 4 coins au dessus et si il n'y a pas de jaune la bouger au bon endroit
-
             #cube bleu/rouge
             self.majcube()
             #on remet le cube bleu/rouge sur sa face correspondante 
