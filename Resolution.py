@@ -956,23 +956,23 @@ class Resolution:
             tabLiFaceChange = self.getTabLiFaceChange(faceJaune)
 
             #Test si tout est bien placé (si c'est le cas on effectue une seule rotation et le cube est fini)
-            faceTest = self.cube.liFace[(self.cube.liFace.index('u')+2)%6]
+            faceTest = tabLiFaceChange[0]
             if faceJaune == 'u' :
                 index = 0
             elif faceJaune == 'd' :
                 index = 2
-                
+
             counter = 0
             for i in tabLiFaceChange :
                 if self.cube.getFace(i)[index][0] == self.cube.getFace(i)[index][1] == self.cube.getFace(i)[index][2] :
                     counter += 1
-            if counter == 4 :    
-                for i in tabLiFaceChange :
-                    if self.cube.getCentralColor(i) == self.cube.getFace(faceTest)[index][0] :
-                        faceDest = i
-                    
-                    self.rotation(self.getApproRot(faceTest,faceDest,faceJaune))
-                    return
+            if counter == 4 :
+                for i in range(3) :
+                    if self.cube.getCentralColor(tabLiFaceChange[i+1]) == self.cube.getFace(faceTest)[index][0] :
+                        faceDest = tabLiFaceChange[i+1]
+
+                self.rotation(self.getApproRot(faceTest,faceDest,faceJaune))
+                return
             #Test si ...
             
             tabParc = self.getTabParc(faceJaune)
@@ -1207,7 +1207,6 @@ class Resolution:
                 else :
                     face = 1
                 
-                self.cube.displayCube()
                 self.rotation(faceJaune.upper())
                 self.rotation(tabLiFaceChange[face].upper()+'\'')
                 self.rotation(faceJaune.upper()+'\'')
