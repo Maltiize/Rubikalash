@@ -21,7 +21,7 @@ class Resolution:
         self.liCmd=''
         self.nbCmd=0
         self.liRota='','2',"'"
-        self.listeMouv=[]
+
         
     # Utiliser cette fonction permet de garder en mémoire les mouvements effectué durant la résolution
     def rotation(self,cmd):
@@ -751,8 +751,11 @@ class Resolution:
 
 ############## PARTIE CROIX JAUNE #################################
 
-#Fonction qui renvoie quelle face est de la couleur recherchée (jaune pour mon algo ("Y"))
+#Dans la suite de l'algorithme, lorsque les fonctions font référence à la face jaune, il s'agit de la face sur laquelle nous utilisons notre algorithme, soit celle opposée à la face Up, donc Down.
+
+#Fonction qui renvoie quelle face est de la couleur recherchée
 #On compare avec la couleur de chaque face en [1][1] et donc au milieu
+#Fonction plus utilisée à la fin car on se base directement sur la face Down
     def whichIsColor(self,color):
 
         colorF = self.cube.up[1][1]  
@@ -783,7 +786,7 @@ class Resolution:
             
 #Fonction qui vérifie si la croix non orienté est vérifiée
     def checkCrossNonOriente(self):
-        posColor = 'd'   #on trouve la position de la face jaune
+        posColor = 'd'   #on trouve la position de la face jaune // au final on va se baser sur la base Down dans tous les cas
         listeColors=[self.cube.getCentralColor('f'),self.cube.getCentralColor('b'),self.cube.getCentralColor('r'),self.cube.getCentralColor('l')]       #c'est la liste des couleurs composants les aretes avec une face jaune
         for i in range(len(listeColors)):   #on parcout la liste des couleurs
             pos = self.cube.findCube([self.cube.getCentralColor('d'),listeColors[i][0][0]]) #on récupère la position des aretes
@@ -791,8 +794,8 @@ class Resolution:
                 return False
         return True
 
-#pas utile cette fonction apparemment
-#on récupère l'emplacement des aretes
+
+#on récupère l'emplacement des aretes entre la face Down et les faces adjacentes
     def checkEmplacement(self):
         posColor = 'd'
         listeColors=[self.cube.getCentralColor('f'),self.cube.getCentralColor('b'),self.cube.getCentralColor('r'),self.cube.getCentralColor('l')]
@@ -808,8 +811,7 @@ class Resolution:
             #liste contenant les listes des arêtes avec (1) : sur quelle face se trouve la partie Y de l'arete et (2) : de quelle couleur est l'autre partie
         return liste
 
-#fonction qui renvoie la position des 
-    
+#fonction qui renvoie la face opposée, mais en majuscule pour éviter de devoir utiliser la fonction .upper() par la suite
     def opposite(self,face):
         if face == 'u':
             return 'D'
@@ -824,12 +826,18 @@ class Resolution:
         elif face == 'b':
             return 'F'
 
+#fonction qui renvoie les faces a utiliser pour le cas 1 de la résolution croix jaune
+    def case1(self):
+        posY='d'
+        index=['u','d','f','b','r','l']         #l'index servait ici dans le cas de posY différent de Down, mais nous ne l'avons pas utilisé au final
+        liste=[['F','U','R'],['F','D','L'],['D','F','R'],['U','B','R'],['F','R','D'],['F','L','U']]
+        return liste[index.index(posY)]
 
 #fonction qui renvoie les deux aretes dans le bon ordre pour le cas 2 de la croix jaune
     def case2(self,pos1,pos2):
     
         posY = 'd'
-        index=['u','d','f','b','r','l'] 
+        index=['u','d','f','b','r','l']         #l'index servait ici dans le cas de posY différent de Down, mais nous ne l'avons pas utilisé au final
         liste=[['L','B','R','F'],['R','B','L','F'],['L','U','R','D'],['R','U','L','D'],['F','U','B','D'],['B','U','F','D']] #chaque liste correspond a un index respectif
 
         ind=index.index(posY)
@@ -839,24 +847,19 @@ class Resolution:
             if liste[ind][(a+1)%4] != pos2.upper() or a < 3:
                 return [pos1,pos2]
             else:
-                return [pos2,pos1]
+                return [pos2,pos1]                  #L'ordre de renvoie est utile pour la résolution qui suit l'utilisation de cette fonction
         else:
             if liste[ind][(b+1)%4] != pos1.upper() or b <3:
                 return [pos2,pos1]
             else:
                 return [pos1,pos2]
 
-#fonction qui renvoie les faces a utiliser pour le cas 1 de la résolution croix jaune
-    def case1(self):
-        posY='d'
-        index=['u','d','f','b','r','l']
-        liste=[['F','U','R'],['F','D','L'],['D','F','R'],['U','B','R'],['F','R','D'],['F','L','U']]
-        return liste[index.index(posY)]
 
+#fonction qui renvoie les deux aretes dans le bon ordre pour le cas 3 de la croix jaune
     def case3(self,pos1):
 
         posY='d'
-        index=['u','d','f','b','r','l']
+        index=['u','d','f','b','r','l']         #Comme pour les autres, on avait un index pour les différents cas up, down, etc... mais non utilisé
         liste=[['L','B','R','F'],['R','B','L','F'],['L','U','R','D'],['R','U','L','D'],['F','U','B','D'],['B','U','F','D']]
         listeDroite=[['F','R','B','L'],['F','L','B','R'],['R','U','L','D'],['R','D','L','U'],['D','B','U','F'],['D','F','U','B']]
         ind = index.index(posY)
@@ -865,45 +868,46 @@ class Resolution:
         return [liste[ind][(ind1+1)%4] , listeDroite[ind][(ind2+1)%4] , posY.upper()]
 
 
-        # F R U Ri Ui Fi
-
     def resolutionCroixJaune(self):
+        
+
         posY='d'
 
-        #adj : Y en b u f 
-        dicAdj = [['u','r'],['l','u'],['r','d'],['d','l'],['l','f'],['b','l'],['r','b'],['f','r']]
-        dicOp = [['u','d'],['l','r']]
-        #tant que la croix jaune n'est pas vérifiée
+        #adj : lorsque on passe d'une des deux faces a l'autre par une simple rotation
 
+        dicAdj = [['u','r'],['l','u'],['r','d'],['d','l'],['l','f'],['b','l'],['r','b'],['f','r']]
+
+        #tant que la croix jaune n'est pas vérifiée
         while self.checkCrossNonOriente() != True:
 
             
-            pos=None #position up ou down
             adj=False
+
             #on récupère la position des aretes jaunes qui sont sur la face jaune
             liste=self.checkEmplacement()   
             #liste contenant le placement des aretes dont la partie jaune est déjà sur la face jaune
             listeAretes=[]
-            listeCeTour=[]
-
 
             #on récupère la position des aretes dont la partie jaune est sur la face jaune
             for i in range(len(liste)):
                 #si la partie jaune de l'arete est sur la face jaune
-                if liste[i][0] == self.whichIsColor("Y"):
+                if liste[i][0] == 'd':
                     #alors on récupère l'emplacement de la partie de l'autre couleur
                     listeAretes.append(liste[i][1])
             #si il n'y a que la case jaune du milieu
 
             if len(listeAretes) == 0 or len(listeAretes) == 3 or len(listeAretes)==1:
 
+                # CAS 1
+
                 tmp = self.case1()
-                listeCeTour.append(tmp[0])
-                listeCeTour.append(tmp[1])
-                listeCeTour.append(tmp[2])      #a check
-                listeCeTour.append(tmp[1]+"'")
-                listeCeTour.append(tmp[2]+"'")
-                listeCeTour.append(tmp[0]+"'")
+
+                self.rotation.append(tmp[0])
+                self.rotation.append(tmp[1])
+                self.rotation.append(tmp[2])      
+                self.rotation.append(tmp[1]+"'")
+                self.rotation.append(tmp[2]+"'")
+                self.rotation.append(tmp[0]+"'")
                 
                     
 
@@ -919,37 +923,32 @@ class Resolution:
                     if listeAretes[0] in dicAdj[i] and listeAretes[1] in dicAdj[i]: #On vérifie qu'on est dans le cas de l'adjacence
                         adj = True
 
-                if adj == True :
+                if adj == True :    #CAS 2
 
                     tmp = self.case2(listeAretes[0],listeAretes[1])   #on récupère les aretes dans le bon ordre pour notre algorithme
                     #on applique les rotations par rapport aux bonnes faces du coup
-                    listeCeTour.append(self.opposite(tmp[0]))
-                    listeCeTour.append(posY.upper())
-                    listeCeTour.append(self.opposite(tmp[1]))
-                    listeCeTour.append(posY.upper() + "'")
-                    listeCeTour.append(self.opposite(tmp[1])+"'")
-                    listeCeTour.append(self.opposite(tmp[0])+"'")
+                    self.rotation.append(self.opposite(tmp[0]))
+                    self.rotation.append(posY.upper())
+                    self.rotation.append(self.opposite(tmp[1]))
+                    self.rotation.append(posY.upper() + "'")
+                    self.rotation.append(self.opposite(tmp[1])+"'")
+                    self.rotation.append(self.opposite(tmp[0])+"'")
 
                         # F U R Ui Ri Fi
-                else :
+                else :      #CAS 3
                     tmp = self.case3(listeAretes[0])
                     
-                    listeCeTour.append(tmp[0])
-                    listeCeTour.append(tmp[1])
-                    listeCeTour.append(tmp[2])
-                    listeCeTour.append(tmp[1]+"'")     #ERREURS
-                    listeCeTour.append(tmp[2]+"'")
-                    listeCeTour.append(tmp[0]+"'")
+                    self.rotation.append(tmp[0])
+                    self.rotation.append(tmp[1])
+                    self.rotation.append(tmp[2])
+                    self.rotation.append(tmp[1]+"'")    
+                    self.rotation.append(tmp[2]+"'")
+                    self.rotation.append(tmp[0]+"'")
 
                         # F R U Ri Ui Fi
-            self.listeMouv.append(listeCeTour)
-            self.rotate(listeCeTour)
 
 
 
-    def rotate(self,liste):
-        for i in range(len(liste)):
-            self.rotation(liste[i])
 
 ############## PARTIE CROIX JAUNE #################################            
 
