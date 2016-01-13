@@ -1638,12 +1638,14 @@ class Resolution:
         else :
             if tabParc[0] == 'x' :
                 couleurMiniCube = self.cube.getFace(tabLiFaceChange[2])[1][tabParc[1]]
+                index = 2
             else :
                 couleurMiniCube = self.cube.getFace(tabLiFaceChange[0])[tabParc[0]][1]
+                index = 0
 
             # CAS 1
-            # M2 U M2 U2 M2 U M2
-            if couleurMiniCube == self.cube.getFace(self.cube.getFaceInversed(tabLiFaceChange[2]))[1][1] :
+            # M2 U M2 U2 M2 U M2           
+            if couleurMiniCube == self.cube.getFace(self.cube.getFaceInversed(tabLiFaceChange[index]))[1][1] :
                 # L2 + R2 = M2 ou B2 + F2 = M2 mais cela inverse la face haute et basse
                 self.rotation(tabLiFaceChange[0].upper()+'2')
                 self.rotation(tabLiFaceChange[2].upper()+'2')
@@ -1662,11 +1664,12 @@ class Resolution:
             # CAS 2
             # U R' U' R U' R U R U' R' U R U R2 U' R' U
             else :
-                if faceJaune == 'l' or faceJaune == 'r' :
-                    face = 1
+                if self.cube.getFace(tabLiFaceChange[0])[2][1] == self.cube.getFace(tabLiFaceChange[1])[1][1] :
+                    face = 0
                 else :
-                    face = 2
-                    
+                    face = 1
+                
+                self.cube.displayCube()
                 self.rotation(faceJaune.upper())
                 self.rotation(tabLiFaceChange[face].upper()+'\'')
                 self.rotation(faceJaune.upper()+'\'')
