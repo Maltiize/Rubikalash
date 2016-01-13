@@ -1441,6 +1441,7 @@ class Resolution:
             faceJaune = faceBlanche
             faceBlanche = temp
 
+        print(faceJaune)
         return faceJaune
         
     def getTabParc(self, faceJaune) :
@@ -1489,6 +1490,9 @@ class Resolution:
                         tabMiniReplace.append([i,0,tabParc[1]])
                     if faceEnCours[2][tabParc[1]] != faceEnCours[2][(tabParc[1]+1)%2] :
                         tabMiniReplace.append([i,2,tabParc[1]])
+            # Si les coins sont déjà tous bien placés
+            if len(tabMiniReplace) == 0 :
+                return
             #(suite) je tourne la face "Jaune" (non résolue)
             if len(tabMiniReplace) != 4 :
                 self.rotation(faceJaune.upper())

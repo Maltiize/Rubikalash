@@ -139,7 +139,7 @@ resolutionCube = InterfaceIO()
 
 #batTestOfBatCube=resolutionCube.batCube(10000)
 
-batTestOfBatCube=resolutionCube.batCube(10000)
+#batTestOfBatCube=resolutionCube.batCube(10000)
 
 resolutionCube.batTest()
 #resolutionCube.setOutput()
