@@ -1436,7 +1436,7 @@ class Resolution:
 
         # Si les deux faces sont inversé
         faceTest = self.cube.getFace(self.cube.liFace[(self.cube.liFace.index(faceJaune)+2)%6])
-        if (faceJaune == 'u' and faceTest[0][0] == faceTest[0][1] == faceTest[0][2]) or (faceJaune == 'f' and faceTest[0][0] == faceTest[1][0] == faceTest[2][0]) or ((faceJaune == 'd' or faceJaune == 'b') and faceTest[2][0] == faceTest[2][1] == faceTest[2][2]) or ((faceJaune == 'l' or faceJaune == 'r') and faceTest[0][2] == faceTest[1][2] == faceTest[2][2])  :
+        if (faceJaune == 'u' and faceTest[0][1] != faceTest[1][1]) or (faceJaune == 'f' and faceTest[1][0] != faceTest[1][1]) or ((faceJaune == 'd' or faceJaune == 'b') and faceTest[2][1] == faceTest[1][1]) or ((faceJaune == 'l' or faceJaune == 'r') and faceTest[1][2] == faceTest[1][1])  :
             temp = faceJaune
             faceJaune = faceBlanche
             faceBlanche = temp
