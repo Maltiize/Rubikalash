@@ -1251,12 +1251,12 @@ class Resolution:
 ## ETAPE 6 & 7  : FIN  ##
                 
 def resolutionFinale(strcu="WWWWWWWWWGGGRRRBBBOOOGGGRRRBBBOOOGGGRRRBBBOOOYYYYYYYYY",entry=''):
-    
     cube = Cube(strcu)
     resolution = Resolution(cube)
     resolution.applyCmd(entry)
     resolution.theCross('u')
     resolution.theCorner('u')
+    resolution.deuxcouronne()
     resolution.resolutionCroixJaune()
     resolution.rfjaune()
     resolution.lastStep()
