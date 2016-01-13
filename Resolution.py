@@ -209,7 +209,7 @@ class Resolution:
                         self.rotation(rr)
                         tmppos=self.cube.findCube([colorcross,curColor])
                         self.rotation(self.getApproRot(tmppos[1][1],x,tmppos[0][1]))
-                        if(result[1][1]==cube.getFaceInversed(nameFace)):
+                        if(result[1][1]==self.cube.getFaceInversed(nameFace)):
                             comeB=True
                         elif((rr[0].lower() not in tab[1] or (rr[0].lower()==nameFace and len(tab[1]!=4)))):
                             self.rotation(self.getInvRot(rr))
