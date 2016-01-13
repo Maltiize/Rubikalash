@@ -807,16 +807,16 @@ class Resolution:
         self.majcube()
 
         #si le cube bleu/rouge inversé avec le vert/rouge
-        if (br[0][1] == 'l' and vr[0][1] == 'r') or (br[0][1] == 'f' and vr[0][1] == 'f') or (br[0][1] == 'l' and vr[0][1] == 'f') or (br[0][1] == 'f' and vr[0][1] == 'r'):
+        if (self.br[0][1] == 'l' and self.vr[0][1] == 'r') or (self.br[0][1] == 'f' and self.vr[0][1] == 'f') or (self.br[0][1] == 'l' and self.vr[0][1] == 'f') or (self.br[0][1] == 'f' and self.vr[0][1] == 'r'):
             a = "F"
         #si le cube bleu/rouge inversé avec le bleu/orange
-        elif (br[1][1] == 'b' and bo[1][1] == 'f') or (br[1][1] == 'r' and bo[1][1] == 'r') or (br[1][1] == 'b' and bo[1][1] == 'r') or (br[1][1] == 'r' and bo[1][1] == 'f'):
+        elif (self.br[1][1] == 'b' and self.bo[1][1] == 'f') or (self.br[1][1] == 'r' and self.bo[1][1] == 'r') or (self.br[1][1] == 'b' and self.bo[1][1] == 'r') or (self.br[1][1] == 'r' and self.bo[1][1] == 'f'):
             a = "R"
         #si le cube vert/orange inversé avec le bleu/orange
-        elif (vo[0][1] == 'r' and bo[0][1] == 'l') or (vo[0][1] == 'b' and bo[0][1] == 'b') or (vo[0][1] == 'r' and bo[0][1] == 'b') or (vo[0][1] == 'b' and bo[0][1] == 'l'):
+        elif (self.vo[0][1] == 'r' and self.bo[0][1] == 'l') or (self.vo[0][1] == 'b' and self.bo[0][1] == 'b') or (self.vo[0][1] == 'r' and self.bo[0][1] == 'b') or (self.vo[0][1] == 'b' and self.bo[0][1] == 'l'):
             a = "B"
         #si le cube vert/orange inversé avec le vert/rouge
-        elif (vo[1][1] == 'f' and vr[1][1] == 'b') or (vo[1][1] == 'l' and vr[1][1] == 'l') or (vo[1][1] == 'f' and vr[1][1] == 'l') or (vo[1][1] == 'l' and vr[1][1] == 'b'):
+        elif (self.vo[1][1] == 'f' and self.vr[1][1] == 'b') or (self.vo[1][1] == 'l' and self.vr[1][1] == 'l') or (self.vo[1][1] == 'f' and self.vr[1][1] == 'l') or (self.vo[1][1] == 'l' and self.vr[1][1] == 'b'):
             a = "L"
         if a!= 0:
             self.cube.rotation(str(a)+str(2))
