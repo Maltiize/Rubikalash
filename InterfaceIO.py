@@ -8,7 +8,7 @@ class InterfaceIO:
     def __init__(self, entree=None, sortie=None):
         self.entry=entree
         self.output=sortie
-        self.path="C:/Users/Etienne/Documents/polytech/GIT/Rubikcube_of_death_that_kill/"
+        self.path="/comptes/etudiant/E15A502B/Rubikcube_of_death_that_kill/"
         self.file="cube.txt"
 
 #l'utilisateur entre dans le programme la position du cube de départ
