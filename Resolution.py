@@ -1415,8 +1415,25 @@ class Resolution:
         if self.cube.cubeFinished() == False :
             # Récupération des différentes variables nécéssaire à la résolution
             faceJaune = self.getFaceJaune()
-            tabParc = self.getTabParc(faceJaune)
             tabLiFaceChange = self.getTabLiFaceChange(faceJaune)
+
+            #Test si tout est bien placé (si c'est le cas on effectue une seule rotation et le cube est fini)
+            faceTest = self.cube.liFace[(self.cube.liFace.index('u')+2)%6]
+            if faceJaune == 'u' :
+                index = 0
+            elif faceJaune == 'd' :
+                index = 2
+
+            if self.cube.getFace(faceTest)[index][0] == self.cube.getFace(faceTest)[index][1] == self.cube.getFace(faceTest)[index][2] :
+                for i in tabLiFaceChange :
+                    if self.cube.getCentralColor(i) == self.cube.getFace(faceTest)[index][0] :
+                        faceDest = i
+                
+                self.rotation(self.getApproRot(faceTest,faceDest,faceJaune))
+                return
+            #Test si ...
+            
+            tabParc = self.getTabParc(faceJaune)
 
             # Résolution des coins et des arrêtes
             self.putCornerLastFace(faceJaune, tabParc, tabLiFaceChange)
@@ -1437,12 +1454,11 @@ class Resolution:
 
         # Si les deux faces sont inversé
         faceTest = self.cube.getFace(self.cube.liFace[(self.cube.liFace.index(faceJaune)+2)%6])
-        if (faceJaune == 'u' and faceTest[0][1] != faceTest[1][1]) or (faceJaune == 'f' and faceTest[1][0] != faceTest[1][1]) or ((faceJaune == 'd' or faceJaune == 'b') and faceTest[2][1] == faceTest[1][1]) or ((faceJaune == 'l' or faceJaune == 'r') and faceTest[1][2] == faceTest[1][1])  :
+        if (faceJaune == 'u' and faceTest[0][0] == faceTest[0][1] == faceTest[0][2] == faceTest[1][1]) or ((faceJaune == 'd') and faceTest[2][0] == faceTest[2][1] == faceTest[2][2] == faceTest[1][1]) :
             temp = faceJaune
             faceJaune = faceBlanche
             faceBlanche = temp
 
-        print(faceJaune)
         return faceJaune
         
     def getTabParc(self, faceJaune) :
@@ -1658,8 +1674,7 @@ class Resolution:
                 self.rotation(tabLiFaceChange[face].upper()+'\'')
                 self.rotation(faceJaune.upper())
                 
-## ETAPE 6 & 7  : FIN  ##         
-
+## ETAPE 6 & 7  : FIN  ##
 
 def resolutionFinale(strcu="WWWWWWWWWGGGRRRBBBOOOGGGRRRBBBOOOGGGRRRBBBOOOYYYYYYYYY",entry=''):
     
