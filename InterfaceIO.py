@@ -8,7 +8,7 @@ class InterfaceIO:
     def __init__(self, entree=None, sortie=None):
         self.entry=entree
         self.output=sortie
-        self.path="C:/Users/PC/Rubikcube_of_death_that_kill/"
+        self.path="/comptes/etudiant/E15A502B/Rubikcube_of_death_that_kill/"
         self.file="cube.txt"
 
 #l'utilisateur entre dans le programme la position du cube de départ
@@ -63,6 +63,7 @@ class InterfaceIO:
     def batTest(self,TCube=None):
         nbfini=0
         nbmvt=0
+        Tfail=[]
         if(TCube==None):
             TCube=getCubeFile(self.path+self.file)
             print("nbcube à tester : ",len(TCube))
@@ -70,7 +71,10 @@ class InterfaceIO:
             self.output = resolutionFinale(i)
             if self.output[1]==True:
                 nbfini+=1
+            else :
+                Tfail.append(i)
             nbmvt+=len(self.output[0])
+            print("cube num : ",nbfini)
             print("moyfini : ",nbfini/(idi+1))
             print("moymvt : ",nbmvt/(idi+1))
             

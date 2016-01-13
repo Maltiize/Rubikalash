@@ -862,7 +862,7 @@ class Resolution:
 ##            self.cube.rotation("L2")
         self.mouv += 5
         #self.cube.displayCube()
-        print("2cubeinv")
+        #print("2cubeinv")
 
     def cubeinv(self):
         #si cube au bon endroit mais couleurs inversées
@@ -979,7 +979,7 @@ class Resolution:
 ##                vr = self.cube.findCube(['G', 'R']) #vert/rouge
 ##                vo = self.cube.findCube(['G', 'O']) #cube vert/orange
 ##                bo = self.cube.findCube(['B', 'O']) #cube bleu/orange
-            self.cube.displayCube()
+            #self.cube.displayCube()
             if self.checkscdcouronne():
                 break
             self.cubeinv()
@@ -1690,50 +1690,50 @@ def resolutionFinale(strcu="WWWWWWWWWGGGRRRBBBOOOGGGRRRBBBOOOGGGRRRBBBOOOYYYYYYY
 
     #print("Cube d'origine")
     print(cube.getStr())
-    cube.displayCube()
+    #cube.displayCube()
     
     #print(resolution.liCmd)
     #print(str(resolution.nbCmd) + '\n')
     
-    print("Etape 1 : Croix")
+    #print("Etape 1 : Croix")
     resolution.theCross('u')
-    cube.displayCube()
+    #cube.displayCube()
 
     #print(resolution.liCmd)
     #print(str(resolution.nbCmd) + '\n')
 
-    print("Etape 2 : Les coins")
+    #print("Etape 2 : Les coins")
 
     resolution.theCorner('u')
-    cube.displayCube()
+    #cube.displayCube()
 
     #print(resolution.liCmd)
     #print(str(resolution.nbCmd) + '\n')
 
-    print("Etape 3 : la deuxieme couronne")
+    #print("Etape 3 : la deuxieme couronne")
     resolution.deuxcouronne()
-    cube.displayCube()
+    #cube.displayCube()
 
     #print(resolution.liCmd)
     #print(str(resolution.nbCmd)+ '\n')
 
-    print("Etape 4 : la croix inverse")
+    #print("Etape 4 : la croix inverse")
     resolution.resolutionCroixJaune()
-    cube.displayCube()
+    #cube.displayCube()
 
     #print(resolution.liCmd)
     #print(str(resolution.nbCmd) + '\n')
 
-    print("Etape 5 : la face inverse")
+    #print("Etape 5 : la face inverse")
     resolution.rfjaune()
-    cube.displayCube()
+    #cube.displayCube()
 
     #print(resolution.liCmd)
     #print(str(resolution.nbCmd) + '\n')
 
-    print("Etape 6 : les coins et les arretes jaunes ")
+    #print("Etape 6 : les coins et les arretes jaunes ")
     resolution.lastStep()
-    cube.displayCube()
+    #cube.displayCube()
 
     #print(resolution.liCmd)
     #print(str(resolution.nbCmd) + '\n')
