@@ -203,7 +203,7 @@ class Resolution:
                         self.rotation(self.getApproRot(tmppos[1][1],x,tmppos[0][1]))
                         
                         if(result[1][1] not in tab[1] or (result[1][1]==nameFace and len(tab[1]!=4))):
-                            self.rotation(self.getInvRot(result[1][1].upper()))
+                            self.rotation(self.getInvRot(rr)
                         self.rotation(self.getApproRot(tmppos[0][1],nameFace,x))
 
                     # cas le plus simple ou il sufft de placer la partie de la croix sur la face ou on fait la croix
