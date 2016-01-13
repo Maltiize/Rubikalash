@@ -82,6 +82,7 @@ class InterfaceIO:
     def setOutput(self):
         
         self.output = resolutionFinale("RYYWWBWWRGRRBOGYWGOGWBGYRRWGBBYORORRBOBOOOBBGYGYGYYWOW")
+        self.output = resolutionFinale("BBGYWWYWWYGGOOOGGYRORYGBRRRGBWROOWBBOROBBWRORYYWYYWBGG")
         #self.output = resolutionFinale("WWWWWWWWWGGGRRRBBBOOOGGGRRRBBBOOOGGGRRRBBBOOOYYYYYYYYY", "B2 F D B' L F L B' R U F' B D2 L' F2 B2 U R2 L F B2 L2 U2 R' U'")
 ##        self.output = resolutionFinale("D2 L U2 B' U L2 R' D2 B D2 B2 F' L' D' R2 L' U2 B2 D' U' F' L' F2 B' R'")
 ##        self.output = resolutionFinale("B' R L U' B' U' R' U2 R' L2 D2 R U2 B2 D L2 U2 B2 F2 R2 F' L R' B2 R")
