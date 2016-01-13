@@ -245,7 +245,14 @@ class Resolution:
                 
         return tmp
 
-     #verifie si les coin sont fait           
+    #verifie si les coin sont fait
+    #entré : nom de la face à vérifier
+    #sortie : tableau à deux case :
+    #premiere case boolean true si les coins sont bien fait false sinon
+    #deuxieme case : tableau à trois dimension chaque case represente un coin mal placé avec
+    #[[face ou doit etre la couleur de gauche,couleur gauche],[face ou doit etre la couleur de droite,couleur droite]]
+    # si tout est bien placé on aura
+    # [ True ,[] ]
     def checkCorner(self,nameFace):
         tmp=[True,[]]
         colorcorner=self.cube.getCentralColor(nameFace)
@@ -259,40 +266,61 @@ class Resolution:
             
             if(result==-1 or result[1][1]!=m[1][(x+3)%4][0] or result[2][1]!=m[1][x][0] ):
                 tmp[1]+=[[[m[1][(x+3)%4][0],colorPrev],[m[1][x][0],colorNext]]]
+                #[[face ou doit etre la couleur de gauche,couleur gauche],[face ou doit etre la couleur de droite,couleur droite]] 
+
+
                 tmp[0]=False
                 
         return tmp
+
+    #the corner permet de faire les coin d'une face sans prendre en compte se qu'elle fait sur les autre face
     def theCorner(self,nameFace):
         tab=self.checkCorner(nameFace)
         colorCorner=self.cube.getCentralColor(nameFace)
         inv=self.cube.getFaceInversed(nameFace)
+
+        
         if(tab[0]==True):
+        #si les coins sont bien placé on ne fait rien
+            
             return 0
         else :
             
             for idx, x in enumerate (tab[1]) :
+            #pour chaque coins mal placés
                    
                     
                 tmp=self.cube.findCube([colorCorner,x[0][1],x[1][1]])
+                #on trouve le cube à replacer corectement
+                
                 
                 if (tmp[0][1] != inv):
+                #si la couleur de la face à aranger n'est pas à l'opposer de où elle devrait etre (cas les plus simple)
+                
                     for i in range (0,2) :
+                    #on regarde quelle couleur est donc à l'opposé les rotation change selon celle ci c'est pour ça qu'il y à cette boucle
                         
                         if (tmp[1+i][1] == inv):
+                            #la couleur choisi est bien à l'opposé de la face à aranger
+                            
                             m=self.cube.getMouv(tmp[2-i][1].upper())
                             if (tmp[0][1] == m[1][1][0]):
+                                #si la couleur de la face à aranger est à la droite de la dernière couleur faire c'est rotation
                                 self.rotation(self.getApproRot(tmp[0][1],self.cube.getFaceInversed(x[1-i][0]),inv))
                                 self.rotation(x[1-i][0].upper())
                                 self.rotation(self.getInvRot(inv.upper()))
                                 self.rotation(self.getInvRot(x[1-i][0].upper()))
                                 
                             else :
+                                #si la couleur de la face à aranger est à la gauche de la dernière couleur faire c'est rotation
                                 self.rotation(self.getApproRot(tmp[0][1],self.cube.getFaceInversed(x[1-i][0]),inv))
 
                                 self.rotation(self.getInvRot(x[1-i][0].upper()))
                                 self.rotation(inv.upper())
                                 self.rotation(x[1-i][0].upper())
                 else :
+                    #si la couleur de la face à aranger est à l'opposer de où elle devrait etre
+                    
                     self.rotation(self.getApproRot(tmp[1][1],x[1][0],inv))
                     m=self.cube.getMouv(tmp[1][1].upper())
 
@@ -324,15 +352,25 @@ class Resolution:
                         self.rotation(x[1][0].upper())
             tab=self.checkCorner(nameFace)
             if(tab[0]==True):
+                #on vérifie si les rotation que l'on à fait on suffit
+                #c.a.d qu'aucun des cube mal placé est été sur la couronne de la face à modifier
+                
                 return 0
             else :
                 for idx, x in enumerate (tab[1]) :
                     
                     tmp=self.cube.findCube([colorCorner,x[0][1],x[1][1]])
+                    #on trouve les cubes manquant 
+                    
                     for i in range (3) :
                         if tmp[i][1] == nameFace :
-                            mtp=self.cube.getMouv(tmp[(i+1)%3][1].upper())
+                            #ontrouve la face étant sur la face à modifier
                             
+                            mtp=self.cube.getMouv(tmp[(i+1)%3][1].upper())
+
+
+                            #on va placer le cube pour qu'il soit sur la couronne opposer de là ou il est et qu'il puisse ainsi etre traiter par theCorner
+
                             if tmp[(i+2)%3][1] == mtp[1][1][0] :
                                 self.rotation(tmp[(i+1)%3][1].upper())
                                 self.rotation(inv.upper())
@@ -341,14 +379,16 @@ class Resolution:
                                 self.rotation(tmp[(i+2)%3][1].upper())
                                 self.rotation(inv.upper())
                                 self.rotation(self.getInvRot(tmp[(i+2)%3][1].upper()))
-                self.theCorner(nameFace)        
+                    i=(len(tab[1]))        
+                self.theCorner(nameFace)
+                #on envoie la récursivité et normalement ça doit bien placé le cube deplacer sur la couronne opposer
                         
                                 
             
                                 
                 
                 
-#the corner permet de faire les coin d'une face sans prendre en compte se qu'elle fait sur les autre face
+
     def rfjaune(self):
         cube=self.cube
        
