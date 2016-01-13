@@ -1243,7 +1243,7 @@ class Resolution:
 
 
 def resolutionFinale(strcu="WWWWWWWWWGGGRRRBBBOOOGGGRRRBBBOOOGGGRRRBBBOOOYYYYYYYYY",entry=''):
-
+    
     cube = Cube(strcu)
     resolution = Resolution(cube)
     #cube = Cube("RWYRWGOGOYYGWRWBOOBOGGGYORGWBWBOYBBGYRRBRGWOWOWYYYBRBR")

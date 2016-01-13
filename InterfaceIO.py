@@ -39,7 +39,8 @@ class InterfaceIO:
     
     def batCube(self,nbcube=1000):
         tCube=[]
-        for j in range (nbcube) :
+        j=0
+        while (j <= nbcube) :
         
             tab = ['U','L','R','B','D','F','U2','L2','R2','B2','D2','F2',]
             cube = Cube("WWWWWWWWWGGGRRRBBBOOOGGGRRRBBBOOOGGGRRRBBBOOOYYYYYYYYY")
@@ -51,9 +52,8 @@ class InterfaceIO:
             
             if strtmp not in tCube :
                 tCube.append(strtmp)
-   
-            else :
-                j-=1
+                j+=1
+            
         
         writeTab(tCube,self.path,self.file)
                
@@ -63,7 +63,7 @@ class InterfaceIO:
     def batTest(self,TCube=None):
         if(TCube==None):
             TCube=getCubeFile(self.path+self.file)
-            print(TCube)
+            print("nbcube à tester : ",len(TCube))
         for i in TCube :
             self.output = resolutionFinale(i)
             
@@ -134,8 +134,7 @@ def getCubeFile(path):
 
 resolutionCube = InterfaceIO()
 
-batTestOfBatCube=resolutionCube.batCube(10)
+batTestOfBatCube=resolutionCube.batCube(10000)
 resolutionCube.batTest()
-#resolutionCube.getEntry()
 #resolutionCube.setOutput()
 
