@@ -100,8 +100,8 @@ class Resolution:
         # pour toute les faces qui n'ont pas encore été traitée
         while(len(tab[1])!=0):
             for x in tab[1]:
-                print(tab)
-                cube.displayCube()
+                #print(tab)
+                #cube.displayCube()
                 # On cherche le cube de couleur "Face à traiter" + " Face où se trouve la croix"
                 # on récupere donc la couleur de "Face à traiter" 
                 curColor=self.cube.getCentralColor(x)
@@ -193,7 +193,7 @@ class Resolution:
                     
                     # si la face blanche est sur la face cherchée il faut retourner le cube
                     elif(rot==-2):
-                        print('ok')
+                        #print('ok')
                         rr=result[1][1].upper()
                         #if(result[1][1]!=self.cube.getFaceInversed(nameFace) and result[1][1]!=nameFace):
                         #    rr=self.getApproRot(result[0][1],cube.getFaceInversed(nameFace),result[1][1])
