@@ -402,7 +402,7 @@ class Resolution:
                 
                 
 
-    def rfjaune(self):
+     def rfjaune(self):
         cube=self.cube
        
         j=cube.down
@@ -412,23 +412,23 @@ class Resolution:
         o=cube.back
         if not cube.faceFinished('d') :
           
-            if r[2][0]==b[2][2] and j[0][2]==b[2][2] and j[2][0]==b[2][2] and j[2][2]!=b[2][2] and j[0][0]!=b[2][2]:
+            if b[2][2]==j[1][1] and r[2][0]==b[2][2] and j[0][2]==b[2][2] and j[2][0]==b[2][2] and j[2][2]!=b[2][2] and j[0][0]!=b[2][2]:
                 self.applyCmd("F'RFL'F'R'FL")
                 
-            elif b[2][2]==b[2][0] and j[0][0]==b[2][0] and j[2][0]==b[2][0]   and j[2][2]!=b[2][0]  and j[0][2]!=b[2][0] :
+            elif b[2][0]==j[1][1] and b[2][2]==b[2][0] and j[0][0]==b[2][0] and j[2][0]==b[2][0]   and j[2][2]!=b[2][0]  and j[0][2]!=b[2][0] :
                 self.applyCmd("F2UF'D2FU'F'D2F'")
                 
-            elif r[2][0]==b[2][0] and j[2][2]==b[2][0]  and j[0][0]!=b[2][0] and j[0][2]!=b[2][0]  and j[2][0]!=b[2][0]:
+            elif b[2][0]==j[1][1] and r[2][0]==b[2][0] and j[2][2]==b[2][0]  and j[0][0]!=b[2][0] and j[0][2]!=b[2][0]  and j[2][0]!=b[2][0]:
                 self.applyCmd("FDF'DFD2F'")
                 
-            elif j[0][2]== r[2][0]  and j[2][2]== r[2][0]   and j[2][0]!= r[2][0]  and j[0][0]!= r[2][0] :
+            elif r[2][0]==j[1][1] and j[0][2]== r[2][0]  and j[2][2]== r[2][0]   and j[2][0]!= r[2][0]  and j[0][0]!= r[2][0] :
                 self.applyCmd("F'R'FL'F'RFL")
                 
 
-            elif  b[2][2]==r[2][2] and j[0][0]==r[2][2] and j[2][2]!=r[2][2] and j[2][0]!=r[2][2] and j[0][2]!=r[2][2]:
+            elif r[2][2]==j[1][1] and b[2][2]==r[2][2] and j[0][0]==r[2][2] and j[2][2]!=r[2][2] and j[2][0]!=r[2][2] and j[0][2]!=r[2][2]:
                 self.applyCmd("FD2F'D'FD'F'")
                 
-            elif r[2][2]==r[2][0] and j[0][0]!=r[2][0] and j[0][2]!=r[2][0] and j[2][0]!=r[2][0] and j[2][2]!=r[2][0] :
+            elif r[2][2]==r[2][0] and r[2][2]==j[1][1] and  j[0][0]!=r[2][0] and j[0][2]!=r[2][0] and j[2][0]!=r[2][0] and j[2][2]!=r[2][0] :
                 self.applyCmd("BD2B2D'B2D'B2D2B")
                 
                 
@@ -440,8 +440,7 @@ class Resolution:
             self.rfjaune()
             
         else :
-            return 1
-        
+            return 1        
     
 ############## PARTIE 2ND COURONNE #################################
 
