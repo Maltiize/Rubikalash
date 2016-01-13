@@ -539,24 +539,3 @@ class Cube:
 def affTab(tab):
     for x in tab:
         print(x)
-
-    
-
-
-cube = Cube("OGRBWYBGBGYYOYOWOWGRYOOOBGBRRYRBWWWRBWYGROWGRYBRGYWBOG")
-print(cube.getStr())
-
-
-#cube = Cube("OGRBWYBGBGYYOYOWOWGRYOOOBGBRRYRBWWWRBWYGROWGRYBRGYWBOG")
-
-#cube = Cube("YBGGGGGGGRRRWWWOOOYYBGRRWWWOOOYYYYRRWWWOOGRYOBBBBBBBRY")
-#cube = Cube("O0OOOOOOOBBBRRRJJJGGGBBBRRRJJJGGGBBBRRRJJJGGGYYYYYYYYY")
-#cube.printCube()
-#print(cube.findCube(['Y','R']))
-#cube.displayCube() 
-##cube = Cube("OGRBWYBGBGYYOYOWOWGRYOOOBGBRRYRBWWWRBWYGROWGRYBRGYWBOG")
-##cube.printCube()
-#print(cube.findCube(['R','B']))
-##
-
-

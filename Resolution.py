@@ -7,6 +7,11 @@ class Resolution:
     def __init__(self,c):
         self.cube=c
         self.mouv = 0
+        self.vr = 0
+        self.br = 0
+        self.bo = 0
+        self.vo = 0
+        
         
         # liste des indexes servant  à la croix
         self.liCross=1,5,7,3
@@ -195,15 +200,15 @@ class Resolution:
                     elif(rot==-2):
                         #print('ok')
                         rr=result[1][1].upper()
-                        if(result[1][1]!=self.cube.getFaceInversed(nameFace) and result[1][1]!=nameFace):
-                            rr=self.getApproRot(result[0][1],cube.getFaceInversed(nameFace),result[1][1])
+                        #if(result[1][1]!=self.cube.getFaceInversed(nameFace) and result[1][1]!=nameFace):
+                        #    rr=self.getApproRot(result[0][1],cube.getFaceInversed(nameFace),result[1][1])
                             
                         self.rotation(rr)
                         tmppos=self.cube.findCube([colorcross,curColor])
                         self.rotation(self.getApproRot(tmppos[1][1],x,tmppos[0][1]))
                         
                         if(result[1][1] not in tab[1] or (result[1][1]==nameFace and len(tab[1]!=4))):
-                            self.rotation(self.getInvRot(rr))
+                            self.rotation(self.getInvRot(result[1][1].upper()))
                         self.rotation(self.getApproRot(tmppos[0][1],nameFace,x))
 
                     # cas le plus simple ou il sufft de placer la partie de la croix sur la face ou on fait la croix
@@ -438,6 +443,354 @@ class Resolution:
         
     
 ############## PARTIE 2ND COURONNE #################################
+##    def checkscdcouronne(self):
+##        if self.cube.front[1] == ['R','R','R'] and self.cube.right[1] == ['B','B','B'] and self.cube.back[1] == ['O','O','O'] and self.cube.left[1] == ['G','G','G']:
+##            return True
+##        else:
+##            return False
+##
+##    def deuxcubeinv(self):
+##        #si 2 cubes sont inversé sur une 2 face opposées
+##        
+##        br = self.cube.findCube(['B', 'R']) #cube bleu/rouge
+##        vr = self.cube.findCube(['G', 'R']) #vert/rouge
+##        vo = self.cube.findCube(['G', 'O']) #cube vert/orange
+##        bo = self.cube.findCube(['B', 'O']) #cube bleu/orange
+##
+##        #si le cube bleu/rouge inversé avec le vert/rouge
+##        if (br[0][1] == 'l' and vr[0][1] == 'r') or (br[0][1] == 'f' and vr[0][1] == 'f') or (br[0][1] == 'l' and vr[0][1] == 'f') or (br[0][1] == 'f' and vr[0][1] == 'r'):
+##            self.rotation("F2")
+##            self.rotation("D2")
+##            self.rotation("F2")
+##            self.rotation("D2")
+##            self.rotation("F2")
+##            self.mouv += 5
+##
+##        #si le cube bleu/rouge inversé avec le bleu/orange
+##        if (br[1][1] == 'b' and bo[1][1] == 'f') or (br[1][1] == 'r' and bo[1][1] == 'r') or (br[1][1] == 'b' and bo[1][1] == 'r') or (br[1][1] == 'r' and bo[1][1] == 'f'):
+##            self.rotation("R2")
+##            self.rotation("D2")
+##            self.rotation("R2")
+##            self.rotation("D2")
+##            self.rotation("R2")
+##            self.mouv += 5
+##            
+##        #si le cube vert/orange inversé avec le bleu/orange
+##        if (vo[0][1] == 'r' and bo[0][1] == 'l') or (vo[0][1] == 'b' and bo[0][1] == 'b') or (vo[0][1] == 'r' and bo[0][1] == 'b') or (vo[0][1] == 'b' and bo[0][1] == 'l'):
+##            self.rotation("B2")
+##            self.rotation("D2")
+##            self.rotation("B2")
+##            self.rotation("D2")
+##            self.rotation("B2")
+##            self.mouv += 5
+##
+##        #si le cube vert/orange inversé avec le vert/rouge
+##        if (vo[1][1] == 'f' and vr[1][1] == 'b') or (vo[1][1] == 'l' and vr[1][1] == 'l') or (vo[1][1] == 'f' and vr[1][1] == 'l') or (vo[1][1] == 'l' and vr[1][1] == 'b'):
+##            self.rotation("L2")
+##            self.rotation("D2")
+##            self.rotation("L2")
+##            self.rotation("D2")
+##            self.rotation("L2")
+##            self.mouv += 5
+##        #self.cube.displayCube()
+##        #print("2cubeinv")
+##
+##    def cubeinv(self):
+##        #si cube au bon endroit mais couleurs inversées
+##        br = self.cube.findCube(['B', 'R']) #cube bleu/rouge
+##        vr = self.cube.findCube(['G', 'R']) #vert/rouge
+##        vo = self.cube.findCube(['G', 'O']) #cube vert/orange
+##        bo = self.cube.findCube(['B', 'O']) #cube bleu/orange
+##
+##        if br[0][1] == 'f' and br[1][1] == 'r':
+##            self.rotation("F")
+##            self.rotation("D")
+##            self.rotation("F'")
+##            self.rotation("D2")
+##            self.rotation("F")
+##            self.rotation("D2")
+##            self.rotation("F'")
+##            self.rotation("D")
+##            self.rotation("R'")
+##            self.rotation("D'")
+##            self.rotation("R")
+##            self.mouv += 11
+##            #self.cube.displayCube()
+##
+##        if vr[0][1] == 'f' and vr[1][1] == 'l':
+##            self.rotation("L")
+##            self.rotation("D")
+##            self.rotation("L'")
+##            self.rotation("D2")
+##            self.rotation("L")
+##            self.rotation("D2")
+##            self.rotation("L'")
+##            self.rotation("D")
+##            self.rotation("F'")
+##            self.rotation("D'")
+##            self.rotation("F")
+##            self.mouv += 11
+##            #self.cube.displayCube()
+##
+##        if vo[0][1] == 'b' and vo[1][1] == 'l':
+##            self.rotation("B")
+##            self.rotation("D")
+##            self.rotation("B'")
+##            self.rotation("D2")
+##            self.rotation("B")
+##            self.rotation("D2")
+##            self.rotation("B'")
+##            self.rotation("D")
+##            self.rotation("L'")
+##            self.rotation("D'")
+##            self.rotation("L")
+##            self.mouv += 11
+##
+##        if bo[0][1] == 'b' and bo[1][1] == 'r':
+##            self.rotation("R")
+##            self.rotation("D")
+##            self.rotation("R'")
+##            self.rotation("D2")
+##            self.rotation("R")
+##            self.rotation("D2")
+##            self.rotation("R'")
+##            self.rotation("D")
+##            self.rotation("B'")
+##            self.rotation("D'")
+##            self.rotation("B")
+##            self.mouv += 11
+##            
+##    
+##    def deuxcouronne(self):
+##        
+##        #peut creer une fonction maj pour savoir ou sont les 4 cubes ? utile?
+##        br = self.cube.findCube(['B', 'R']) #cube bleu/rouge
+##        vr = self.cube.findCube(['G', 'R']) #vert/rouge
+##        vo = self.cube.findCube(['G', 'O']) #cube vert/orange
+##        bo = self.cube.findCube(['B', 'O']) #cube bleu/orange
+##        while not self.checkscdcouronne():
+##            while br[0][1] == 'd' or br[1][1] == 'd' or vr[0][1] == 'd' or vr[1][1] == 'd' or vo[0][1] == 'd' or vo[1][1] == 'd' or bo[0][1] == 'd' or bo[1][1] == 'd':
+##                self.deuxiemecouronne()
+##                br = self.cube.findCube(['B', 'R']) #cube bleu/rouge
+##                vr = self.cube.findCube(['G', 'R']) #vert/rouge
+##                vo = self.cube.findCube(['G', 'O']) #cube vert/orange
+##                bo = self.cube.findCube(['B', 'O']) #cube bleu/orange
+##
+##            if self.checkscdcouronne():
+##                break
+##            self.cubeinv()
+##            self.deuxcubeinv()
+##            
+##        return self.cube
+##    
+##    def majcube(self):
+##        self.br = self.cube.findCube(['B', 'R']) #cube bleu/rouge
+##        self.vr = self.cube.findCube(['G', 'R']) #vert/rouge
+##        self.vo = self.cube.findCube(['G', 'O']) #cube vert/orang
+##        self.bo = self.cube.findCube(['B', 'O']) #cube bleu/orange
+##
+##    def deuxiemecouronne(self):
+##    #regarder les 4 coins au dessus et si il n'y a pas de jaune la bouger au bon endroit
+##
+##            #cube bleu/rouge
+##            br = self.cube.findCube(['B', 'R']) #cube bleu/rouge
+##            #on remet le cube bleu/rouge sur sa face correspondante 
+##            if br[0][1] == 'd':  #ici le cube bleu est sur la face down
+##                self.mouv += 9
+##                #if br[1][1] == 'f':
+##                    #ne rien faire car bon endroit
+##                if br[1][1] == 'l':
+##                    #faire
+##                    self.rotation("D")
+##                elif br[1][1] == 'b':
+##                    #faire
+##                    self.rotation("D2")
+##                elif br[1][1] == 'r':
+##                    #faire
+##                    self.rotation("D'")
+##                #on doit faire basculer le cube a gauche/ au dessus du rouge
+##                self.rotation("D'")
+##                self.rotation("R'")
+##                self.rotation("D")
+##                self.rotation("R")
+##                self.rotation("D")
+##                self.rotation("F")
+##                self.rotation("D'")
+##                self.rotation("F'")
+##
+##                    
+##            elif br[1][1] == 'd': #ici le cube rouge est sur la face down
+##                if br[0][1] == 'f':
+##                    #faire
+##                    self.rotation("D")
+##                elif br[0][1] == 'l':
+##                    #faire
+##                    self.rotation("D2")
+##                elif br[0][1] == 'b':
+##                    #faire
+##                    self.rotation("D'")
+##                #if a[0][1] == 'r':
+##                    #ne rien faire
+##                #on doit faire basculer le cube a droite
+##                self.rotation("D")
+##                self.rotation("F")
+##                self.rotation("D'")
+##                self.rotation("F'")
+##                self.rotation("D'")
+##                self.rotation("R'")
+##                self.rotation("D")
+##                self.rotation("R")
+##
+##            
+##            #cube vert/rouge
+##            vr = self.cube.findCube(['G', 'R']) #cube vert/rouge
+##            #on remet le cube vert/rouge sur sa face correspondante
+##            if vr[0][1] == 'd':  #ici le cube vert est sur la face down
+##
+##                self.mouv += 9
+##                
+##                if vr[1][1] == 'l':
+##                    #faire
+##                    self.rotation("D")
+##                elif vr[1][1] == 'b':
+##                    #faire
+##                    self.rotation("D2")
+##                elif vr[1][1] == 'r':
+##                    #faire
+##                    self.rotation("D'")
+##                #on doit faire basculer le cube a droite
+##                self.rotation("D")
+##                self.rotation("L")
+##                self.rotation("D'")
+##                self.rotation("L'")
+##                self.rotation("D'")
+##                self.rotation("F'")
+##                self.rotation("D")
+##                self.rotation("F")
+##
+##            elif vr[1][1] == 'd': #ici le cube rouge est sur la face down
+##                if vr[0][1] == 'f':
+##                    #faire
+##                    self.rotation("D'")
+##                elif vr[0][1] == 'r':
+##                    #faire
+##                    self.rotation("D2")
+##                elif vr[0][1] == 'b':
+##                    #faire
+##                    self.rotation("D")
+##                #elif a[0][1] == 'r':
+##                    #ne rien faire
+##                #on doit faire basculer le cube a gauche
+##                self.rotation("D'")
+##                self.rotation("F'")
+##                self.rotation("D")
+##                self.rotation("F")
+##                self.rotation("D")
+##                self.rotation("L")
+##                self.rotation("D'")
+##                self.rotation("L'")
+##                self.cube.displayCube()
+##
+##            #cube vert/orange
+##            vo = self.cube.findCube(['G', 'O']) #cube vert/orange
+##                #on remet le cube vert/orange sur sa face correspondante 
+##            if vo[0][1] == 'd':  #ici le cube vert est sur la face down
+##                self.mouv += 8
+##                if vo[1][1] == 'f':
+##                     #faire
+##                    self.rotation("D2")
+##                elif vo[1][1] == 'l':
+##                    #faire
+##                    self.rotation("D'")
+##                #if vr[1][1] == 'b':
+##                   #ne rien faire car bon endroit
+##                elif vo[1][1] == 'r':
+##                    #faire
+##                    self.rotation("D")
+##                #on doit faire basculer le cube a gauche
+##                self.rotation("D'")
+##                self.rotation("L'")
+##                self.rotation("D")
+##                self.rotation("L")
+##                self.rotation("D")
+##                self.rotation("B")
+##                self.rotation("D'")
+##                self.rotation("B'")
+##                self.cube.displayCube()
+##                
+##            elif vo[1][1] == 'd': #ici le cube orange est sur la face down
+##                if vo[0][1] == 'f':
+##                    #faire
+##                    self.rotation("D'")
+##                elif vo[0][1] == 'r':
+##                    #faire
+##                    self.rotation("D2")
+##                elif vo[0][1] == 'b':
+##                    #faire
+##                    self.rotation("D")
+##                #if vo[0][1] == 'r':
+##                    #ne rien faire
+##                #on doit faire basculer le cube a droite
+##                self.rotation("D")
+##                self.rotation("B")
+##                self.rotation("D'")
+##                self.rotation("B'")
+##                self.rotation("D'")
+##                self.rotation("L'")
+##                self.rotation("D")
+##                self.rotation("L")
+##                self.cube.displayCube()
+##
+##            #cube bleu/orange
+##            bo = self.cube.findCube(['B', 'O']) #cube bleu/orange
+##            #on remet le cube bleu/orange sur sa face correspondante 
+##            if bo[0][1] == 'd':  #ici le cube bleu est sur la face down
+##                self.mouv += 8
+##                if bo[1][1] == 'f':
+##                     #faire
+##                    self.rotation("D2")
+##                elif bo[1][1] == 'l':
+##                    #faire
+##                    self.rotation("D'")
+##                #if bo[1][1] == 'b':
+##                   #ne rien faire car bon endroit
+##                elif bo[1][1] == 'r':
+##                    #faire
+##                    self.rotation("D")
+##                    #on doit faire basculer le cube a droite
+##                self.rotation("D")
+##                self.rotation("R")
+##                self.rotation("D'")
+##                self.rotation("R'")
+##                self.rotation("D'")
+##                self.rotation("B'")
+##                self.rotation("D")
+##                self.rotation("B")
+##                self.cube.displayCube()
+##            
+##            elif bo[1][1] == 'd': #ici le cube orange est sur la face down
+##                if bo[0][1] == 'f':
+##                    #faire
+##                    self.rotation("D")
+##                #if bo[0][1] == 'r':
+##                    #ne rien faire
+##                elif bo[0][1] == 'b':
+##                    #faire
+##                    self.rotation("D'")
+##                elif bo[0][1] == 'l':
+##                    #faire
+##                    self.rotation("D2")
+##                #on doit faire basculer le cube a gauche
+##                self.rotation("D'")
+##                self.rotation("B'")
+##                self.rotation("D")
+##                self.rotation("B")
+##                self.rotation("D")
+##                self.rotation("R")
+##                self.rotation("D'")
+##                self.rotation("R'")
+##                self.cube.displayCube()
+
     def checkscdcouronne(self):
         if self.cube.front[1] == ['R','R','R'] and self.cube.right[1] == ['B','B','B'] and self.cube.back[1] == ['O','O','O'] and self.cube.left[1] == ['G','G','G']:
             return True
@@ -446,136 +799,196 @@ class Resolution:
 
     def deuxcubeinv(self):
         #si 2 cubes sont inversé sur une 2 face opposées
-        
-        br = self.cube.findCube(['B', 'R']) #cube bleu/rouge
-        vr = self.cube.findCube(['G', 'R']) #vert/rouge
-        vo = self.cube.findCube(['G', 'O']) #cube vert/orange
-        bo = self.cube.findCube(['B', 'O']) #cube bleu/orange
+        a = 0
+##        br = self.cube.findCube(['B', 'R']) #cube bleu/rouge
+##        vr = self.cube.findCube(['G', 'R']) #vert/rouge
+##        vo = self.cube.findCube(['G', 'O']) #cube vert/orange
+##        bo = self.cube.findCube(['B', 'O']) #cube bleu/orange
+        self.majcube()
 
         #si le cube bleu/rouge inversé avec le vert/rouge
-        if (br[0][1] == 'l' and vr[0][1] == 'r') or (br[0][1] == 'f' and vr[0][1] == 'f'):
-            self.rotation("F2")
-            self.rotation("D2")
-            self.rotation("F2")
-            self.rotation("D2")
-            self.rotation("F2")
-            self.mouv += 5
-
+        if (self.br[0][1] == 'l' and self.vr[0][1] == 'r') or (self.br[0][1] == 'f' and self.vr[0][1] == 'f') or (self.br[0][1] == 'l' and self.vr[0][1] == 'f') or (self.br[0][1] == 'f' and self.vr[0][1] == 'r'):
+            a = "F"
         #si le cube bleu/rouge inversé avec le bleu/orange
-        if (br[1][1] == 'b' and bo[1][1] == 'f') or (br[1][1] == 'r' and bo[1][1] == 'r'):
-            self.rotation("R2")
-            self.rotation("D2")
-            self.rotation("R2")
-            self.rotation("D2")
-            self.rotation("R2")
-            self.mouv += 5
-            
+        elif (self.br[1][1] == 'b' and self.bo[1][1] == 'f') or (self.br[1][1] == 'r' and self.bo[1][1] == 'r') or (self.br[1][1] == 'b' and self.bo[1][1] == 'r') or (self.br[1][1] == 'r' and self.bo[1][1] == 'f'):
+            a = "R"
         #si le cube vert/orange inversé avec le bleu/orange
-        if (vo[0][1] == 'r' and bo[0][1] == 'l') or (vo[0][1] == 'b' and bo[0][1] == 'b'):
-            self.rotation("B2")
-            self.rotation("D2")
-            self.rotation("B2")
-            self.rotation("D2")
-            self.rotation("B2")
-            self.mouv += 5
-
+        elif (self.vo[0][1] == 'r' and self.bo[0][1] == 'l') or (self.vo[0][1] == 'b' and self.bo[0][1] == 'b') or (self.vo[0][1] == 'r' and self.bo[0][1] == 'b') or (self.vo[0][1] == 'b' and self.bo[0][1] == 'l'):
+            a = "B"
         #si le cube vert/orange inversé avec le vert/rouge
-        if (vo[1][1] == 'f' and vr[1][1] == 'b') or (vo[1][1] == 'l' and vr[1][1] == 'l'):
-            self.rotation("L2")
-            self.rotation("D2")
-            self.rotation("L2")
-            self.rotation("D2")
-            self.rotation("L2")
-            self.mouv += 5
+        elif (self.vo[1][1] == 'f' and self.vr[1][1] == 'b') or (self.vo[1][1] == 'l' and self.vr[1][1] == 'l') or (self.vo[1][1] == 'f' and self.vr[1][1] == 'l') or (self.vo[1][1] == 'l' and self.vr[1][1] == 'b'):
+            a = "L"
+        if a!= 0:
+            self.cube.rotation(str(a)+str(2))
+            self.cube.rotation("D2")
+            self.cube.rotation(str(a)+str(2))
+            self.cube.rotation("D2")
+            self.cube.rotation(str(a)+str(2))
+
+##        #si le cube bleu/rouge inversé avec le vert/rouge
+##        if br[0][1] == 'l' and vr[0][1] == 'r':
+##            self.cube.rotation("F2")
+##            self.cube.rotation("D2")
+##            self.cube.rotation("F2")
+##            self.cube.rotation("D2")
+##            self.cube.rotation("F2")
+##            self.mouv += 5
+##
+##        #si le cube bleu/rouge inversé avec le bleu/orange
+##        if br[1][1] == 'b' and bo[1][1] == 'f':
+##            self.cube.rotation("R2")
+##            self.cube.rotation("D2")
+##            self.cube.rotation("R2")
+##            self.cube.rotation("D2")
+##            self.cube.rotation("R2")
+##            self.mouv += 5
+##            
+##        #si le cube vert/orange inversé avec le bleu/orange
+##        if vo[0][1] == 'r' and bo[0][1] == 'l':
+##            self.cube.rotation("B2")
+##            self.cube.rotation("D2")
+##            self.cube.rotation("B2")
+##            self.cube.rotation("D2")
+##            self.cube.rotation("B2")
+##            self.mouv += 5
+##
+##        #si le cube vert/orange inversé avec le vert/rouge
+##        if vo[1][1] == 'f' and vr[1][1] == 'b':
+##            self.cube.rotation("L2")
+##            self.cube.rotation("D2")
+##            self.cube.rotation("L2")
+##            self.cube.rotation("D2")
+##            self.cube.rotation("L2")
+        self.mouv += 5
         #self.cube.displayCube()
-        #print("2cubeinv")
+        print("2cubeinv")
 
     def cubeinv(self):
         #si cube au bon endroit mais couleurs inversées
-        br = self.cube.findCube(['B', 'R']) #cube bleu/rouge
-        vr = self.cube.findCube(['G', 'R']) #vert/rouge
-        vo = self.cube.findCube(['G', 'O']) #cube vert/orange
-        bo = self.cube.findCube(['B', 'O']) #cube bleu/orange
-
-        if br[0][1] == 'f' and br[1][1] == 'r':
-            self.rotation("F")
-            self.rotation("D")
-            self.rotation("F'")
-            self.rotation("D2")
-            self.rotation("F")
-            self.rotation("D2")
-            self.rotation("F'")
-            self.rotation("D")
-            self.rotation("R'")
-            self.rotation("D'")
-            self.rotation("R")
+##        br = self.cube.findCube(['B', 'R']) #cube bleu/rouge
+##        vr = self.cube.findCube(['G', 'R']) #vert/rouge
+##        vo = self.cube.findCube(['G', 'O']) #cube vert/orange
+##        bo = self.cube.findCube(['B', 'O']) #cube bleu/orange
+        self.majcube()
+        a = 0
+        b = 0
+        
+        if self.br[0][1] == 'f' and self.br[1][1] == 'r':
+            a = "F"
+            b = "R"
+        if self.vr[0][1] == 'f' and self.vr[1][1] == 'l':
+            a = "L"
+            b = "F"
+        if self.vo[0][1] == 'b' and self.vo[1][1] == 'l':
+            a = "B"
+            b = "L"
+        if self.bo[0][1] == 'b' and self.bo[1][1] == 'r':
+            a = "R"
+            b = "B"
+        if a != 0:
+            self.cube.rotation(str(a))
+            self.cube.rotation("D")
+            self.cube.rotation(str(a)+"'")
+            self.cube.rotation("D2")
+            self.cube.rotation(str(a))
+            self.cube.rotation("D2")
+            self.cube.rotation(str(a)+"'")
+            self.cube.rotation("D")
+            self.cube.rotation(str(b)+"'")
+            self.cube.rotation("D'")
+            self.cube.rotation(str(b))
             self.mouv += 11
             #self.cube.displayCube()
 
-        if vr[0][1] == 'f' and vr[1][1] == 'l':
-            self.rotation("L")
-            self.rotation("D")
-            self.rotation("L'")
-            self.rotation("D2")
-            self.rotation("L")
-            self.rotation("D2")
-            self.rotation("L'")
-            self.rotation("D")
-            self.rotation("F'")
-            self.rotation("D'")
-            self.rotation("F")
-            self.mouv += 11
-            #self.cube.displayCube()
-
-        if vo[0][1] == 'b' and vo[1][1] == 'l':
-            self.rotation("B")
-            self.rotation("D")
-            self.rotation("B'")
-            self.rotation("D2")
-            self.rotation("B")
-            self.rotation("D2")
-            self.rotation("B'")
-            self.rotation("D")
-            self.rotation("L'")
-            self.rotation("D'")
-            self.rotation("L")
-            self.mouv += 11
-
-        if bo[0][1] == 'b' and bo[1][1] == 'r':
-            self.rotation("R")
-            self.rotation("D")
-            self.rotation("R'")
-            self.rotation("D2")
-            self.rotation("R")
-            self.rotation("D2")
-            self.rotation("R'")
-            self.rotation("D")
-            self.rotation("B'")
-            self.rotation("D'")
-            self.rotation("B")
-            self.mouv += 11
+##        if br[0][1] == 'f' and br[1][1] == 'r':
+##            self.cube.rotation("F")
+##            self.cube.rotation("D")
+##            self.cube.rotation("F'")
+##            self.cube.rotation("D2")
+##            self.cube.rotation("F")
+##            self.cube.rotation("D2")
+##            self.cube.rotation("F'")
+##            self.cube.rotation("D")
+##            self.cube.rotation("R'")
+##            self.cube.rotation("D'")
+##            self.cube.rotation("R")
+##            self.mouv += 11
+##            self.cube.displayCube()
+##
+##        if vr[0][1] == 'f' and vr[1][1] == 'l':
+##            self.cube.rotation("L")
+##            self.cube.rotation("D")
+##            self.cube.rotation("L'")
+##            self.cube.rotation("D2")
+##            self.cube.rotation("L")
+##            self.cube.rotation("D2")
+##            self.cube.rotation("L'")
+##            self.cube.rotation("D")
+##            self.cube.rotation("F'")
+##            self.cube.rotation("D'")
+##            self.cube.rotation("F")
+##            self.mouv += 11
+##            self.cube.displayCube()
+##
+##        if vo[0][1] == 'b' and vo[1][1] == 'l':
+##            self.cube.rotation("B")
+##            self.cube.rotation("D")
+##            self.cube.rotation("B'")
+##            self.cube.rotation("D2")
+##            self.cube.rotation("B")
+##            self.cube.rotation("D2")
+##            self.cube.rotation("B'")
+##            self.cube.rotation("D")
+##            self.cube.rotation("L'")
+##            self.cube.rotation("D'")
+##            self.cube.rotation("L")
+##            self.mouv += 11
+##            self.cube.displayCube()
+##
+##        if bo[0][1] == 'b' and bo[1][1] == 'r':
+##            self.cube.rotation("R")
+##            self.cube.rotation("D")
+##            self.cube.rotation("R'")
+##            self.cube.rotation("D2")
+##            self.cube.rotation("R")
+##            self.cube.rotation("D2")
+##            self.cube.rotation("R'")
+##            self.cube.rotation("D")
+##            self.cube.rotation("B'")
+##            self.cube.rotation("D'")
+##            self.cube.rotation("B")
+##            self.mouv += 11
+##            self.cube.displayCube()
             
+        #print("cubeinv")
     
     def deuxcouronne(self):
         
         #peut creer une fonction maj pour savoir ou sont les 4 cubes ? utile?
-        br = self.cube.findCube(['B', 'R']) #cube bleu/rouge
-        vr = self.cube.findCube(['G', 'R']) #vert/rouge
-        vo = self.cube.findCube(['G', 'O']) #cube vert/orange
-        bo = self.cube.findCube(['B', 'O']) #cube bleu/orange
+##        br = self.cube.findCube(['B', 'R']) #cube bleu/rouge
+##        vr = self.cube.findCube(['G', 'R']) #vert/rouge
+##        vo = self.cube.findCube(['G', 'O']) #cube vert/orange
+##        bo = self.cube.findCube(['B', 'O']) #cube bleu/orange
+        self.majcube()
         while not self.checkscdcouronne():
-            while br[0][1] == 'd' or br[1][1] == 'd' or vr[0][1] == 'd' or vr[1][1] == 'd' or vo[0][1] == 'd' or vo[1][1] == 'd' or bo[0][1] == 'd' or bo[1][1] == 'd':
+            while self.br[0][1] == 'd' or self.br[1][1] == 'd' or self.vr[0][1] == 'd' or self.vr[1][1] == 'd' or self.vo[0][1] == 'd' or self.vo[1][1] == 'd' or self.bo[0][1] == 'd' or self.bo[1][1] == 'd':
                 self.deuxiemecouronne()
-                br = self.cube.findCube(['B', 'R']) #cube bleu/rouge
-                vr = self.cube.findCube(['G', 'R']) #vert/rouge
-                vo = self.cube.findCube(['G', 'O']) #cube vert/orange
-                bo = self.cube.findCube(['B', 'O']) #cube bleu/orange
-
+                self.majcube()
+##                br = self.cube.findCube(['B', 'R']) #cube bleu/rouge
+##                vr = self.cube.findCube(['G', 'R']) #vert/rouge
+##                vo = self.cube.findCube(['G', 'O']) #cube vert/orange
+##                bo = self.cube.findCube(['B', 'O']) #cube bleu/orange
+            self.cube.displayCube()
             if self.checkscdcouronne():
                 break
             self.cubeinv()
+            if self.checkscdcouronne():
+                break
+            #self.cube.displayCube()
             self.deuxcubeinv()
-            
+            #self.cube.displayCube()
+
+        #print(self.mouv)
         return self.cube
     
     def majcube(self):
@@ -591,50 +1004,50 @@ class Resolution:
             br = self.cube.findCube(['B', 'R']) #cube bleu/rouge
             #on remet le cube bleu/rouge sur sa face correspondante 
             if br[0][1] == 'd':  #ici le cube bleu est sur la face down
-                self.mouv += 9
-                #if br[1][1] == 'f':
-                    #ne rien faire car bon endroit
                 if br[1][1] == 'l':
                     #faire
-                    self.rotation("D")
+                    self.cube.rotation("D")
                 elif br[1][1] == 'b':
                     #faire
-                    self.rotation("D2")
+                    self.cube.rotation("D2")
                 elif br[1][1] == 'r':
                     #faire
-                    self.rotation("D'")
+                    self.cube.rotation("D'")
+                    #self.cube.printCube()
                 #on doit faire basculer le cube a gauche/ au dessus du rouge
-                self.rotation("D'")
-                self.rotation("R'")
-                self.rotation("D")
-                self.rotation("R")
-                self.rotation("D")
-                self.rotation("F")
-                self.rotation("D'")
-                self.rotation("F'")
+                self.cube.rotation("D'")
+                self.cube.rotation("R'")
+                self.cube.rotation("D")
+                self.cube.rotation("R")
+                self.cube.rotation("D")
+                self.cube.rotation("F")
+                self.cube.rotation("D'")
+                self.cube.rotation("F'")
+                #self.cube.displayCube()
 
                     
             elif br[1][1] == 'd': #ici le cube rouge est sur la face down
                 if br[0][1] == 'f':
                     #faire
-                    self.rotation("D")
+                    self.cube.rotation("D")
                 elif br[0][1] == 'l':
                     #faire
-                    self.rotation("D2")
+                    self.cube.rotation("D2")
                 elif br[0][1] == 'b':
                     #faire
-                    self.rotation("D'")
+                    self.cube.rotation("D'")
                 #if a[0][1] == 'r':
                     #ne rien faire
                 #on doit faire basculer le cube a droite
-                self.rotation("D")
-                self.rotation("F")
-                self.rotation("D'")
-                self.rotation("F'")
-                self.rotation("D'")
-                self.rotation("R'")
-                self.rotation("D")
-                self.rotation("R")
+                self.cube.rotation("D")
+                self.cube.rotation("F")
+                self.cube.rotation("D'")
+                self.cube.rotation("F'")
+                self.cube.rotation("D'")
+                self.cube.rotation("R'")
+                self.cube.rotation("D")
+                self.cube.rotation("R")
+                #self.cube.displayCube()
 
             
             #cube vert/rouge
@@ -646,45 +1059,45 @@ class Resolution:
                 
                 if vr[1][1] == 'l':
                     #faire
-                    self.rotation("D")
+                    self.cube.rotation("D")
                 elif vr[1][1] == 'b':
                     #faire
-                    self.rotation("D2")
+                    self.cube.rotation("D2")
                 elif vr[1][1] == 'r':
                     #faire
-                    self.rotation("D'")
+                    self.cube.rotation("D'")
                 #on doit faire basculer le cube a droite
-                self.rotation("D")
-                self.rotation("L")
-                self.rotation("D'")
-                self.rotation("L'")
-                self.rotation("D'")
-                self.rotation("F'")
-                self.rotation("D")
-                self.rotation("F")
-
+                self.cube.rotation("D")
+                self.cube.rotation("L")
+                self.cube.rotation("D'")
+                self.cube.rotation("L'")
+                self.cube.rotation("D'")
+                self.cube.rotation("F'")
+                self.cube.rotation("D")
+                self.cube.rotation("F")
+                #self.cube.displayCube()
             elif vr[1][1] == 'd': #ici le cube rouge est sur la face down
                 if vr[0][1] == 'f':
                     #faire
-                    self.rotation("D'")
+                    self.cube.rotation("D'")
                 elif vr[0][1] == 'r':
                     #faire
-                    self.rotation("D2")
+                    self.cube.rotation("D2")
                 elif vr[0][1] == 'b':
                     #faire
-                    self.rotation("D")
+                    self.cube.rotation("D")
                 #elif a[0][1] == 'r':
                     #ne rien faire
                 #on doit faire basculer le cube a gauche
-                self.rotation("D'")
-                self.rotation("F'")
-                self.rotation("D")
-                self.rotation("F")
-                self.rotation("D")
-                self.rotation("L")
-                self.rotation("D'")
-                self.rotation("L'")
-                self.cube.displayCube()
+                self.cube.rotation("D'")
+                self.cube.rotation("F'")
+                self.cube.rotation("D")
+                self.cube.rotation("F")
+                self.cube.rotation("D")
+                self.cube.rotation("L")
+                self.cube.rotation("D'")
+                self.cube.rotation("L'")
+                #self.cube.displayCube()
 
             #cube vert/orange
             vo = self.cube.findCube(['G', 'O']) #cube vert/orange
@@ -693,48 +1106,48 @@ class Resolution:
                 self.mouv += 8
                 if vo[1][1] == 'f':
                      #faire
-                    self.rotation("D2")
+                    self.cube.rotation("D2")
                 elif vo[1][1] == 'l':
                     #faire
-                    self.rotation("D'")
+                    self.cube.rotation("D'")
                 #if vr[1][1] == 'b':
                    #ne rien faire car bon endroit
                 elif vo[1][1] == 'r':
                     #faire
-                    self.rotation("D")
+                    self.cube.rotation("D")
                 #on doit faire basculer le cube a gauche
-                self.rotation("D'")
-                self.rotation("L'")
-                self.rotation("D")
-                self.rotation("L")
-                self.rotation("D")
-                self.rotation("B")
-                self.rotation("D'")
-                self.rotation("B'")
-                self.cube.displayCube()
+                self.cube.rotation("D'")
+                self.cube.rotation("L'")
+                self.cube.rotation("D")
+                self.cube.rotation("L")
+                self.cube.rotation("D")
+                self.cube.rotation("B")
+                self.cube.rotation("D'")
+                self.cube.rotation("B'")
+                #self.cube.displayCube()
                 
             elif vo[1][1] == 'd': #ici le cube orange est sur la face down
                 if vo[0][1] == 'f':
                     #faire
-                    self.rotation("D'")
+                    self.cube.rotation("D'")
                 elif vo[0][1] == 'r':
                     #faire
-                    self.rotation("D2")
+                    self.cube.rotation("D2")
                 elif vo[0][1] == 'b':
                     #faire
-                    self.rotation("D")
+                    self.cube.rotation("D")
                 #if vo[0][1] == 'r':
                     #ne rien faire
                 #on doit faire basculer le cube a droite
-                self.rotation("D")
-                self.rotation("B")
-                self.rotation("D'")
-                self.rotation("B'")
-                self.rotation("D'")
-                self.rotation("L'")
-                self.rotation("D")
-                self.rotation("L")
-                self.cube.displayCube()
+                self.cube.rotation("D")
+                self.cube.rotation("B")
+                self.cube.rotation("D'")
+                self.cube.rotation("B'")
+                self.cube.rotation("D'")
+                self.cube.rotation("L'")
+                self.cube.rotation("D")
+                self.cube.rotation("L")
+                #self.cube.displayCube()
 
             #cube bleu/orange
             bo = self.cube.findCube(['B', 'O']) #cube bleu/orange
@@ -743,48 +1156,49 @@ class Resolution:
                 self.mouv += 8
                 if bo[1][1] == 'f':
                      #faire
-                    self.rotation("D2")
+                    self.cube.rotation("D2")
                 elif bo[1][1] == 'l':
                     #faire
-                    self.rotation("D'")
+                    self.cube.rotation("D'")
                 #if bo[1][1] == 'b':
                    #ne rien faire car bon endroit
                 elif bo[1][1] == 'r':
                     #faire
-                    self.rotation("D")
+                    self.cube.rotation("D")
                     #on doit faire basculer le cube a droite
-                self.rotation("D")
-                self.rotation("R")
-                self.rotation("D'")
-                self.rotation("R'")
-                self.rotation("D'")
-                self.rotation("B'")
-                self.rotation("D")
-                self.rotation("B")
-                self.cube.displayCube()
+                self.cube.rotation("D")
+                self.cube.rotation("R")
+                self.cube.rotation("D'")
+                self.cube.rotation("R'")
+                self.cube.rotation("D'")
+                self.cube.rotation("B'")
+                self.cube.rotation("D")
+                self.cube.rotation("B")
+                #self.cube.displayCube()
             
             elif bo[1][1] == 'd': #ici le cube orange est sur la face down
                 if bo[0][1] == 'f':
                     #faire
-                    self.rotation("D")
+                    self.cube.rotation("D")
                 #if bo[0][1] == 'r':
                     #ne rien faire
                 elif bo[0][1] == 'b':
                     #faire
-                    self.rotation("D'")
+                    self.cube.rotation("D'")
                 elif bo[0][1] == 'l':
                     #faire
-                    self.rotation("D2")
+                    self.cube.rotation("D2")
                 #on doit faire basculer le cube a gauche
-                self.rotation("D'")
-                self.rotation("B'")
-                self.rotation("D")
-                self.rotation("B")
-                self.rotation("D")
-                self.rotation("R")
-                self.rotation("D'")
-                self.rotation("R'")
-                self.cube.displayCube()
+                self.cube.rotation("D'")
+                self.cube.rotation("B'")
+                self.cube.rotation("D")
+                self.cube.rotation("B")
+                self.cube.rotation("D")
+                self.cube.rotation("R")
+                self.cube.rotation("D'")
+                self.cube.rotation("R'")
+                #self.cube.displayCube()
+            #print("2couronne")   
 
 ############## PARTIE 2ND COURONNE #################################
         
@@ -1022,11 +1436,12 @@ class Resolution:
 
         # Si les deux faces sont inversé
         faceTest = self.cube.getFace(self.cube.liFace[(self.cube.liFace.index(faceJaune)+2)%6])
-        if (faceJaune == 'u' and faceTest[0][0] == faceTest[0][1] == faceTest[0][2]) or (faceJaune == 'f' and faceTest[0][0] == faceTest[1][0] == faceTest[2][0]) or ((faceJaune == 'd' or faceJaune == 'b') and faceTest[2][0] == faceTest[2][1] == faceTest[2][2]) or ((faceJaune == 'l' or faceJaune == 'r') and faceTest[0][2] == faceTest[1][2] == faceTest[2][2])  :
+        if (faceJaune == 'u' and faceTest[0][1] != faceTest[1][1]) or (faceJaune == 'f' and faceTest[1][0] != faceTest[1][1]) or ((faceJaune == 'd' or faceJaune == 'b') and faceTest[2][1] == faceTest[1][1]) or ((faceJaune == 'l' or faceJaune == 'r') and faceTest[1][2] == faceTest[1][1])  :
             temp = faceJaune
             faceJaune = faceBlanche
             faceBlanche = temp
 
+        print(faceJaune)
         return faceJaune
         
     def getTabParc(self, faceJaune) :
@@ -1075,6 +1490,9 @@ class Resolution:
                         tabMiniReplace.append([i,0,tabParc[1]])
                     if faceEnCours[2][tabParc[1]] != faceEnCours[2][(tabParc[1]+1)%2] :
                         tabMiniReplace.append([i,2,tabParc[1]])
+            # Si les coins sont déjà tous bien placés
+            if len(tabMiniReplace) == 0 :
+                return
             #(suite) je tourne la face "Jaune" (non résolue)
             if len(tabMiniReplace) != 4 :
                 self.rotation(faceJaune.upper())
@@ -1243,7 +1661,7 @@ class Resolution:
 
 
 def resolutionFinale(strcu="WWWWWWWWWGGGRRRBBBOOOGGGRRRBBBOOOGGGRRRBBBOOOYYYYYYYYY",entry=''):
-
+    
     cube = Cube(strcu)
     resolution = Resolution(cube)
     #cube = Cube("RWYRWGOGOYYGWRWBOOBOGGGYORGWBWBOYBBGYRRBRGWOWOWYYYBRBR")
@@ -1251,9 +1669,9 @@ def resolutionFinale(strcu="WWWWWWWWWGGGRRRBBBOOOGGGRRRBBBOOOGGGRRRBBBOOOYYYYYYY
     resolution.applyCmd(entry)
 
     print("Cube d'origine")
+    print(cube.getStr())
     cube.displayCube()
     
-
     print(resolution.liCmd)
     print(str(resolution.nbCmd) + '\n')
     
@@ -1302,6 +1720,7 @@ def resolutionFinale(strcu="WWWWWWWWWGGGRRRBBBOOOGGGRRRBBBOOOGGGRRRBBBOOOYYYYYYY
 
     return resolution.liCmd
 #MODIFIER POUR QUE SA FONCTION PERSONNELLE FONCTIONNE
+
 
 
 
